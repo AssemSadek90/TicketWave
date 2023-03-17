@@ -3,6 +3,10 @@ import React from 'react';
 import CreateAccount from './EnterEmail';
 
 function App() {
-  return <div className="App">{CreateAccount()}</div>;
+  return (
+    <div className="App">
+      <CreateAccount />
+    </div>
+  );
 }
 export default App;

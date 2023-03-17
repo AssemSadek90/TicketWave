@@ -4,7 +4,10 @@ import { useState } from 'react';
 function CreateAccount() {
   const [email, setEmail] = useState('');
   const [validEmail, setValidEmail] = useState(false);
+  const [confirmEmail, setConfirmEmail] = useState('');
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [password, setPassword] = useState('');
 
   function vaildateEmail(email) {
@@ -12,14 +15,18 @@ function CreateAccount() {
     return re.test(email);
   }
   function handleContinueButtonClick() {
-    setValidEmail(vaildateEmail(email));
-    setShowAdditionalInfo(validEmail);
+    setShowAdditionalInfo(true);
   }
   //function that handles the input change of email
   function handleEmailChange(event) {
     const newEmail = event.target.value;
     setEmail(newEmail);
     setValidEmail(vaildateEmail(newEmail));
+  }
+
+  function handleConfirmEmailChange(event) {
+    const newEmail = event.target.value;
+    setConfirmEmail(newEmail);
   }
 
   return (
@@ -43,10 +50,32 @@ function CreateAccount() {
                 Continue
               </button>
             </div>
-            <div id="confirm-email"></div>
-            <div id="first-name"></div>
-            <div id="last-name"></div>
-            <div id="password"></div>
+            {showAdditionalInfo && validEmail && (
+              <div id="additional-info">
+                <div id="confirm-email">
+                  <label htmlFor="confirmEmail">Confirm Email:</label>
+                  <input
+                    id="confirmEmail"
+                    type="email"
+                    value={confirmEmail}
+                    onChange={handleConfirmEmailChange}
+                    required
+                  />
+                </div>
+                <div id="first-name">
+                  <label htmlFor="firstName">First Name:</label>
+                  <input
+                    id="firstName"
+                    type="text"
+                    value={firstName}
+                    //onChange={handleFirstNameChange}
+                    required
+                  />
+                </div>
+                <div id="last-name"></div>
+                <div id="password"></div>
+              </div>
+            )}
           </form>
         </div>
       </div>
