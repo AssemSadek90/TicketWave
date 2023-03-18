@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import './App.css';
 
 function CreateAccount() {
   const [email, setEmail] = useState('');
@@ -12,18 +13,27 @@ function CreateAccount() {
   const [password, setPassword] = useState('');
   const [validData, setvalidData] = useState(false);
   const [createClicked, setCreateClicked] = useState(false);
-  const [showCreateButton, setShowCreateButton] = useState(true);
+  const [showContinueButton, setshowContinueButton] = useState(true);
 
   function vaildateEmail(email) {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
   }
+
+  function eraseFields() {
+    setFirstName('');
+    setLastName('');
+    setPassword('');
+    setConfirmEmail('');
+  }
+
   function handleContinueButtonClick() {
     if (validEmail) {
       setShowAdditionalInfo(true);
-      setShowCreateButton(false);
+      setshowContinueButton(false);
     } else {
       setShowAdditionalInfo(false);
+      setshowContinueButton(true);
     }
   }
   //function that handles the input change of email
@@ -31,8 +41,10 @@ function CreateAccount() {
     const newEmail = event.target.value;
     setEmail(newEmail);
     setValidEmail(vaildateEmail(newEmail));
-    if (!vaildateEmail(newEmail)) {
-      setShowCreateButton(true);
+    if (!validEmail) {
+      setshowContinueButton(true);
+      setShowAdditionalInfo(false);
+      eraseFields();
     }
   }
 
@@ -101,7 +113,7 @@ function CreateAccount() {
                 onChange={handleEmailChange}
                 //required
               />
-              {showCreateButton && (
+              {showContinueButton && (
                 <button
                   id="continue-button"
                   onClick={handleContinueButtonClick}
@@ -110,7 +122,7 @@ function CreateAccount() {
                 </button>
               )}
             </div>
-            {showAdditionalInfo && validEmail && (
+            {validEmail && showAdditionalInfo && (
               <div id="additional-info">
                 <div id="confirm-email">
                   <label htmlFor="confirmEmail">Confirm Email:</label>
@@ -163,19 +175,21 @@ function CreateAccount() {
                 </div>
                 <div>
                   {createClicked && email !== confirmEmail && (
-                    <p>Emails do not match</p>
+                    <p className="error">Emails do not match</p>
                   )}
                   {createClicked && !validEmail && (
-                    <p>Please enter a valid email address</p>
+                    <p className="error">Please enter a valid email address</p>
                   )}
                   {createClicked && firstName.length === 0 && (
-                    <p>Please enter a first name.</p>
+                    <p className="error">Please enter a first name.</p>
                   )}
                   {createClicked && lastName.length === 0 && (
-                    <p>Please enter a last name.</p>
+                    <p className="error">Please enter a last name.</p>
                   )}
                   {createClicked && password.length < 6 && (
-                    <p>Please enter a password over 6 characters.</p>
+                    <p className="error">
+                      Please enter a password over 6 characters.
+                    </p>
                   )}
                 </div>
               </div>
