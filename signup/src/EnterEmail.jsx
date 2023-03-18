@@ -2,24 +2,92 @@ import React from 'react';
 import { useState } from 'react';
 import './App.css';
 
+/**
+ * A React component for creating an account.
+ * @function
+ */
 function CreateAccount() {
+  /**
+   * The email input's value.
+   * @typedef {string} email
+   */
   const [email, setEmail] = useState('');
+
+  /**
+   * Indicates whether the email is valid or not.
+   * @typedef {boolean} validEmail
+   */
   const [validEmail, setValidEmail] = useState(false);
+
+  /**
+   * The confirm email input's value.
+   * @typedef {string} confirmEmail
+   */
   const [confirmEmail, setConfirmEmail] = useState('');
+
+  /**
+   * Indicates whether to show the additional information form or not.
+   * @typedef {boolean} showAdditionalInfo
+   */
   const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+
+  /**
+   * The first name input's value.
+   * @typedef {string} firstName
+   */
   const [firstName, setFirstName] = useState('');
+
+  /**
+   * The last name input's value.
+   * @typedef {string} lastName
+   */
   const [lastName, setLastName] = useState('');
+
+  /**
+   * Indicates whether the password is valid or not.
+   * @typedef {boolean} validPassword
+   */
   const [validPassword, setvalidPassword] = useState(false);
+
+  /**
+   * The password input's value.
+   * @typedef {string} password
+   */
   const [password, setPassword] = useState('');
+
+  /**
+   * Indicates whether all form data is valid or not.
+   * @typedef {boolean} validData
+   */
   const [validData, setvalidData] = useState(false);
+
+  /**
+   * Indicates whether the Create Account button is clicked or not.
+   * @typedef {boolean} createClicked
+   */
   const [createClicked, setCreateClicked] = useState(false);
+
+  /**
+   * Indicates whether to show the Continue button or not.
+   * @typedef {boolean} showContinueButton
+   */
   const [showContinueButton, setshowContinueButton] = useState(true);
 
-  function vaildateEmail(email) {
+  /**
+   * Validates the email input.
+   * @function
+   * @param {email} email - The email input's value.
+   * @returns {boolean} - Whether the email is valid or not.
+   */
+  function validateEmail(email) {
     const re = /\S+@\S+\.\S+/;
     return re.test(email);
   }
 
+  /**
+   * Resets the first name, last name, password and confirm email input's value to empty.
+   * @function
+   */
   function eraseFields() {
     setFirstName('');
     setLastName('');
@@ -27,6 +95,10 @@ function CreateAccount() {
     setConfirmEmail('');
   }
 
+  /**
+   * Handles the Continue button click event.
+   * @function
+   */
   function handleContinueButtonClick() {
     if (validEmail) {
       setShowAdditionalInfo(true);
@@ -36,35 +108,71 @@ function CreateAccount() {
       setshowContinueButton(true);
     }
   }
-  //function that handles the input change of email
+
+  /**
+   * Handles the email input's change event.
+   * @function
+   * @param {Event} event - The change event.
+   */
+  /**
+
+Handles email input change event
+@param {Event} event - The event object from the email input change event
+@return {void}
+*/
   function handleEmailChange(event) {
     const newEmail = event.target.value;
     setEmail(newEmail);
-    setValidEmail(vaildateEmail(newEmail));
+    setValidEmail(validateEmail(newEmail));
     if (!validEmail) {
       setshowContinueButton(true);
       setShowAdditionalInfo(false);
       eraseFields();
     }
   }
-
+  /**
+  
+  Handles confirm email input change event
+  @param {Event} event - The event object from the confirm email input change event
+  @return {void}
+  */
   function handleConfirmEmailChange(event) {
     const newEmail = event.target.value;
     setConfirmEmail(newEmail);
   }
-
+  /**
+  
+  Handles first name input change event
+  @param {Event} event - The event object from the first name input change event
+  @return {void}
+  */
   function handleFirstNameChange(event) {
     setFirstName(event.target.value);
   }
+  /**
+  
+  Handles last name input change event
+  @param {Event} event - The event object from the last name input change event
+  @return {void}
+  */
   function handleLastNameChange(event) {
     setLastName(event.target.value);
   }
-
+  /**
+  
+  Handles password input change event
+  @param {Event} event - The event object from the password input change event
+  @return {void}
+  */
   function handlePasswordChange(event) {
     setPassword(event.target.value);
     setvalidPassword(event.target.value.length >= 6);
   }
-
+  /**
+  
+  Validates all input fields
+  @return {void}
+  */
   function validateAll() {
     if (email !== confirmEmail) {
       setvalidData(false);
@@ -78,12 +186,21 @@ function CreateAccount() {
       setvalidData(true);
     }
   }
-
+  /**
+  
+  Handles create account button click event
+  @return {void}
+  */
   function handleCreateClick() {
     setCreateClicked(true);
     validateAll();
   }
-
+  /**
+  
+  Submits the form and logs the form data to the console if valid
+  @param {Event} event - The event object from the form submission event
+  @return {void}
+  */
   function submitForm(event) {
     event.preventDefault();
     if (validData) {
@@ -96,6 +213,11 @@ function CreateAccount() {
       });
     }
   }
+  /**
+  
+  Renders the Create Account page
+  @return {JSX.Element}
+  */
   return (
     <div className="create-account-main">
       <div className="split-container-primary">
