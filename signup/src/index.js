@@ -4,8 +4,19 @@ import './index.css';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  //<React.StrictMode>
-  <App />
-  //</React.StrictMode>
-);
+
+/**
+ * Renders the root component of the application.
+ * @function
+ * @returns {void}
+ */
+function render() {
+  root.render(
+    //<React.StrictMode>
+    <App />
+    //</React.StrictMode>
+  );
+}
+
+// Call the render function to render the application
+render();

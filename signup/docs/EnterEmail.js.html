@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: EnterEmail.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: EnterEmail.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { useState } from 'react';
+import './App.css';
+
+/**
+ * A React component for creating an account.
+ * @function
+ */
+function CreateAccount() {
+  /**
+   * The email input's value.
+   * @typedef {string} email
+   */
+  const [email, setEmail] = useState('');
+
+  /**
+   * Indicates whether the email is valid or not.
+   * @typedef {boolean} validEmail
+   */
+  const [validEmail, setValidEmail] = useState(false);
+
+  /**
+   * The confirm email input's value.
+   * @typedef {string} confirmEmail
+   */
+  const [confirmEmail, setConfirmEmail] = useState('');
+
+  /**
+   * Indicates whether to show the additional information form or not.
+   * @typedef {boolean} showAdditionalInfo
+   */
+  const [showAdditionalInfo, setShowAdditionalInfo] = useState(false);
+
+  /**
+   * The first name input's value.
+   * @typedef {string} firstName
+   */
+  const [firstName, setFirstName] = useState('');
+
+  /**
+   * The last name input's value.
+   * @typedef {string} lastName
+   */
+  const [lastName, setLastName] = useState('');
+
+  /**
+   * Indicates whether the password is valid or not.
+   * @typedef {boolean} validPassword
+   */
+  const [validPassword, setvalidPassword] = useState(false);
+
+  /**
+   * The password input's value.
+   * @typedef {string} password
+   */
+  const [password, setPassword] = useState('');
+
+  /**
+   * Indicates whether all form data is valid or not.
+   * @typedef {boolean} validData
+   */
+  const [validData, setvalidData] = useState(false);
+
+  /**
+   * Indicates whether the Create Account button is clicked or not.
+   * @typedef {boolean} createClicked
+   */
+  const [createClicked, setCreateClicked] = useState(false);
+
+  /**
+   * Indicates whether to show the Continue button or not.
+   * @typedef {boolean} showContinueButton
+   */
+  const [showContinueButton, setshowContinueButton] = useState(true);
+
+  /**
+   * Validates the email input.
+   * @function
+   * @param {email} email - The email input's value.
+   * @returns {boolean} - Whether the email is valid or not.
+   */
+  function validateEmail(email) {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  }
+
+  /**
+   * Resets the first name, last name, password and confirm email input's value to empty.
+   * @function
+   */
+  function eraseFields() {
+    setFirstName('');
+    setLastName('');
+    setPassword('');
+    setConfirmEmail('');
+  }
+
+  /**
+   * Handles the Continue button click event.
+   * @function
+   */
+  function handleContinueButtonClick() {
+    if (validEmail) {
+      setShowAdditionalInfo(true);
+      setshowContinueButton(false);
+    } else {
+      setShowAdditionalInfo(false);
+      setshowContinueButton(true);
+    }
+  }
+
+  /**
+   * Handles the email input's change event.
+   * @function
+   * @param {Event} event - The change event.
+   */
+  /**
+
+Handles email input change event
+@param {Event} event - The event object from the email input change event
+@return {void}
+*/
+  function handleEmailChange(event) {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+    setValidEmail(validateEmail(newEmail));
+    if (!validEmail) {
+      setshowContinueButton(true);
+      setShowAdditionalInfo(false);
+      eraseFields();
+    }
+  }
+  /**
+  
+  Handles confirm email input change event
+  @param {Event} event - The event object from the confirm email input change event
+  @return {void}
+  */
+  function handleConfirmEmailChange(event) {
+    const newEmail = event.target.value;
+    setConfirmEmail(newEmail);
+  }
+  /**
+  
+  Handles first name input change event
+  @param {Event} event - The event object from the first name input change event
+  @return {void}
+  */
+  function handleFirstNameChange(event) {
+    setFirstName(event.target.value);
+  }
+  /**
+  
+  Handles last name input change event
+  @param {Event} event - The event object from the last name input change event
+  @return {void}
+  */
+  function handleLastNameChange(event) {
+    setLastName(event.target.value);
+  }
+  /**
+  
+  Handles password input change event
+  @param {Event} event - The event object from the password input change event
+  @return {void}
+  */
+  function handlePasswordChange(event) {
+    setPassword(event.target.value);
+    setvalidPassword(event.target.value.length >= 6);
+  }
+  /**
+  
+  Validates all input fields
+  @return {void}
+  */
+  function validateAll() {
+    if (email !== confirmEmail) {
+      setvalidData(false);
+    } else if (firstName.length === 0) {
+      setvalidData(false);
+    } else if (lastName.length === 0) {
+      setvalidData(false);
+    } else if (!validPassword) {
+      setvalidData(false);
+    } else {
+      setvalidData(true);
+    }
+  }
+  /**
+  
+  Handles create account button click event
+  @return {void}
+  */
+  function handleCreateClick() {
+    setCreateClicked(true);
+    validateAll();
+  }
+  /**
+  
+  Submits the form and logs the form data to the console if valid
+  @param {Event} event - The event object from the form submission event
+  @return {void}
+  */
+  function submitForm(event) {
+    event.preventDefault();
+    if (validData) {
+      console.log({
+        email,
+        confirmEmail,
+        firstName,
+        lastName,
+        password,
+      });
+    }
+  }
+  /**
+  
+  Renders the Create Account page
+  @return {JSX.Element}
+  */
+  return (
+    &lt;div className="create-account-main">
+      &lt;div className="split-container-primary">
+        &lt;div className="split-container-content">
+          &lt;div className="header-create-element">
+            &lt;h1>Ticketwave&lt;/h1>
+            &lt;h1>Create an account&lt;/h1>
+          &lt;/div>
+          &lt;form onSubmit={submitForm}>
+            &lt;div id="create-account">
+              &lt;input
+                id="email"
+                type="email"
+                value={email}
+                onChange={handleEmailChange}
+                //required
+              />
+              {showContinueButton &amp;&amp; (
+                &lt;button
+                  id="continue-button"
+                  onClick={handleContinueButtonClick}
+                >
+                  Continue
+                &lt;/button>
+              )}
+            &lt;/div>
+            {validEmail &amp;&amp; showAdditionalInfo &amp;&amp; (
+              &lt;div id="additional-info">
+                &lt;div id="confirm-email">
+                  &lt;label htmlFor="confirmEmail">Confirm Email:&lt;/label>
+                  &lt;input
+                    id="confirmEmail"
+                    type="email"
+                    value={confirmEmail}
+                    onChange={handleConfirmEmailChange}
+                    //required
+                  />
+                &lt;/div>
+                &lt;div id="first-name">
+                  &lt;label htmlFor="firstName">First Name:&lt;/label>
+                  &lt;input
+                    id="firstName"
+                    type="text"
+                    value={firstName}
+                    onChange={handleFirstNameChange}
+                    //required
+                  />
+                &lt;/div>
+                &lt;div id="last-name">
+                  &lt;label htmlFor="lastname">Last Name:&lt;/label>
+                  &lt;input
+                    id="lastname"
+                    type="text"
+                    value={lastName}
+                    onChange={handleLastNameChange}
+                    //required
+                  />
+                &lt;/div>
+                &lt;div id="password">
+                  &lt;label htmlFor="password">Password:&lt;/label>
+                  &lt;input
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                    required
+                  />
+                &lt;/div>
+                &lt;div>
+                  &lt;button
+                    id="create-account-button"
+                    type="submit"
+                    onClick={handleCreateClick}
+                  >
+                    Create Account
+                  &lt;/button>
+                &lt;/div>
+                &lt;div>
+                  {createClicked &amp;&amp; email !== confirmEmail &amp;&amp; (
+                    &lt;p className="error">Emails do not match&lt;/p>
+                  )}
+                  {createClicked &amp;&amp; !validEmail &amp;&amp; (
+                    &lt;p className="error">Please enter a valid email address&lt;/p>
+                  )}
+                  {createClicked &amp;&amp; firstName.length === 0 &amp;&amp; (
+                    &lt;p className="error">Please enter a first name.&lt;/p>
+                  )}
+                  {createClicked &amp;&amp; lastName.length === 0 &amp;&amp; (
+                    &lt;p className="error">Please enter a last name.&lt;/p>
+                  )}
+                  {createClicked &amp;&amp; password.length &lt; 6 &amp;&amp; (
+                    &lt;p className="error">
+                      Please enter a password over 6 characters.
+                    &lt;/p>
+                  )}
+                &lt;/div>
+              &lt;/div>
+            )}
+          &lt;/form>
+        &lt;/div>
+      &lt;/div>
+      &lt;div className="split-container-secondary">&lt;/div>
+    &lt;/div>
+  );
+}
+
+export default CreateAccount;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Mar 19 2023 00:11:18 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
