@@ -12,6 +12,7 @@ function CreateAccount() {
   const [password, setPassword] = useState('');
   const [validData, setvalidData] = useState(false);
   const [createClicked, setCreateClicked] = useState(false);
+  const [showCreateButton, setShowCreateButton] = useState(true);
 
   function vaildateEmail(email) {
     const re = /\S+@\S+\.\S+/;
@@ -20,6 +21,7 @@ function CreateAccount() {
   function handleContinueButtonClick() {
     if (validEmail) {
       setShowAdditionalInfo(true);
+      setShowCreateButton(false);
     } else {
       setShowAdditionalInfo(false);
     }
@@ -29,6 +31,9 @@ function CreateAccount() {
     const newEmail = event.target.value;
     setEmail(newEmail);
     setValidEmail(vaildateEmail(newEmail));
+    if (!vaildateEmail(newEmail)) {
+      setShowCreateButton(true);
+    }
   }
 
   function handleConfirmEmailChange(event) {
@@ -96,9 +101,14 @@ function CreateAccount() {
                 onChange={handleEmailChange}
                 //required
               />
-              <button id="continue-button" onClick={handleContinueButtonClick}>
-                Continue
-              </button>
+              {showCreateButton && (
+                <button
+                  id="continue-button"
+                  onClick={handleContinueButtonClick}
+                >
+                  Continue
+                </button>
+              )}
             </div>
             {showAdditionalInfo && validEmail && (
               <div id="additional-info">
