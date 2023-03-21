@@ -56,10 +56,28 @@ function SignIn() {
   }
 
   /**
+  
+  Validates all input fields
+  @return {void}
+  */
+  function validateAll() {
+    if (!validPassword) {
+      setvalidData(false);
+    } else if (!validEmail) {
+      setvalidData(false);
+    } else {
+      setvalidData(true);
+    }
+  }
+
+  /**
    * Handles the Continue button click event.
    * @function
    */
-  function handleLogInClick() {}
+  function handleLogInClick() {
+    setSignInClicked(true);
+    validateAll();
+  }
 
   /**
 Handles email input change event
@@ -99,16 +117,27 @@ Handles email input change event
   }
 
   const handleSignIn = (user) => {
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user),
-    };
-
-    fetch('http://localhost:3000/users', requestOptions)
+    setIsLoading(true);
+    fetch(`http://localhost:3000/users?email=${email}`)
       .then((response) => response.json())
-      .then((data) => console.log(data))
-      .catch((error) => console.log(error));
+      .then((data) => {
+        setIsLoading(false);
+        if (data.length > 0) {
+          setUserExists(true);
+        } else {
+          setUserExists(false);
+        }
+        if (userExists) {
+          console.log('User exists');
+        } else {
+          eraseFields();
+          console.log('User does not exist');
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error(error);
+      });
   };
 
   function eraseFields() {
@@ -157,7 +186,7 @@ Handles email input change event
                   onClick={handleLogInClick}
                   disabled={isLoading}
                 >
-                  Log in
+                  {isLoading ? 'Loading...' : 'Log in'}
                 </button>
               </div>
               <div>

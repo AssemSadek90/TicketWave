@@ -1,99 +1,20 @@
 {
   "users": [
     {
-      "email": "ziad@gmai.com",
+      "email": "ziad@gmail.com",
       "firstName": "Ziad",
       "lastName": "Ghanem",
       "password": "1234567",
       "id": 1
     },
     {
-      "email": "ziad@gmail.com",
+      "email": "de7ko@gmail.com",
       "firstName": "Ziad",
       "lastName": "Ghanem",
       "password": "1234567",
+      "is_public": true,
+      "image_id": null,
       "id": 2
-    },
-    {
-      "email": "ziad@gmail.com",
-      "firstName": "Ziad",
-      "lastName": "Ghanem",
-      "password": "1234567",
-      "is_public": true,
-      "image_id": null,
-      "id": 3
-    },
-    {
-      "email": "ziad@gmail.com",
-      "firstName": "Zasd",
-      "lastName": "dsadad",
-      "password": "dasdsdsdsa",
-      "is_public": true,
-      "image_id": null,
-      "id": 4
-    },
-    {
-      "email": "ziad@gmail.com",
-      "firstName": "Zasd",
-      "lastName": "dsadad",
-      "password": "dasdsdsdsa",
-      "is_public": true,
-      "image_id": null,
-      "id": 5
-    },
-    {
-      "email": "ziad@gmail.com",
-      "firstName": "dsadasdasd",
-      "lastName": "dsadasdasdd",
-      "password": "asdsadasdasd",
-      "is_public": true,
-      "image_id": null,
-      "id": 6
-    },
-    {
-      "email": "ziad@gmail.com",
-      "firstName": "dsdsdada",
-      "lastName": "sdadsadsa",
-      "password": "sdafsafafafsf",
-      "is_public": true,
-      "image_id": null,
-      "id": 7
-    },
-    {
-      "email": "ziad@gmail.comn",
-      "firstName": "Ziad",
-      "lastName": "Zehe2",
-      "password": "awybgdba2a",
-      "is_public": true,
-      "image_id": null,
-      "id": 8
-    },
-    {
-      "email": "ziad@gmail.comni",
-      "firstName": "ziad@gmail.comni",
-      "lastName": "ziad@gmail.comni",
-      "password": "ziad@gmail.comni",
-      "is_public": true,
-      "image_id": null,
-      "id": 9
-    },
-    {
-      "email": "ziad@gmail.comnio",
-      "firstName": "Ziad",
-      "lastName": "Gab ",
-      "password": "5roooooo",
-      "is_public": true,
-      "image_id": null,
-      "id": 10
-    },
-    {
-      "email": "ziad123@gmail.com",
-      "firstName": "Ziad",
-      "lastName": "Ghanem",
-      "password": "benzoel7arraaa2",
-      "is_public": true,
-      "image_id": null,
-      "id": 11
     }
   ]
 }
