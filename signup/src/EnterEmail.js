@@ -110,12 +110,6 @@ function CreateAccount() {
   }
 
   /**
-   * Handles the email input's change event.
-   * @function
-   * @param {Event} event - The change event.
-   */
-  /**
-
 Handles email input change event
 @param {Event} event - The event object from the email input change event
 @return {void}
