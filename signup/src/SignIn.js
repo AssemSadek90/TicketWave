@@ -1,5 +1,6 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
 import './App.css';
 
@@ -145,6 +146,38 @@ Handles email input change event
     setPassword('');
   }
 
+  //   useEffect(() => {
+  //     /* global google */
+  //     google.accounts.id.initialize({
+  //       client_id:
+  //         '770303914933-s45dc140ig3djblj6rs9ckg30m58is1u.apps.googleusercontent.com',
+  //       callback: handlCallBackResponse,
+  //     });
+  //     google.accounts.id.renderButton(document.getElementById('signInDiv'), {
+  //       theme: 'outline',
+  //       size: 'large',
+  //     });
+  //   }, []);
+
+  //   const handleGoogleSignIn = () => {
+  //     window.gapi.auth2.getAuthInstance().signIn();
+  //   };
+  //   // Render the Google Sign-In button
+  //   window.gapi.signin2.render('additional-info', {
+  //     scope: 'profile email',
+  //     width: 200,
+  //     height: 50,
+  //     longtitle: true,
+  //     theme: 'dark',
+  //     onsuccess: (googleUser) => {
+  //       const id_token = googleUser.getAuthResponse().id_token;
+  //       // TODO: Send ID token to your server for verification
+  //     },
+  //     onfailure: (error) => {
+  //       console.error(error);
+  //     },
+  //   });
+
   /**
   
   Renders the Create Account page
@@ -205,6 +238,19 @@ Handles email input change event
             <p>
               Don't have an account? <Link to="/">Sign Up</Link>
             </p>
+          </div>
+          <div id="signInDiv">
+            {/* <button type="button" onClick={handleGoogleSignIn}>
+              Sign in with Google
+            </button> */}
+            <GoogleLogin
+              onSuccess={(credentialResponse) => {
+                console.log(credentialResponse);
+              }}
+              onError={() => {
+                console.log('Login Failed');
+              }}
+            />
           </div>
         </div>
       </div>

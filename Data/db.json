@@ -15,6 +15,15 @@
       "is_public": true,
       "image_id": null,
       "id": 2
+    },
+    {
+      "email": "ziad@gmail.cod",
+      "firstName": "Ziad",
+      "lastName": "Ta3baan",
+      "password": "Awwyyyyyyyyyy",
+      "is_public": true,
+      "image_id": null,
+      "id": 3
     }
   ]
 }
