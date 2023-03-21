@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "email": "ziad@gmai.com",
+      "firstName": "Ziad",
+      "lastName": "Ghanem",
+      "password": "1234567",
+      "id": 1
+    },
+    {
+      "email": "ziad@gmail.com",
+      "firstName": "Ziad",
+      "lastName": "Ghanem",
+      "password": "1234567",
+      "id": 2
+    },
+    {
+      "email": "ziad@gmail.com",
+      "firstName": "Ziad",
+      "lastName": "Ghanem",
+      "password": "1234567",
+      "is_public": true,
+      "image_id": null,
+      "id": 3
+    }
+  ]
+}

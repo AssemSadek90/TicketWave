@@ -7,6 +7,7 @@ import './App.css';
  * @function
  */
 function CreateAccount() {
+  const user = {};
   /**
    * The email input's value.
    * @typedef {string} email
@@ -198,15 +199,29 @@ Handles email input change event
   function submitForm(event) {
     event.preventDefault();
     if (validData) {
-      console.log({
-        email,
-        confirmEmail,
-        firstName,
-        lastName,
-        password,
-      });
+      user.email = email;
+      user.firstName = firstName;
+      user.lastName = lastName;
+      user.password = password;
+      user.is_public = true;
+      user.image_id = null;
+      handleSignUp(user);
     }
   }
+
+  const handleSignUp = (user) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user),
+    };
+
+    fetch('http://localhost:3000/users', requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  };
+
   /**
   
   Renders the Create Account page
