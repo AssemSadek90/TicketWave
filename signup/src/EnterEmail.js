@@ -56,6 +56,8 @@ function CreateAccount() {
    */
   const [password, setPassword] = useState('');
 
+  const [userExists, setUserExists] = useState(false);
+
   /**
    * Indicates whether all form data is valid or not.
    * @typedef {boolean} validData
@@ -73,6 +75,12 @@ function CreateAccount() {
    * @typedef {boolean} showContinueButton
    */
   const [showContinueButton, setshowContinueButton] = useState(true);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [emailDisabled, setEmailDisabled] = useState(false);
+
+  const [showEditEmail, setShowEditEmail] = useState(false);
 
   /**
    * Validates the email input.
@@ -101,13 +109,39 @@ function CreateAccount() {
    * @function
    */
   function handleContinueButtonClick() {
-    if (validEmail) {
-      setShowAdditionalInfo(true);
-      setshowContinueButton(false);
-    } else {
-      setShowAdditionalInfo(false);
-      setshowContinueButton(true);
-    }
+    //add validation if user (email already exists)
+    //setEmailDisabled(true);
+    setIsLoading(true);
+    fetch(`http://localhost:3000/users?email=${email}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setIsLoading(false);
+
+        if (data.length > 0) {
+          setUserExists(true);
+          console.log('User already exists');
+          // You could show an error message or disable the submit button here
+          if (userExists || !validEmail) {
+            setShowAdditionalInfo(false);
+            setshowContinueButton(true);
+            setShowEditEmail(false);
+            setEmailDisabled(false);
+          }
+        } else {
+          setUserExists(false);
+          console.log('User does not exist');
+          if (validEmail) {
+            setShowAdditionalInfo(true);
+            setshowContinueButton(false);
+            setShowEditEmail(true);
+            setEmailDisabled(true);
+          }
+        }
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error(error);
+      });
   }
 
   /**
@@ -122,6 +156,9 @@ Handles email input change event
     if (!validEmail) {
       setshowContinueButton(true);
       setShowAdditionalInfo(false);
+      setShowEditEmail(false);
+      setEmailDisabled(false);
+      setCreateClicked(false);
       eraseFields();
     }
   }
@@ -209,6 +246,15 @@ Handles email input change event
     }
   }
 
+  const handleEditClick = () => {
+    setEmailDisabled(false);
+    setShowEditEmail(false);
+    setshowContinueButton(true);
+    setShowAdditionalInfo(false);
+    setCreateClicked(false);
+    eraseFields();
+  };
+
   const handleSignUp = (user) => {
     const requestOptions = {
       method: 'POST',
@@ -241,16 +287,32 @@ Handles email input change event
                 id="email"
                 type="email"
                 value={email}
+                disabled={emailDisabled}
                 onChange={handleEmailChange}
                 //required
               />
-              {showContinueButton && (
-                <button
-                  id="continue-button"
-                  onClick={handleContinueButtonClick}
-                >
-                  Continue
-                </button>
+              <div>
+                <div>
+                  {showContinueButton && (
+                    <button
+                      id="continue-button"
+                      disabled={isLoading}
+                      onClick={handleContinueButtonClick}
+                    >
+                      {isLoading ? 'Loading...' : 'Continue'}
+                    </button>
+                  )}
+                </div>
+                <span>
+                  {showEditEmail && (
+                    <button onClick={handleEditClick}>Edit</button>
+                  )}
+                </span>
+              </div>
+              {userExists && (
+                <div>
+                  <p className="error">User already exists.</p>
+                </div>
               )}
             </div>
             {validEmail && showAdditionalInfo && (
