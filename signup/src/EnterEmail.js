@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './App.css';
 
 /**
@@ -120,7 +121,6 @@ function CreateAccount() {
         if (data.length > 0) {
           setUserExists(true);
           console.log('User already exists');
-          // You could show an error message or disable the submit button here
           if (userExists || !validEmail) {
             setShowAdditionalInfo(false);
             setshowContinueButton(true);
@@ -388,6 +388,11 @@ Handles email input change event
               </div>
             )}
           </form>
+          <div>
+            <p>
+              Already have an account? <Link to="/signin">Sign in</Link>
+            </p>
+          </div>
         </div>
       </div>
       <div className="split-container-secondary"></div>
