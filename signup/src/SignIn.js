@@ -1,7 +1,9 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
 /**
@@ -9,6 +11,12 @@ import './App.css';
  * @function
  */
 function SignIn() {
+  const server = axios.create({
+    baseURL: 'http://localhost:3000',
+  });
+
+  const navigate = useNavigate();
+
   const user = {};
   /**
    * The email input's value.
@@ -33,8 +41,9 @@ function SignIn() {
    * @typedef {string} password
    */
   const [password, setPassword] = useState('');
+  const [invalidFields, setInvalidFields] = useState(false);
 
-  const [userExists, setUserExists] = useState(false);
+  //const history = useHistory();
 
   /**
    * Indicates whether all form data is valid or not.
@@ -119,20 +128,20 @@ Handles email input change event
 
   const handleSignIn = (user) => {
     setIsLoading(true);
-    fetch(`http://localhost:3000/users?email=${email}`)
-      .then((response) => response.json())
+    server
+      .get(`/users?email=${email}`)
+      .then((response) => response.data)
       .then((data) => {
         setIsLoading(false);
-        if (data.length > 0) {
-          setUserExists(true);
-        } else {
-          setUserExists(false);
-        }
-        if (userExists) {
+        if (data.length > 0 && data[0].password === password) {
           console.log('User exists');
+          localStorage.setItem('userId', data[0].id);
+          setInvalidFields(false);
+          navigate('/home');
         } else {
-          eraseFields();
           console.log('User does not exist');
+          setInvalidFields(true);
+          eraseFields();
         }
       })
       .catch((error) => {
@@ -145,38 +154,6 @@ Handles email input change event
     setEmail('');
     setPassword('');
   }
-
-  //   useEffect(() => {
-  //     /* global google */
-  //     google.accounts.id.initialize({
-  //       client_id:
-  //         '770303914933-s45dc140ig3djblj6rs9ckg30m58is1u.apps.googleusercontent.com',
-  //       callback: handlCallBackResponse,
-  //     });
-  //     google.accounts.id.renderButton(document.getElementById('signInDiv'), {
-  //       theme: 'outline',
-  //       size: 'large',
-  //     });
-  //   }, []);
-
-  //   const handleGoogleSignIn = () => {
-  //     window.gapi.auth2.getAuthInstance().signIn();
-  //   };
-  //   // Render the Google Sign-In button
-  //   window.gapi.signin2.render('additional-info', {
-  //     scope: 'profile email',
-  //     width: 200,
-  //     height: 50,
-  //     longtitle: true,
-  //     theme: 'dark',
-  //     onsuccess: (googleUser) => {
-  //       const id_token = googleUser.getAuthResponse().id_token;
-  //       // TODO: Send ID token to your server for verification
-  //     },
-  //     onfailure: (error) => {
-  //       console.error(error);
-  //     },
-  //   });
 
   /**
   
@@ -230,6 +207,9 @@ Handles email input change event
                   <p className="error">
                     Please enter a password over 6 characters.
                   </p>
+                )}
+                {invalidFields && (
+                  <p className="error">Invalid email or password</p>
                 )}
               </div>
             </div>

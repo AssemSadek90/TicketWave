@@ -24,6 +24,24 @@
       "is_public": true,
       "image_id": null,
       "id": 3
+    },
+    {
+      "email": "ziad1234@gmail.com",
+      "firstName": "ZoZz",
+      "lastName": "Ziko",
+      "password": "dasdfsafasfas",
+      "is_public": true,
+      "image_id": null,
+      "id": 4
+    },
+    {
+      "email": "ana-ta3banaa@awwwy.com",
+      "firstName": "Lolo",
+      "lastName": "Uni",
+      "password": "ufgusfgasidu",
+      "is_public": true,
+      "image_id": null,
+      "id": 5
     }
   ]
 }

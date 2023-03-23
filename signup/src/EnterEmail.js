@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './App.css';
 
 /**
@@ -8,6 +10,9 @@ import './App.css';
  * @function
  */
 function CreateAccount() {
+  const server = axios.create({
+    baseURL: 'http://localhost:3000',
+  });
   const user = {};
   /**
    * The email input's value.
@@ -82,7 +87,7 @@ function CreateAccount() {
   const [emailDisabled, setEmailDisabled] = useState(false);
 
   const [showEditEmail, setShowEditEmail] = useState(false);
-
+  const navigate = useNavigate();
   /**
    * Validates the email input.
    * @function
@@ -113,8 +118,9 @@ function CreateAccount() {
     //add validation if user (email already exists)
     //setEmailDisabled(true);
     setIsLoading(true);
-    fetch(`http://localhost:3000/users?email=${email}`)
-      .then((response) => response.json())
+    server
+      .get(`/users?email=${email}`)
+      .then((response) => response.data)
       .then((data) => {
         setIsLoading(false);
 
@@ -255,17 +261,31 @@ Handles email input change event
     eraseFields();
   };
 
+  const navigateHome = () => {
+    server
+      .get(`/users?email=${email}`)
+      .then((response) => response.data)
+      .then((data) => {
+        localStorage.setItem('userId', data[0].id);
+        navigate('/home');
+      })
+      .catch((error) => {
+        setIsLoading(false);
+        console.error(error);
+        return;
+      });
+  };
+
   const handleSignUp = (user) => {
     const requestOptions = {
-      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user),
     };
 
-    fetch('http://localhost:3000/users', requestOptions)
-      .then((response) => response.json())
-      .then((data) => console.log(data))
+    server
+      .post('/users', user, requestOptions)
+      .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
+    navigateHome();
   };
 
   /**
