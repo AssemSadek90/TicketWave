@@ -42,6 +42,24 @@
       "is_public": true,
       "image_id": null,
       "id": 5
+    },
+    {
+      "email": "dsad@gadjs.com",
+      "firstName": "Zoz",
+      "lastName": "Ziko",
+      "password": "adasdqdfas",
+      "is_public": true,
+      "image_id": null,
+      "id": 6
+    },
+    {
+      "email": "ziad@gogo.com",
+      "firstName": "Zozza",
+      "lastName": "Ta3bana",
+      "password": "5alesssss",
+      "is_public": true,
+      "image_id": null,
+      "id": 7
     }
   ]
 }

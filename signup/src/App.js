@@ -1,10 +1,10 @@
-import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-//import { useEffect } from 'react';
+import './App.css';
 import CreateAccount from './EnterEmail';
 import SignIn from './SignIn';
 import Home from './Landing';
+
 /**
  * Renders the main application component.
  * @function

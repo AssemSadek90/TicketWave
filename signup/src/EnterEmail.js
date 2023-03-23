@@ -10,10 +10,25 @@ import './App.css';
  * @function
  */
 function CreateAccount() {
+  /**
+
+  Initializes an axios instance with a specified baseURL.
+  @type {Object}
+  @constant server
+  @property {string} baseURL - The base URL for the axios instance.
+  */
   const server = axios.create({
     baseURL: 'http://localhost:3000',
   });
+
+  /**
+
+  An object that represents the user being created.
+  @type {Object}
+  @constant user
+  */
   const user = {};
+
   /**
    * The email input's value.
    * @typedef {string} email
@@ -62,6 +77,13 @@ function CreateAccount() {
    */
   const [password, setPassword] = useState('');
 
+  /**
+
+  Represents whether a user exists or not.
+  @type {Array}
+  @property {boolean} userExists - The current state of whether a user exists or not.
+  @property {function} setUserExists - A function that sets the userExists state.
+  */
   const [userExists, setUserExists] = useState(false);
 
   /**
@@ -82,11 +104,40 @@ function CreateAccount() {
    */
   const [showContinueButton, setshowContinueButton] = useState(true);
 
+  /**
+
+  Represents whether the application is currently loading or not.
+  @type {Array}
+  @property {boolean} isLoading - The current state of whether the application is loading or not.
+  @property {function} setIsLoading - A function that sets the isLoading state.
+  */
   const [isLoading, setIsLoading] = useState(false);
 
+  /**
+
+  Represents whether the email input field is disabled or not.
+  @type {Array}
+  @property {boolean} emailDisabled - The current state of whether the email input field is disabled or not.
+  @property {function} setEmailDisabled - A function that sets the emailDisabled state.
+  */
   const [emailDisabled, setEmailDisabled] = useState(false);
 
+  /**
+
+  Represents whether the "Edit" button has been clicked or not.
+  @type {Array}
+  @property {boolean} showEditEmail - The current state of whether the "Edit" button has been clicked or not.
+  @property {function} setShowEditEmail - A function that sets the showEditEmail state.
+  */
   const [showEditEmail, setShowEditEmail] = useState(false);
+
+  /**
+
+  A function provided by the react-router-dom package that allows for programmatic navigation.
+  @function
+  @name navigate
+  */
+
   const navigate = useNavigate();
   /**
    * Validates the email input.
@@ -115,8 +166,6 @@ function CreateAccount() {
    * @function
    */
   function handleContinueButtonClick() {
-    //add validation if user (email already exists)
-    //setEmailDisabled(true);
     setIsLoading(true);
     server
       .get(`/users?email=${email}`)
@@ -251,7 +300,12 @@ Handles email input change event
       handleSignUp(user);
     }
   }
+  /**
 
+  A function that handles the "Edit" button click event.
+  @function
+  @name handleEditClick
+  */
   const handleEditClick = () => {
     setEmailDisabled(false);
     setShowEditEmail(false);
@@ -261,6 +315,12 @@ Handles email input change event
     eraseFields();
   };
 
+  /**
+
+  A function that navigates to the "/home" route.
+  @function
+  @name navigateHome
+  */
   const navigateHome = () => {
     server
       .get(`/users?email=${email}`)
@@ -276,6 +336,15 @@ Handles email input change event
       });
   };
 
+  /**
+
+  A function that handles the sign up process.
+  @function
+  @name handleSignUp
+  @param {Object} user - An object that represents the user being signed up.
+  @param {string} user.email - The email address of the user being signed up.
+  @param {string} user.password - The password of the user being signed up.
+  */
   const handleSignUp = (user) => {
     const requestOptions = {
       headers: { 'Content-Type': 'application/json' },
@@ -294,128 +363,143 @@ Handles email input change event
   @return {JSX.Element}
   */
   return (
-    <div className="create-account-main">
-      <div className="split-container-primary">
-        <div className="split-container-content">
-          <div className="header-create-element">
-            <h1>Ticketwave</h1>
-            <h1>Create an account</h1>
-          </div>
-          <form onSubmit={submitForm}>
-            <div id="create-account">
-              <input
-                id="email"
-                type="email"
-                value={email}
-                disabled={emailDisabled}
-                onChange={handleEmailChange}
-                //required
-              />
-              <div>
+    <div class="container-fluid">
+      <div class="row">
+        <div className="col-md-6 split-container-primary">
+          <div className="split-container-content">
+            <div className="header-create-element">
+              <h1 className="company-name">Ticketwave</h1>
+              <h2 className="eds-text-hl">Create an account</h2>
+            </div>
+            <form onSubmit={submitForm}>
+              <div className="additional-info" id="create-account">
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Email address"
+                  value={email}
+                  disabled={emailDisabled}
+                  onChange={handleEmailChange}
+                  //required
+                />
                 <div>
-                  {showContinueButton && (
-                    <button
-                      id="continue-button"
-                      disabled={isLoading}
-                      onClick={handleContinueButtonClick}
-                    >
-                      {isLoading ? 'Loading...' : 'Continue'}
-                    </button>
-                  )}
+                  <div>
+                    {showContinueButton && (
+                      <button
+                        className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
+                        disabled={isLoading}
+                        onClick={handleContinueButtonClick}
+                      >
+                        {isLoading ? 'Loading...' : 'Continue'}
+                      </button>
+                    )}
+                  </div>
+                  <span>
+                    {showEditEmail && (
+                      <button
+                        className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
+                        onClick={handleEditClick}
+                      >
+                        Edit
+                      </button>
+                    )}
+                  </span>
                 </div>
-                <span>
-                  {showEditEmail && (
-                    <button onClick={handleEditClick}>Edit</button>
-                  )}
-                </span>
+                {userExists && (
+                  <div>
+                    <p className="error">User already exists.</p>
+                  </div>
+                )}
               </div>
-              {userExists && (
-                <div>
-                  <p className="error">User already exists.</p>
+              {validEmail && showAdditionalInfo && (
+                <div className="additional-info">
+                  <div id="confirm-email">
+                    <input
+                      id="confirmEmail"
+                      type="email"
+                      placeholder="Confirm email address"
+                      value={confirmEmail}
+                      onChange={handleConfirmEmailChange}
+                      //required
+                    />
+                  </div>
+                  <div id="first-name">
+                    <input
+                      id="firstName"
+                      type="text"
+                      placeholder="First name"
+                      value={firstName}
+                      onChange={handleFirstNameChange}
+                      //required
+                    />
+                  </div>
+                  <div id="last-name">
+                    <input
+                      id="lastname"
+                      type="text"
+                      placeholder="Last name"
+                      value={lastName}
+                      onChange={handleLastNameChange}
+                      //required
+                    />
+                  </div>
+                  <div id="password">
+                    <input
+                      id="password"
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={handlePasswordChange}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <button
+                      className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
+                      type="submit"
+                      onClick={handleCreateClick}
+                    >
+                      Create Account
+                    </button>
+                  </div>
+                  <div>
+                    {createClicked && email !== confirmEmail && (
+                      <p className="error">Emails do not match</p>
+                    )}
+                    {createClicked && !validEmail && (
+                      <p className="error">
+                        Please enter a valid email address
+                      </p>
+                    )}
+                    {createClicked && firstName.length === 0 && (
+                      <p className="error">Please enter a first name.</p>
+                    )}
+                    {createClicked && lastName.length === 0 && (
+                      <p className="error">Please enter a last name.</p>
+                    )}
+                    {createClicked && password.length < 6 && (
+                      <p className="error">
+                        Please enter a password over 6 characters.
+                      </p>
+                    )}
+                  </div>
                 </div>
               )}
+            </form>
+            <div>
+              <p>
+                Already have an account? <Link to="/signin">Sign in</Link>
+              </p>
             </div>
-            {validEmail && showAdditionalInfo && (
-              <div id="additional-info">
-                <div id="confirm-email">
-                  <label htmlFor="confirmEmail">Confirm Email:</label>
-                  <input
-                    id="confirmEmail"
-                    type="email"
-                    value={confirmEmail}
-                    onChange={handleConfirmEmailChange}
-                    //required
-                  />
-                </div>
-                <div id="first-name">
-                  <label htmlFor="firstName">First Name:</label>
-                  <input
-                    id="firstName"
-                    type="text"
-                    value={firstName}
-                    onChange={handleFirstNameChange}
-                    //required
-                  />
-                </div>
-                <div id="last-name">
-                  <label htmlFor="lastname">Last Name:</label>
-                  <input
-                    id="lastname"
-                    type="text"
-                    value={lastName}
-                    onChange={handleLastNameChange}
-                    //required
-                  />
-                </div>
-                <div id="password">
-                  <label htmlFor="password">Password:</label>
-                  <input
-                    id="password"
-                    type="password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    required
-                  />
-                </div>
-                <div>
-                  <button
-                    id="create-account-button"
-                    type="submit"
-                    onClick={handleCreateClick}
-                  >
-                    Create Account
-                  </button>
-                </div>
-                <div>
-                  {createClicked && email !== confirmEmail && (
-                    <p className="error">Emails do not match</p>
-                  )}
-                  {createClicked && !validEmail && (
-                    <p className="error">Please enter a valid email address</p>
-                  )}
-                  {createClicked && firstName.length === 0 && (
-                    <p className="error">Please enter a first name.</p>
-                  )}
-                  {createClicked && lastName.length === 0 && (
-                    <p className="error">Please enter a last name.</p>
-                  )}
-                  {createClicked && password.length < 6 && (
-                    <p className="error">
-                      Please enter a password over 6 characters.
-                    </p>
-                  )}
-                </div>
-              </div>
-            )}
-          </form>
-          <div>
-            <p>
-              Already have an account? <Link to="/signin">Sign in</Link>
-            </p>
           </div>
         </div>
+        <div className="fill col-md-6 split-container-secondary d-none d-md-block">
+          <img
+            src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
+            alt="Kitchen working"
+          ></img>
+        </div>
       </div>
-      <div className="split-container-secondary"></div>
     </div>
   );
 }

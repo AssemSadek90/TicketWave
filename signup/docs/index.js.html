@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: App.js</title>
+    <title>JSDoc: Source: index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: App.js</h1>
+    <h1 class="page-title">Source: index.js</h1>
 
     
 
@@ -27,32 +27,33 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import './App.css';
-import CreateAccount from './EnterEmail';
-import SignIn from './SignIn';
-import Home from './Landing';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+// Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
+// Bootstrap Bundle JS
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import App from './App';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
 /**
- * Renders the main application component.
+ * Renders the root component of the application.
  * @function
- * @returns {JSX.Element} The rendered application component.
+ * @returns {void}
  */
-function App() {
-  return (
-    &lt;div className="App">
-      &lt;Router>
-        &lt;Routes>
-          &lt;Route path="/" element={&lt;CreateAccount />} />
-          &lt;Route path="/signin" element={&lt;SignIn />} />
-          &lt;Route path="/home" element={&lt;Home />} />
-        &lt;/Routes>
-      &lt;/Router>
-    &lt;/div>
+function render() {
+  root.render(
+    //&lt;React.StrictMode>
+    &lt;GoogleOAuthProvider clientId="770303914933-s45dc140ig3djblj6rs9ckg30m58is1u.apps.googleusercontent.com">
+      &lt;App />
+    &lt;/GoogleOAuthProvider>
+    //&lt;/React.StrictMode>
   );
 }
 
-export default App;
+render();
 </code></pre>
         </article>
     </section>
