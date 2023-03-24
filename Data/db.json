@@ -60,6 +60,15 @@
       "is_public": true,
       "image_id": null,
       "id": 7
+    },
+    {
+      "email": "karim@gmail.com",
+      "firstName": "Karim",
+      "lastName": "Elnady",
+      "password": "dsadasdasd",
+      "is_public": true,
+      "image_id": null,
+      "id": 8
     }
   ]
 }

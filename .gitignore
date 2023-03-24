@@ -1,9 +1,9 @@
 node_modules
 package-lock.json
 package.json
-*.json
 signup/package.json
 signup/package-lock.json
+Data/db.json
 Data/db.json
 Data/db.json
 Data/db.json
