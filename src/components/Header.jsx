@@ -1,5 +1,5 @@
 import React from "react";
-import "./publish.css";
+import "./Publish.css";
 /**
  * Renders a header with a title.
  * @component Header
