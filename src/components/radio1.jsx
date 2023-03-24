@@ -126,9 +126,10 @@ function RadioApp() {
   
   return (
     <div>
-      <label>Who can see your event?</label>
-      <div>
-        <input
+      <h2>Who can see your event?</h2>
+      <div className="RadioBlock">
+        <input 
+        className="Radio"
           type="radio"
           id="option1"
           name="options"
@@ -137,13 +138,15 @@ function RadioApp() {
           defaultChecked={true}
         />
         <br />
-        <label htmlFor="option1">Public</label>
-        <br />
-        <span>Shared on TicketWave and search engines</span>
-      </div>
-      <div>
         <div>
+        <label htmlFor="option1"  className="sideradio">Public</label>
+        <br />
+        <span className="sideradio">Shared on TicketWave and search engines</span>
+        </div>
+      </div>
+      <div className="RadioBlock">
           <input
+            className="Radio"
             type="radio"
             id="option2"
             name="options"
@@ -151,20 +154,20 @@ function RadioApp() {
             onChange={handleChange}
           />
           <br />
-          <label htmlFor="option2">private</label>
+          <div>
+          <label htmlFor="option2" className="sideradio">private</label>
           <br />
-          <span>Only available to a selected audience</span>
+          <span  className="sideradio">Only available to a selected audience</span>
+          </div>
         </div>
-      </div>
       {radioValue === "option1" && (
         <div>
           {/* show additional options */}
-          <label>
-            <br />
-            When should we publish your event? <br />
+          <h2>When should we publish your event? </h2>
             <br />
             <label>
               <input
+                className="Radio"
                 type="radio"
                 id="option3"
                 name="options2"
@@ -177,9 +180,9 @@ function RadioApp() {
               <br />
             </label>
             <br />
-          </label>
           <label>
             <input
+              className="Radio"
               type="radio"
               id="option4"
               name="options2"
@@ -192,12 +195,12 @@ function RadioApp() {
         </div>
       )}
       {radioValue === "option2" && (
-        <div>
+        <div className="Audience">
           {/* show different additional options */}
-          <label>
+          <h2 className="Header2">
             Choose your Audience:
             <br />
-          </label>
+          </h2>
           <select
             value={selectedDropdownOption}
             onChange={handleDropdownChange}
@@ -224,6 +227,7 @@ function RadioApp() {
             Will this event ever be public? <br /><br/>
             <label>
               <input
+                className="Radio"
                 type="radio"
                 name="options3"
                 value="keep-private"
@@ -236,6 +240,7 @@ function RadioApp() {
           </label>
           <label>
             <input
+              className="Radio"
               type="radio"
               name="options3"
               value="Scheduled"

@@ -91,6 +91,98 @@ flex-direction: row;
 
 
 }
+   .Radio{
+    font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+    letter-spacing: 0;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: var(--eds-ui-700,#4b4d63);
+    margin: 0 16px 0 0;
+    border: 1px solid var(--eds-ui-300,#dbdae3);
+    border-radius: 50%;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    text-indent: -999px;
+    background-color: transparent;
+    -webkit-box-flex: 0;
+   }
+   .sideradio{ 
+    position:flex;
+    font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+    letter-spacing: 0;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    margin-right: 16px;
+    cursor: pointer;
+    color: var(--eds-ui-700,#4b4d63)
+    }
+    .header2
+    
+    {   
+    font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+    color: var(--eds-ui-800,#39364f);
+    margin: 0;
+    padding: 0;
+    text-rendering: optimizeLegibility;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    letter-spacing: .25px;
+    margin-right: -.25px;
+    font-weight: 600;}
+    .RadioBlock{padding: 0;
+    display: flex;
+    align-items: center;
+    margin: 8px 0;}
+    .Audience
+    {    -webkit-text-size-adjust: 100%;
+    --ButtonHeight: 44px;
+    --ButtonPadding: 0 32px;
+    --ButtonBorderRadius: 4px;
+    --ButtonBorderWidth: 2px;
+    --ButtonBorderColor: #a9a8b3;
+    --ButtonTextColor: #1e0a3c;
+    --ButtonBackgroundColor: #fff;
+    --ButtonBackgroundColorHover: #f8f7fa;
+    --ButtonBorderColorHover: #6f7287;
+    --ButtonBackgroundColorActive: #eeedf2;
+    --ButtonBorderColorActive: #6f7287;
+    --ButtonFocusOutline: #3d64ff;
+    --ButtonPrimaryBackgroundColor: #d1410c;
+    --ButtonPrimaryTextColor: #fff;
+    --ButtonPrimaryBackgroundColorHover: #f05537;
+    --ButtonPrimaryBackgroundColorActive: #bd3a20;
+    --ButtonPrimaryBackgroundColorDisabled: #f8f7fa;
+    --ButtonTextColorDisabled: #a9a8b3;
+    --ButtonSecondaryBackgroundColorDisabled: #fff;
+    --ButtonSecondaryBorderColorDisabled: #eeedf2;
+    --ButtonGhostTextColor: #3659e3;
+    --ButtonGhostTextColorHover: #3d64ff;
+    --ButtonGhostTextColorActive: #304fc9;
+    --ButtonGhostBackgroundColorHover: #f8f7fa;
+    --ButtonGhostBackgroundColorActive: #eeedf2;
+    --ButtonGhostBorderColorHover: #f8f7fa;
+    --ButtonGhostBorderColorActive: #eeedf2;
+    font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    color: var(--eds-ui-800,#39364f);
+    -webkit-box-direction: normal;
+    letter-spacing: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    width: 100%;
+    margin-top: 40px;}
 .eds-vector {
     display: inline;
     margin: 0 auto;
