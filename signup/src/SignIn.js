@@ -205,7 +205,7 @@ Handles email input change event
   @return {JSX.Element}
   */
   return (
-    <div class="container-fluid">
+    <div className="container-fluid">
       <div className="row">
         <div className="col-md-6 split-container-primary">
           <div className="split-container-content">
