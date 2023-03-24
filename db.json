@@ -1,0 +1,14 @@
+{
+  "Event_id": {
+    "Name": "Heidi",
+    "created": "25",
+    "price": "50$",
+    "Availability": "300",
+    "online_event":"online",
+    "logo":"https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
+  },
+  "Time": {
+    "EventDate": "2023-03-01",
+    "EventTime": "13:18"
+  }
+}
