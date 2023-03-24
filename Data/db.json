@@ -1,0 +1,65 @@
+{
+  "users": [
+    {
+      "email": "ziad@gmail.com",
+      "firstName": "Ziad",
+      "lastName": "Ghanem",
+      "password": "1234567",
+      "id": 1
+    },
+    {
+      "email": "de7ko@gmail.com",
+      "firstName": "Ziad",
+      "lastName": "Ghanem",
+      "password": "1234567",
+      "is_public": true,
+      "image_id": null,
+      "id": 2
+    },
+    {
+      "email": "ziad@gmail.cod",
+      "firstName": "Ziad",
+      "lastName": "Ta3baan",
+      "password": "Awwyyyyyyyyyy",
+      "is_public": true,
+      "image_id": null,
+      "id": 3
+    },
+    {
+      "email": "ziad1234@gmail.com",
+      "firstName": "ZoZz",
+      "lastName": "Ziko",
+      "password": "dasdfsafasfas",
+      "is_public": true,
+      "image_id": null,
+      "id": 4
+    },
+    {
+      "email": "ana-ta3banaa@awwwy.com",
+      "firstName": "Lolo",
+      "lastName": "Uni",
+      "password": "ufgusfgasidu",
+      "is_public": true,
+      "image_id": null,
+      "id": 5
+    },
+    {
+      "email": "dsad@gadjs.com",
+      "firstName": "Zoz",
+      "lastName": "Ziko",
+      "password": "adasdqdfas",
+      "is_public": true,
+      "image_id": null,
+      "id": 6
+    },
+    {
+      "email": "ziad@gogo.com",
+      "firstName": "Zozza",
+      "lastName": "Ta3bana",
+      "password": "5alesssss",
+      "is_public": true,
+      "image_id": null,
+      "id": 7
+    }
+  ]
+}

@@ -1,3 +1,10 @@
-
-node_modules/.package-lock.json
-node_modules/@popperjs/core/dist/cjs/enums.js.map
+node_modules
+package-lock.json
+package.json
+*.json
+signup/package.json
+signup/package-lock.json
+Data/db.json
+Data/db.json
+Data/db.json
+Data/db.json
