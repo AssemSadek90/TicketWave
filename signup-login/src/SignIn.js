@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GoogleLogin } from '@react-oauth/google';
+//import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
@@ -263,7 +263,7 @@ Handles email input change event
                     Don't have an account? <Link to="/">Sign Up</Link>
                   </p>
                 </div>
-                <div id="signInDiv">
+                {/* <div id="signInDiv">
                   <GoogleLogin
                     onSuccess={(credentialResponse) => {
                       console.log(credentialResponse);
@@ -272,7 +272,7 @@ Handles email input change event
                       console.log('Login Failed');
                     }}
                   />
-                </div>
+                </div> */}
               </div>
             </form>
           </div>
