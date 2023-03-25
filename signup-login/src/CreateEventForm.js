@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faStickyNote, faMapMarkerAlt, faCalendarAlt  } from '@fortawesome/free-solid-svg-icons'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Header from "./extra/Header";
+import "./Header.css";
 
 
 const CreateEventForm = () => {
     
     
     // TAG FUNCTIONALITY
-    const [tags, setTags] = useState([]);
+  const [tags, setTags] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [tagError, setTagError] = useState(false);
   const [tagCount, setTagCount] = useState(null);
