@@ -4,6 +4,7 @@ import './App.css';
 import CreateAccount from './EnterEmail';
 import SignIn from './SignIn';
 import Home from './Landing';
+import Navbar from './NavBar/Navbar';
 
 /**
  * Renders the main application component.
@@ -15,6 +16,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/navbar" element={<Navbar />} />
           <Route path="/" element={<CreateAccount />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/home" element={<Home />} />
