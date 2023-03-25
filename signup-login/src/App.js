@@ -5,6 +5,7 @@ import CreateAccount from './EnterEmail';
 import SignIn from './SignIn';
 import Home from './Landing';
 import Navbar from './NavBar/Navbar';
+import EventDetails from './EventDetailsPage';
 
 /**
  * Renders the main application component.
@@ -16,6 +17,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/event-details" element={<EventDetails />} />
           <Route path="/navbar" element={<Navbar />} />
           <Route path="/" element={<CreateAccount />} />
           <Route path="/signin" element={<SignIn />} />

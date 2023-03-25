@@ -38,5 +38,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "^1.21.2",
+    "eslint-plugin-jsx-a11y": "^6.7.1"
   }
 }

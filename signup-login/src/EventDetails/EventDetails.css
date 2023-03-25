@@ -1,0 +1,203 @@
+.icons{
+    width: 18px;
+    height: 18px;
+    margin: auto;
+    position: relative;
+    padding: 25px;
+}
+
+#date-location{
+   display: flex;
+   flex-direction: row;
+}
+
+#date-time-container{
+    width: fit-content;
+}
+
+#location-container{
+    width: fit-content;
+    display: flex;
+}
+
+ #main-body {
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 5%;
+    max-width: 1200px;
+    display: flex;
+} 
+
+  #date-time{
+    display:flex;
+    border-right: 0.5px solid#e3e3e3;
+}
+
+
+  body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #fff;
+  }
+  
+  #event-title {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+  
+  #event-summary {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+  
+  #when-and-where h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  #date-time h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  #date-time p {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  #location-content h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  #location-content p {
+    font-size: 18px;
+    margin: 0;
+  }
+  
+  #about-this-event h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+   #time-and-ticket {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  } 
+
+  #time-and-ticket li {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+  } 
+
+  #event-summary{
+    font-size: .875rem;
+    line-height: 1.5rem;
+  }
+
+  #time-text{
+    font-size: 16px;
+    line-height: 1.5rem;
+    color: #6f7287;
+  }
+
+  .titles{
+    font-weight: bolder;
+  }
+
+  #aside-booking-container{
+    padding: 18px;
+    width: 360px;
+    border:0.5px solid#eaeaea;
+    border-radius: 16px;
+    position: sticky;
+    top: 24px;
+    bottom: auto;
+    align-self: flex-start;
+    margin-left: 5%;
+  }
+  
+  #aside-card{
+    padding: 18px;
+    border: 3px solid blue;
+    border-radius: 16px;
+
+  }
+
+  #registration-in-card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  #ticket-counter{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  #left-part{
+    max-width:720px;
+  }
+
+  .registration-buttons{
+    background-color: #3d64ff;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+    margin-right: 20px;
+    font-size: larger;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s ease; 
+  }
+
+  .registration-buttons:hover{
+    background-color: #1735ab;
+  }
+
+  #booking-button{
+    background-color: #d1410c;
+    height: 44px;
+    margin-top: 24px;
+    width:100%;
+    border:0.5px solid #d1410c;
+    border-radius: 5px;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+    transition: background-color 0.5s ease; 
+  }
+
+  #booking-button:hover{
+    background-color: #f05537;
+    border: 0.5px solid #f05537;
+  }
+
+#ticket-icon{
+  rotate: -45deg;
+}
+
+.share-icons{
+    width: 18px;
+    height: 18px;
+    margin: auto;
+    position: relative;
+    padding: 8px;
+}
