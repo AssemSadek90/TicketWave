@@ -1,0 +1,104 @@
+.NavBar {
+    background-color:white;
+    border-bottom: 0.5px solid #e3e2e2;
+    overflow: hidden;
+    height: 72px;
+    width: 100%;
+    display: flex;
+    flex: 1 0 auto;
+    justify-content: space-between;
+  }
+  
+  #NavBarButtons {
+    float: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  #NavBarButtons > div {
+    margin-left: 10px;
+  }
+  
+  #NavBarButtons button {
+    background-color: white;
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+  }
+  
+  #NavBarButtons button:hover {
+    background-color: #bbb;
+  }
+  
+  .NavBar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .NavBar li {
+    float: right;
+  }
+  
+  .NavBar select {
+    background-color: white;
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .NavBar select:hover {
+    background-color: #bbb;
+  }
+
+  #logo{
+    height: 36px;
+    width: 36px;
+    float: left;
+    padding: 18px;
+  }
+  .SearchBar {
+    display: flex;
+    align-items: center;
+    width:fit-content;
+    height: 72px;
+  }
+  
+  .SearchInput {
+    width: 374px;
+    height: 46px;
+    font-size: 16px;
+    border: 1px solid white;
+    border-radius: 0px;
+    margin-top: 10px;
+  }
+  
+  .SearchButton {
+    background-color:white;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .SearchButton:hover {
+    background-color: white;
+  }
+
+  #logoAndSearch{
+    width: fit-content;
+  }
+  #SearchIcon{
+    height: 18px;
+    width: 18px;
+  }
