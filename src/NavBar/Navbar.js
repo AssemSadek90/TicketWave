@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "../App.css";
+import "../Navbar.css";
 import NavBarListItem from "./NavBarListItem";
 import SearchButton from "./NavBarSearch";
 import Dropdown from "./DropMenu";
