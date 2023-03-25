@@ -6,7 +6,8 @@ import SignIn from './SignIn';
 import Home from './Landing';
 import Navbar from './NavBar/Navbar';
 import EventDetails from './EventDetailsPage';
-import CreateEventForm from "./CreateEventForm";
+import CreateEventForm from './CreateEventForm';
+import PublishApp from './publish-components/PublishApp';
 
 /**
  * Renders the main application component.
@@ -18,7 +19,8 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="basic-info" element={<CreateEventForm />}/>
+          <Route path="/publish" element={<PublishApp />} />
+          <Route path="/basic-info" element={<CreateEventForm />} />
           <Route path="/event-details" element={<EventDetails />} />
           <Route path="/navbar" element={<Navbar />} />
           <Route path="/" element={<CreateAccount />} />
