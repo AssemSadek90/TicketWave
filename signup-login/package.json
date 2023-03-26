@@ -25,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docs": "jsdoc -c jsdoc.json"
   },
   "eslintConfig": {
     "extends": [
@@ -48,6 +49,7 @@
   "devDependencies": {
     "axios-mock-adapter": "^1.21.2",
     "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-jsx-a11y": "^6.7.1"
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "jsdoc": "^4.0.2"
   }
 }
