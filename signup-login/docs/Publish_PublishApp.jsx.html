@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: NavBar/Tabs.js</title>
+    <title>JSDoc: Source: Publish/PublishApp.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: NavBar/Tabs.js</h1>
+    <h1 class="page-title">Source: Publish/PublishApp.jsx</h1>
 
     
 
@@ -26,20 +26,24 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import Publish from './publish-preview';
+import Footer from './Footer';
 /**
- * Renders a set of tabs for navigating between different sections of content.
- *
- * @param {object} props - The props object containing the component's properties.
- * @param {string} props.title - The title of the current tab.
- *
- * @returns {JSX.Element} - A React component representing the tabs.
+ * @component called "App".
+ * @ which contains two child components - "Publish" and "Footer".
+ * "Publish" and "Footer" are imported components, and "./app.css" is the style sheet for this component.
  */
 
-export default function Tabs(props) {
-  return &lt;span className="tabs">{props.title}&lt;/span>;
+function PublishApp() {
+  return (
+    &lt;div>
+      &lt;Publish />
+      &lt;Footer />
+    &lt;/div>
+  );
 }
+export default PublishApp;
 </code></pre>
         </article>
     </section>

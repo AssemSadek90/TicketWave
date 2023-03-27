@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: NavBar/Tabs.js</title>
+    <title>JSDoc: Source: Publish/imagedoc.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: NavBar/Tabs.js</h1>
+    <h1 class="page-title">Source: Publish/imagedoc.jsx</h1>
 
     
 
@@ -26,20 +26,22 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-
-/**
- * Renders a set of tabs for navigating between different sections of content.
+            <pre class="prettyprint source linenums"><code>/**
+ * A React component that renders an image for an event preview card.
  *
- * @param {object} props - The props object containing the component's properties.
- * @param {string} props.title - The title of the current tab.
- *
- * @returns {JSX.Element} - A React component representing the tabs.
+ * @param {Object} Event_id - An object representing the event, including a `logo` property that specifies the URL of the event's logo.
+ * @returns {JSX.Element} The rendered image component.
  */
-
-export default function Tabs(props) {
-  return &lt;span className="tabs">{props.title}&lt;/span>;
+function EventImage(Event_id) {
+  return (
+    &lt;aside className="event-preview-card__image-container">
+      &lt;img className="img" src={Event_id.logo} alt="" />
+      &lt;div className="event-preview-card__image-placeholder">&lt;/div>
+    &lt;/aside>
+  );
 }
+
+export default EventImage;
 </code></pre>
         </article>
     </section>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: NavBar/Tabs.js</title>
+    <title>JSDoc: Source: Publish/Header.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: NavBar/Tabs.js</h1>
+    <h1 class="page-title">Source: Publish/Header.jsx</h1>
 
     
 
@@ -27,20 +27,18 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from "react";
-
+import "./Publish.css";
 /**
- * Renders a set of tabs for navigating between different sections of content.
+ * Renders a header with a title.
+ * @component Header
+ * @returns {JSX.Element} A React component that renders a header element.
  *
- * @param {object} props - The props object containing the component's properties.
- * @param {string} props.title - The title of the current tab.
- *
- * @returns {JSX.Element} - A React component representing the tabs.
+ * @example
+ * &lt;Header />
  */
-
-export default function Tabs(props) {
-  return &lt;span className="tabs">{props.title}&lt;/span>;
+function Header(){return&lt;div>&lt;h1>Publish Your Event&lt;/h1>&lt;/div>
 }
-</code></pre>
+export default Header</code></pre>
         </article>
     </section>
 

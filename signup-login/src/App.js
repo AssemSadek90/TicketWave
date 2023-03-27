@@ -1,13 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import CreateAccount from './EnterEmail';
-import SignIn from './SignIn';
-import Home from './Landing';
+import CreateAccount from './Log-in/EnterEmail';
+import SignIn from './Log-in/SignIn';
+import Home from './Landing-page/Landing';
 import Navbar from './NavBar/Navbar';
-import EventDetails from './EventDetailsPage';
-import CreateEventForm from './CreateEventForm';
-import PublishApp from './publish-components/PublishApp';
+import EventDetails from './EventDetails/EventDetailsPage';
+import CreateEventForm from './Basic-info/CreateEventForm';
+import PublishApp from './Publish/PublishApp';
 
 /**
  * Renders the main application component.

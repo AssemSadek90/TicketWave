@@ -1,11 +1,11 @@
-import React from "react";
-import { useState } from "react";
-import "../App.css";
-import "../Navbar.css";
-import NavBarListItem from "./NavBarListItem";
-import SearchButton from "./NavBarSearch";
-import Dropdown from "./DropMenu";
-import Tabs from "./Tabs";
+import React from 'react';
+import { useState } from 'react';
+import '../App.css';
+import './Navbar.css';
+import NavBarListItem from './NavBarListItem';
+import SearchButton from './NavBarSearch';
+import Dropdown from './DropMenu';
+import Tabs from './Tabs';
 
 /**
  * The `Navbar` component is a navigation bar that contains a site title,
@@ -15,8 +15,8 @@ import Tabs from "./Tabs";
  * `NavBarListItem`, `SearchButton`, `Dropdown`, and `Tabs` components.
  */
 export default function Navbar() {
-  const [searchText, setSearchText] = useState("");
-  const [email, setEmail] = useState("example@example.com");
+  const [searchText, setSearchText] = useState('');
+  const [email, setEmail] = useState('example@example.com');
 
   return (
     <nav className="navigation-bar">

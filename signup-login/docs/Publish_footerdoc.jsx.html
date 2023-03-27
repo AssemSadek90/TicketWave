@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: NavBar/Tabs.js</title>
+    <title>JSDoc: Source: Publish/footerdoc.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: NavBar/Tabs.js</h1>
+    <h1 class="page-title">Source: Publish/footerdoc.jsx</h1>
 
     
 
@@ -26,20 +26,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from "react";
-
-/**
- * Renders a set of tabs for navigating between different sections of content.
+            <pre class="prettyprint source linenums"><code>/**
+ * A React component that renders a footer with a publish button.
  *
- * @param {object} props - The props object containing the component's properties.
- * @param {string} props.title - The title of the current tab.
- *
- * @returns {JSX.Element} - A React component representing the tabs.
+ * @param {string} buttonText - The text to display on the publish button.
+ * @returns {JSX.Element} The rendered footer component.
  */
-
-export default function Tabs(props) {
-  return &lt;span className="tabs">{props.title}&lt;/span>;
+function Footer({ buttonText }) {
+  return (
+    &lt;form action="https://www.nextPage.com">
+      &lt;div className="footerContainer">
+        &lt;button className="footerButton" type="submit" value="submit">
+          {buttonText}
+        &lt;/button>
+      &lt;/div>
+    &lt;/form>
+  );
 }
+
+export default Footer;
 </code></pre>
         </article>
     </section>
