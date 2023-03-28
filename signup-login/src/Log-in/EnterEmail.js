@@ -4,23 +4,13 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Log-in-styling/Login.css';
+import server from '../server';
 
 /**
  * A React component for creating an account.
  * @function
  */
 function CreateAccount() {
-  /**
-
-  Initializes an axios instance with a specified baseURL.
-  @type {Object}
-  @constant server
-  @property {string} baseURL - The base URL for the axios instance.
-  */
-  const server = axios.create({
-    baseURL: 'http://localhost:3000',
-  });
-
   /**
 
   An object that represents the user being created.
