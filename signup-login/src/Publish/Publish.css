@@ -2,7 +2,12 @@
     flex-grow: 1;
     align-self: flex-end;
     padding: 16px;
+    text-align: start;
 }
+/* .flex-row{
+    display: flex;
+    justify-content: flex-start;
+} */
 .page-heading{
     max-width: 100%;
     margin-bottom: 32px;
@@ -111,6 +116,7 @@ flex-direction: row;
     -webkit-box-flex: 0;
    }
    .sideradio{ 
+    display: inline-block;
     position:flex;
     font-family: Neue Plak,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,Helvetica,Tahoma,Arial,sans-serif;
     letter-spacing: 0;
@@ -188,7 +194,7 @@ flex-direction: row;
     margin: 0 auto;
     background-size: contain;
     line-height: 0;
-    vertical-align: text-top;
+    /* vertical-align: text-top; */
 }
 .publish-preview{
     flex: 1 0 auto;

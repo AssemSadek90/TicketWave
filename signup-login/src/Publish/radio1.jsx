@@ -49,8 +49,9 @@ function RadioApp() {
     //   console.log(selectedTime)
     // };
 
- function handleDateChange(date) {
-  setSelectedDate(date);
+ const  handleDateChange = (date) =>{
+  console.log(date)
+  setSelectedDate(date);  
   SubmitTheData();
 }
 
@@ -58,6 +59,7 @@ function RadioApp() {
   const handleTimeChange = (e) => {
   const time = e.target.value;
   setSelectedTime(time);
+  SubmitTheData();
   console.log(selectedTime);
 };
 
@@ -99,16 +101,16 @@ function RadioApp() {
   }
   
   function SubmitTheData(){
-        fetch('http://localhost:3001/Time', {
+        fetch('http://localhost:3000/Time', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer <your access token>'
       },
-      body: JSON.stringify({
-        "EventDate": selectedDate,
+      body: JSON.stringify([{
+        // "EventDate": selectedDate,
         "EventTime": selectedTime
-      })
+      }])
     })
       .then(response => {
         if (!response.ok) {
@@ -252,7 +254,7 @@ function RadioApp() {
         </div>
       )}
       <br/>
-       <div>
+       <div className="flex-row">
        
          {/* <input disabled={EnableDate} type="date" id="date-input" onChange={(e)=>handleDateChange(e)}   />
    
