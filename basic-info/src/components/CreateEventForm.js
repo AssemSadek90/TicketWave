@@ -10,7 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./extra/Header.css";
+import "./Styles.css";
 
 const CreateEventForm = () => {
   // ASSIGNING VARIABLES ______________________________________________________________________________________________________________________________
