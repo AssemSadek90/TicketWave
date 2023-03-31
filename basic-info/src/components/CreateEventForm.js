@@ -12,38 +12,127 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Styles.css";
 
+
+/**
+
+Component for creating an event form.
+@component
+@returns {JSX.Element} - The rendered component.
+*/
+
 const CreateEventForm = () => {
   // ASSIGNING VARIABLES ______________________________________________________________________________________________________________________________
-
+  
+  /**
+  A reference to the event title input field.
+  @type {React.MutableRefObject}
+  */
   const titleRef = useRef("");
-  const organizerRef = useRef("");
-  const eventTypeRef = useRef("");
-  const [eventCategory, setEventCategory] = useState("Category");
-  const [subCategory, setSubCategory] = useState("Sub Category");
-  const [startTime, setStartTime] = useState("12 AM");
-  const [endTime, setEndime] = useState("12 AM");
-  const [displayStart, setDisplayStart] = useState(false);
-  const displayEndRef = useRef(false);
-  const timeZoneRef = useRef("");
-  const languageRef = useRef("");
+
+  /**
+A reference to the event organizer input field.
+@type {React.MutableRefObject}
+*/
+const organizerRef = useRef("");
+/**
+
+A reference to the event type input field.
+@type {React.MutableRefObject}
+*/
+const eventTypeRef = useRef("");
+/**
+
+The category of the event.
+@type {string}
+*/
+const [eventCategory, setEventCategory] = useState("Category");
+/**
+
+The subcategory of the event.
+@type {string}
+*/
+const [subCategory, setSubCategory] = useState("Sub Category");
+/**
+
+The start time of the event.
+@type {string}
+*/
+const [startTime, setStartTime] = useState("12 AM");
+/**
+
+The end time of the event.
+@type {string}
+*/
+const [endTime, setEndime] = useState("12 AM");
+/**
+
+Indicates whether to display the start time of the event.
+@type {boolean}
+*/
+const [displayStart, setDisplayStart] = useState(false);
+/**
+
+A reference to the checkbox indicating whether to display the end time of the event.
+@type {React.MutableRefObject}
+*/
+const displayEndRef = useRef(false);
+/**
+
+A reference to the time zone input field.
+@type {React.MutableRefObject}
+*/
+const timeZoneRef = useRef("");
+/**
+
+A reference to the language input field.
+@type {React.MutableRefObject}
+*/
+const languageRef = useRef("");
+
+  
 
   // ________________________________________________________________________________________________________________________________________________
 
   // TAG FUNCTIONALITY_____________________________________________________________________________________________________________________________
+
+  /**
+   * An array of tags
+   * @property {string[]} tags
+   */
   const [tags, setTags] = useState([]);
+
+  /** The current input value for adding a new tag.
+   * @property {string} inputValue
+   */
   const [inputValue, setInputValue] = useState("");
+
+  /** Indicates whether there is an error with the tags
+   * @property {boolean} tagError
+   */
   const [tagError, setTagError] = useState(false);
+
+  /**The current count of tags, or null if not yet initialized.
+   * @property {number | null} tagCount
+   */
   const [tagCount, setTagCount] = useState(null);
 
+
+  /** Handles changes to the input value for adding a new tag.
+   * @param {Event} event - The input change event.
+   */
   const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-    setTagCount(event.target.value.length);
+    setInputValue(event.target.value); /* The updated input value. */
+    setTagCount(event.target.value.length); /* The length of the updated input value. */
   };
 
+
+  /** Handles the addition of a new tag to the form tags state.
+   * @param {Event} event - The form submission event.
+   */
   const handleAddTag = (event) => {
     event.preventDefault();
     setTagCount(0);
-    const newTag = inputValue.trim();
+    const newTag = inputValue.trim(); /* The new tag to be added to the tags state. */
 
     if (newTag !== "" && !tags.includes(newTag)) {
       setTagError(false);
@@ -52,17 +141,42 @@ const CreateEventForm = () => {
     } else setTagError(true);
   };
 
+  /** Handles the removal of a tag from the form tags state.
+   * @param {string} tagToRemove - The tag to be removed from the tags state.
+   */
   const handleRemoveTag = (tagToRemove) => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
   // ________________________________________________________________________________________________________________________________________________
 
   // LOCATION FUNCTIONALITY__________________________________________________________________________________________________________________________
-  const [myLocation, setMyLocation] = useState("Venue");
-  const [location, setLocation] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const selectRef = useRef(null);
+  
+  /**
 
+The selected location type for the event.
+@type {string}
+*/
+const [myLocation, setMyLocation] = useState("Venue");
+/**
+
+The location for the event.
+@type {string}
+*/
+const [location, setLocation] = useState("");
+/**
+
+An array of suggested locations based on the current input value.
+@type {string[]}
+*/
+const [suggestions, setSuggestions] = useState([]);
+/**
+
+A reference to the select element for the location suggestions.
+@type {Object}
+*/
+const selectRef = useRef(null);
+
+/* A side effect that listens for clicks outside of the location select element and hides the suggestions list when detected.*/
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (selectRef.current && !selectRef.current.contains(event.target)) {
@@ -76,6 +190,9 @@ const CreateEventForm = () => {
     };
   }, []);
 
+  /** Handles changes to the location input field and retrieves location suggestions from the OpenStreetMap API.
+   * @param {Object} event - The input change event.
+   */
   const handleLocationChange = (event) => {
     const input = event.target.value;
     setLocation(input);
@@ -94,6 +211,9 @@ const CreateEventForm = () => {
     }
   };
 
+  /** Handles the selection of a location suggestion and sets the location state to the suggestion's display name.
+   * @param {Object} suggestion - The selected location suggestion object.
+   */
   const handleSelectSuggestion = (suggestion) => {
     setLocation(suggestion.display_name);
     setSuggestions([]);
@@ -101,14 +221,31 @@ const CreateEventForm = () => {
   // ________________________________________________________________________________________________________________________________________________
 
   // DATE & TIME FUNCTIONALITY_______________________________________________________________________________________________________________________
-  const [date, setDate] = useState("Single Event");
 
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
+  /**
+ * State hook that sets the date type for the event.
+ * @type {[string, function]} Array that contains the current value and a function to update it.
+ */
+const [date, setDate] = useState("Single Event");
+
+/**
+ * State hook that sets the start date for the event.
+ * @type {[object, function]} Array that contains the current date object and a function to update it.
+ */
+const [startDate, setStartDate] = useState(new Date());
+
+/**
+ * State hook that sets the end date for the event.
+ * @type {[object, function]} Array that contains the current date object and a function to update it.
+ */
+const [endDate, setEndDate] = useState(new Date());
   // ________________________________________________________________________________________________________________________________________________
 
   // SUBMIT HANDLING_________________________________________________________________________________________________________________________________
 
+  /**  * Function to handle form submission and display form data
+ * @param {Event} event - The submit event from the form
+ */
   function submitHandler(event) {
     event.preventDefault();
     const data = {
@@ -130,6 +267,25 @@ const CreateEventForm = () => {
     };
 
     // DISPLAYING DATA_____________________________________________________________________________________________________________________________
+
+    /**
+   * Log form data to console
+   * @param {string} data.Title - The title of the event
+   * @param {string} data.Organizer - The organizer of the event
+   * @param {string} data.EventType - The type of the event
+   * @param {string} data.EventCategory - The category of the event
+   * @param {string} data.subCategory - The subcategory of the event (if applicable)
+   * @param {array} data.Tags - The tags associated with the event
+   * @param {string} data.Location - The location of the event
+   * @param {Date} data.StartDate - The start date of the event
+   * @param {string} data.StartTime - The start time of the event
+   * @param {Date} data.EndDate - The end date of the event
+   * @param {string} data.EndTime - The end time of the event
+   * @param {boolean} data.DisplayStartTime - Whether to display the start time of the event
+   * @param {boolean} data.DisplayEndTime - Whether to display the end time of the event
+   * @param {string} data.TimeZone - The timezone of the event
+   * @param {string} data.Language - The language of the event
+   */
 
     console.log(
       "Title: " +
@@ -172,11 +328,36 @@ const CreateEventForm = () => {
 
   // TITLE ERROR VALIDATION__________________________________________________________________________________________________________________________
 
+  /** 
+   * @property {string} value - The current value of the input field.
+   * @property {function} setValue - A function that updates the current value of the input field. 
+   */
   const [value, setValue] = useState("");
+
+  /**
+   * @property {boolean} error - A boolean value indicating whether there is an error in the input field.
+   * @property {function} setError - A function that sets the error state.
+   */
   const [error, setError] = useState(false);
+
+  /**
+   * @property {number} count - The current count of the input field value.
+   * @property {function} setCount - A function that updates the count state.
+   */
   const [count, setCount] = useState(0);
+
+  /**
+   * @property {boolean} isFocused - A boolean value indicating whether the input field is currently focused.
+   * @property {function} setIsFocused - A function that updates the focus state of the input
+   */
   const [isFocused, setIsFocused] = useState(false);
 
+
+  /**
+ * Function that handles the onBlur event of the input field.
+ * If the input field value is empty, sets the error state to true.
+ * Sets isFocused state to false.
+ */
   const handleBlur = () => {
     if (value.trim().length === 0) {
       setError(true);
@@ -184,10 +365,21 @@ const CreateEventForm = () => {
     setIsFocused(false);
   };
 
+  /**
+ * Function that handles the onFocus event of the input field.
+ * Sets isFocused state to true.
+ */
   const handleFocus = () => {
     setIsFocused(true);
   };
 
+  /**
+ * Function that handles the onChange event of the input field.
+ * Sets the value state to the new input value.
+ * Sets the count state to the length of the new input value.
+ * If the input value is not empty, sets the error state to false.
+ * @param {Object} event - The event object.
+ */
   const handleChange = (event) => {
     setValue(event.target.value);
     setCount(event.target.value.length);
@@ -197,6 +389,11 @@ const CreateEventForm = () => {
   };
   // ________________________________________________________________________________________________________________________________________________
 
+  /**
+ * useEffect hook that runs on mount and when eventCategory state changes.
+ * If the eventCategory is "Category" or "Other", sets the subCategory state to "Sub Category".
+ * @param {string} eventCategory - The current event category.
+ */
   useEffect(() => {
     if (eventCategory === "Category") {
       setSubCategory("Sub Category");
