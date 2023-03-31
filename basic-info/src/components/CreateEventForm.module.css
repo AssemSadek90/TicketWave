@@ -1,146 +1,98 @@
 form {
-    max-width: 1000px;
-    margin: 0 auto;
-    font-family: sans-serif;
-  }
-  
-  
-
-  .inputContainer {
-    margin-top: 1rem;
-    padding: 5px;
-    padding-left: 1rem;
-    border: 1px solid rgb(212, 212, 212);
-    transition: border 0.2s ease-out;
-    border-radius: 2px;
-    /* min-height: 3rem; */
-  }
-  
-  .inputContainer:focus-within {
-    outline: 0;
-    border-color: blue;
-  }
-  
-  .inputContainer input:focus {
-    outline: 0;
-    border-color: blue;
-  }
-  
-
-  .invalid{
-    margin-top: 1rem;
-    padding: 5px;
-    padding-left: 1rem;
-    border: 1px solid red;
-    transition: border 0.2s ease-out
-  }
-
-  .inputLabel{
-    font-size: small;
-    color: #8d8d8d;
-    font-weight: 200;
-    transition: color 0.2s ease-out
-  }
-
-  .inputText{
-    font-size: xx-small;
-  }
-
-  .title{
-    color: rgb(19, 19, 19);
-    font-size: xx-large;
-    margin-bottom: 3px;
-  }
-
-
-  .para{
-    margin: 0;
-    font-size: small;
-    color: rgb(60, 60, 60);
-    width: 80%;
-  }
-  
+  max-width: 1000px;
+  margin: 0 auto;
+  font-family: sans-serif;
+  margin-bottom: 5rem;
+}
 
 
 
-  .form-group select {
-    margin-right: 1rem;
-    width: 10rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #535353;
-    background-color: #fff;
-    font-size: small;
-    border: 1px solid #d9d9d9;
-    padding-left: 0.5rem;
-    height: 3rem;
-    border-radius: 2px;
-    padding-right: 1rem;
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-  
-  .form-group select:focus {
-    outline: 0;
-    border-color: blue;
-  }
-  
+.inputContainer {
+  margin-top: 1rem;
+  padding: 5px;
+  padding-left: 1rem;
+  border: 1px solid rgb(212, 212, 212);
+  transition: border 0.2s ease-out;
+  border-radius: 2px;
+  min-height: 3rem;
+  /* min-height: 3rem; */
+}
+
+.inputContainer:hover {
+  border-color: gray;
+}
+
+.inputContainer:focus-within {
+  outline: 0;
+  border-color: blue;
+}
+
+.inputContainer input:focus {
+  outline: 0;
+  border-color: blue;
+}
+
+
+.invalid{
+  margin-top: 1rem;
+  padding: 5px;
+  padding-left: 1rem;
+  border: 1px solid red;
+  transition: border 0.2s ease-out
+}
+
+.inputLabel{
+  font-size: small;
+  color: #8d8d8d;
+  font-weight: 200;
+  transition: color 0.2s ease-out
+}
+
+.inputText{
+  font-size: xx-small;
+}
+
+.title{
+  color: rgb(19, 19, 19);
+  font-size: xx-large;
+  margin-bottom: 3px;
+}
+
+
+.para{
+  margin: 0;
+  font-size: small;
+  color: rgb(60, 60, 60);
+  width: 80%;
+}
 
 
 
 
+.form-group select {
+  /* margin-right: 1rem; */
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #535353;
+  background-color: #fff;
+  font-size: small;
+  /* border: 1px solid #d9d9d9; */
+  padding-left: 0.5rem;
+  height: 3rem;
+  border-radius: 2px;
+  padding-right: 1rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
 
+/* .form-group select:focus {
+  border-color: blue;
+}
 
-
-
-  /* TAGS */
-
-  .secondaryTitle{
-    color: rgb(60, 60, 60);
-    font-size: large;
-    margin-bottom: 3px;
-  }
-
-
-
-
-
-  /* LOCATION */
-
-
-  .locationButton{
-    background-color: white;
-    justify-content: center;
-    align-items: center;
-    padding-top: 0.8rem;
-    padding-bottom: 0.8rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    text-align: center;
-    width: max-content;
-    border: 1px solid rgb(212, 212, 212);
-    color: #535353;
-    font-size: medium;
-    margin-right: 2rem;
-    border-radius: 5px;
-  }
-
-  .active{
-    background-color: rgb(234, 234, 255);
-    justify-content: center;
-    align-items: center;
-    padding-top: 0.8rem;
-    padding-bottom: 0.8rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    text-align: center;
-    width: max-content;
-    border: 1px solid blue;
-    color: blue;
-    font-size: medium;
-    margin-right: 2rem;
-    border-radius: 5px;
-  }
+.form-group select:hover {
+  border-color: gray;
+} */
 
 
 
@@ -150,5 +102,71 @@ form {
 
 
 
+/* TAGS */
 
-  /* DATE */
+.secondaryTitle{
+  color: rgb(60, 60, 60);
+  font-size: large;
+  margin-bottom: 3px;
+}
+
+
+
+
+
+/* LOCATION */
+
+
+.locationButton{
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+  width: max-content;
+  border: 1px solid rgb(212, 212, 212);
+  color: #535353;
+  font-size: medium;
+  margin-right: 2rem;
+  border-radius: 5px;
+}
+.locationButton:hover{
+  border: 1px solid gray;
+}
+
+.active{
+  background-color: rgb(234, 234, 255);
+  justify-content: center;
+  align-items: center;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  text-align: center;
+  width: max-content;
+  border: 1px solid blue;
+  color: blue;
+  font-size: medium;
+  margin-right: 2rem;
+  border-radius: 5px;
+}
+
+
+.active:active{
+  opacity: 70%;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* DATE */
