@@ -69,6 +69,36 @@
       "is_public": true,
       "image_id": null,
       "id": 8
+    },
+    {
+      "email": "marwan@gmail.com",
+      "firstName": "Maro",
+      "lastName": "Mousa",
+      "password": "maromousa",
+      "is_public": true,
+      "image_id": null,
+      "id": 9
+    },
+    {
+      "email": "marwan@gmail.com",
+      "firstName": "Maro",
+      "lastName": "Mousa",
+      "password": "maromousa",
+      "is_public": true,
+      "image_id": null,
+      "id": 10
     }
-  ]
+  ],
+  "Event-id": {
+    "Name": "Heidi",
+    "created": "25",
+    "Price": "50$",
+    "Availability": "300",
+    "online_event": "online",
+    "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
+  },
+  "Time": {
+    "EventDate": "2023-03-01",
+    "EventTime": "13:18"
+  }
 }
