@@ -87,6 +87,24 @@
       "is_public": true,
       "image_id": null,
       "id": 10
+    },
+    {
+      "email": "rachel@gmail.com",
+      "firstName": "rachel",
+      "lastName": "rachel",
+      "password": "123456",
+      "is_public": true,
+      "image_id": null,
+      "id": 11
+    },
+    {
+      "email": "rachel@gmail.com",
+      "firstName": "rachel",
+      "lastName": "rachel",
+      "password": "123456",
+      "is_public": true,
+      "image_id": null,
+      "id": 12
     }
   ],
   "Event-id": {
@@ -100,5 +118,49 @@
   "Time": {
     "EventDate": "2023-03-01",
     "EventTime": "13:18"
-  }
+  },
+  "Events": [
+    {
+      "Title": "party4",
+      "Organizer": "hanan",
+      "EventType": "Attraction",
+      "EventCategory": "Community and Culture",
+      "subCategory": "LGBT",
+      "Tags": [
+        "one"
+      ],
+      "Location": "Tokio, Japan",
+      "StartDate": "2023-04-01T18:36:05.376Z",
+      "StartTime": "12 AM",
+      "EndDate": "2023-04-01T18:36:05.376Z",
+      "EndTime": "12 AM",
+      "DisplayStartTime": true,
+      "DisplayEndTime": false,
+      "TimeZone": "(GMT-11:00) Midway Island",
+      "Language": "English US",
+      "id": 1
+    },
+    {
+      "Title": "party5",
+      "Organizer": "nona",
+      "EventType": "Attraction",
+      "EventCategory": "Community and Culture",
+      "subCategory": "LGBT",
+      "Tags": [
+        "one",
+        "two",
+        "three"
+      ],
+      "Location": "Tokio, Japan",
+      "StartDate": "2023-04-01T18:36:05.376Z",
+      "StartTime": "12 AM",
+      "EndDate": "2023-04-01T18:36:05.376Z",
+      "EndTime": "12 AM",
+      "DisplayStartTime": true,
+      "DisplayEndTime": false,
+      "TimeZone": "(GMT-11:00) Midway Island",
+      "Language": "English US",
+      "id": 2
+    }
+  ]
 }

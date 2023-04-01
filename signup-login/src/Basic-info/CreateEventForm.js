@@ -11,6 +11,7 @@ import {
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./Styles.css";
+import server from '../server';
 
 
 /**
@@ -266,6 +267,8 @@ const [endDate, setEndDate] = useState(new Date());
       Language: languageRef.current.value,
     };
 
+
+
     // DISPLAYING DATA_____________________________________________________________________________________________________________________________
 
     /**
@@ -322,7 +325,22 @@ const [endDate, setEndDate] = useState(new Date());
     );
 
     console.log(data);
+    handleSignUp(data);
   }
+
+  // SAVE TO DATABASE ________________________________________________________________________________________________________________________________
+
+  
+  const handleSignUp = (data) => {
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    server
+      .post('/Events', data, requestOptions)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
+  };
 
   // ________________________________________________________________________________________________________________________________________________
 
