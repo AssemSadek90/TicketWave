@@ -1,4 +1,4 @@
-.event-element{
+.event_element{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -7,7 +7,7 @@
     height: 400px;
 }
 
-.event-poster {
+.event_poster {
     width: 100%;
     height: 200px;
     background-color: #eee;
@@ -15,31 +15,31 @@
     background-position: center;
   }
   
-  .event-details {
+  .event_details {
     margin: 10px;
   }
 
-  .event-details p {
+  .event_details p {
     text-align: center;
   }
   
-  .event-title {
+  .event_title {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
   }
   
-  .event-location {
+  .event_location {
     font-size: 16px;
     margin-bottom: 5px;
   }
   
-  .event-date {
+  .event_date {
     font-size: 14px;
     color: #666;
   }
   
-  .event-row{
+  .event_row{
     display: flex;
     justify-content: space-around;
   }

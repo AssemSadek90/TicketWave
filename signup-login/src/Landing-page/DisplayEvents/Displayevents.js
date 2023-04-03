@@ -1,5 +1,5 @@
 import React from 'react';
-import './DisplayEvents.css';
+import styles from './Displayevents.module.css';
 import EventItem from './EventItem';
 
 function DisplayEvents(props) {
@@ -34,13 +34,13 @@ function DisplayEvents(props) {
     });
 
     return (
-      <div className="event-row" key={i}>
+      <div className={styles.event_row} key={i}>
         {eventItems}
       </div>
     );
   });
 
-  return <div className="entertainment-events">{eventRows}</div>;
+  return <div className={styles.entertainment_events}>{eventRows}</div>;
 }
 
 export default DisplayEvents;
