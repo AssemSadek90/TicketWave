@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Log-in-styling/Login.css';
+import Terms from './TermsConditions/Terms';
 import server from '../server';
 
 /**
@@ -410,27 +411,25 @@ Handles email input change event
                       placeholder="Confirm email address"
                       value={confirmEmail}
                       onChange={handleConfirmEmailChange}
-                      //required
+                      required
                     />
                   </div>
                   <div id="first-name">
                     <input
                       id="firstName"
-                      type="text"
                       placeholder="First name"
                       value={firstName}
                       onChange={handleFirstNameChange}
-                      //required
+                      required
                     />
                   </div>
                   <div id="last-name">
                     <input
                       id="lastname"
-                      type="text"
                       placeholder="Last name"
                       value={lastName}
                       onChange={handleLastNameChange}
-                      //required
+                      required
                     />
                   </div>
                   <div id="password">
@@ -488,6 +487,7 @@ Handles email input change event
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
           ></img>
+          {/* <div>{createClicked && <Terms />}</div> */}
         </div>
       </div>
     </div>

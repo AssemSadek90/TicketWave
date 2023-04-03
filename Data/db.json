@@ -87,6 +87,24 @@
       "is_public": true,
       "image_id": null,
       "id": 10
+    },
+    {
+      "email": "ziko@de7k.com",
+      "firstName": "Ziko",
+      "lastName": "CCE",
+      "password": "imBAAAaDDMJ",
+      "is_public": true,
+      "image_id": null,
+      "id": 11
+    },
+    {
+      "email": "ziko@de7k.com",
+      "firstName": "Ziko",
+      "lastName": "CCE",
+      "password": "imBAAAaDDMJ",
+      "is_public": true,
+      "image_id": null,
+      "id": 12
     }
   ],
   "Event-id": {
