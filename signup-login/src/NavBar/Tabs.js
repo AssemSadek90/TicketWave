@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import styles from './Navbar.module.css';
 
 /**
  * Renders a set of tabs for navigating between different sections of content.
@@ -10,5 +11,5 @@ import React from "react";
  */
 
 export default function Tabs(props) {
-  return <span className="tabs">{props.title}</span>;
+  return <span className={styles.tabs}>{props.title}</span>;
 }
