@@ -12,7 +12,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.event_element :not(event_image) :not(event_details) :hover{
+.event_element:hover {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
