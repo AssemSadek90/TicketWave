@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Displayevents.module.css';
 import EventItem from './EventItem';
 
 function DisplayEvents(props) {
+  const [displayAll, setDisplayAll] = useState(false);
+  function handleClickButton() {
+    setDisplayAll(true);
+  }
+
   // assume the props.events an array of objects
   const events = props.eventsData;
 
@@ -40,7 +45,24 @@ function DisplayEvents(props) {
     );
   });
 
-  return <div className={styles.entertainment_events}>{eventRows}</div>;
+  return (
+    <div className={styles.entertainment_events}>
+      <h2>events in location</h2>
+      {displayAll ? (
+        <>{eventRows}</>
+      ) : (
+        <>
+          {eventRows[0]}
+          <button
+            className={styles.see_more_button}
+            onClick={handleClickButton}
+          >
+            see more
+          </button>
+        </>
+      )}
+    </div>
+  );
 }
 
 export default DisplayEvents;
