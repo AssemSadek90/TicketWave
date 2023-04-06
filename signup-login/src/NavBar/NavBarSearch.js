@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import styles from './Navbar.module.css';
 
 /**
 
@@ -16,11 +17,11 @@ function SearchButton({ label, to }) {
   }
 
   return (
-    <button className="search-button" onClick={handleClick}>
-      <svg className="svg-icon" viewBox="0 0 24 24">
+    <button className={styles.search_button} onClick={handleClick}>
+      <svg className={styles.svg_icon} viewBox="0 0 24 24">
         <path d="M10 14c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4zm3.5.9c-1 .7-2.2 1.1-3.5 1.1-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6c0 1.3-.4 2.5-1.1 3.4l5.1 5.1-1.5 1.5-5-5.1z"></path>
       </svg>
-      <span className="label">{label}</span>
+      <span className={styles.label}>{label}</span>
     </button>
   );
 }
