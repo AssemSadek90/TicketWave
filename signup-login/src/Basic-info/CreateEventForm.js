@@ -10,7 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import "./Styles.css";
 import server from '../server';
 
 
@@ -423,6 +422,7 @@ const [endDate, setEndDate] = useState(new Date());
 
   // DISPLAYING ITEMS_________________________________________________________________________________________________________________________________
   return (
+    <div className={classes.basic}>
     <form className={classes.form} onSubmit={submitHandler}>
       {/* 1st PART OF PAGE _______________________________________________________________________________________________________________________________ */}
 
@@ -442,10 +442,11 @@ const [endDate, setEndDate] = useState(new Date());
 
         {/* TITLE AND ORGANIZER INFORMATION ____________________________________*/}
 
-        <div
-          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        <div 
+         style={{display: "flex",flexDirection: "column",width: "100%" }}
+          
         >
-          <h2 className={classes.title}>Basic Info</h2>
+          <h2>Basic Info</h2>
           <p className={classes.para}>
             Name your event and tell event-goers why they should come. Add
             details that highlight what makes it unique.
@@ -1247,7 +1248,7 @@ const [endDate, setEndDate] = useState(new Date());
           {/* TAGS INFORMATION __________________________________________ */}
 
           <div>
-            <h2 className={classes.secondaryTitle}>Tags</h2>
+            <h2 >Tags</h2>
             <p
               className={classes.para}
               style={{ marginBottom: "1rem", marginTop: "1rem" }}
@@ -1393,7 +1394,7 @@ const [endDate, setEndDate] = useState(new Date());
           {/* LOCATION INFORMATION _________________________________________________ */}
 
           <div>
-            <h2 className={classes.title} style={{ marginTop: "3rem" }}>
+            <h2 style={{ marginTop: "3rem" }}>
               Location
             </h2>
             <p className={classes.para} style={{ marginBottom: "1rem" }}>
@@ -1537,7 +1538,7 @@ const [endDate, setEndDate] = useState(new Date());
           {/* DATE AND TIME INFORMATION _________________________________________________________________*/}
 
           <React.Fragment>
-            <h2 className={classes.title}>Date & Time</h2>
+            <h2>Date & Time</h2>
             <p className={classes.para} style={{ marginBottom: "1.5rem" }}>
               Tell event-goers when your event starts and ends so they can make
               plans to attend.
@@ -2009,6 +2010,7 @@ const [endDate, setEndDate] = useState(new Date());
 
       {/* ___________________________________________________________________________________________________________________________________________ */}
     </form>
+    </div>
   );
 };
 
