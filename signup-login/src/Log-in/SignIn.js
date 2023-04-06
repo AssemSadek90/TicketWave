@@ -200,8 +200,8 @@ Handles email input change event
         <div className="col-md-6 split-container-primary">
           <div className="split-container-content">
             <div className="header-create-element">
-              <h1 className="company-name">Ticketwave</h1>
-              <h2 className="eds-text-hl">Log in</h2>
+              <div className="company-name">Ticketwave</div>
+              <div className="create-account-hl">Log in</div>
             </div>
             <form onSubmit={submitForm}>
               <div className="additional-info">
