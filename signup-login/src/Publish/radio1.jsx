@@ -108,9 +108,10 @@ function RadioApp() {
         'Authorization': 'Bearer <your access token>'
       },
       body: JSON.stringify([{
-        // "EventDate": selectedDate,
+        "EventDate": selectedDate,
         "EventTime": selectedTime
-      }])
+      },
+    { "Password": textInputValue }])
     })
       .then(response => {
         if (!response.ok) {
