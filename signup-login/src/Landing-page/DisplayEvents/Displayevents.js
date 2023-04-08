@@ -30,6 +30,7 @@ function DisplayEvents(props) {
     const eventItems = row.map((event) => {
       return (
         <EventItem
+          data-testid="event-display-item"
           imageSrc={event.path}
           location={event.location}
           date={event.date}
@@ -39,14 +40,17 @@ function DisplayEvents(props) {
     });
 
     return (
-      <div className={styles.event_row} key={i}>
+      <div data-testid="event-row-element" className={styles.event_row} key={i}>
         {eventItems}
       </div>
     );
   });
 
   return (
-    <div className={styles.entertainment_events}>
+    <div
+      data-testid="event-display-container"
+      className={styles.entertainment_events}
+    >
       <h2>events in location</h2>
       {displayAll ? (
         <>{eventRows}</>
@@ -54,6 +58,7 @@ function DisplayEvents(props) {
         <>
           {eventRows[0]}
           <button
+            data-testid="see-more-button"
             className={styles.see_more_button}
             onClick={handleClickButton}
           >

@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <Navbar />
-      <DisplayEvents eventsData={events} />
+      <DisplayEvents data-testid="event-container" eventsData={events} />
     </div>
   );
 };
