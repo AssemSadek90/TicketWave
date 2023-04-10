@@ -105,8 +105,8 @@
   margin-top: 10px;
 }
 
-.eds-text-hl,
-.eds-text-hl--fixed {
+.create-account-hl,
+.create-account-hl--fixed {
   text-align: left;
   font-size: 2rem;
   line-height: 2.5rem;
@@ -167,5 +167,9 @@
   color: #d1410c;
   text-align: left;
   font-style: italic;
-  font-size: 14px;
+  display: block;
+  font-size: 3em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
 }
