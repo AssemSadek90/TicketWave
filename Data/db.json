@@ -69,6 +69,117 @@
       "is_public": true,
       "image_id": null,
       "id": 8
+    },
+    {
+      "email": "marwan@gmail.com",
+      "firstName": "Maro",
+      "lastName": "Mousa",
+      "password": "maromousa",
+      "is_public": true,
+      "image_id": null,
+      "id": 9
+    },
+    {
+      "email": "marwan@gmail.com",
+      "firstName": "Maro",
+      "lastName": "Mousa",
+      "password": "maromousa",
+      "is_public": true,
+      "image_id": null,
+      "id": 10
+    },
+    {
+      "email": "ziko@de7k.com",
+      "firstName": "Ziko",
+      "lastName": "CCE",
+      "password": "imBAAAaDDMJ",
+      "is_public": true,
+      "image_id": null,
+      "id": 11
+    },
+    {
+      "email": "ziko@de7k.com",
+      "firstName": "Ziko",
+      "lastName": "CCE",
+      "password": "imBAAAaDDMJ",
+      "is_public": true,
+      "image_id": null,
+      "id": 12
     }
-  ]
+  ],
+  
+  "eventsData": [
+    {
+      "path": "https://openclipart.org/download/341148/cantthink-simplecolour.svg",
+      "location": "New York City",
+      "date": "March 28, 2023",
+      "title": "My Trip to NYC"
+    },
+    {
+      "path": "https://openclipart.org/download/341147/building-engineer-colour.svg",
+      "location": "San Francisco",
+      "date": "April 15, 2023",
+      "title": "Golden Gate Bridge"
+    },
+    {
+      "path": "https://openclipart.org/download/341145/ladyinreddances-remix.svg",
+      "location": "Paris",
+      "date": "May 3, 2023",
+      "title": "Eiffel Tower"
+    },
+    {
+      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
+      "location": "Tokyo",
+      "date": "June 7, 2023",
+      "title": "Cherry Blossoms"
+    },
+    {
+      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
+      "location": "London",
+      "date": "July 12, 2023",
+      "title": "Big Ben"
+    },
+    {
+      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
+      "location": "Sydney",
+      "date": "August 21, 2023",
+      "title": "Opera House"
+    },
+    {
+      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
+      "location": "Rio de Janeiro",
+      "date": "September 4, 2023",
+      "title": "Christ the Redeemer"
+    },
+    {
+      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
+      "location": "Dubai",
+      "date": "October 1, 2023",
+      "title": "Burj Khalifa"
+    },
+    {
+      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
+      "location": "Rome",
+      "date": "November 10, 2023",
+      "title": "Colosseum"
+    },
+    {
+      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
+      "location": "Moscow",
+      "date": "December 5, 2023",
+      "title": "Red Square"
+    }
+  ],
+  "Event-id": {
+    "Name": "Heidi",
+    "created": "25",
+    "Price": "50$",
+    "Availability": "300",
+    "online_event": "online",
+    "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
+  },
+  "Time": {
+    "EventDate": "2023-03-01",
+    "EventTime": "13:18"
+  }
 }
