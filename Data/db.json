@@ -105,9 +105,17 @@
       "is_public": true,
       "image_id": null,
       "id": 12
+    },
+    {
+      "email": "jemmy@gmail.com",
+      "firstName": "Ahmed",
+      "lastName": "Gamal",
+      "password": "1234567",
+      "is_public": true,
+      "image_id": null,
+      "id": 13
     }
   ],
-  
   "eventsData": [
     {
       "path": "https://openclipart.org/download/341148/cantthink-simplecolour.svg",

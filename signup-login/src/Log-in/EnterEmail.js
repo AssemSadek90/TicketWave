@@ -158,36 +158,36 @@ function CreateAccount() {
    */
   function handleContinueButtonClick() {
     setIsLoading(true);
-    server
-      .get(`/users?email=${email}`)
-      .then((response) => response.data)
-      .then((data) => {
-        setIsLoading(false);
+    // server
+    //   .get(`/users?email=${email}`)
+    //   .then((response) => response.data)
+    //   .then((data) => {
+    //     setIsLoading(false);
 
-        if (data.length > 0) {
-          setUserExists(true);
-          console.log('User already exists');
-          if (userExists || !validEmail) {
-            setShowAdditionalInfo(false);
-            setshowContinueButton(true);
-            setShowEditEmail(false);
-            setEmailDisabled(false);
-          }
-        } else {
-          setUserExists(false);
-          console.log('User does not exist');
-          if (validEmail) {
-            setShowAdditionalInfo(true);
-            setshowContinueButton(false);
-            setShowEditEmail(true);
-            setEmailDisabled(true);
-          }
-        }
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.error(error);
-      });
+    //     if (data.length > 0) {
+    //       setUserExists(true);
+    //       console.log('User already exists');
+    //       if (userExists || !validEmail) {
+    //         setShowAdditionalInfo(false);
+    //         setshowContinueButton(true);
+    //         setShowEditEmail(false);
+    //         setEmailDisabled(false);
+    //       }
+    //     } else {
+    setUserExists(false);
+    console.log('User does not exist');
+    if (validEmail) {
+      setShowAdditionalInfo(true);
+      setshowContinueButton(false);
+      setShowEditEmail(true);
+      setEmailDisabled(true);
+    }
+    // }
+    // })
+    // .catch((error) => {
+    //   setIsLoading(false);
+    //   console.error(error);
+    // });
   }
 
   /**
@@ -283,11 +283,13 @@ Handles email input change event
     event.preventDefault();
     if (validData) {
       user.email = email;
-      user.firstName = firstName;
-      user.lastName = lastName;
-      user.password = password;
+      // user.first_name = firstName;
+      // user.last_name = lastName;
+      user.username = firstName + lastName;
+      user.password1 = password;
+      user.password2 = password;
       user.is_public = true;
-      user.image_id = null;
+      // user.image_id = null;
       handleSignUp(user);
     }
   }
@@ -313,18 +315,18 @@ Handles email input change event
   @name navigateHome
   */
   const navigateHome = () => {
-    server
-      .get(`/users?email=${email}`)
-      .then((response) => response.data)
-      .then((data) => {
-        localStorage.setItem('userId', data[0].id);
-        navigate('/home');
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.error(error);
-        return;
-      });
+    // server
+    //   .get(`/users?email=${email}`)
+    //   .then((response) => response.data)
+    //   .then((data) => {
+    //     localStorage.setItem('userId', data[0].id);
+    navigate('/home');
+    // })
+    // .catch((error) => {
+    //   setIsLoading(false);
+    //   console.error(error);
+    //   return;
+    // });
   };
 
   /**
@@ -342,10 +344,10 @@ Handles email input change event
     };
 
     server
-      .post('/users', user, requestOptions)
+      .post('/auth/signup/', user, requestOptions)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
-    navigateHome();
+    //navigateHome();
   };
 
   /**
