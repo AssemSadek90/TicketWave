@@ -208,11 +208,11 @@ function EventDetails(){
                             </div>
                             <div>
                                 <div>
-                                    <span><a href="https://www.facebook.com" target={"_blank"} data-testid="share-facebook-icon"><img className="share-icons" src={FacebookIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.facebook.com" target={"_blank"} data-testid="share-messenger-icon"><img className="share-icons" src={MessengerIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.linkedin.com" target={"_blank"} data-testid="share-linkedin-icon"><img className="share-icons" src={LinkedInIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.twitter.com" target={"_blank"} data-testid="share-twitter-icon"><img className="share-icons" src={TwitterIcon} alt='logo'></img></a></span>
-                                    <span><a href="mailto:" target={"_blank"} data-testid="share-mail-icon"><img className="share-icons" src={MailIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.facebook.com" target={"_blank"} test-id="share-facebook-icon"><img className="share-icons" src={FacebookIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.facebook.com" target={"_blank"} test-id="share-messenger-icon"><img className="share-icons" src={MessengerIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.linkedin.com" target={"_blank"} test-id="share-linkedin-icon"><img className="share-icons" src={LinkedInIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.twitter.com" target={"_blank"} test-id="share-twitter-icon"><img className="share-icons" src={TwitterIcon} alt='logo'></img></a></span>
+                                    <span><a href="mailto:" target={"_blank"} test-id="share-mail-icon"><img className="share-icons" src={MailIcon} alt='logo'></img></a></span>
                                 </div>  
                             </div>
                         </div>
@@ -228,9 +228,9 @@ function EventDetails(){
                             <strong>Registration</strong>
                        </span>
                        <span id="ticket-counter">
-                            <button className="registration-buttons" data-testid="decrement-button" onClick={() => ticketCounter.decrement()}>-</button>
+                            <button className="registration-buttons" test-id="decrement-button" onClick={() => ticketCounter.decrement()}>-</button>
                             {ticketCounter.value}
-                            <button className="registration-buttons" data-testid="increment-button" onClick={() => ticketCounter.increment()}>+</button>
+                            <button className="registration-buttons" test-id="increment-button" onClick={() => ticketCounter.increment()}>+</button>
                        </span>
                     </div>
 
@@ -241,7 +241,7 @@ function EventDetails(){
 
                 <div>
                     {/* booking pop-up to be added with phase 3*/}
-                    <button id="booking-button" data-testid="booking-button">Reserve a spot</button>
+                    <button id="booking-button" test-id="booking-button">Reserve a spot</button>
                 </div>
             </div>
 
