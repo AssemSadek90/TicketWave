@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavigationBar from './NavigationBar/NavigationBar';
+import NavBar from '../NavBar/Navbar'
 import EventDetails from './EventDetails';
 import Banner from './Banner/Banner';
 
@@ -7,7 +7,7 @@ class EventDetailsPage extends Component {
   render() {
     return (
       <div>
-        <NavigationBar />
+        <NavBar />
         <Banner />
         <EventDetails />
       </div>

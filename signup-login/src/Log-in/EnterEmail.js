@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Log-in-styling/Login.css';
+import Terms from './TermsConditions/Terms';
 import server from '../server';
 
 /**
@@ -358,12 +359,13 @@ Handles email input change event
         <div className="col-md-6 split-container-primary">
           <div className="split-container-content">
             <div className="header-create-element">
-              <h1 className="company-name">Ticketwave</h1>
-              <h2 className="eds-text-hl">Create an account</h2>
+              <div className="company-name">Ticketwave</div>
+              <div className="create-account-hl">Create an account</div>
             </div>
-            <form onSubmit={submitForm}>
+            <form test-id="sign-up-form" onSubmit={submitForm}>
               <div className="additional-info" id="create-account">
                 <input
+                  test-id="email-sign-up"
                   id="email"
                   type="email"
                   placeholder="Email address"
@@ -376,6 +378,7 @@ Handles email input change event
                   <div>
                     {showContinueButton && (
                       <button
+                        test-id="continue-button-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         disabled={isLoading}
                         onClick={handleContinueButtonClick}
@@ -387,6 +390,7 @@ Handles email input change event
                   <span>
                     {showEditEmail && (
                       <button
+                        test-id="edit-email-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         onClick={handleEditClick}
                       >
@@ -405,35 +409,36 @@ Handles email input change event
                 <div className="additional-info">
                   <div id="confirm-email">
                     <input
+                      test-id="confirm-email-sign-up"
                       id="confirmEmail"
                       type="email"
                       placeholder="Confirm email address"
                       value={confirmEmail}
                       onChange={handleConfirmEmailChange}
-                      //required
+                      required
                     />
                   </div>
                   <div id="first-name">
                     <input
+                      test-id="first-name-sign-up"
                       id="firstName"
-                      type="text"
                       placeholder="First name"
                       value={firstName}
                       onChange={handleFirstNameChange}
-                      //required
+                      required
                     />
                   </div>
                   <div id="last-name">
                     <input
+                      test-id="last-name-sign-up"
                       id="lastname"
-                      type="text"
                       placeholder="Last name"
                       value={lastName}
                       onChange={handleLastNameChange}
-                      //required
+                      required
                     />
                   </div>
-                  <div id="password">
+                  <div test-id="password-sign-up" id="password">
                     <input
                       id="password"
                       type="password"
@@ -445,6 +450,7 @@ Handles email input change event
                   </div>
                   <div>
                     <button
+                      test-id="create-button-sign-up"
                       className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                       type="submit"
                       onClick={handleCreateClick}
@@ -477,7 +483,7 @@ Handles email input change event
               )}
             </form>
             <div>
-              <p>
+              <p test-id="signin-navigate-sign-up">
                 Already have an account? <Link to="/signin">Sign in</Link>
               </p>
             </div>
@@ -488,6 +494,7 @@ Handles email input change event
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
           ></img>
+          {/* <div>{createClicked && <Terms />}</div> */}
         </div>
       </div>
     </div>

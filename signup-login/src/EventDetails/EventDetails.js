@@ -124,7 +124,7 @@ function EventDetails(){
                         </div>
                     </div>
                     <div id="date-location">
-                        <section>
+                        <section id="date-time-section">
                             <div id="date-time-container">
                                 <div id="date-time">
                                     <div id="date-time-icon">
@@ -134,7 +134,7 @@ function EventDetails(){
                                         <div>
                                             <h3 className="titles">Date and time</h3>
                                         </div>
-                                        <p>
+                                        <p className="date-time-location-subtext">
                                             {event1.start_time + ' - ' + event1.end_time}
                                         </p>
                                     </div>
@@ -151,7 +151,7 @@ function EventDetails(){
                                         <div>
                                             <h3 className="titles">Location</h3>
                                         </div>
-                                        <p>
+                                        <p className="date-time-location-subtext">
                                         {event1.venue.name + ' - ' + event1.venue.address}
                                         </p>
                                     </div>
@@ -167,19 +167,19 @@ function EventDetails(){
                         </div>
                         <ul id='time-and-ticket'>
                             <li>
-                                <span>
+                                <span id="clock-icon-span">
                                     <img className="icons" src={ClockIcon} alt='icon'></img>
                                 </span>
-                                <span>
-                                    <p>2 days 12 hours</p>
+                                <span className="time-ticket-span">
+                                    2 days 12 hours
                                 </span>
                             </li>
                             <li>
-                                <span>
+                                <span id="ticket-icon-span">
                                     <img className="icons" src={TicketIcon} id='ticket-icon' alt='icon'></img>
                                 </span>
-                                <span>
-                                    <p>Mobile eTicket</p>
+                                <span className="time-ticket-span">
+                                    Mobile eTicket
                                 </span>
                             </li>
                         </ul>
@@ -225,7 +225,7 @@ function EventDetails(){
                 <div id="aside-card">
                     <div id="registration-in-card">
                        <span>
-                            <h3 className="titles">Registration</h3>
+                            <strong>Registration</strong>
                        </span>
                        <span id="ticket-counter">
                             <button className="registration-buttons" onClick={() => ticketCounter.decrement()}>-</button>
@@ -235,7 +235,7 @@ function EventDetails(){
                     </div>
 
                     <div>
-                        Free
+                        <strong>Free</strong>
                     </div>
                 </div>
 
