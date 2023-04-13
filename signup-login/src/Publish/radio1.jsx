@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
+import './Publish.css';
+import { Box } from '@mui/material';
 
 
 function RadioApp() {
@@ -205,10 +207,11 @@ function RadioApp() {
             <br />
           </h2>
           <select
+         
             value={selectedDropdownOption}
             onChange={handleDropdownChange}
           >
-            <option value="option1">Anyone with the link</option>
+            <option  value="option1">Anyone with the link</option>
             <option value="option2">only people with the password</option>
           </select>
           {textInputVisible && (
@@ -262,11 +265,118 @@ function RadioApp() {
         
          <input disabled={EnableDate} type="time" id="time-input" onChange={handleTimeChange} /> */}
    
-  
-      <DatePicker disabled={EnableDate} selected={selectedDate} onChange={handleDateChange} minDate={new Date()} />
-      <input type="time" value={selectedTime} disabled={EnableDate} onChange={handleTimeChange} />
-      
+   <div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                  }}
+                >
 
+            <div className="eds-field-styled__label-wrapper snipcss0-11-78-79 snipcss0-9-23-24"
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                    }}
+                  >
+                  <Box
+      sx={{
+        border:0.1,
+        borderColor:'grey',
+        width: 240,
+        height: 58,
+        backgroundColor: 'transparent',
+        '&:hover': {
+          borderColor:'blue',
+          }
+        }
+      }>
+                    <label className="eds-field-styled__label eds-label-primary snipcss0-12-79-80 snipcss0-10-24-25">
+                      <span className="eds-label__content snipcss0-13-80-81 snipcss0-11-25-26">  Start date</span>
+                    </label>
+      <DatePicker disabled={EnableDate} selected={selectedDate} onChange={handleDateChange} minDate={new Date()} title="start"/>
+      </Box></div>
+      {/* <input type="time" value={selectedTime} disabled={EnableDate} onChange={handleTimeChange} /> */}
+              <div  style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                    }}>
+                                      <Box
+      sx={{
+        border:0.1,
+        borderColor:'grey',
+        width: 240,
+        height: 58,
+        backgroundColor: 'transparent',
+        '&:hover': {
+          borderColor:'blue',
+          }
+        }
+      }>
+              <label className="eds-field-styled__label eds-label-primary snipcss0-12-79-80 snipcss0-10-24-25" >
+              <span className="eds-label__content snipcss0-13-80-81 snipcss0-11-25-26" >Start Time</span></label>
+              <select
+                      style={{ maxHeight: "5rem" }}
+                      onChange={handleTimeChange}
+                      id="startTime"
+                      name="startTime"
+                      type= "time"
+                      disabled={EnableDate}
+
+                    >
+                      <option value="12 AM">00:00</option>
+                      <option value="12:30 AM">00:30</option>
+                      <option value="1 AM">1:00</option>
+                      <option value="1:30 AM">1:30</option>
+                      <option value="2 AM">2:00</option>
+                      <option value="2:30 AM">2:30</option>
+                      <option value="3 AM">3:00</option>
+                      <option value="3:30 AM">3:30</option>
+                      <option value="4 AM">4:00</option>
+                      <option value="4:30 AM">4:30</option>
+                      <option value="5 AM">5:00</option>
+                      <option value="5:30 AM">5:30</option>
+                      <option value="6 AM">6:00</option>
+                      <option value="6:30 AM">6:30</option>
+                      <option value="7 AM">7:00</option>
+                      <option value="7:30 AM">7:30</option>
+                      <option value="8 AM">8:00</option>
+                      <option value="8:30 AM">8:30</option>
+                      <option value="9 AM">9:00</option>
+                      <option value="9:30 AM">9:30</option>
+                      <option value="10 AM">10:00</option>
+                      <option value="10:30 AM">10:30</option>
+                      <option value="11 AM">11:00</option>
+                      <option value="11:30 AM">11:30</option>
+                      <option value="12 PM">12:00</option>
+                      <option value="12:30 PM">12:30</option>
+                      <option value="1 PM">13:00</option>
+                      <option value="1:30 PM">13:30</option>
+                      <option value="2 PM">14:00</option>
+                      <option value="2:30 PM">14:30</option>
+                      <option value="3 PM">15:00</option>
+                      <option value="3:30 PM">15:30</option>
+                      <option value="4 PM">16:00</option>
+                      <option value="4:30 PM">16:30</option>
+                      <option value="5 PM">17:00</option>
+                      <option value="5:30 PM">17:30</option>
+                      <option value="6 PM">18:00</option>
+                      <option value="6:30 PM">18:30</option>
+                      <option value="7 PM">19:00</option>
+                      <option value="7:30 PM">19:30</option>
+                      <option value="8 PM">20:00</option>
+                      <option value="8:30 PM">20:30</option>
+                      <option value="9 PM">21:00</option>
+                      <option value="9:30 PM">21:30</option>
+                      <option value="10 PM">22:00</option>
+                      <option value="10:30 PM">22:30</option>
+                      <option value="11 PM">23:00</option>
+                      <option value="11:30 PM">23:30</option>
+                    </select>
+                   </Box> </div>
+                   
+</div>
+ <p className="eds-text-bm eds-l-mar-bot-4">Time zone is the same as your event's</p>
        </div> 
     </div>
   );

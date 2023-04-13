@@ -17,6 +17,34 @@
 
 
 }
+.eds-text-bm { 
+    text-rendering:  optimizeLegibility;
+    font-size: 1rem; 
+    line-height: 1.5rem; 
+    font-weight: 400;
+} 
+.eds-l-mar-bot-4 { 
+    margin-bottom: 16px;
+}
+.eds-field-styled__internal .eds-field-styled__label-wrapper  { 
+    overflow: hidden; 
+    pointer-events: none; 
+    position: absolute; 
+    width: 100%; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box; 
+    padding: 12px;
+} 
+.eds-label__content { 
+    display:  flex; 
+    cursor: pointer; 
+    font-weight: 400;
+} 
+
+
+.eds-field-styled--static .eds-field-styled__internal .eds-field-styled__label-wrapper  { 
+    padding: 2px 12px 0;
+} 
 .eds-textl{
     flex: auto;
 }
