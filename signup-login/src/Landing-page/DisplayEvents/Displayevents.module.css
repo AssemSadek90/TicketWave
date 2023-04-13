@@ -78,3 +78,8 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
   }
 
+  .entertainment_events{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 0 auto;
+  }

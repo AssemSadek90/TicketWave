@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styles from './Displayevents.module.css';
 import EventItem from './EventItem';
+import EventsList from './EventList';
 
 function DisplayEvents(props) {
-  const [displayAll, setDisplayAll] = useState(false);
-  function handleClickButton() {
-    setDisplayAll(true);
-  }
+  // const [displayAll, setDisplayAll] = useState(false);
+  // function handleClickButton() {
+  //   setDisplayAll(true);
+  // }
 
   // assume the props.events an array of objects
   const events = props.eventsData;
@@ -45,13 +46,19 @@ function DisplayEvents(props) {
       </div>
     );
   });
-
+  //console.log(eventRows);
   return (
-    <div
-      data-testid="event-display-container"
-      className={styles.entertainment_events}
-    >
-      <h2>events in location</h2>
+    <div>
+      <h2 data-testid="events-header">Events In Cairo</h2>
+      <div
+        data-testid="event-display-container"
+        className={styles.entertainment_events}
+      >
+        {/* <Section1  title="events in cairo" events={eventRows.slice(0, 1)} /> */}
+        {/* <Section1 title="events in cairo" events={props.eventsData} /> */}
+        {/* <Section2 events={[...eventRows.slice(1, 2), ...eventRows.slice(2)]} /> */}
+        {/* <Section2 events={[...eventRows.slice(1, 2), ...eventRows.slice(2)]} /> */}
+        {/* <h2>events in location</h2>
       {displayAll ? (
         <>{eventRows}</>
       ) : (
@@ -65,7 +72,9 @@ function DisplayEvents(props) {
             see more
           </button>
         </>
-      )}
+      )} */}
+        <EventsList eventsData={props.eventsData} />
+      </div>
     </div>
   );
 }
