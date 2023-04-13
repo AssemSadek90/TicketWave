@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import styles from './Displayevents.module.css';
 import EventItem from './EventItem';
+import EventsList from './EventList';
 
 function DisplayEvents(props) {
-  const [displayAll, setDisplayAll] = useState(false);
-  function handleClickButton() {
-    setDisplayAll(true);
-  }
+  // const [displayAll, setDisplayAll] = useState(false);
+  // function handleClickButton() {
+  //   setDisplayAll(true);
+  // }
 
   // assume the props.events an array of objects
   const events = props.eventsData;
@@ -30,6 +31,7 @@ function DisplayEvents(props) {
     const eventItems = row.map((event) => {
       return (
         <EventItem
+          test-id="event-display-item"
           imageSrc={event.path}
           location={event.location}
           date={event.date}
@@ -39,28 +41,40 @@ function DisplayEvents(props) {
     });
 
     return (
-      <div className={styles.event_row} key={i}>
+      <div test-id="event-row-element" className={styles.event_row} key={i}>
         {eventItems}
       </div>
     );
   });
-
+  //console.log(eventRows);
   return (
-    <div className={styles.entertainment_events}>
-      <h2>events in location</h2>
+    <div>
+      <h2 test-id="events-header">Events In Cairo</h2>
+      <div
+        test-id="event-display-container"
+        className={styles.entertainment_events}
+      >
+        {/* <Section1  title="events in cairo" events={eventRows.slice(0, 1)} /> */}
+        {/* <Section1 title="events in cairo" events={props.eventsData} /> */}
+        {/* <Section2 events={[...eventRows.slice(1, 2), ...eventRows.slice(2)]} /> */}
+        {/* <Section2 events={[...eventRows.slice(1, 2), ...eventRows.slice(2)]} /> */}
+        {/* <h2>events in location</h2>
       {displayAll ? (
         <>{eventRows}</>
       ) : (
         <>
           {eventRows[0]}
           <button
+            test-id="see-more-button"
             className={styles.see_more_button}
             onClick={handleClickButton}
           >
             see more
           </button>
         </>
-      )}
+      )} */}
+        <EventsList eventsData={props.eventsData} />
+      </div>
     </div>
   );
 }

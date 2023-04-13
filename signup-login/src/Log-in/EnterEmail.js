@@ -362,9 +362,10 @@ Handles email input change event
               <div className="company-name">Ticketwave</div>
               <div className="create-account-hl">Create an account</div>
             </div>
-            <form onSubmit={submitForm}>
+            <form test-id="sign-up-form" onSubmit={submitForm}>
               <div className="additional-info" id="create-account">
                 <input
+                  test-id="email-sign-up"
                   id="email"
                   type="email"
                   placeholder="Email address"
@@ -377,6 +378,7 @@ Handles email input change event
                   <div>
                     {showContinueButton && (
                       <button
+                        test-id="continue-button-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         disabled={isLoading}
                         onClick={handleContinueButtonClick}
@@ -388,6 +390,7 @@ Handles email input change event
                   <span>
                     {showEditEmail && (
                       <button
+                        test-id="edit-email-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         onClick={handleEditClick}
                       >
@@ -406,6 +409,7 @@ Handles email input change event
                 <div className="additional-info">
                   <div id="confirm-email">
                     <input
+                      test-id="confirm-email-sign-up"
                       id="confirmEmail"
                       type="email"
                       placeholder="Confirm email address"
@@ -416,6 +420,7 @@ Handles email input change event
                   </div>
                   <div id="first-name">
                     <input
+                      test-id="first-name-sign-up"
                       id="firstName"
                       placeholder="First name"
                       value={firstName}
@@ -425,6 +430,7 @@ Handles email input change event
                   </div>
                   <div id="last-name">
                     <input
+                      test-id="last-name-sign-up"
                       id="lastname"
                       placeholder="Last name"
                       value={lastName}
@@ -432,7 +438,7 @@ Handles email input change event
                       required
                     />
                   </div>
-                  <div id="password">
+                  <div test-id="password-sign-up" id="password">
                     <input
                       id="password"
                       type="password"
@@ -444,6 +450,7 @@ Handles email input change event
                   </div>
                   <div>
                     <button
+                      test-id="create-button-sign-up"
                       className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                       type="submit"
                       onClick={handleCreateClick}
@@ -476,7 +483,7 @@ Handles email input change event
               )}
             </form>
             <div>
-              <p>
+              <p test-id="signin-navigate-sign-up">
                 Already have an account? <Link to="/signin">Sign in</Link>
               </p>
             </div>
