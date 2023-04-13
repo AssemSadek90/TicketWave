@@ -107,7 +107,6 @@
       "id": 12
     }
   ],
-  
   "eventsData": [
     {
       "path": "https://openclipart.org/download/341148/cantthink-simplecolour.svg",
@@ -181,5 +180,27 @@
   "Time": {
     "EventDate": "2023-03-01",
     "EventTime": "13:18"
-  }
+  },
+  "Events": [
+    {
+      "Title": "Party1",
+      "Organizer": "Me",
+      "EventType": "Meeting or Networking Event",
+      "EventCategory": "Food & Drink",
+      "subCategory": "Spirits",
+      "Tags": [
+        "tag1"
+      ],
+      "Location": "Tokio, Japan",
+      "StartDate": "2023-04-12T22:18:21.635Z",
+      "StartTime": "12 AM",
+      "EndDate": "2023-04-12T22:18:21.635Z",
+      "EndTime": "12 AM",
+      "DisplayStartTime": true,
+      "DisplayEndTime": false,
+      "TimeZone": "(GMT-11:00) Midway Island",
+      "Language": "English US",
+      "id": 1
+    }
+  ]
 }
