@@ -3,9 +3,9 @@ import"./footer.css";
 
 function Footer() {
   return (
-    <form action = "https://www.nextPage.com">
+    <form action = "https://www.eventbrite.co.uk/myevent/591102953847/invite-and-promote/?showSuccessAlert=1" >
     <div className='footerContainer'>
-        <button className='footerButton' type='submit' value="submit">Publish</button>
+    <button className='footerButton' type='submit' value="submit">Publish</button>
     </div>
   </form>)
 }

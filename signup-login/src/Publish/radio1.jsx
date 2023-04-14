@@ -4,6 +4,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import './Publish.css';
 import { Box } from '@mui/material';
+import server from "../server";
+
 
 
 function RadioApp() {
@@ -50,6 +52,13 @@ function RadioApp() {
     //   e => setSelectedTime(e.target.value)
     //   console.log(selectedTime)
     // };
+    function DataHandler(event) {
+    event.preventDefault();
+    const data = {
+      StartDate: StartDate,
+      StartTime: StartTime,
+      password:password,
+    };
 
  const  handleDateChange = (date) =>{
   console.log(date)
@@ -102,34 +111,44 @@ function RadioApp() {
     console.log(textInputValue);
   }
   
-  function SubmitTheData(){
-        fetch('http://localhost:3000/Time', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer <your access token>'
-      },
-      body: JSON.stringify([{
-        "EventDate": selectedDate,
-        "EventTime": selectedTime
-      },
-    { "Password": textInputValue }])
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => {
-        // handle the response data
-      })
-      .catch(error => {
-        console.error('There was a problem with the push request:', error);
-      });
-  }
+  const SubmitTheData= (data) => {
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    server
+      .post('/events/publish/{event_id}',data, requestOptions)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
+  };
+    
+  //       fetch('http://localhost:3000/Time', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer <your access token>'
+  //     },
+  //     body: JSON.stringify([{
+  //       "EventDate": selectedDate,
+  //       "EventTime": selectedTime
+  //     },
+  //   { "Password": textInputValue }])
+  //   })
+  //     .then(response => {
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       // handle the response data
+  //     })
+  //     .catch(error => {
+  //       console.error('There was a problem with the push request:', error);
+  //     });
+  // }
   
-  return (
+  return (<form onSubmit={DataHandler}>
     <div>
       <h2>Who can see your event?</h2>
       <div className="RadioBlock">
@@ -220,6 +239,7 @@ function RadioApp() {
               password:
               <br />
               <input
+                id="pasword"
                 type="password"
                 value={textInputValue}
                 onChange={handleTextInputChange}
@@ -294,7 +314,7 @@ function RadioApp() {
                     <label className="eds-field-styled__label eds-label-primary snipcss0-12-79-80 snipcss0-10-24-25">
                       <span className="eds-label__content snipcss0-13-80-81 snipcss0-11-25-26">  Start date</span>
                     </label>
-      <DatePicker disabled={EnableDate} selected={selectedDate} onChange={handleDateChange} minDate={new Date()} title="start"/>
+      <DatePicker  id="StartDate" name="startDate" disabled={EnableDate} selected={selectedDate} onChange={handleDateChange} minDate={new Date()}/>
       </Box></div>
       {/* <input type="time" value={selectedTime} disabled={EnableDate} onChange={handleTimeChange} /> */}
               <div  style={{
@@ -373,12 +393,11 @@ function RadioApp() {
                       <option value="11 PM">23:00</option>
                       <option value="11:30 PM">23:30</option>
                     </select>
-                   </Box> </div>
-                   
-</div>
- <p className="eds-text-bm eds-l-mar-bot-4">Time zone is the same as your event's</p>
-       </div> 
-    </div>
+                   </Box> 
+                   </div>
+                   </div>
+ <p className="eds-text-bm eds-l-mar-bot-4">Time zone is the same as your event's</p></div>
+  </div></form>
   );
 
 
@@ -387,4 +406,3 @@ function RadioApp() {
 }
 
 export default RadioApp;
-
