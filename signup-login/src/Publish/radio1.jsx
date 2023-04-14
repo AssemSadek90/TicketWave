@@ -58,7 +58,7 @@ function RadioApp() {
       StartDate: StartDate,
       StartTime: StartTime,
       password:password,
-    };
+    }};
 
  const  handleDateChange = (date) =>{
   console.log(date)
