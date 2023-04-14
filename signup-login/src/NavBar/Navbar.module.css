@@ -1,4 +1,4 @@
-.navigation-bar{
+.navigation_bar{
     background-color: white;
     color: black;
     display: flex; 
@@ -10,14 +10,14 @@
     
   }
   
-  .site-title {
+  .site_title {
     font-size: 2rem;
     height: 40px;
     color: rgba(255, 102, 0, 0.973);
   }
   
   
-  .navigation-bar a{
+  .navigation_bar a{
     color: inherit;
     text-decoration: none;
     display: flex;
@@ -28,7 +28,7 @@
     flex-direction: column;
     }
   
-  .navigation-bar li{
+  .navigation_bar li{
     margin: 0;
     padding: 0;
     display: flex;
@@ -37,7 +37,7 @@
     flex-direction: column;
   }
   
-  .navigation-bar ul{
+  .navigation_bar ul{
     margin: 0;
     padding: 0;
     height: 72px;
@@ -46,23 +46,23 @@
     gap: 2rem;
   }
   
-  .navigation-bar li:hover{
+  .navigation_bar li:hover{
     background-color: #f0f0f0;
   
   }
   
-  .navigation-bar li:active{
+  .navigation_bar li:active{
     background-color: #f8f1f1;
   }
   
   
-  .svg-icon {
+  .svg_icon {
     width: 24px;
     height: 24px;
   }
   
   
-  .search-bar{
+  .search_bar{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -78,7 +78,7 @@
   }
   
   
-  .email-add{
+  .email_add{
     display: flex;
     flex-direction: column;
   }
@@ -88,11 +88,7 @@
     cursor: pointer;
   }
   
-  .create-event{
-    fill: dodgerblue;
-  }
-  
-  .search-button {
+  .search_button {
     display: flex;
     align-items: center;
     background-color: #ebe8e8;
@@ -106,23 +102,23 @@
     
   }
   
-  .search-button svg{
+  .search_button svg{
     margin: 8px;
   }
   
-  .search-button .label {
+  .search_button .label {
     font-size: 14px;
     color: #777;
     text-transform: capitalize;
     letter-spacing: 1px;
   }
   
-  .dropdown-container {
+  .dropdown_container {
     position: relative;
     display: flex;
     align-items: center;
   }
-  .dropdown-menu {
+  .dropdown_menu {
     position: absolute;
     top:  100%;
     left: 0;
@@ -133,7 +129,7 @@
     z-index: 1;
   }
   
-  .dropdown-button {
+  .dropdown_button {
     background-color: #fff;
     border: none;
     padding: 10px;
@@ -144,7 +140,7 @@
   }
   
   
-  .dropdown-menu ul {
+  .dropdown_menu ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -153,15 +149,15 @@
     height: fit-content;
   }
   
-  .dropdown-menu li {
+  .dropdown_menu li {
     padding: 5px 0;
     height: 100%;
   }
   
-  .dropdown-container:hover .dropdown-menu {
+  .dropdown_container:hover .dropdown-menu {
     display: block;
   }
   
-  .dropdown-container:hover .dropdown-button {
+  .dropdown_container:hover .dropdown-button {
     background-color: #f0f0f0;
   }
