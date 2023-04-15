@@ -1,9 +1,23 @@
 .icons{
-    width: 18px;
-    height: 18px;
+    width: 1.5rem;
+    height: 1.5rem;
     margin: auto;
     position: relative;
-    padding: 25px;
+    /* padding: 25px; */
+}
+
+#location-icon{
+  padding: 25px;
+}
+
+#date-time-icon{
+  padding: 25px;
+}
+#ticket-icon-span{
+  padding: 25px;
+}
+#clock-icon-span{
+  padding: 25px;
 }
 
 #date-location{
@@ -30,9 +44,21 @@
 
   #date-time{
     display:flex;
-    border-right: 0.5px solid#e3e3e3;
 }
 
+  #date-time-section{
+    position: relative;
+  }
+  
+  #date-time-section::after{
+    content: ''; /* To create a pseudo-element */
+    position: absolute; /* To position the pseudo-element */
+    top: 50%; /* To position the pseudo-element at 50% of the height of the section */
+    right: 0; /* To position the pseudo-element on the right side of the section */
+    height: 50%; /* To set the height of the pseudo-element to 50% of the section */
+    border-right: 0.5px solid#e3e3e3;
+    transform: translateY(-50%);
+  }
 
   body {
     font-family: Arial, sans-serif;
@@ -64,7 +90,7 @@
   }
   
   #date-time p {
-    font-size: 18px;
+    font-size: 14px;
     margin: 0;
   }
   
@@ -75,7 +101,7 @@
   }
   
   #location-content p {
-    font-size: 18px;
+    font-size: 14px;
     margin: 0;
   }
   
@@ -195,9 +221,9 @@
 }
 
 .share-icons{
-    width: 18px;
-    height: 18px;
+    width: 2rem;
+    height: 2rem;
     margin: auto;
     position: relative;
-    padding: 8px;
+    padding: 0.2rem;
 }

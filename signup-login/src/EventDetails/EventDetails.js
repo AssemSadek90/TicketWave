@@ -124,7 +124,7 @@ function EventDetails(){
                         </div>
                     </div>
                     <div id="date-location">
-                        <section>
+                        <section id="date-time-section">
                             <div id="date-time-container">
                                 <div id="date-time">
                                     <div id="date-time-icon">
@@ -134,7 +134,7 @@ function EventDetails(){
                                         <div>
                                             <h3 className="titles">Date and time</h3>
                                         </div>
-                                        <p>
+                                        <p className="date-time-location-subtext">
                                             {event1.start_time + ' - ' + event1.end_time}
                                         </p>
                                     </div>
@@ -151,7 +151,7 @@ function EventDetails(){
                                         <div>
                                             <h3 className="titles">Location</h3>
                                         </div>
-                                        <p>
+                                        <p className="date-time-location-subtext">
                                         {event1.venue.name + ' - ' + event1.venue.address}
                                         </p>
                                     </div>
@@ -167,19 +167,19 @@ function EventDetails(){
                         </div>
                         <ul id='time-and-ticket'>
                             <li>
-                                <span>
+                                <span id="clock-icon-span">
                                     <img className="icons" src={ClockIcon} alt='icon'></img>
                                 </span>
-                                <span>
-                                    <p>2 days 12 hours</p>
+                                <span className="time-ticket-span">
+                                    2 days 12 hours
                                 </span>
                             </li>
                             <li>
-                                <span>
+                                <span id="ticket-icon-span">
                                     <img className="icons" src={TicketIcon} id='ticket-icon' alt='icon'></img>
                                 </span>
-                                <span>
-                                    <p>Mobile eTicket</p>
+                                <span className="time-ticket-span">
+                                    Mobile eTicket
                                 </span>
                             </li>
                         </ul>
@@ -208,11 +208,11 @@ function EventDetails(){
                             </div>
                             <div>
                                 <div>
-                                    <span><a href="https://www.facebook.com" target={"_blank"}><img className="share-icons" src={FacebookIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.facebook.com" target={"_blank"}><img className="share-icons" src={MessengerIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.linkedin.com" target={"_blank"}><img className="share-icons" src={LinkedInIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.twitter.com" target={"_blank"}><img className="share-icons" src={TwitterIcon} alt='logo'></img></a></span>
-                                    <span><a href="mailto:" target={"_blank"}><img className="share-icons" src={MailIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.facebook.com" target={"_blank"} test-id="share-facebook-icon"><img className="share-icons" src={FacebookIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.facebook.com" target={"_blank"} test-id="share-messenger-icon"><img className="share-icons" src={MessengerIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.linkedin.com" target={"_blank"} test-id="share-linkedin-icon"><img className="share-icons" src={LinkedInIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.twitter.com" target={"_blank"} test-id="share-twitter-icon"><img className="share-icons" src={TwitterIcon} alt='logo'></img></a></span>
+                                    <span><a href="mailto:" target={"_blank"} test-id="share-mail-icon"><img className="share-icons" src={MailIcon} alt='logo'></img></a></span>
                                 </div>  
                             </div>
                         </div>
@@ -225,23 +225,23 @@ function EventDetails(){
                 <div id="aside-card">
                     <div id="registration-in-card">
                        <span>
-                            <h3 className="titles">Registration</h3>
+                            <strong>Registration</strong>
                        </span>
                        <span id="ticket-counter">
-                            <button className="registration-buttons" onClick={() => ticketCounter.decrement()}>-</button>
+                            <button className="registration-buttons" test-id="decrement-button" onClick={() => ticketCounter.decrement()}>-</button>
                             {ticketCounter.value}
-                            <button className="registration-buttons" onClick={() => ticketCounter.increment()}>+</button>
+                            <button className="registration-buttons" test-id="increment-button" onClick={() => ticketCounter.increment()}>+</button>
                        </span>
                     </div>
 
                     <div>
-                        Free
+                        <strong>Free</strong>
                     </div>
                 </div>
 
                 <div>
                     {/* booking pop-up to be added with phase 3*/}
-                    <button id="booking-button">Reserve a spot</button>
+                    <button id="booking-button" test-id="booking-button">Reserve a spot</button>
                 </div>
             </div>
 

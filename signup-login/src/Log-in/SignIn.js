@@ -228,10 +228,11 @@ Handles email input change event
               <div className="company-name">Ticketwave</div>
               <div className="create-account-hl">Log in</div>
             </div>
-            <form onSubmit={submitForm}>
+            <form test-id="sign-in-form" onSubmit={submitForm}>
               <div className="additional-info">
                 <div id="sign-in">
                   <input
+                    test-id="email-sign-in"
                     id="email-sign-in"
                     type="email"
                     placeholder="Email address"
@@ -242,6 +243,7 @@ Handles email input change event
                 </div>
                 <div id="password">
                   <input
+                    test-id="password-sign-in"
                     id="password"
                     type="password"
                     placeholder="Password"
@@ -252,6 +254,7 @@ Handles email input change event
                 </div>
                 <div>
                   <button
+                    test-id="submit-form-sign-in"
                     className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                     type="submit"
                     onClick={handleLogInClick}
@@ -274,7 +277,7 @@ Handles email input change event
                   )}
                 </div>
                 <div>
-                  <p>
+                  <p test-id="navigate-email-sign-up">
                     Don't have an account? <Link to="/">Sign Up</Link>
                     {/* <div>
                       <a href="https://www.facebook.com" target={'_blank'}>
