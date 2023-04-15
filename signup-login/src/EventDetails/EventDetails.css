@@ -227,3 +227,15 @@
     position: relative;
     padding: 0.2rem;
 }
+
+@media (max-width: 768px) {
+  #aside-booking-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 18px;
+    width: 100%;
+    top: 24px;
+  }
+}

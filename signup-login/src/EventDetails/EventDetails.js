@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import YoutubeEmbed from "./YoutubeEmbed";
 import './EventDetails.css';
+import Popup from "../Booking-popup/Booking-popup";
 import CalendarIcon from './Calendar.png'
 import ClockIcon from './Clock.png'
 import Locationicon from './Location.png'
@@ -10,38 +11,50 @@ import LinkedInIcon from './LinkedIn.png'
 import MailIcon from './Mail.png'
 import TwitterIcon from './Twitter.png'
 import MessengerIcon from './Messenger.jfif'
-import axios from'axios';
+import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
+import server from '../server';
 
 
 
 function EventDetails(){
 
     const mock = new MockAdapter(axios);
-    
-    
+
+    const maxTicket = 10;
+    const minTicket = 1;
+
+    const [count,setCount] = useState(1)
     
     let ticketCounter = {
-        value: 0,
-        
+
         increment () {
-        ticketCounter.value = this.value + 1;
+            if (count < maxTicket)
+            {
+            setCount(count + 1)
+            }
     },
         decrement () {
-        ticketCounter.value = this.value - 1;
+            if (count > minTicket)
+            {
+                setCount(count - 1)
+            }
     }
 
-    };
+    };   
 
-    
-    const fetchEvent = () =>{
+    const id = 1;    
+    const [event1, setEvent] = useState({});
 
-    }
-
-
-
-    // Event 1
-    const event1 = {
+  useEffect(() => {
+    const fetchEvent = async () => {
+        const response = await axios.get(`http://localhost:3000/Events?id=${id}`);
+        setEvent(response.data);
+      };
+  
+      fetchEvent();
+    }, [id]);
+    const event = {
     id: 1,
     name: "Middle East Vape Show 2023",
     summary: "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
@@ -62,61 +75,41 @@ function EventDetails(){
       longitude: -122.4194
     }
   };
-  
-  // Event 2
-  const event2 = {
-    id: 2,
-    name: "Cloudflight Coding Contest (CCC) - Cairo",
-    summary: "Solve a level-based coding game in competition with thousands of participants across the globe!",
-    description: "The CCC (short for Cloudflight Coding Contest) is one of the biggest coding competitions of its kind. Over 4,000 coders from all around the world simultaneously compete against each other in a level-based coding game. With each level the difficulty increases and the candidate or team reaching the highest level within the shortest time wins. How do you get in? Step 1. Find your location on the registration page. Step 2. Choose your track: #Classic, #AI Step 3. Decide if you participate alone or as a team Get more insights and register on our Website!",
-    start_time: " Friday, March 31 · 3pm",
-    end_time: "Friday, March 31 · 7pm",
-    url: "https://www.eventbrite.at/e/cloudflight-coding-contest-ccc-cairo-tickets-535486292917?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
-    created: "2023-03-23T14:00:00",
-    changed: "2023-03-23T16:00:00",
-    videoURL: "null",
-    published: true,
-    online_event: false,
-    logo: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F440846959%2F185909912123%2F1%2Foriginal.20230207-111035?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C94%2C4000%2C2000&s=7054fe4d34bfd88649e45f53da0b5281",
-    venue: {
-      name: "German University in Cairo",
-      address: "جمال عبد الناصر Cairo, محافظة القاهرة‬ 4721301",
-      latitude: 37.7946,
-      longitude: -122.3990
+
+    function handleFacebookShare() {
+        const message = ' ';
+        let url = event.url;
+        const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${message}`;
+        window.open(shareUrl, 'Share on Facebook', 'width=600,height=400');
+    };
+
+    function handleMessengerShare() {
+        const url = `https://www.facebook.com/dialog/send?app_id=217288657613432&display=popup&link=${event.url}&redirect_uri=YOUR_REDIRECT_URI`;
+        window.open(url, 'facebook-message-dialog', 'width=800,height=600');
+    };
+
+    function handleTwitterShare() {
+        const text = `Check out "${event.name}"`
+        const url = event.url
+        const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+        window.open(tweetUrl,'Tweet', 'width=600,height=400');
     }
-  };
-  
-  // Event 3
-  const event3 = {
-    id: 3,
-    name: "Parenting CIRCLE (Fireside Chat)",
-    summary: "Meet our Seminar Speakers!",
-    description: "This event is suitable for parents living in Egypt. We would to invite you to join us and meet the experts in the field. Our Fireside Chat Host will be presenting questions relating to Parenting to our panel of speakers. Your queries, in relation to parenting, are welcome during the discussion section. Do join us to be enlighten.",
-    start_time: "Friday, May 12 · 11am",
-    end_time: "1pm EET",
-    url: "https://www.eventbrite.sg/e/parenting-circle-fireside-chat-tickets-595476575467?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
-    created: "2023-03-24T09:00:00",
-    changed: "2023-03-24T11:00:00",
-    videoURL: "null",
-    published: true,
-    online_event: false,
-    logo: "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F474043129%2F1417760847563%2F1%2Foriginal.20230321-130310?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C9%2C1042%2C521&s=0c76ab7ac9e13281da850fc4efa19db0",
-    venue: {
-      name: "Uptown Cairo",
-      address: "Uptown Cairo Al Abageyah, Cairo Governorate 11571",
-      latitude: 37.7833,
-      longitude: -122.4167
+
+    function handleMailShare(){
+        const subject = `You're invited to ${event.name}`
+        const body = event.url
+        const mailToLink = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        return mailToLink
     }
-  };
 
 
 
     return(
         <div  id="main-body">
             <div id="left-part">
-                <time id='start-date'>{event1.start_time}</time>
-                <h1 id='event-title' className="titles">{event1.name}</h1>
-                <p id='event-summary'>{event1.summary}</p>
+                <time id='start-date'>{event.start_time}</time>
+                <h1 id='event-title' className="titles">{event.name}</h1>
+                <p id='event-summary'>{event.summary}</p>
                 <section>
                     <div>
                         <div id='when-and-where'>
@@ -135,7 +128,7 @@ function EventDetails(){
                                             <h3 className="titles">Date and time</h3>
                                         </div>
                                         <p className="date-time-location-subtext">
-                                            {event1.start_time + ' - ' + event1.end_time}
+                                            {event.start_time + ' - ' + event.end_time}
                                         </p>
                                     </div>
                                 </div>
@@ -152,7 +145,7 @@ function EventDetails(){
                                             <h3 className="titles">Location</h3>
                                         </div>
                                         <p className="date-time-location-subtext">
-                                        {event1.venue.name + ' - ' + event1.venue.address}
+                                        {event.venue.name + ' - ' + event.venue.address}
                                         </p>
                                     </div>
                                 </div>
@@ -187,14 +180,14 @@ function EventDetails(){
                             <div>
                                 <div>
                                     <p id="time-text">
-                                       {event1.description}
+                                       {event.description}
                                     </p>
                                 </div>
                             </div>
             
                             <div>
                                 <div id="youtube-video">
-                                    <YoutubeEmbed embedId={event1.videoURL} />
+                                    <YoutubeEmbed embedId={event.videoURL} />
                                 </div>
                             </div>                        
                         </div>
@@ -208,11 +201,11 @@ function EventDetails(){
                             </div>
                             <div>
                                 <div>
-                                    <span><a href="https://www.facebook.com" target={"_blank"} test-id="share-facebook-icon"><img className="share-icons" src={FacebookIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.facebook.com" target={"_blank"} test-id="share-messenger-icon"><img className="share-icons" src={MessengerIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.linkedin.com" target={"_blank"} test-id="share-linkedin-icon"><img className="share-icons" src={LinkedInIcon} alt='logo'></img></a></span>
-                                    <span><a href="https://www.twitter.com" target={"_blank"} test-id="share-twitter-icon"><img className="share-icons" src={TwitterIcon} alt='logo'></img></a></span>
-                                    <span><a href="mailto:" target={"_blank"} test-id="share-mail-icon"><img className="share-icons" src={MailIcon} alt='logo'></img></a></span>
+                                    <span><a href='' onClick={handleFacebookShare}  test-id="share-facebook-icon"><img className="share-icons" src={FacebookIcon} alt='logo'></img></a></span>
+                                    <span><a href='' onClick={handleMessengerShare} test-id="share-messenger-icon"><img className="share-icons" src={MessengerIcon} alt='logo'></img></a></span>
+                                    <span><a href="https://www.linkedin.com"  test-id="share-linkedin-icon"><img className="share-icons" src={LinkedInIcon} alt='logo'></img></a></span>
+                                    <span><a href='' onClick={handleTwitterShare} test-id="share-twitter-icon"><img className="share-icons" src={TwitterIcon} alt='logo'></img></a></span>
+                                    <span><a href={handleMailShare()}  test-id="share-mail-icon"><img className="share-icons" src={MailIcon} alt='logo'></img></a></span>
                                 </div>  
                             </div>
                         </div>
@@ -229,7 +222,7 @@ function EventDetails(){
                        </span>
                        <span id="ticket-counter">
                             <button className="registration-buttons" test-id="decrement-button" onClick={() => ticketCounter.decrement()}>-</button>
-                            {ticketCounter.value}
+                            {count}
                             <button className="registration-buttons" test-id="increment-button" onClick={() => ticketCounter.increment()}>+</button>
                        </span>
                     </div>
@@ -241,7 +234,7 @@ function EventDetails(){
 
                 <div>
                     {/* booking pop-up to be added with phase 3*/}
-                    <button id="booking-button" test-id="booking-button">Reserve a spot</button>
+                    <Popup />
                 </div>
             </div>
 
