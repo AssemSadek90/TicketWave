@@ -114,6 +114,18 @@
       "is_public": true,
       "image_id": null,
       "id": 13
+    },
+    {
+      "StartDate": "Sat Apr 15 2023 03:48:22 GMT+0200 (Eastern European Standard Time)",
+      "StartTime": "03:48",
+      "password": "",
+      "id": 14
+    },
+    {
+      "StartDate": "Sat Apr 15 2023 03:48:22 GMT+0200 (Eastern European Standard Time)",
+      "StartTime": "03:48",
+      "password": "",
+      "id": 15
     }
   ],
   "eventsData": [
@@ -190,8 +202,10 @@
   ],
   "Time": [
     {
-      "EventDate": "2023-03-01",
-      "EventTime": "13:18"
+      "StartDate": "Sat Apr 15 2023 03:50:46 GMT+0200 (Eastern European Standard Time)",
+      "StartTime": "03:50",
+      "password": "",
+      "id": 1
     }
   ],
   "Events": [
