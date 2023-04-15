@@ -105,6 +105,15 @@
       "is_public": true,
       "image_id": null,
       "id": 12
+    },
+    {
+      "email": "heidi@gmaol.com",
+      "firstName": "gghg",
+      "lastName": "hhhj",
+      "password": "asdfvcxz",
+      "is_public": true,
+      "image_id": null,
+      "id": 13
     }
   ],
   "eventsData": [
@@ -169,18 +178,22 @@
       "title": "Red Square"
     }
   ],
-  "Event_id": [{
-    "Name": "Heidi",
-    "created": "25/9/2022",
-    "Price": "50$",
-    "Availability": "300",
-    "online_event": "online",
-    "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
-  }],
-  "Time": [{
-    "EventDate": "2023-03-01",
-    "EventTime": "13:18"
-  },
+  "Event_id": [
+    {
+      "Name": "Heidi",
+      "created": "25/9/2022",
+      "Price": "50$",
+      "Availability": "300",
+      "online_event": "online",
+      "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
+    }
+  ],
+  "Time": [
+    {
+      "EventDate": "2023-03-01",
+      "EventTime": "13:18"
+    }
+  ],
   "Events": [
     {
       "Title": "Party1",

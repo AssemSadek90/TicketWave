@@ -5,7 +5,7 @@ import moment from 'moment';
 import './Publish.css';
 import { Box } from '@mui/material';
 import server from "../server";
-
+import"./footer.css";
 
 
 function RadioApp() {
@@ -52,26 +52,29 @@ function RadioApp() {
     //   e => setSelectedTime(e.target.value)
     //   console.log(selectedTime)
     // };
-    function DataHandler(event) {
-    event.preventDefault();
-    const data = {
-      StartDate: StartDate,
-      StartTime: StartTime,
-      password:password,
-    }};
+    const eventdata={};
+  //   function DataHandler(event) {
+  //   event.preventDefault();
+  //     data.StartDate=selectedDate;
+  //     data.StartTime=selectedTime;
+  //     data.password=textInputValue;
+    
+  // };
 
  const  handleDateChange = (date) =>{
   console.log(date)
   setSelectedDate(date);  
-  SubmitTheData();
+  // SubmitTheData();
 }
-
+// function handlePublish=() => {}
    
   const handleTimeChange = (e) => {
   const time = e.target.value;
   setSelectedTime(time);
-  SubmitTheData();
+  // SubmitTheData();
+  // console.log(data);
   console.log(selectedTime);
+  console.log(time);
 };
 
   function handleRadioButtonChange(event) {
@@ -106,18 +109,28 @@ function RadioApp() {
     setTextInputVisible(selectvalueDrop === "option2");
   }
 
-  function handleTextInputChange(event) {
+  function handlepasswordInputChange(event) {
     setTextInputValue(event.target.value);
     console.log(textInputValue);
   }
+  function eventHandler(event){   
+    event.preventDefault();
+      eventdata.StartDate=selectedDate.toString();
+      eventdata.StartTime=selectedTime;
+      eventdata.password=textInputValue
+      SubmitTheData(eventdata);}
   
-  const SubmitTheData= (data) => {
+  const SubmitTheData= (eventdata) => {
+      // event.preventDefault();
+      // data.StartDate=selectedDate.toString();
+      // data.StartTime=selectedTime;
+      // data.password=textInputValue;}
     const requestOptions = {
-      headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
     };
 
     server
-      .post('/events/publish/{event_id}',data, requestOptions)
+      .post('/Time',eventdata, requestOptions)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
   };
@@ -148,7 +161,7 @@ function RadioApp() {
   //     });
   // }
   
-  return (<form onSubmit={DataHandler}>
+  return (
     <div>
       <h2>Who can see your event?</h2>
       <div className="RadioBlock">
@@ -242,7 +255,7 @@ function RadioApp() {
                 id="pasword"
                 type="password"
                 value={textInputValue}
-                onChange={handleTextInputChange}
+                onChange={handlepasswordInputChange}
                 placeholder="Password"
               />
             </label>
@@ -397,7 +410,12 @@ function RadioApp() {
                    </div>
                    </div>
  <p className="eds-text-bm eds-l-mar-bot-4">Time zone is the same as your event's</p></div>
-  </div></form>
+   <form  onSubmit={eventHandler} >
+    <div className='footerContainer'>
+    <button className='footerButton' type='submit'>Publish</button>
+    </div>
+  </form>
+  </div>
   );
 
 
