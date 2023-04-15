@@ -103,9 +103,23 @@ function EventDetails(){
     }
 
 
+    const [showOverlay, setShowOverlay] = useState(false);
+
+    const handleOverlayOpen = () => {
+      setShowOverlay(true);
+    }
+  
+    const handleOverlayClose = () => {
+      setShowOverlay(false);
+    }
+
+
 
     return(
         <div  id="main-body">
+
+            {showOverlay && <Popup closeOverlay={setShowOverlay} />}
+            
             <div id="left-part">
                 <time id='start-date'>{event.start_time}</time>
                 <h1 id='event-title' className="titles">{event.name}</h1>
@@ -233,8 +247,7 @@ function EventDetails(){
                 </div>
 
                 <div>
-                    {/* booking pop-up to be added with phase 3*/}
-                    <Popup />
+                    <button id='booking-button' onClick={handleOverlayOpen}>Reserve a spot</button>
                 </div>
             </div>
 
