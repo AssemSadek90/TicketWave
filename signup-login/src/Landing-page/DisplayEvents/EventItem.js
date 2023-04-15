@@ -3,7 +3,6 @@ import styles from './Displayevents.module.css';
 import './Displayevents';
 
 export default function EventItem(props) {
-  console.log('zeb');
   return (
     <div
       data-testid="event-element"
@@ -16,12 +15,7 @@ export default function EventItem(props) {
         width="100%"
         height="70%"
       >
-        <image
-          href={props.event.path}
-          src={props.event.imageSrc}
-          width="100%"
-          height="100%"
-        />
+        <image href={props.event.path} width="100%" height="100%" />
       </svg>
       <div
         data-testid="event-details"
