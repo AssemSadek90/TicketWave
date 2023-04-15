@@ -377,9 +377,9 @@ Handles email input change event
       .post(`/auth/send_verification_email/${user.pk}/`)
       .then((response) => {
         console.log(response.data);
+        navigateHome();
       })
       .catch((error) => console.log(error));
-    //navigateHome();
   };
 
   /**
