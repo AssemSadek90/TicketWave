@@ -3,7 +3,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import './Publish.css';
-import { Box } from '@mui/material';
 import server from '../server';
 import './footer.css';
 
@@ -313,18 +312,7 @@ function RadioApp() {
               marginBottom: '1rem',
             }}
           >
-            <Box
-              sx={{
-                border: 0.1,
-                borderColor: 'grey',
-                width: 240,
-                height: 58,
-                backgroundColor: 'transparent',
-                '&:hover': {
-                  borderColor: 'blue',
-                },
-              }}
-            >
+            
               <label className="eds-field-styled__label eds-label-primary snipcss0-12-79-80 snipcss0-10-24-25">
                 <span className="eds-label__content snipcss0-13-80-81 snipcss0-11-25-26">
                   {' '}
@@ -339,7 +327,7 @@ function RadioApp() {
                 onChange={handleDateChange}
                 minDate={new Date()}
               />
-            </Box>
+          
           </div>
           {/* <input type="time" value={selectedTime} disabled={EnableDate} onChange={handleTimeChange} /> */}
           <div
@@ -348,18 +336,7 @@ function RadioApp() {
               marginBottom: '1rem',
             }}
           >
-            <Box
-              sx={{
-                border: 0.1,
-                borderColor: 'grey',
-                width: 240,
-                height: 58,
-                backgroundColor: 'transparent',
-                '&:hover': {
-                  borderColor: 'blue',
-                },
-              }}
-            >
+          
               <label className="eds-field-styled__label eds-label-primary snipcss0-12-79-80 snipcss0-10-24-25">
                 <span className="eds-label__content snipcss0-13-80-81 snipcss0-11-25-26">
                   Start Time
@@ -422,7 +399,7 @@ function RadioApp() {
                 <option value="11 PM">23:00</option>
                 <option value="11:30 PM">23:30</option>
               </select>
-            </Box>
+       
           </div>
         </div>
         <p className="eds-text-bm eds-l-mar-bot-4">
