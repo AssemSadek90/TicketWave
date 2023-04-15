@@ -3,28 +3,18 @@ import styles from './Displayevents.module.css';
 import './Displayevents';
 
 export default function EventItem(props) {
-  console.log('zeb');
   return (
-    <div
-      data-testid="event-element"
-      className={styles.event_element}
-      style={{}}
-    >
+    <div test-id="event-element" className={styles.event_element} style={{}}>
       <svg
-        data-testid="event-poster"
+        test-id="event-poster"
         className={styles.event_image}
         width="100%"
         height="70%"
       >
-        <image
-          href={props.event.path}
-          src={props.event.imageSrc}
-          width="100%"
-          height="100%"
-        />
+        <image href={props.event.path} width="100%" height="100%" />
       </svg>
       <div
-        data-testid="event-details"
+        test-id="event-details"
         className={styles.event_details}
         style={{ marginTop: '10px' }}
       >

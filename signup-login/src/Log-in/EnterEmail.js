@@ -158,13 +158,15 @@ function CreateAccount() {
    */
   function handleContinueButtonClick() {
     setIsLoading(true);
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
     server
-      .get(`/users?email=${email}`)
-      .then((response) => response.data)
-      .then((data) => {
+      .get(`/users/email/${email}/`, requestOptions)
+      .then((response) => {
+        console.log(response);
         setIsLoading(false);
-
-        if (data.length > 0) {
+        if (response.data.username.length > 0) {
           setUserExists(true);
           console.log('User already exists');
           if (userExists || !validEmail) {
@@ -187,6 +189,14 @@ function CreateAccount() {
       .catch((error) => {
         setIsLoading(false);
         console.error(error);
+        setUserExists(false);
+        console.log('User does not exist');
+        if (validEmail) {
+          setShowAdditionalInfo(true);
+          setshowContinueButton(false);
+          setShowEditEmail(true);
+          setEmailDisabled(true);
+        }
       });
   }
 
@@ -283,11 +293,13 @@ Handles email input change event
     event.preventDefault();
     if (validData) {
       user.email = email;
-      user.firstName = firstName;
-      user.lastName = lastName;
-      user.password = password;
+      // user.first_name = firstName;
+      // user.last_name = lastName;
+      user.username = firstName + lastName;
+      user.password1 = password;
+      user.password2 = password;
       user.is_public = true;
-      user.image_id = null;
+      user.image_id = 5;
       handleSignUp(user);
     }
   }
@@ -313,18 +325,18 @@ Handles email input change event
   @name navigateHome
   */
   const navigateHome = () => {
-    server
-      .get(`/users?email=${email}`)
-      .then((response) => response.data)
-      .then((data) => {
-        localStorage.setItem('userId', data[0].id);
-        navigate('/home');
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.error(error);
-        return;
-      });
+    // server
+    //   .get(`/users?email=${email}`)
+    //   .then((response) => response.data)
+    //   .then((data) => {
+    //     localStorage.setItem('userId', data[0].id);
+    navigate('/home');
+    // })
+    // .catch((error) => {
+    //   setIsLoading(false);
+    //   console.error(error);
+    //   return;
+    // });
   };
 
   /**
@@ -342,10 +354,35 @@ Handles email input change event
     };
 
     server
-      .post('/users', user, requestOptions)
-      .then((response) => console.log(response.data))
+      .post('/auth/signup/', user, requestOptions)
+      .then((response) => {
+        const accessToken = response.data.access_token;
+        const refreshToken = response.data.refresh_token;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        user.pk = response.data.user.pk;
+        console.log(user.pk);
+      })
+      .then(() => {
+        server
+          .post(`/auth/send_verification_email/${user.pk}/`)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .then(navigateHome())
+          .catch((error) => console.log(error));
+      })
       .catch((error) => console.log(error));
-    navigateHome();
+  };
+
+  const verify = () => {
+    server
+      .post(`/auth/send_verification_email/${user.pk}/`)
+      .then((response) => {
+        console.log(response.data);
+        navigateHome();
+      })
+      .catch((error) => console.log(error));
   };
 
   /**

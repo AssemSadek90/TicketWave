@@ -22,9 +22,7 @@ export default function Navbar() {
     <nav className={styles.navigation_bar}>
       <ul>
         <a href="#">
-          <sp an className={styles.site_title}>
-            TicketWave
-          </sp>
+          <span className={styles.site_title}>TicketWave</span>
         </a>
         <SearchButton to="https://www.eventbrite.com" label="Search events" />
       </ul>
