@@ -189,6 +189,14 @@ function CreateAccount() {
       .catch((error) => {
         setIsLoading(false);
         console.error(error);
+        setUserExists(false);
+        console.log('User does not exist');
+        if (validEmail) {
+          setShowAdditionalInfo(true);
+          setshowContinueButton(false);
+          setShowEditEmail(true);
+          setEmailDisabled(true);
+        }
       });
   }
 
