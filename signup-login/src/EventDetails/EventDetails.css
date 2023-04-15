@@ -3,35 +3,43 @@
     height: 1.5rem;
     margin: auto;
     position: relative;
+    z-index: 1;
     /* padding: 25px; */
 }
 
 #location-icon{
   padding: 25px;
+  z-index: 1;
 }
 
 #date-time-icon{
   padding: 25px;
+  z-index: 1;
 }
 #ticket-icon-span{
   padding: 25px;
+  z-index: 1;
 }
 #clock-icon-span{
   padding: 25px;
+  z-index: 1;
 }
 
 #date-location{
    display: flex;
    flex-direction: row;
+   z-index: 1;
 }
 
 #date-time-container{
     width: fit-content;
+    z-index: 1;
 }
 
 #location-container{
     width: fit-content;
     display: flex;
+    z-index: 1;
 }
 
  #main-body {
@@ -40,14 +48,17 @@
     padding-top: 5%;
     max-width: 1200px;
     display: flex;
+    z-index: 1;
 } 
 
   #date-time{
     display:flex;
+    z-index: 1;
 }
 
   #date-time-section{
     position: relative;
+    z-index: 1;
   }
   
   #date-time-section::after{
@@ -58,57 +69,67 @@
     height: 50%; /* To set the height of the pseudo-element to 50% of the section */
     border-right: 0.5px solid#e3e3e3;
     transform: translateY(-50%);
+    z-index: 1;
   }
 
   body {
     font-family: Arial, sans-serif;
     color: #333;
     background-color: #fff;
+    z-index: 1;
   }
   
   #event-title {
     font-size: 36px;
     font-weight: bold;
     margin: 20px 0;
+    z-index: 1;
   }
   
   #event-summary {
     font-size: 20px;
     margin-bottom: 40px;
+    z-index: 1;
   }
   
   #when-and-where h2 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    z-index: 1;
   }
   
   #date-time h3 {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
+    z-index: 1;
   }
   
   #date-time p {
     font-size: 14px;
     margin: 0;
+    z-index: 1;
   }
   
   #location-content h3 {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10px;
+    z-index: 1;
   }
   
   #location-content p {
     font-size: 14px;
     margin: 0;
+    z-index: 1;
   }
   
   #about-this-event h2 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    z-index: 1;
   }
   
    #time-and-ticket {
@@ -117,6 +138,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
+    z-index: 1;
   } 
 
   #time-and-ticket li {
@@ -125,21 +147,25 @@
     margin: 0;
     padding: 0;
     align-items: center;
+    z-index: 1;
   } 
 
   #event-summary{
     font-size: .875rem;
     line-height: 1.5rem;
+    z-index: 1;
   }
 
   #time-text{
     font-size: 16px;
     line-height: 1.5rem;
     color: #6f7287;
+    z-index: 1;
   }
 
   .titles{
     font-weight: bolder;
+    z-index: 1;
   }
 
   #aside-booking-container{
@@ -152,12 +178,14 @@
     bottom: auto;
     align-self: flex-start;
     margin-left: 5%;
+    z-index: 1;
   }
   
   #aside-card{
     padding: 18px;
     border: 3px solid blue;
     border-radius: 16px;
+    z-index: 1;
 
   }
 
@@ -165,16 +193,19 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
   }
 
   #ticket-counter{
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    z-index: 1;
   }
 
   #left-part{
     max-width:720px;
+    z-index: 1;
   }
 
   .registration-buttons{
@@ -192,6 +223,8 @@
     color: white;
     cursor: pointer;
     transition: background-color 0.5s ease; 
+    z-index: 1;
+
   }
 
   .registration-buttons:hover{
@@ -209,15 +242,21 @@
     font-size: large;
     cursor: pointer;
     transition: background-color 0.5s ease; 
+    z-index: 1;
+
   }
 
   #booking-button:hover{
     background-color: #f05537;
     border: 0.5px solid #f05537;
+    z-index: 1;
+
   }
 
 #ticket-icon{
   rotate: -45deg;
+  z-index: 1;
+
 }
 
 .share-icons{
@@ -226,6 +265,7 @@
     margin: auto;
     position: relative;
     padding: 0.2rem;
+    z-index: 1;
 }
 
 @media (max-width: 768px) {
