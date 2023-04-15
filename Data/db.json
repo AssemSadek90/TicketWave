@@ -107,6 +107,7 @@
       "id": 12
     },
     {
+<<<<<<< HEAD
       "email": "heidi@gmaol.com",
       "firstName": "gghg",
       "lastName": "hhhj",
@@ -126,6 +127,15 @@
       "StartTime": "03:48",
       "password": "",
       "id": 15
+=======
+      "email": "jemmy@gmail.com",
+      "firstName": "Ahmed",
+      "lastName": "Gamal",
+      "password": "1234567",
+      "is_public": true,
+      "image_id": null,
+      "id": 13
+>>>>>>> development-branch
     }
   ],
   "eventsData": [
@@ -189,6 +199,7 @@
       "date": "December 5, 2023",
       "title": "Red Square"
     }
+    
   ],
   "Event_id": [
     {
