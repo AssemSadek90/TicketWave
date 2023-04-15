@@ -47,7 +47,7 @@
   }
   
   .navigation_bar li:hover{
-    background-color: #f0f0f0;
+    background-color: #f2f2f246;
   
   }
   
@@ -91,7 +91,7 @@
   .search_button {
     display: flex;
     align-items: center;
-    background-color: #ebe8e8;
+    background-color: #f2f2f246;
     border: 1px solid #ccc;
     border-radius: 4px;
     cursor: pointer;
@@ -159,5 +159,5 @@
   }
   
   .dropdown_container:hover .dropdown-button {
-    background-color: #f0f0f0;
+    background-color: #f2f2f246;
   }
