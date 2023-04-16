@@ -362,16 +362,19 @@ Handles email input change event
         localStorage.setItem('refreshToken', refreshToken);
         user.pk = response.data.user.pk;
         console.log(user.pk);
+      })
+      .then(() => {
         server
           .post(`/auth/send_verification_email/${user.pk}/`)
           .then((response) => {
             console.log(response.data);
           })
+          .then(navigateHome())
           .catch((error) => console.log(error));
-        //navigateHome();
       })
       .catch((error) => console.log(error));
   };
+
   const verify = () => {
     server
       .post(`/auth/send_verification_email/${user.pk}/`)

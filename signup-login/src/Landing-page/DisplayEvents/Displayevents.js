@@ -21,7 +21,7 @@ export default function DisplayEvents(props) {
       <CategoriesNav />
       <h2 data-testid="events-header">Events In Cairo</h2>
       <div
-        data-testid="event-display-container"
+        test-id="event-display-container"
         className={styles.entertainment_events}
       >
         <EventsList eventsData={events.slice(0, 8)} />
