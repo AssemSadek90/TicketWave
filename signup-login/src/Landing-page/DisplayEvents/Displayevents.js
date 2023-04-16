@@ -4,7 +4,15 @@ import EventsList from './EventList';
 import CategoriesNav from './Categories';
 import MoreEvents from './MoreEvents';
 
-function DisplayEvents(props) {
+/**
+ * DisplayEvents is a React component that displays a list of events, sorted by category.
+ *
+ * @param {Object} props - Component props.
+ * @param {Array} props.eventsData - An array of objects representing the events to display.
+ *
+ * @returns {JSX.Element} A React component that displays the categories navbar and a list of events.
+ */
+export default function DisplayEvents(props) {
   // assume the props.events an array of objects
   const events = props.eventsData;
 
@@ -22,5 +30,3 @@ function DisplayEvents(props) {
     </div>
   );
 }
-
-export default DisplayEvents;
