@@ -3,6 +3,7 @@ import styles from './Displayevents.module.css';
 import './Displayevents';
 
 export default function EventItem(props) {
+  console.log(props);
   return (
     <div
       data-testid="event-element"
@@ -22,9 +23,9 @@ export default function EventItem(props) {
         className={styles.event_details}
         style={{ marginTop: '10px' }}
       >
-        <p style={{ fontWeight: 'bold' }}>{props.event.location}</p>
-        <p>{props.event.date}</p>
-        <p>{props.event.title}</p>
+        <p style={{ fontWeight: 'bold' }}>{props.event.start}</p>
+        <p>{props.event.id}</p>
+        <p>{props.event.summary}</p>
       </div>
     </div>
   );

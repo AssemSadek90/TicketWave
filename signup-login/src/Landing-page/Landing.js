@@ -8,10 +8,11 @@ const Home = () => {
   const [events, setEvents] = useState([]);
   const userId = parseInt(localStorage.getItem('userId'));
   useEffect(() => {
-    server.get(`/eventsData`).then((response) => {
-      const data = response.data;
+    server.get(`/events/list`).then((response) => {
+      const primarydata = response.data;
+      const data = primarydata.results;
       if (data) setEvents(data);
-      // console.log(data);
+      //console.log(data);
     });
   }, []);
 
