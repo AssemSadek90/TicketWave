@@ -1,5 +1,11 @@
+import { useState } from 'react';
 import './Log-in-styling/ChangePassword.css';
 function ChangePassword() {
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [passwordsValid, setPasswordsValid] = useState(true);
+  const [currentPassword, setCurrentPassword] = useState('');
   return (
     <main
       className="eds-structure__main snipcss-gHksn"
@@ -70,6 +76,7 @@ function ChangePassword() {
                                   id="current_password"
                                   name="current_password"
                                   type="password"
+                                  placeholder="Current Password"
                                   meta="[object Object]"
                                   value=""
                                 />
