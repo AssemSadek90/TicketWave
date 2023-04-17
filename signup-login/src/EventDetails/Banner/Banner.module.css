@@ -1,32 +1,26 @@
-#foreground-image {
+.foreground_image {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
   height: auto;
 }
-#image-container {
+.image_container {
   border: 0.5px solid #ccc;
-  border-radius: 30px;
+  border-radius: 32px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 2% auto 0 auto;
   position: relative;
 }
-section{
-  padding-top: 2%;
-  height: 30%;
-  width: 100%;
-  /* background-image:url(MEVS.avif); */
-}
 
-#imagecover{
+.image_cover {
   width: max-content;
   align-items: center;
   display: block;
   margin: 0 auto;
   top: 0;
-  max-width: 1200px;
+  width: 1200px;
   max-height: 470px;
   border-radius: 10px;
-  filter: blur(50px) brightness(.9);
+  filter: blur(2rem) brightness(0.9);
 }
