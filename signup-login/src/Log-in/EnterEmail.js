@@ -548,16 +548,16 @@ Handles email input change event
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
           ></img>
-          {
-            <div>
-              {showTerms && (
+          {showTerms && (
+            <div className="overlay-CP">
+              <div className="overlay-content-CP">
                 <Terms
                   handleCancelClick={handleCancelClick}
                   handleSignUp={handleSignUp}
                 />
-              )}
+              </div>
             </div>
-          }
+          )}
         </div>
       </div>
     </div>
