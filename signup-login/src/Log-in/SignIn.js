@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Log-in-styling/Login.css';
@@ -188,9 +188,9 @@ Handles email input change event
               localStorage.setItem('accessToken', accessToken);
               localStorage.setItem('refreshToken', refreshToken);
               console.log(response.data);
+              navigate('/home');
             })
             .catch((error) => console.log(error));
-          //navigate('/home');
           //navigate('/home');
         } else {
           setUserExists(false);
