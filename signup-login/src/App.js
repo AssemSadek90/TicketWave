@@ -9,6 +9,7 @@ import EventDetails from './EventDetails/EventDetailsPage';
 import CreateEventForm from './Basic-info/CreateEventForm';
 import PublishApp from './Publish/PublishApp';
 import Terms from './Log-in/TermsConditions/Terms';
+import ChangePassword from './Log-in/ChangePassword';
 
 /**
  * Renders the main application component.
@@ -20,6 +21,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/publish" element={<PublishApp />} />
           <Route path="/basic-info" element={<CreateEventForm />} />
