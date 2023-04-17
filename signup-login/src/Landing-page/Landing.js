@@ -4,6 +4,10 @@ import server from '../server';
 import DisplayEvents from './DisplayEvents/Displayevents';
 import '../App.css';
 
+/**
+ * Represents the Home component, which displays the main page of the application.
+ * @returns {JSX.Element} The Home component UI.
+ */
 const Home = () => {
   const [events, setEvents] = useState([]);
 
@@ -26,9 +30,17 @@ const Home = () => {
   }, []);
 
   return (
+    //this svg is temporary and is going to be replaced
     <div>
       <Navbar />
-      <DisplayEvents test-id="event-container" eventsData={events} />
+      <svg style={{ width: '100%', height: '400px' }}>
+        <image
+          href="https://cdn.evbstatic.com/s3-build/fe/build/images/6c5d49c679ae35c60ad2a035492632d3-1_tablet_1067x470.jpg"
+          width="100%"
+          height="100%"
+        />
+      </svg>
+      <DisplayEvents data-testid="event-container" eventsData={events} />
     </div>
   );
 };
