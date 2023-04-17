@@ -2,16 +2,21 @@ import React from 'react';
 import { useState } from 'react';
 import './Terms.css';
 
-function Terms() {
-  const [cancelClicked, setCancelClicked] = useState(false);
-  const [agreeClicked, setAgreeClicked] = useState(false);
-  function handleAgreeButtonClick(props) {
-    setAgreeClicked(true);
-    props.handleSignUp(props.user);
+function Terms(props) {
+  // const [cancelClicked, setCancelClicked] = useState(false);
+  // const [agreeClicked, setAgreeClicked] = useState(false);
+  function handleAgreeButtonClick() {
+    props.handleSignUp();
+    console.log('Agree button clicked');
   }
+  function handleCancelClick() {
+    props.handleCancelClick();
+    console.log('Cancel button clicked');
+  }
+
   return (
     <div>
-      {cancelClicked === false && agreeClicked === false && (
+      {
         <div
           id="edsModalContentChildren"
           className="eds-modal__content__children snipcss-QRQUc"
@@ -40,20 +45,20 @@ function Terms() {
                         >
                           <path
                             className="alert-chunky_svg__eds-icon--alert-chunky_base"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-14c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8z"
                           ></path>
                           <path
                             className="alert-chunky_svg__eds-icon--alert-chunky_dot"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M11 14h2v2h-2z"
                           ></path>
                           <path
                             className="alert-chunky_svg__eds-icon--alert-chunky_line"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M11 8h2v5h-2z"
                           ></path>
                         </svg>
@@ -116,7 +121,7 @@ function Terms() {
                     className="eds-btn eds-btn--button eds-btn--neutral eds-l-mar-right-8"
                     type="button"
                     onClick={() => {
-                      setCancelClicked(true);
+                      handleCancelClick();
                     }}
                   >
                     Cancel
@@ -134,7 +139,7 @@ function Terms() {
             </div>
           </div>
         </div>
-      )}
+      }
     </div>
   );
 }
