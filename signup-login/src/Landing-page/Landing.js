@@ -6,13 +6,23 @@ import '../App.css';
 
 const Home = () => {
   const [events, setEvents] = useState([]);
-  const userId = parseInt(localStorage.getItem('userId'));
+
   useEffect(() => {
-    server.get(`/eventsData`).then((response) => {
-      const data = response.data;
-      if (data) setEvents(data);
-      // console.log(data);
-    });
+    const accessToken = localStorage.getItem('accessToken');
+    const requestOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    server
+      .get(`/events/list/`, requestOptions)
+      .then((response) => {
+        const data = response.data.results;
+        if (data) setEvents(data);
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
   }, []);
 
   return (

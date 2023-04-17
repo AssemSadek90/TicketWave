@@ -1,121 +1,5 @@
 {
-  "users": [
-    {
-      "email": "ziad@gmail.com",
-      "firstName": "Ziad",
-      "lastName": "Ghanem",
-      "password": "1234567",
-      "id": 1
-    },
-    {
-      "email": "de7ko@gmail.com",
-      "firstName": "Ziad",
-      "lastName": "Ghanem",
-      "password": "1234567",
-      "is_public": true,
-      "image_id": null,
-      "id": 2
-    },
-    {
-      "email": "ziad@gmail.cod",
-      "firstName": "Ziad",
-      "lastName": "Ta3baan",
-      "password": "Awwyyyyyyyyyy",
-      "is_public": true,
-      "image_id": null,
-      "id": 3
-    },
-    {
-      "email": "ziad1234@gmail.com",
-      "firstName": "ZoZz",
-      "lastName": "Ziko",
-      "password": "dasdfsafasfas",
-      "is_public": true,
-      "image_id": null,
-      "id": 4
-    },
-    {
-      "email": "ana-ta3banaa@awwwy.com",
-      "firstName": "Lolo",
-      "lastName": "Uni",
-      "password": "ufgusfgasidu",
-      "is_public": true,
-      "image_id": null,
-      "id": 5
-    },
-    {
-      "email": "dsad@gadjs.com",
-      "firstName": "Zoz",
-      "lastName": "Ziko",
-      "password": "adasdqdfas",
-      "is_public": true,
-      "image_id": null,
-      "id": 6
-    },
-    {
-      "email": "ziad@gogo.com",
-      "firstName": "Zozza",
-      "lastName": "Ta3bana",
-      "password": "5alesssss",
-      "is_public": true,
-      "image_id": null,
-      "id": 7
-    },
-    {
-      "email": "karim@gmail.com",
-      "firstName": "Karim",
-      "lastName": "Elnady",
-      "password": "dsadasdasd",
-      "is_public": true,
-      "image_id": null,
-      "id": 8
-    },
-    {
-      "email": "marwan@gmail.com",
-      "firstName": "Maro",
-      "lastName": "Mousa",
-      "password": "maromousa",
-      "is_public": true,
-      "image_id": null,
-      "id": 9
-    },
-    {
-      "email": "marwan@gmail.com",
-      "firstName": "Maro",
-      "lastName": "Mousa",
-      "password": "maromousa",
-      "is_public": true,
-      "image_id": null,
-      "id": 10
-    },
-    {
-      "email": "ziko@de7k.com",
-      "firstName": "Ziko",
-      "lastName": "CCE",
-      "password": "imBAAAaDDMJ",
-      "is_public": true,
-      "image_id": null,
-      "id": 11
-    },
-    {
-      "email": "ziko@de7k.com",
-      "firstName": "Ziko",
-      "lastName": "CCE",
-      "password": "imBAAAaDDMJ",
-      "is_public": true,
-      "image_id": null,
-      "id": 12
-    },
-    {
-      "email": "jemmy@gmail.com",
-      "firstName": "Ahmed",
-      "lastName": "Gamal",
-      "password": "1234567",
-      "is_public": true,
-      "image_id": null,
-      "id": 13
-    }
-  ],
+  "users": [],
   "eventsData": [
     {
       "path": "https://openclipart.org/download/341148/cantthink-simplecolour.svg",
@@ -177,7 +61,6 @@
       "date": "December 5, 2023",
       "title": "Red Square"
     }
-    
   ],
   "Event-id": {
     "Name": "Heidi",
@@ -198,9 +81,7 @@
       "EventType": "Meeting or Networking Event",
       "EventCategory": "Food & Drink",
       "subCategory": "Spirits",
-      "Tags": [
-        "tag1"
-      ],
+      "Tags": ["tag1"],
       "Location": "Tokio, Japan",
       "StartDate": "2023-04-12T22:18:21.635Z",
       "StartTime": "12 AM",

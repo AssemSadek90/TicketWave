@@ -17,6 +17,12 @@ import FacebookIcon from '../EventDetails/Facebook.png';
  */
 function SignIn() {
   const [userExists, setUserExists] = useState(false);
+
+  const [forgotPasswordClicked, setForgotPasswordClicked] = useState(false);
+
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
+  const [forgotPasswordUsername, setForgotPasswordUsername] = useState('');
+
   /**
   A function provided by the react-router-dom package that allows for programmatic navigation.
   @function
@@ -179,7 +185,6 @@ Handles email input change event
           const requestOptions = {
             headers: { 'Content-Type': 'application/json' },
           };
-
           server
             .post('/auth/login/', user, requestOptions)
             .then((response) => {
@@ -188,10 +193,9 @@ Handles email input change event
               localStorage.setItem('accessToken', accessToken);
               localStorage.setItem('refreshToken', refreshToken);
               console.log(response.data);
+              navigate('/home');
             })
             .catch((error) => console.log(error));
-          //navigate('/home');
-          //navigate('/home');
         } else {
           setUserExists(false);
           setInvalidFields(true);
@@ -203,6 +207,40 @@ Handles email input change event
         console.error(error);
       });
   };
+
+  function handleForgotPassword() {
+    setForgotPasswordClicked(true);
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
+    server
+      .get(`/users/email/${email}/`, requestOptions)
+      .then((response) => {
+        console.log(response);
+        if (response.data.username.length > 0) {
+          setUserExists(true);
+          console.log('User exists');
+          setForgotPasswordUsername(response.data.username);
+          setForgotPasswordEmail(response.data.email);
+          //send email
+          server
+            .get(
+              `auth/password/reset/${forgotPasswordUsername}/${forgotPasswordEmail}/`
+            )
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => console.log(error));
+        } else {
+          setUserExists(false);
+          eraseFields();
+          console.log('User does not exist');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   /**
   A function that erases the values in the email and password input fields.
@@ -275,10 +313,18 @@ Handles email input change event
                   {invalidFields && (
                     <p className="error">Invalid email or password</p>
                   )}
+                  {!userExists && forgotPasswordClicked && (
+                    <p className="error">Invalid email address.</p>
+                  )}
                 </div>
                 <div>
                   <p test-id="navigate-email-sign-up">
                     Don't have an account? <Link to="/">Sign Up</Link>
+                    <p test-id="signin-reset-password">
+                      <Link href="#" onClick={handleForgotPassword}>
+                        Forgot password?
+                      </Link>
+                    </p>
                     {/* <div>
                       <a href="https://www.facebook.com" target={'_blank'}>
                         <img src={FacebookIcon} alt="logo"></img>
