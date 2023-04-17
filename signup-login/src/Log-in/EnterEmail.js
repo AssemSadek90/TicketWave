@@ -18,7 +18,14 @@ function CreateAccount() {
   @type {Object}
   @constant user
   */
-  const user = {};
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    is_public: true,
+    image_id: -1,
+  });
 
   /**
    * The email input's value.
@@ -121,6 +128,8 @@ function CreateAccount() {
   @property {function} setShowEditEmail - A function that sets the showEditEmail state.
   */
   const [showEditEmail, setShowEditEmail] = useState(false);
+
+  const [showTerms, setShowTerms] = useState(false);
 
   /**
 
@@ -235,7 +244,9 @@ Handles email input change event
   @return {void}
   */
   function handleFirstNameChange(event) {
-    setFirstName(event.target.value);
+    setFirstName(
+      event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1)
+    );
   }
   /**
   
@@ -283,6 +294,11 @@ Handles email input change event
     setCreateClicked(true);
     validateAll();
   }
+
+  function handleCancelClick() {
+    setShowTerms(false);
+  }
+
   /**
   
   Submits the form and logs the form data to the console if valid
@@ -292,15 +308,17 @@ Handles email input change event
   function submitForm(event) {
     event.preventDefault();
     if (validData) {
-      user.email = email;
       // user.first_name = firstName;
       // user.last_name = lastName;
-      user.username = firstName + lastName;
-      user.password1 = password;
-      user.password2 = password;
-      user.is_public = true;
-      user.image_id = 5;
-      handleSignUp(user);
+      setUser({
+        username: firstName + lastName,
+        email: email,
+        password1: password,
+        password2: password,
+        is_public: true,
+        image_id: -1,
+      });
+      setShowTerms(true);
     }
   }
   /**
@@ -338,7 +356,6 @@ Handles email input change event
     //   return;
     // });
   };
-
   /**
 
   A function that handles the sign up process.
@@ -348,11 +365,11 @@ Handles email input change event
   @param {string} user.email - The email address of the user being signed up.
   @param {string} user.password - The password of the user being signed up.
   */
-  const handleSignUp = (user) => {
+  const handleSignUp = () => {
     const requestOptions = {
       headers: { 'Content-Type': 'application/json' },
     };
-
+    console.log(user);
     server
       .post('/auth/signup/', user, requestOptions)
       .then((response) => {
@@ -367,7 +384,7 @@ Handles email input change event
         server
           .post(`/auth/send_verification_email/${user.pk}/`)
           .then((response) => {
-            console.log(response.data);
+            console.log(response);
           })
           .then(navigateHome())
           .catch((error) => console.log(error));
@@ -375,15 +392,15 @@ Handles email input change event
       .catch((error) => console.log(error));
   };
 
-  const verify = () => {
-    server
-      .post(`/auth/send_verification_email/${user.pk}/`)
-      .then((response) => {
-        console.log(response.data);
-        navigateHome();
-      })
-      .catch((error) => console.log(error));
-  };
+  // const verify = () => {
+  //   server
+  //     .post(`/auth/send_verification_email/${user.pk}/`)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       navigateHome();
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   /**
   
@@ -531,7 +548,16 @@ Handles email input change event
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
           ></img>
-          {/* <div>{createClicked && <Terms />}</div> */}
+          {
+            <div>
+              {showTerms && (
+                <Terms
+                  handleCancelClick={handleCancelClick}
+                  handleSignUp={handleSignUp}
+                />
+              )}
+            </div>
+          }
         </div>
       </div>
     </div>
