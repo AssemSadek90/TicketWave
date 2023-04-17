@@ -66,6 +66,7 @@ function ChangePassword() {
                                   aria-required="true"
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
                                   data-automation="current_password-field"
+                                  placeholder="Current Password"
                                   id="current_password"
                                   name="current_password"
                                   type="password"
@@ -177,6 +178,7 @@ function ChangePassword() {
                                   aria-required="true"
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
                                   data-automation="new_password-field"
+                                  placeholder="New Password"
                                   id="new_password"
                                   name="new_password"
                                   type="password"
@@ -277,6 +279,7 @@ function ChangePassword() {
                                   aria-required="true"
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
                                   data-automation="repeat_password-field"
+                                  placeholder='Repeat Password"'
                                   id="repeat_password"
                                   name="repeat_password"
                                   type="password"
