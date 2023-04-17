@@ -1,18 +1,18 @@
-import React from 'react';
-import './Banner.css';
-import MEVS from './MEVS.avif'
-function Banner(){
- 
-    return (
-      <div>
-          <section>
-            <div id='image-container'>
-              <img src={MEVS} alt='banner' id='imagecover'></img>
-              <img src={MEVS} alt='foreground' id='foreground-image'></img>
-            </div>
-          </section>
-      </div>
-    );
+import React from "react";
+import styles from "./Banner.module.css";
+import MEVS from "./MEVS.avif";
+
+function Banner() {
+  return (
+    <div className={styles.image_container}>
+      <img src={MEVS} alt="banner" className={styles.image_cover}></img>
+      <img
+        src={MEVS}
+        alt="foreground"
+        className={styles.foreground_image}
+      ></img>
+    </div>
+  );
 }
 
 export default Banner;

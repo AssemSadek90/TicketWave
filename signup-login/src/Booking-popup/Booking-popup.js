@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
-import './Booking-popup.css';
-import MEVS from '../EventDetails/Banner/MEVS.avif'
+import React, { useState } from "react";
+import "./Booking-popup.css";
+import MEVS from "../EventDetails/Banner/MEVS.avif";
 
 function Popup({ closeOverlay }) {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch('http://localhost:3000/users', {
-      method: 'POST',
+    const response = await fetch("http://localhost:4000/userss", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ firstName, lastName, email })
+      body: JSON.stringify({ firstName, lastName, email }),
     });
     const data = await response.json();
     console.log(data); // do something with the response data
@@ -74,7 +74,9 @@ function Popup({ closeOverlay }) {
                   </form>
                 </div>
                 <div className="footer">
-                  <button className='register' type='submit'>register</button>
+                  <button className="register" type="submit">
+                    register
+                  </button>
                 </div>
               </div>
             </main>
@@ -85,7 +87,7 @@ function Popup({ closeOverlay }) {
             <div className="image-and-order-summary">
               <aside className="right-container">
                 <div className="image">
-                  <img src={MEVS} className='image'></img>
+                  <img src={MEVS} className="image"></img>
                 </div>
                 <div className="order-summary-container">
                   <div className="order-summary">
@@ -106,4 +108,3 @@ function Popup({ closeOverlay }) {
 }
 
 export default Popup;
-

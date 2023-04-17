@@ -1,0 +1,49 @@
+.registration_buttons {
+  background-color: #3d64ff;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: larger;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  z-index: 1;
+}
+
+.registration_buttons:hover {
+  background-color: #1735ab;
+}
+
+.booking_button {
+  background-color: #d1410c;
+  height: 44px;
+  margin-top: 24px;
+  width: 100%;
+  border: 0.5px solid #d1410c;
+  border-radius: 5px;
+  color: white;
+  font-size: large;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+  z-index: 1;
+}
+
+.booking_button:hover {
+  background-color: #f05537;
+  border: 0.5px solid #f05537;
+  z-index: 1;
+}
+
+.aside_card {
+  padding: 18px;
+  border: 2px solid #3659e3;
+  box-shadow: inset 0 0 0 1px #3659e3;
+  border-radius: 8px;
+  z-index: 1;
+}
