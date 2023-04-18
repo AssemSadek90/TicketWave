@@ -23,6 +23,7 @@ function Dropdown(props) {
 
   return (
     <div
+      id="dropdown-user-name"
       className={styles.dropdown_container}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}

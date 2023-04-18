@@ -8,7 +8,14 @@ function ChangePassword() {
   const [passwordsValid, setPasswordsValid] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [validData, setValidData] = useState(false);
-  const accessToken = localStorage.getItem('accessToken');
+
+  /**
+  Represents whether the application is currently loading or not.
+  @type {Array}
+  @property {boolean} isLoading - The current state of whether the application is loading or not.
+  @property {function} setIsLoading - A function that sets the isLoading state.
+  */
+  const [isLoading, setIsLoading] = useState(false);
 
   function validateAll() {
     if (confirmPassword !== newPassword) {
@@ -29,6 +36,7 @@ function ChangePassword() {
   }
   function handleSubmit(event) {
     event.preventDefault();
+    setIsLoading(true);
     validateAll();
     if (validData === false) {
       return;
@@ -48,10 +56,15 @@ function ChangePassword() {
           requestOptions
         )
         .then((response) => {
+          setIsLoading(false);
           console.log(response);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          setIsLoading(false);
+        });
     }
+    setIsLoading(false);
   }
 
   return (
@@ -424,9 +437,10 @@ function ChangePassword() {
                       data-automation="set-password-submit"
                       className="eds-btn eds-btn--submit eds-btn--fill"
                       type="submit"
+                      disabled={isLoading}
                       //onClick={handleSubmit}
                     >
-                      Save
+                      {isLoading ? 'Loading...' : 'Save'}
                     </button>
                   </form>
                 </div>
