@@ -107,27 +107,6 @@
       "id": 12
     },
     {
-<<<<<<< HEAD
-      "email": "heidi@gmaol.com",
-      "firstName": "gghg",
-      "lastName": "hhhj",
-      "password": "asdfvcxz",
-      "is_public": true,
-      "image_id": null,
-      "id": 13
-    },
-    {
-      "StartDate": "Sat Apr 15 2023 03:48:22 GMT+0200 (Eastern European Standard Time)",
-      "StartTime": "03:48",
-      "password": "",
-      "id": 14
-    },
-    {
-      "StartDate": "Sat Apr 15 2023 03:48:22 GMT+0200 (Eastern European Standard Time)",
-      "StartTime": "03:48",
-      "password": "",
-      "id": 15
-=======
       "email": "jemmy@gmail.com",
       "firstName": "Ahmed",
       "lastName": "Gamal",
@@ -135,7 +114,6 @@
       "is_public": true,
       "image_id": null,
       "id": 13
->>>>>>> development-branch
     }
   ],
   "eventsData": [
