@@ -1,0 +1,35 @@
+.main_body {
+  align-items: center;
+  margin: 0 auto;
+  padding-top: 5%;
+  max-width: 1200px;
+  display: flex;
+  z-index: 1;
+}
+
+.aside_booking_container {
+  padding: 18px;
+  width: 30%;
+  border: 0.5px solid#eaeaea;
+  border-radius: 16px;
+  position: sticky;
+  top: 24px;
+  bottom: auto;
+  align-self: flex-start;
+  margin-left: 15%;
+  z-index: 1;
+}
+
+.left_part {
+  max-width: 55%;
+  z-index: 1;
+}
+
+/* @media (max-width: 768px) {
+  .aside_booking_container {
+    position: static;
+    bottom: 0;
+    padding: 18px;
+    width: 100%;
+  }
+} */

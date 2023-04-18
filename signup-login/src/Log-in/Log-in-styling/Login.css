@@ -173,3 +173,12 @@
   margin-right: 0;
   font-weight: bold;
 }
+
+.split-container-content p {
+  text-align: center;
+}
+
+.split-container-content img {
+  width: 18px;
+  height: 18px;
+}

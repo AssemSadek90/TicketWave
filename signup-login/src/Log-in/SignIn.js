@@ -1,11 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import { GoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Log-in-styling/Login.css';
 import server from '../server';
+//import GoogleIcon from './Google_G_Logo.png';
+import FacebookIcon from '../EventDetails/Facebook.png';
+//import { ReactComponent as GoogleIcon } from '.../google-icon.svg';
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 /**
@@ -13,6 +16,13 @@ import server from '../server';
  * @function
  */
 function SignIn() {
+  const [userExists, setUserExists] = useState(false);
+
+  const [forgotPasswordClicked, setForgotPasswordClicked] = useState(false);
+
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
+  const [forgotPasswordUsername, setForgotPasswordUsername] = useState('');
+
   /**
   A function provided by the react-router-dom package that allows for programmatic navigation.
   @function
@@ -157,20 +167,39 @@ Handles email input change event
   */
   const handleSignIn = (user) => {
     setIsLoading(true);
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
     server
-      .get(`/users?email=${email}`)
-      .then((response) => response.data)
-      .then((data) => {
+      .get(`/users/email/${user.email}/`, requestOptions)
+      .then((response) => {
+        console.log(response);
         setIsLoading(false);
-        if (data.length > 0 && data[0].password === password) {
-          console.log('User exists');
-          localStorage.setItem('userId', data[0].id);
+        if (response.data.username.length > 0) {
+          setUserExists(true);
+          //user.email = response.data.email;
+          user.username = response.data.username;
+          user.id = response.data.id;
+          console.log(user);
           setInvalidFields(false);
-          navigate('/home');
+          const requestOptions = {
+            headers: { 'Content-Type': 'application/json' },
+          };
+          server
+            .post('/auth/login/', user, requestOptions)
+            .then((response) => {
+              const accessToken = response.data.access_token;
+              const refreshToken = response.data.refresh_token;
+              localStorage.setItem('accessToken', accessToken);
+              localStorage.setItem('refreshToken', refreshToken);
+              console.log(response.data);
+              navigate('/home');
+            })
+            .catch((error) => console.log(error));
         } else {
-          console.log('User does not exist');
+          setUserExists(false);
           setInvalidFields(true);
-          eraseFields();
+          //eraseFields();
         }
       })
       .catch((error) => {
@@ -178,6 +207,40 @@ Handles email input change event
         console.error(error);
       });
   };
+
+  function handleForgotPassword() {
+    setForgotPasswordClicked(true);
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
+    server
+      .get(`/users/email/${email}/`, requestOptions)
+      .then((response) => {
+        console.log(response);
+        if (response.data.username.length > 0) {
+          setUserExists(true);
+          console.log('User exists');
+          setForgotPasswordUsername(response.data.username);
+          setForgotPasswordEmail(response.data.email);
+          //send email
+          server
+            .get(
+              `auth/password/reset/${forgotPasswordUsername}/${forgotPasswordEmail}/`
+            )
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => console.log(error));
+        } else {
+          setUserExists(false);
+          eraseFields();
+          console.log('User does not exist');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   /**
   A function that erases the values in the email and password input fields.
@@ -203,11 +266,12 @@ Handles email input change event
               <div className="company-name">Ticketwave</div>
               <div className="create-account-hl">Log in</div>
             </div>
-            <form onSubmit={submitForm}>
+            <form id="sign-in-form" onSubmit={submitForm}>
               <div className="additional-info">
                 <div id="sign-in">
                   <input
                     id="email-sign-in"
+                    //id="email-sign-in"
                     type="email"
                     placeholder="Email address"
                     value={email}
@@ -217,7 +281,8 @@ Handles email input change event
                 </div>
                 <div id="password">
                   <input
-                    id="password"
+                    id="password-sign-in"
+                    //id="password"
                     type="password"
                     placeholder="Password"
                     value={password}
@@ -227,6 +292,7 @@ Handles email input change event
                 </div>
                 <div>
                   <button
+                    id="submit-form-sign-in"
                     className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                     type="submit"
                     onClick={handleLogInClick}
@@ -247,22 +313,38 @@ Handles email input change event
                   {invalidFields && (
                     <p className="error">Invalid email or password</p>
                   )}
+                  {!userExists && forgotPasswordClicked && (
+                    <p className="error">Invalid email address.</p>
+                  )}
                 </div>
                 <div>
-                  <p>
+                  <p id="navigate-email-sign-up">
                     Don't have an account? <Link to="/">Sign Up</Link>
+                    {/* <div>
+                      <a href="https://www.facebook.com" target={'_blank'}>
+                        <img src={FacebookIcon} alt="logo"></img>
+                      </a>
+                    </div> */}
+                  </p>
+                  <p id="signin-reset-password">
+                    <Link href="#" onClick={handleForgotPassword}>
+                      Forgot Password?
+                    </Link>
+                  </p>
+                  <p>
+                    <Link to="/change-password">Change Password</Link>
                   </p>
                 </div>
-                {/* <div id="signInDiv">
-                  <GoogleLogin
+                <div id="signInDiv">
+                  {/* <GoogleLogin
                     onSuccess={(credentialResponse) => {
                       console.log(credentialResponse);
                     }}
                     onError={() => {
                       console.log('Login Failed');
                     }}
-                  />
-                </div> */}
+                  /> */}
+                </div>
               </div>
             </form>
           </div>
