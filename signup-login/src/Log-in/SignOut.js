@@ -2,6 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import server from '../server';
 
+/**
+ * Signs out the user by sending a logout request to the server and removing the access and refresh tokens from the local storage.
+ *
+ * @function
+ * @returns {void}
+ */
+
 export function signOut() {
   const accessToken = localStorage.getItem('accessToken');
   const requestOptions = {
