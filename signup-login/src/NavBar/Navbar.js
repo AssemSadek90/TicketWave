@@ -71,7 +71,7 @@ export default function Navbar() {
           <Tabs title="Following" />
           <Tabs title="Intersts" />
           <Tabs title="Account settings" />
-          <Tabs title="Log out" onClick={handleLogOut} />
+          <Tabs title="Log out" onClick={handleLogOut} id="log-out-tab" />
         </Dropdown>
       </ul>
     </nav>

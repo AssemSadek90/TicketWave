@@ -117,7 +117,7 @@ function Terms(props) {
                 </div>
                 <div className="tos-form__actions eds-l-pad-bot-8 eds-align--center">
                   <button
-                    data-testid="signup-tos-form-button-cancel"
+                    id="signup-tos-form-button-cancel"
                     className="eds-btn eds-btn--button eds-btn--neutral eds-l-mar-right-8"
                     type="button"
                     onClick={() => {
@@ -127,7 +127,7 @@ function Terms(props) {
                     Cancel
                   </button>
                   <button
-                    data-testid="signup-tos-form-button-accept"
+                    id="signup-tos-form-button-accept"
                     className="eds-btn eds-btn--button eds-btn--fill eds-l-mar-right-8"
                     type="button"
                     onClick={handleAgreeButtonClick}

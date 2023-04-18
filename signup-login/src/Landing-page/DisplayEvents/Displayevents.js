@@ -19,11 +19,8 @@ export default function DisplayEvents(props) {
   return (
     <div>
       <CategoriesNav />
-      <h2 data-testid="events-header">Events In Cairo</h2>
-      <div
-        test-id="event-display-container"
-        className={styles.entertainment_events}
-      >
+      <h2 id="events-header">Events In Cairo</h2>
+      <div id="event-display-container" className={styles.entertainment_events}>
         <EventsList eventsData={events.slice(0, 8)} />
       </div>
       {events[8] && <MoreEvents events={events} />}
