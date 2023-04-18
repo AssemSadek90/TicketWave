@@ -129,6 +129,12 @@ function CreateAccount() {
   */
   const [showEditEmail, setShowEditEmail] = useState(false);
 
+  /**
+
+  State hook that holds a boolean value to toggle the display of terms.
+  @function
+  @returns {Array} An array containing the state value and a function to update it.
+  */
   const [showTerms, setShowTerms] = useState(false);
 
   /**

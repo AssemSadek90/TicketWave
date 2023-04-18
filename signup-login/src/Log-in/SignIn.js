@@ -16,11 +16,42 @@ import server from '../server';
  * @function
  */
 function SignIn() {
+  /**
+   * State variables related to the user's existence and the forgot password functionality.
+   *
+   * @typedef {Object} UserState
+   * @property {boolean} userExists - Indicates whether a user exists.
+   * @property {boolean} forgotPasswordClicked - Indicates whether the forgot password button has been clicked.
+   * @property {string} forgotPasswordEmail - The email entered by the user in the forgot password form.
+   * @property {string} forgotPasswordUsername - The username entered by the user in the forgot password form.
+   */
+
+  /**
+   * The state related to the user's existence and the forgot password functionality.
+   *
+   * @type {UserState}
+   */
   const [userExists, setUserExists] = useState(false);
 
+  /**
+   * Indicates whether the forgot password button has been clicked.
+   *
+   * @type {[boolean, function]} A tuple containing the forgot password clicked state and its setter.
+   */
   const [forgotPasswordClicked, setForgotPasswordClicked] = useState(false);
 
+  /**
+   * The email entered by the user in the forgot password form.
+   *
+   * @type {[string, function]} A tuple containing the forgot password email state and its setter.
+   */
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
+
+  /**
+   * The username entered by the user in the forgot password form.
+   *
+   * @type {[string, function]} A tuple containing the forgot password username state and its setter.
+   */
   const [forgotPasswordUsername, setForgotPasswordUsername] = useState('');
 
   /**
@@ -207,6 +238,13 @@ Handles email input change event
         console.error(error);
       });
   };
+
+  /**
+
+  Handles the forgot password functionality by setting the state to initiate password reset
+  @function
+  @returns {void}
+  */
 
   function handleForgotPassword() {
     setForgotPasswordClicked(true);
