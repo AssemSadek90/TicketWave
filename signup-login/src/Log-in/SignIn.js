@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import './Log-in-styling/Login.css';
 import server from '../server';
 //import GoogleIcon from './Google_G_Logo.png';
-import FacebookIcon from '../EventDetails/Facebook.png';
+//import FacebookIcon from '../EventDetails/Facebook.png';
 //import { ReactComponent as GoogleIcon } from '.../google-icon.svg';
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
