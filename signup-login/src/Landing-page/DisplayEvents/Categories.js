@@ -22,12 +22,15 @@ export default function CategoriesNav() {
   ];
 
   return (
-    <nav className={styles.navbar}>
-      <ul className={styles.tabs}>
+    <nav id="categories-navbar" className={styles.navbar}>
+      <ul id="categoriesnav-list" className={styles.tabs}>
         {tabs.map((tab) => (
-          <li key={tab.id} className={styles.tab}>
+          <li id="categoriesnav-list-item" key={tab.id} className={styles.tab}>
             {tab.label}
-            <div className={styles.underline}></div>
+            <div
+              id="categoriesnav-underline"
+              className={styles.underline}
+            ></div>
           </li>
         ))}
       </ul>
