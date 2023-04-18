@@ -1,11 +1,59 @@
 import { useState } from 'react';
+import server from '../server';
 import './Log-in-styling/ChangePassword.css';
 function ChangePassword() {
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordsMatch, setPasswordsMatch] = useState(true);
-  const [passwordsValid, setPasswordsValid] = useState(true);
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  const [passwordsValid, setPasswordsValid] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
+  const [validData, setValidData] = useState(false);
+  const accessToken = localStorage.getItem('accessToken');
+
+  function validateAll() {
+    if (confirmPassword !== newPassword) {
+      setPasswordsMatch(false);
+      setValidData(false);
+      //passwords don't match
+    }
+    if (
+      (confirmPassword.length || newPassword.length || currentPassword.length) <
+      8
+    ) {
+      setPasswordsValid(false);
+      setValidData(false);
+      //passwords are not valid length ( over 8 characters)
+    } else {
+      setValidData(true);
+    }
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    validateAll();
+    if (validData === false) {
+      return;
+    } else {
+      const accessToken = localStorage.getItem('accessToken');
+      console.log(accessToken);
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      server
+        .post(
+          '/auth/password/change/',
+          { new_password1: newPassword, new_password2: confirmPassword },
+          requestOptions
+        )
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => console.log(error));
+    }
+  }
+
   return (
     <main
       className="eds-structure__main snipcss-gHksn"
@@ -31,7 +79,7 @@ function ChangePassword() {
               <div className="eds-g-cell eds-g-cell-md-4-12 eds-l-pad-top-4">
                 <div className="eds-l-pad-bot-5">Set a new password.</div>
                 <div className="eds-fx--fade-in eds-fx--delay-2">
-                  <form noValidate="" method="post">
+                  <form onSubmit={handleSubmit}>
                     <div className="eds-l-pad-bot-3">
                       <div className="eds-password--v2">
                         <div
@@ -67,18 +115,15 @@ function ChangePassword() {
                                   </label>
                                 </div>
                                 <input
-                                  data-spec="input-field-input-element"
-                                  aria-invalid="true"
-                                  aria-required="true"
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  data-automation="current_password-field"
                                   placeholder="Current Password"
                                   id="current_password"
                                   name="current_password"
                                   type="password"
-                                  placeholder="Current Password"
-                                  meta="[object Object]"
-                                  value=""
+                                  onChange={(e) => {
+                                    setCurrentPassword(e.target.value);
+                                  }}
+                                  //value={currentPassword}
                                 />
                               </div>
                               <span className="eds-field-styled__aside eds-field-styled__aside-suffix eds-field-styled__aside--minimal-spacing">
@@ -180,17 +225,15 @@ function ChangePassword() {
                                   </label>
                                 </div>
                                 <input
-                                  data-spec="input-field-input-element"
-                                  aria-invalid="false"
-                                  aria-required="true"
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  data-automation="new_password-field"
                                   placeholder="New Password"
                                   id="new_password"
                                   name="new_password"
                                   type="password"
-                                  meta="[object Object]"
-                                  value=""
+                                  onChange={(e) => {
+                                    setNewPassword(e.target.value);
+                                  }}
+                                  //value={newPassword}
                                 />
                               </div>
                               <span className="eds-field-styled__aside eds-field-styled__aside-suffix eds-field-styled__aside--minimal-spacing">
@@ -281,17 +324,15 @@ function ChangePassword() {
                                   </label>
                                 </div>
                                 <input
-                                  data-spec="input-field-input-element"
-                                  aria-invalid="false"
-                                  aria-required="true"
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  data-automation="repeat_password-field"
-                                  placeholder='Repeat Password"'
+                                  placeholder="Repeat Password"
                                   id="repeat_password"
                                   name="repeat_password"
                                   type="password"
-                                  meta="[object Object]"
-                                  value=""
+                                  onChange={(e) => {
+                                    setConfirmPassword(e.target.value);
+                                  }}
+                                  //value={confirmPassword}
                                 />
                               </div>
                               <span className="eds-field-styled__aside eds-field-styled__aside-suffix eds-field-styled__aside--minimal-spacing">
@@ -383,6 +424,7 @@ function ChangePassword() {
                       data-automation="set-password-submit"
                       className="eds-btn eds-btn--submit eds-btn--fill"
                       type="submit"
+                      //onClick={handleSubmit}
                     >
                       Save
                     </button>

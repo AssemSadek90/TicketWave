@@ -331,6 +331,9 @@ Handles email input change event
                       Forgot Password?
                     </Link>
                   </p>
+                  <p>
+                    <Link to="/change-password">Change Password</Link>
+                  </p>
                 </div>
                 <div id="signInDiv">
                   {/* <GoogleLogin
