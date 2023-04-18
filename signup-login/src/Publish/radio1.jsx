@@ -191,7 +191,7 @@ function RadioApp() {
         />
         <br />
         <div>
-          <label htmlFor="option2" className="sideradio">
+          <label id='' htmlFor="option2" className="sideradio">
             private
           </label>
           <br />
@@ -243,8 +243,8 @@ function RadioApp() {
             value={selectedDropdownOption}
             onChange={handleDropdownChange}
           >
-            <option value="option1">Anyone with the link</option>
-            <option value="option2">only people with the password</option>
+            <option id="Any-link" value="option1">Anyone with the link</option>
+            <option id="people-pass" value="option2">only people with the password</option>
           </select>
           {textInputVisible && (
             <label>
@@ -269,6 +269,7 @@ function RadioApp() {
               <input
                 className="Radio"
                 type="radio"
+                id="keep-private"
                 name="options3"
                 value="keep-private"
                 onChange={handleRadioButtonChange}
@@ -283,6 +284,7 @@ function RadioApp() {
             <input
               className="Radio"
               type="radio"
+              id="schedule-public"
               name="options3"
               value="Scheduled"
               onChange={handleRadioButtonChange}
@@ -350,54 +352,54 @@ function RadioApp() {
                 type="time"
                 disabled={EnableDate}
               >
-                <option value="12 AM">00:00</option>
-                <option value="12:30 AM">00:30</option>
-                <option value="1 AM">1:00</option>
-                <option value="1:30 AM">1:30</option>
-                <option value="2 AM">2:00</option>
-                <option value="2:30 AM">2:30</option>
-                <option value="3 AM">3:00</option>
-                <option value="3:30 AM">3:30</option>
-                <option value="4 AM">4:00</option>
-                <option value="4:30 AM">4:30</option>
-                <option value="5 AM">5:00</option>
-                <option value="5:30 AM">5:30</option>
-                <option value="6 AM">6:00</option>
-                <option value="6:30 AM">6:30</option>
-                <option value="7 AM">7:00</option>
-                <option value="7:30 AM">7:30</option>
-                <option value="8 AM">8:00</option>
-                <option value="8:30 AM">8:30</option>
-                <option value="9 AM">9:00</option>
-                <option value="9:30 AM">9:30</option>
-                <option value="10 AM">10:00</option>
-                <option value="10:30 AM">10:30</option>
-                <option value="11 AM">11:00</option>
-                <option value="11:30 AM">11:30</option>
-                <option value="12 PM">12:00</option>
-                <option value="12:30 PM">12:30</option>
-                <option value="1 PM">13:00</option>
-                <option value="1:30 PM">13:30</option>
-                <option value="2 PM">14:00</option>
-                <option value="2:30 PM">14:30</option>
-                <option value="3 PM">15:00</option>
-                <option value="3:30 PM">15:30</option>
-                <option value="4 PM">16:00</option>
-                <option value="4:30 PM">16:30</option>
-                <option value="5 PM">17:00</option>
-                <option value="5:30 PM">17:30</option>
-                <option value="6 PM">18:00</option>
-                <option value="6:30 PM">18:30</option>
-                <option value="7 PM">19:00</option>
-                <option value="7:30 PM">19:30</option>
-                <option value="8 PM">20:00</option>
-                <option value="8:30 PM">20:30</option>
-                <option value="9 PM">21:00</option>
-                <option value="9:30 PM">21:30</option>
-                <option value="10 PM">22:00</option>
-                <option value="10:30 PM">22:30</option>
-                <option value="11 PM">23:00</option>
-                <option value="11:30 PM">23:30</option>
+                <option id="12AM" value="12 AM">00:00</option>
+                <option id="12-30AM" value="12:30 AM">00:30</option>
+                <option id="1AM" value="1 AM">1:00</option>
+                <option id="1-30AM" value="1:30 AM">1:30</option>
+                <option id="2AM" value="2 AM">2:00</option>
+                <option id="2-30AM" value="2:30 AM">2:30</option>
+                <option id="3AM" value="3 AM">3:00</option>
+                <option id="3-30AM" value="3:30 AM">3:30</option>
+                <option id="4AM" value="4 AM">4:00</option>
+                <option id="4-30AM" value="4:30 AM">4:30</option>
+                <option id="5AM" value="5 AM">5:00</option>
+                <option id="5-30AM" value="5:30 AM">5:30</option>
+                <option id="6AM" value="6 AM">6:00</option>
+                <option id="6-30AM" value="6:30 AM">6:30</option>
+                <option id="7AM" value="7 AM">7:00</option>
+                <option id="7-30AM" value="7:30 AM">7:30</option>
+                <option id="8AM" value="8 AM">8:00</option>
+                <option id="8-30AM" value="8:30 AM">8:30</option>
+                <option id="9AM" value="9 AM">9:00</option>
+                <option id="9-30AM" value="9:30 AM">9:30</option>
+                <option id="10AM" value="10 AM">10:00</option>
+                <option id="10-30AM" value="10:30 AM">10:30</option>
+                <option id="11AM" value="11 AM">11:00</option>
+                <option id="11-30AM" value="11:30 AM">11:30</option>
+                <option id="12PM" value="12 PM">12:00</option>
+                <option id="12-30PM" value="12:30 PM">12:30</option>
+                <option id="1PM" value="1 PM">13:00</option>
+                <option id="1-30PM" value="1:30 PM">13:30</option>
+                <option id="2PM" value="2 PM">14:00</option>
+                <option id="2-30PM" value="2:30 PM">14:30</option>
+                <option id="3PM" value="3 PM">15:00</option>
+                <option id="3-30PM" value="3:30 PM">15:30</option>
+                <option id="4PM" value="4 PM">16:00</option>
+                <option id="4-30PM" value="4:30 PM">16:30</option>
+                <option id="5PM" value="5 PM">17:00</option>
+                <option id="5-30PM" value="5:30 PM">17:30</option>
+                <option id="6PM" value="6 PM">18:00</option>
+                <option id="6-30PM" value="6:30 PM">18:30</option>
+                <option id="7PM" value="7 PM">19:00</option>
+                <option id="7-30PM" value="7:30 PM">19:30</option>
+                <option id="8PM" value="8 PM">20:00</option>
+                <option id="8-30PM" value="8:30 PM">20:30</option>
+                <option id="9PM" value="9 PM">21:00</option>
+                <option id="9-30PM" value="9:30 PM">21:30</option>
+                <option id="10PM" value="10 PM">22:00</option>
+                <option id="10-30PM" value="10:30 PM">22:30</option>
+                <option id="11PM" value="11 PM">23:00</option>
+                <option id="11-30PM" value="11:30 PM">23:30</option>
               </select>
        
           </div>
@@ -408,7 +410,7 @@ function RadioApp() {
       </div>
       <form onSubmit={eventHandler}>
         <div className="footerContainer">
-          <button className="footerButton" type="submit">
+          <button className="footerButton" id="footer" type="submit">
             Publish
           </button>
         </div>
