@@ -142,6 +142,7 @@ flex-direction: row;
     text-indent: -999px;
     background-color: transparent;
     -webkit-box-flex: 0;
+    display: flex;
    }
    .sideradio{ 
     display: inline-block;

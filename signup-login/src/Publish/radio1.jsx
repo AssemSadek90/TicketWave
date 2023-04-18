@@ -280,7 +280,7 @@ function RadioApp() {
               <br />
             </label>
           </label>
-          <label>
+          
             <input
               className="Radio"
               type="radio"
@@ -290,7 +290,7 @@ function RadioApp() {
               onChange={handleRadioButtonChange}
             />
             Yes, schedule to share publicly
-          </label>
+        
         </div>
       )}
       <br />
