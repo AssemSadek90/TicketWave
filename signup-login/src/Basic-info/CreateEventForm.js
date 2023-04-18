@@ -250,6 +250,7 @@ const [endDate, setEndDate] = useState(new Date());
     event.preventDefault();
     const data = {
       Title: titleRef.current.value,
+      name:titleRef.current.value,
       Organizer: organizerRef.current.value,
       EventType: eventTypeRef.current.value,
       EventCategory: eventCategory,
@@ -265,6 +266,38 @@ const [endDate, setEndDate] = useState(new Date());
       TimeZone: timeZoneRef.current.value,
       Language: languageRef.current.value,
     };
+    //   name: titleRef.current.value,
+    //   summary: -1,
+    //   description: -1,
+    //   url: -1,
+    //   online_event:-1,
+    //   hide_start_date:displayStart,
+    //   hide_end_date:displayEndRef.current.checked,
+    //   free:-1,
+    //   waitlist:-1,
+    //   status: -1,
+    //   view_counter:-1,
+    //   age_restriction:-1,
+    //   fully_booked:-1,
+    //   published:-1,
+    //   organizer:'organizerRef.current.value',
+    //   video_url:-1,
+    //   timezone:'timeZoneRef.current.value',
+    //   language:'languageRef.current.value',
+    //   listed:-1,
+    //   shareable:-1,
+    //   invite_only:-1,
+    //   show_remaining:-1,
+    //   capacity:-1,
+    //   capacity_is_custom:-1,
+    //   start: startDate + startTime,
+    //   end: endDate + endTime,
+    //   changed :-1,
+    //   created : -1,
+    //   owner:-1,
+    //   category:eventCategory,
+    //   venue:location,
+    // };
 
 
 
@@ -325,18 +358,22 @@ const [endDate, setEndDate] = useState(new Date());
 
     console.log(data);
     handleSignUp(data);
+    
   }
 
   // SAVE TO DATABASE ________________________________________________________________________________________________________________________________
 
   
   const handleSignUp = (data) => {
+
+    const accessToken = localStorage.getItem("accessToken")
     const requestOptions = {
       headers: { 'Content-Type': 'application/json' },
     };
+    
 
     server
-      .post('/Events', data, requestOptions)
+      .post('/events/create/', data, requestOptions)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
   };
