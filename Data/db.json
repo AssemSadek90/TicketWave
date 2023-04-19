@@ -68,8 +68,14 @@
     "Price": "50$",
     "Availability": "300",
     "online_event": "online",
-    "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
-  },
+    "Gross":"20",
+    "Nsales":100,
+    "Sold":"10",
+    "Tickets":"30",
+    "Paid":"5",
+    "Free":"3",
+    "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png",
+    "EventURL":"www.google.com"  },
   "Time": {
     "EventDate": "2023-03-01",
     "EventTime": "13:18"

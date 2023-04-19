@@ -10,7 +10,7 @@ import CreateEventForm from './Basic-info/CreateEventForm';
 import PublishApp from './Publish/PublishApp';
 import Terms from './Log-in/TermsConditions/Terms';
 import ChangePassword from './Log-in/ChangePassword';
-
+import Dashboard from './Dashboard/dashboardinsights';
 /**
  * Renders the main application component.
  * @function
@@ -30,6 +30,7 @@ function App() {
           <Route path="/" element={<CreateAccount />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
       </Router>
     </div>
