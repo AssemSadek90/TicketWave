@@ -32,7 +32,7 @@ whether the passwords are valid, the current password, and whether the form is l
   const [passwordsValid, setPasswordsValid] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [validData, setValidData] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  //const [isLoading, setIsLoading] = useState(false);
 
   /**
   Validates whether the new and confirm passwords match and whether they are at least 8 characters long.
@@ -70,7 +70,7 @@ whether the passwords are valid, the current password, and whether the form is l
 
   function handleSubmit(event) {
     event.preventDefault();
-    setIsLoading(true);
+    //setIsLoading(true);
     validateAll();
     if (validData === false) {
       return;
@@ -90,15 +90,15 @@ whether the passwords are valid, the current password, and whether the form is l
           requestOptions
         )
         .then((response) => {
-          setIsLoading(false);
+          //setIsLoading(false);
           console.log(response);
         })
         .catch((error) => {
           console.log(error);
-          setIsLoading(false);
+          //setIsLoading(false);
         });
     }
-    setIsLoading(false);
+    //setIsLoading(false);
   }
 
   return (
@@ -471,10 +471,11 @@ whether the passwords are valid, the current password, and whether the form is l
                       data-automation="set-password-submit"
                       className="eds-btn eds-btn--submit eds-btn--fill"
                       type="submit"
-                      disabled={isLoading}
+                      //disabled={isLoading}
                       //onClick={handleSubmit}
                     >
-                      {isLoading ? 'Loading...' : 'Save'}
+                      {/* {isLoading ? 'Loading...' : 'Save'} */}
+                      Save
                     </button>
                   </form>
                 </div>

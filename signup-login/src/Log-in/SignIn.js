@@ -258,13 +258,13 @@ Handles email input change event
         if (response.data.username.length > 0) {
           setUserExists(true);
           console.log('User exists');
-          setForgotPasswordUsername(response.data.username);
-          setForgotPasswordEmail(response.data.email);
+          const username = response.data.username;
+          const email = response.data.email;
+          //console.log(forgotPasswordUsername);
+          //console.log(forgotPasswordEmail);
           //send email
           server
-            .get(
-              `auth/password/reset/${forgotPasswordUsername}/${forgotPasswordEmail}/`
-            )
+            .get(`auth/password/reset/${username}/${email}/`)
             .then((response) => {
               console.log(response);
             })
