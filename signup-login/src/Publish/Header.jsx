@@ -8,6 +8,6 @@ import "./Publish.css";
  * @example
  * <Header />
  */
-function Header(){return<div><h1>Publish Your Event</h1></div>
+function Header(){return<div><h1 className="page-heading">Publish Your Event</h1></div>
 }
 export default Header
