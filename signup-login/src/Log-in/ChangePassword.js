@@ -1,22 +1,46 @@
 import { useState } from 'react';
 import server from '../server';
 import './Log-in-styling/ChangePassword.css';
+
+/**
+Represents a component for changing the user's password
+*/
 function ChangePassword() {
+  /**
+State variables for the new password, confirm password, whether the passwords match,
+whether the passwords are valid, the current password, and whether the form is loading.
+@type {Array}
+@property {string} newPassword - The new password input value.
+@property {function} setNewPassword - A function that sets the newPassword state.
+@property {string} confirmPassword - The confirm password input value.
+@property {function} setConfirmPassword - A function that sets the confirmPassword state.
+@property {boolean} passwordsMatch - The current state of whether the new and confirm passwords match.
+@property {function} setPasswordsMatch - A function that sets the passwordsMatch state.
+@property {boolean} passwordsValid - The current state of whether the new and confirm passwords are valid.
+@property {function} setPasswordsValid - A function that sets the passwordsValid state.
+@property {string} currentPassword - The current password input value.
+@property {function} setCurrentPassword - A function that sets the currentPassword state.
+@property {boolean} isLoading - The current state of whether the form is loading or not.
+@property {function} setIsLoading - A function that sets the isLoading state.
+@property {boolean} isLoading - The current state of whether the application is loading or not.
+@property {function} setIsLoading - A function that sets the isLoading state.
+*/
+
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(false);
   const [passwordsValid, setPasswordsValid] = useState(false);
   const [currentPassword, setCurrentPassword] = useState('');
   const [validData, setValidData] = useState(false);
-
-  /**
-  Represents whether the application is currently loading or not.
-  @type {Array}
-  @property {boolean} isLoading - The current state of whether the application is loading or not.
-  @property {function} setIsLoading - A function that sets the isLoading state.
-  */
   const [isLoading, setIsLoading] = useState(false);
 
+  /**
+  Validates whether the new and confirm passwords match and whether they are at least 8 characters long.
+  If the passwords do not match or are not valid, sets the passwordsMatch and passwordsValid states to false.
+  If the passwords match and are valid, sets the validData state to true.
+  @function
+  @returns {void}
+  */
   function validateAll() {
     if (confirmPassword !== newPassword) {
       setPasswordsMatch(false);
@@ -34,6 +58,16 @@ function ChangePassword() {
       setValidData(true);
     }
   }
+
+  /**
+  Handles the form submission for changing the password.
+  Validates the new and confirm passwords, and if they match and are valid, sends a post request to the server
+  to change the password.
+  @function
+  @param {event} event - The event object for the form submission.
+  @returns {void}
+  */
+
   function handleSubmit(event) {
     event.preventDefault();
     setIsLoading(true);

@@ -18,9 +18,9 @@ import './Displayevents';
 export default function EventItem(props) {
   console.log(props);
   return (
-    <div test-id="event-element" className={styles.event_element} style={{}}>
+    <div id="event-element" className={styles.event_element} style={{}}>
       <svg
-        test-id="event-poster"
+        id="event-poster"
         className={styles.event_image}
         width="100%"
         height="70%"
@@ -28,13 +28,15 @@ export default function EventItem(props) {
         <image href={props.event.path} width="100%" height="100%" />
       </svg>
       <div
-        test-id="event-details"
+        id="event-details"
         className={styles.event_details}
         style={{ marginTop: '10px' }}
       >
-        <p style={{ fontWeight: 'bold' }}>{props.event.start}</p>
-        <p>{props.event.id}</p>
-        <p>{props.event.summary}</p>
+        <p id="event-detail-1" style={{ fontWeight: 'bold' }}>
+          {props.event.start}
+        </p>
+        <p id="event-detail-2">{props.event.id}</p>
+        <p id="event-detail-3">{props.event.organizer}</p>
       </div>
     </div>
   );

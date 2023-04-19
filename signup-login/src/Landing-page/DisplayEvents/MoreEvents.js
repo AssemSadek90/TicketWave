@@ -30,12 +30,18 @@ export default function MoreEvents(props) {
     <div>
       <h2 id="events-header">More Events</h2>
       {displayAll ? (
-        <div className={styles.entertainment_events}>
+        <div
+          id="more-events-container1"
+          className={styles.entertainment_events}
+        >
           <EventsList eventsData={props.events.slice(8)} />
         </div>
       ) : (
         <>
-          <div className={styles.entertainment_events}>
+          <div
+            id="more-events-container2"
+            className={styles.entertainment_events}
+          >
             <EventsList eventsData={props.events.slice(8, 12)} />
           </div>
           {props.events[12] && (

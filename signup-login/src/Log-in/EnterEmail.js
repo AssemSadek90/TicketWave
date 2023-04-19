@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import './Log-in-styling/Login.css';
 import Terms from './TermsConditions/Terms';
 import server from '../server';
@@ -129,6 +129,12 @@ function CreateAccount() {
   */
   const [showEditEmail, setShowEditEmail] = useState(false);
 
+  /**
+
+  State hook that holds a boolean value to toggle the display of terms.
+  @function
+  @returns {Array} An array containing the state value and a function to update it.
+  */
   const [showTerms, setShowTerms] = useState(false);
 
   /**

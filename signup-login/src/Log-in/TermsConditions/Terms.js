@@ -2,13 +2,29 @@ import React from 'react';
 import { useState } from 'react';
 import './Terms.css';
 
+/**
+Represents a component for displaying terms and conditions
+@param {Object} props - The props object for the component
+@param {function} props.handleSignUp - The function to handle the sign-up process
+@param {function} props.handleCancelClick - The function to handle the cancellation of the sign-up process
+*/
+
 function Terms(props) {
   // const [cancelClicked, setCancelClicked] = useState(false);
   // const [agreeClicked, setAgreeClicked] = useState(false);
+  /**
+  Handles the click event of the "Agree" button
+  @function
+  */
   function handleAgreeButtonClick() {
     props.handleSignUp();
     console.log('Agree button clicked');
   }
+
+  /**
+  Handles the click event of the "Cancel" button
+  @function
+  */
   function handleCancelClick() {
     props.handleCancelClick();
     console.log('Cancel button clicked');
