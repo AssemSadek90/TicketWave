@@ -18,7 +18,7 @@ export function signOut() {
     },
   };
   server
-    .get(`/auth/logout/`, requestOptions)
+    .get(`/api/auth/logout/`, requestOptions)
     .then((response) => {
       console.log(response);
       localStorage.removeItem('accessToken');
