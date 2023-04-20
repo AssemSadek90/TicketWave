@@ -202,7 +202,7 @@ Handles email input change event
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/api/users/email/${user.email}/`, requestOptions)
+      .get(`/api/api/users/email/${user.email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -264,7 +264,7 @@ Handles email input change event
           //console.log(forgotPasswordEmail);
           //send email
           server
-            .get(`auth/api/password/reset/${username}/${email}/`)
+            .get(`/api/auth/password/reset/${username}/${email}/`)
             .then((response) => {
               console.log(response);
             })
