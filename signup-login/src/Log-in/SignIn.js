@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GoogleLogin } from '@react-oauth/google';
+// import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import './Log-in-styling/Login.css';
 import server from '../server';
 //import GoogleIcon from './Google_G_Logo.png';
-import FacebookIcon from '../EventDetails/Facebook.png';
+//import FacebookIcon from '../EventDetails/Facebook.png';
 //import { ReactComponent as GoogleIcon } from '.../google-icon.svg';
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -16,7 +16,44 @@ import FacebookIcon from '../EventDetails/Facebook.png';
  * @function
  */
 function SignIn() {
+  /**
+   * State variables related to the user's existence and the forgot password functionality.
+   *
+   * @typedef {Object} UserState
+   * @property {boolean} userExists - Indicates whether a user exists.
+   * @property {boolean} forgotPasswordClicked - Indicates whether the forgot password button has been clicked.
+   * @property {string} forgotPasswordEmail - The email entered by the user in the forgot password form.
+   * @property {string} forgotPasswordUsername - The username entered by the user in the forgot password form.
+   */
+
+  /**
+   * The state related to the user's existence and the forgot password functionality.
+   *
+   * @type {UserState}
+   */
   const [userExists, setUserExists] = useState(false);
+
+  /**
+   * Indicates whether the forgot password button has been clicked.
+   *
+   * @type {[boolean, function]} A tuple containing the forgot password clicked state and its setter.
+   */
+  const [forgotPasswordClicked, setForgotPasswordClicked] = useState(false);
+
+  /**
+   * The email entered by the user in the forgot password form.
+   *
+   * @type {[string, function]} A tuple containing the forgot password email state and its setter.
+   */
+  const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
+
+  /**
+   * The username entered by the user in the forgot password form.
+   *
+   * @type {[string, function]} A tuple containing the forgot password username state and its setter.
+   */
+  const [forgotPasswordUsername, setForgotPasswordUsername] = useState('');
+
   /**
   A function provided by the react-router-dom package that allows for programmatic navigation.
   @function
@@ -165,7 +202,7 @@ Handles email input change event
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/users/email/${user.email}/`, requestOptions)
+      .get(`/api/users/email/${user.email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -179,19 +216,17 @@ Handles email input change event
           const requestOptions = {
             headers: { 'Content-Type': 'application/json' },
           };
-
           server
-            .post('/auth/login/', user, requestOptions)
+            .post('/api/auth/login/', user, requestOptions)
             .then((response) => {
               const accessToken = response.data.access_token;
               const refreshToken = response.data.refresh_token;
               localStorage.setItem('accessToken', accessToken);
               localStorage.setItem('refreshToken', refreshToken);
               console.log(response.data);
+              navigate('/home');
             })
             .catch((error) => console.log(error));
-          //navigate('/home');
-          //navigate('/home');
         } else {
           setUserExists(false);
           setInvalidFields(true);
@@ -203,6 +238,47 @@ Handles email input change event
         console.error(error);
       });
   };
+
+  /**
+
+  Handles the forgot password functionality by setting the state to initiate password reset
+  @function
+  @returns {void}
+  */
+
+  function handleForgotPassword() {
+    setForgotPasswordClicked(true);
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
+    server
+      .get(`/api/users/email/${email}/`, requestOptions)
+      .then((response) => {
+        console.log(response);
+        if (response.data.username.length > 0) {
+          setUserExists(true);
+          console.log('User exists');
+          const username = response.data.username;
+          const email = response.data.email;
+          //console.log(forgotPasswordUsername);
+          //console.log(forgotPasswordEmail);
+          //send email
+          server
+            .get(`/api/auth/password/reset/${username}/${email}/`)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => console.log(error));
+        } else {
+          setUserExists(false);
+          eraseFields();
+          console.log('User does not exist');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   /**
   A function that erases the values in the email and password input fields.
@@ -228,12 +304,12 @@ Handles email input change event
               <div className="company-name">Ticketwave</div>
               <div className="create-account-hl">Log in</div>
             </div>
-            <form test-id="sign-in-form" onSubmit={submitForm}>
+            <form id="sign-in-form" onSubmit={submitForm}>
               <div className="additional-info">
                 <div id="sign-in">
                   <input
-                    test-id="email-sign-in"
                     id="email-sign-in"
+                    //id="email-sign-in"
                     type="email"
                     placeholder="Email address"
                     value={email}
@@ -243,8 +319,8 @@ Handles email input change event
                 </div>
                 <div id="password">
                   <input
-                    test-id="password-sign-in"
-                    id="password"
+                    id="password-sign-in"
+                    //id="password"
                     type="password"
                     placeholder="Password"
                     value={password}
@@ -254,7 +330,7 @@ Handles email input change event
                 </div>
                 <div>
                   <button
-                    test-id="submit-form-sign-in"
+                    id="submit-form-sign-in"
                     className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                     type="submit"
                     onClick={handleLogInClick}
@@ -275,15 +351,26 @@ Handles email input change event
                   {invalidFields && (
                     <p className="error">Invalid email or password</p>
                   )}
+                  {!userExists && forgotPasswordClicked && (
+                    <p className="error">Invalid email address.</p>
+                  )}
                 </div>
                 <div>
-                  <p test-id="navigate-email-sign-up">
+                  <p id="navigate-email-sign-up">
                     Don't have an account? <Link to="/">Sign Up</Link>
                     {/* <div>
                       <a href="https://www.facebook.com" target={'_blank'}>
                         <img src={FacebookIcon} alt="logo"></img>
                       </a>
                     </div> */}
+                  </p>
+                  <p id="signin-reset-password">
+                    <Link href="#" onClick={handleForgotPassword}>
+                      Forgot Password?
+                    </Link>
+                  </p>
+                  <p>
+                    <Link to="/change-password">Change Password</Link>
                   </p>
                 </div>
                 <div id="signInDiv">

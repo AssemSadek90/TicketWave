@@ -30,8 +30,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import './Log-in-styling/Login.css';
+import Terms from './TermsConditions/Terms';
+import server from '../server';
 
 /**
  * A React component for creating an account.
@@ -40,22 +42,18 @@ import './Log-in-styling/Login.css';
 function CreateAccount() {
   /**
 
-  Initializes an axios instance with a specified baseURL.
-  @type {Object}
-  @constant server
-  @property {string} baseURL - The base URL for the axios instance.
-  */
-  const server = axios.create({
-    baseURL: 'http://localhost:3000',
-  });
-
-  /**
-
   An object that represents the user being created.
   @type {Object}
   @constant user
   */
-  const user = {};
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    is_public: true,
+    image_id: -1,
+  });
 
   /**
    * The email input's value.
@@ -161,6 +159,14 @@ function CreateAccount() {
 
   /**
 
+  State hook that holds a boolean value to toggle the display of terms.
+  @function
+  @returns {Array} An array containing the state value and a function to update it.
+  */
+  const [showTerms, setShowTerms] = useState(false);
+
+  /**
+
   A function provided by the react-router-dom package that allows for programmatic navigation.
   @function
   @name navigate
@@ -195,13 +201,15 @@ function CreateAccount() {
    */
   function handleContinueButtonClick() {
     setIsLoading(true);
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
     server
-      .get(`/users?email=${email}`)
-      .then((response) => response.data)
-      .then((data) => {
+      .get(`/users/email/${email}/`, requestOptions)
+      .then((response) => {
+        console.log(response);
         setIsLoading(false);
-
-        if (data.length > 0) {
+        if (response.data.username.length > 0) {
           setUserExists(true);
           console.log('User already exists');
           if (userExists || !validEmail) {
@@ -224,6 +232,14 @@ function CreateAccount() {
       .catch((error) => {
         setIsLoading(false);
         console.error(error);
+        setUserExists(false);
+        console.log('User does not exist');
+        if (validEmail) {
+          setShowAdditionalInfo(true);
+          setshowContinueButton(false);
+          setShowEditEmail(true);
+          setEmailDisabled(true);
+        }
       });
   }
 
@@ -262,7 +278,9 @@ Handles email input change event
   @return {void}
   */
   function handleFirstNameChange(event) {
-    setFirstName(event.target.value);
+    setFirstName(
+      event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1)
+    );
   }
   /**
   
@@ -310,6 +328,11 @@ Handles email input change event
     setCreateClicked(true);
     validateAll();
   }
+
+  function handleCancelClick() {
+    setShowTerms(false);
+  }
+
   /**
   
   Submits the form and logs the form data to the console if valid
@@ -319,13 +342,17 @@ Handles email input change event
   function submitForm(event) {
     event.preventDefault();
     if (validData) {
-      user.email = email;
-      user.firstName = firstName;
-      user.lastName = lastName;
-      user.password = password;
-      user.is_public = true;
-      user.image_id = null;
-      handleSignUp(user);
+      // user.first_name = firstName;
+      // user.last_name = lastName;
+      setUser({
+        username: firstName + lastName,
+        email: email,
+        password1: password,
+        password2: password,
+        is_public: true,
+        image_id: -1,
+      });
+      setShowTerms(true);
     }
   }
   /**
@@ -350,20 +377,19 @@ Handles email input change event
   @name navigateHome
   */
   const navigateHome = () => {
-    server
-      .get(`/users?email=${email}`)
-      .then((response) => response.data)
-      .then((data) => {
-        localStorage.setItem('userId', data[0].id);
-        navigate('/home');
-      })
-      .catch((error) => {
-        setIsLoading(false);
-        console.error(error);
-        return;
-      });
+    // server
+    //   .get(`/users?email=${email}`)
+    //   .then((response) => response.data)
+    //   .then((data) => {
+    //     localStorage.setItem('userId', data[0].id);
+    navigate('/home');
+    // })
+    // .catch((error) => {
+    //   setIsLoading(false);
+    //   console.error(error);
+    //   return;
+    // });
   };
-
   /**
 
   A function that handles the sign up process.
@@ -373,17 +399,42 @@ Handles email input change event
   @param {string} user.email - The email address of the user being signed up.
   @param {string} user.password - The password of the user being signed up.
   */
-  const handleSignUp = (user) => {
+  const handleSignUp = () => {
     const requestOptions = {
       headers: { 'Content-Type': 'application/json' },
     };
-
+    console.log(user);
     server
-      .post('/users', user, requestOptions)
-      .then((response) => console.log(response.data))
+      .post('/auth/signup/', user, requestOptions)
+      .then((response) => {
+        const accessToken = response.data.access_token;
+        const refreshToken = response.data.refresh_token;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+        user.pk = response.data.user.pk;
+        console.log(user.pk);
+      })
+      .then(() => {
+        server
+          .post(`/auth/send_verification_email/${user.pk}/`)
+          .then((response) => {
+            console.log(response);
+          })
+          .then(navigateHome())
+          .catch((error) => console.log(error));
+      })
       .catch((error) => console.log(error));
-    navigateHome();
   };
+
+  // const verify = () => {
+  //   server
+  //     .post(`/auth/send_verification_email/${user.pk}/`)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       navigateHome();
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   /**
   
@@ -396,13 +447,14 @@ Handles email input change event
         &lt;div className="col-md-6 split-container-primary">
           &lt;div className="split-container-content">
             &lt;div className="header-create-element">
-              &lt;h1 className="company-name">Ticketwave&lt;/h1>
-              &lt;h2 className="eds-text-hl">Create an account&lt;/h2>
+              &lt;div className="company-name">Ticketwave&lt;/div>
+              &lt;div className="create-account-hl">Create an account&lt;/div>
             &lt;/div>
-            &lt;form onSubmit={submitForm}>
+            &lt;form id="sign-up-form" onSubmit={submitForm}>
               &lt;div className="additional-info" id="create-account">
                 &lt;input
-                  id="email"
+                  id="email-sign-up"
+                  //id="email"
                   type="email"
                   placeholder="Email address"
                   value={email}
@@ -414,6 +466,7 @@ Handles email input change event
                   &lt;div>
                     {showContinueButton &amp;&amp; (
                       &lt;button
+                        id="continue-button-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         disabled={isLoading}
                         onClick={handleContinueButtonClick}
@@ -425,6 +478,7 @@ Handles email input change event
                   &lt;span>
                     {showEditEmail &amp;&amp; (
                       &lt;button
+                        id="edit-email-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         onClick={handleEditClick}
                       >
@@ -443,35 +497,36 @@ Handles email input change event
                 &lt;div className="additional-info">
                   &lt;div id="confirm-email">
                     &lt;input
-                      id="confirmEmail"
+                      id="confirm-email-sign-up"
+                      //id="confirmEmail"
                       type="email"
                       placeholder="Confirm email address"
                       value={confirmEmail}
                       onChange={handleConfirmEmailChange}
-                      //required
+                      required
                     />
                   &lt;/div>
                   &lt;div id="first-name">
                     &lt;input
-                      id="firstName"
-                      type="text"
+                      id="first-name-sign-up"
+                      //id="firstName"
                       placeholder="First name"
                       value={firstName}
                       onChange={handleFirstNameChange}
-                      //required
+                      required
                     />
                   &lt;/div>
                   &lt;div id="last-name">
                     &lt;input
-                      id="lastname"
-                      type="text"
+                      id="last-name-sign-up"
+                      //id="lastname"
                       placeholder="Last name"
                       value={lastName}
                       onChange={handleLastNameChange}
-                      //required
+                      required
                     />
                   &lt;/div>
-                  &lt;div id="password">
+                  &lt;div>
                     &lt;input
                       id="password"
                       type="password"
@@ -483,6 +538,7 @@ Handles email input change event
                   &lt;/div>
                   &lt;div>
                     &lt;button
+                      id="create-button-sign-up"
                       className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                       type="submit"
                       onClick={handleCreateClick}
@@ -515,7 +571,7 @@ Handles email input change event
               )}
             &lt;/form>
             &lt;div>
-              &lt;p>
+              &lt;p id="signin-navigate-sign-up">
                 Already have an account? &lt;Link to="/signin">Sign in&lt;/Link>
               &lt;/p>
             &lt;/div>
@@ -526,6 +582,16 @@ Handles email input change event
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
           >&lt;/img>
+          {showTerms &amp;&amp; (
+            &lt;div className="overlay-CP">
+              &lt;div className="overlay-content-CP">
+                &lt;Terms
+                  handleCancelClick={handleCancelClick}
+                  handleSignUp={handleSignUp}
+                />
+              &lt;/div>
+            &lt;/div>
+          )}
         &lt;/div>
       &lt;/div>
     &lt;/div>
@@ -543,13 +609,13 @@ export default CreateAccount;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#user">user</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#user">user</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 27 2023 14:52:48 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 19 2023 06:49:15 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

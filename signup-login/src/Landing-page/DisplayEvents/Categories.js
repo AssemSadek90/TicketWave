@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './CategoriesNav.module.css';
 
-const CategoriesNav = () => {
+/**
+ * The CategoriesNav component displays a navigation bar with categories.
+ * It receives no props.
+ *
+ * @returns {JSX.Element} JSX element representing the CategoriesNav component.
+ */
+export default function CategoriesNav() {
   const tabs = [
     { label: 'All', id: 1 },
     { label: 'For You', id: 2 },
@@ -16,17 +22,18 @@ const CategoriesNav = () => {
   ];
 
   return (
-    <nav className={styles.navbar}>
-      <ul className={styles.tabs}>
+    <nav id="categories-navbar" className={styles.navbar}>
+      <ul id="categoriesnav-list" className={styles.tabs}>
         {tabs.map((tab) => (
-          <li key={tab.id} className={styles.tab}>
+          <li id="categoriesnav-list-item" key={tab.id} className={styles.tab}>
             {tab.label}
-            <div className={styles.underline}></div>
+            <div
+              id="categoriesnav-underline"
+              className={styles.underline}
+            ></div>
           </li>
         ))}
       </ul>
     </nav>
   );
-};
-
-export default CategoriesNav;
+}

@@ -18,7 +18,14 @@ function CreateAccount() {
   @type {Object}
   @constant user
   */
-  const user = {};
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    is_public: true,
+    image_id: -1,
+  });
 
   /**
    * The email input's value.
@@ -124,6 +131,14 @@ function CreateAccount() {
 
   /**
 
+  State hook that holds a boolean value to toggle the display of terms.
+  @function
+  @returns {Array} An array containing the state value and a function to update it.
+  */
+  const [showTerms, setShowTerms] = useState(false);
+
+  /**
+
   A function provided by the react-router-dom package that allows for programmatic navigation.
   @function
   @name navigate
@@ -162,7 +177,7 @@ function CreateAccount() {
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/users/email/${email}/`, requestOptions)
+      .get(`/api/users/email/${email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -235,7 +250,9 @@ Handles email input change event
   @return {void}
   */
   function handleFirstNameChange(event) {
-    setFirstName(event.target.value);
+    setFirstName(
+      event.target.value.charAt(0).toUpperCase() + event.target.value.slice(1)
+    );
   }
   /**
   
@@ -283,6 +300,11 @@ Handles email input change event
     setCreateClicked(true);
     validateAll();
   }
+
+  function handleCancelClick() {
+    setShowTerms(false);
+  }
+
   /**
   
   Submits the form and logs the form data to the console if valid
@@ -292,15 +314,17 @@ Handles email input change event
   function submitForm(event) {
     event.preventDefault();
     if (validData) {
-      user.email = email;
       // user.first_name = firstName;
       // user.last_name = lastName;
-      user.username = firstName + lastName;
-      user.password1 = password;
-      user.password2 = password;
-      user.is_public = true;
-      user.image_id = 5;
-      handleSignUp(user);
+      setUser({
+        username: firstName + lastName,
+        email: email,
+        password1: password,
+        password2: password,
+        is_public: true,
+        image_id: -1,
+      });
+      setShowTerms(true);
     }
   }
   /**
@@ -338,7 +362,6 @@ Handles email input change event
     //   return;
     // });
   };
-
   /**
 
   A function that handles the sign up process.
@@ -348,13 +371,13 @@ Handles email input change event
   @param {string} user.email - The email address of the user being signed up.
   @param {string} user.password - The password of the user being signed up.
   */
-  const handleSignUp = (user) => {
+  const handleSignUp = () => {
     const requestOptions = {
       headers: { 'Content-Type': 'application/json' },
     };
-
+    console.log(user);
     server
-      .post('/auth/signup/', user, requestOptions)
+      .post('/api/auth/signup/', user, requestOptions)
       .then((response) => {
         const accessToken = response.data.access_token;
         const refreshToken = response.data.refresh_token;
@@ -365,9 +388,9 @@ Handles email input change event
       })
       .then(() => {
         server
-          .post(`/auth/send_verification_email/${user.pk}/`)
+          .post(`/api/auth/send_verification_email/${user.pk}/`)
           .then((response) => {
-            console.log(response.data);
+            console.log(response);
           })
           .then(navigateHome())
           .catch((error) => console.log(error));
@@ -375,15 +398,15 @@ Handles email input change event
       .catch((error) => console.log(error));
   };
 
-  const verify = () => {
-    server
-      .post(`/auth/send_verification_email/${user.pk}/`)
-      .then((response) => {
-        console.log(response.data);
-        navigateHome();
-      })
-      .catch((error) => console.log(error));
-  };
+  // const verify = () => {
+  //   server
+  //     .post(`/auth/send_verification_email/${user.pk}/`)
+  //     .then((response) => {
+  //       console.log(response.data);
+  //       navigateHome();
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   /**
   
@@ -399,11 +422,11 @@ Handles email input change event
               <div className="company-name">Ticketwave</div>
               <div className="create-account-hl">Create an account</div>
             </div>
-            <form test-id="sign-up-form" onSubmit={submitForm}>
+            <form id="sign-up-form" onSubmit={submitForm}>
               <div className="additional-info" id="create-account">
                 <input
-                  test-id="email-sign-up"
-                  id="email"
+                  id="email-sign-up"
+                  //id="email"
                   type="email"
                   placeholder="Email address"
                   value={email}
@@ -415,7 +438,7 @@ Handles email input change event
                   <div>
                     {showContinueButton && (
                       <button
-                        test-id="continue-button-sign-up"
+                        id="continue-button-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         disabled={isLoading}
                         onClick={handleContinueButtonClick}
@@ -427,7 +450,7 @@ Handles email input change event
                   <span>
                     {showEditEmail && (
                       <button
-                        test-id="edit-email-sign-up"
+                        id="edit-email-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         onClick={handleEditClick}
                       >
@@ -446,8 +469,8 @@ Handles email input change event
                 <div className="additional-info">
                   <div id="confirm-email">
                     <input
-                      test-id="confirm-email-sign-up"
-                      id="confirmEmail"
+                      id="confirm-email-sign-up"
+                      //id="confirmEmail"
                       type="email"
                       placeholder="Confirm email address"
                       value={confirmEmail}
@@ -457,8 +480,8 @@ Handles email input change event
                   </div>
                   <div id="first-name">
                     <input
-                      test-id="first-name-sign-up"
-                      id="firstName"
+                      id="first-name-sign-up"
+                      //id="firstName"
                       placeholder="First name"
                       value={firstName}
                       onChange={handleFirstNameChange}
@@ -467,15 +490,15 @@ Handles email input change event
                   </div>
                   <div id="last-name">
                     <input
-                      test-id="last-name-sign-up"
-                      id="lastname"
+                      id="last-name-sign-up"
+                      //id="lastname"
                       placeholder="Last name"
                       value={lastName}
                       onChange={handleLastNameChange}
                       required
                     />
                   </div>
-                  <div test-id="password-sign-up" id="password">
+                  <div>
                     <input
                       id="password"
                       type="password"
@@ -487,7 +510,7 @@ Handles email input change event
                   </div>
                   <div>
                     <button
-                      test-id="create-button-sign-up"
+                      id="create-button-sign-up"
                       className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                       type="submit"
                       onClick={handleCreateClick}
@@ -520,7 +543,7 @@ Handles email input change event
               )}
             </form>
             <div>
-              <p test-id="signin-navigate-sign-up">
+              <p id="signin-navigate-sign-up">
                 Already have an account? <Link to="/signin">Sign in</Link>
               </p>
             </div>
@@ -531,7 +554,16 @@ Handles email input change event
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
           ></img>
-          {/* <div>{createClicked && <Terms />}</div> */}
+          {showTerms && (
+            <div className="overlay-CP">
+              <div className="overlay-content-CP">
+                <Terms
+                  handleCancelClick={handleCancelClick}
+                  handleSignUp={handleSignUp}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

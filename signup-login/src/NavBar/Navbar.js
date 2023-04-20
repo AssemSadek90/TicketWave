@@ -6,6 +6,8 @@ import NavBarListItem from './NavBarListItem';
 import SearchButton from './NavBarSearch';
 import Dropdown from './DropMenu';
 import Tabs from './Tabs';
+import server from '../server';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * The `Navbar` component is a navigation bar that contains a site title,
@@ -17,7 +19,25 @@ import Tabs from './Tabs';
 export default function Navbar() {
   const [searchText, setSearchText] = useState('');
   const [email, setEmail] = useState('example@example.com');
-
+  const navigate = useNavigate();
+  function handleLogOut() {
+    const accessToken = localStorage.getItem('accessToken');
+    const requestOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    server
+      .get(`/auth/logout/`, requestOptions)
+      .then((response) => {
+        console.log(response);
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        navigate('/');
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <nav className={styles.navigation_bar}>
       <ul>
@@ -51,7 +71,7 @@ export default function Navbar() {
           <Tabs title="Following" />
           <Tabs title="Intersts" />
           <Tabs title="Account settings" />
-          <Tabs title="Log out" />
+          <Tabs title="Log out" onClick={handleLogOut} id="log-out-tab" />
         </Dropdown>
       </ul>
     </nav>

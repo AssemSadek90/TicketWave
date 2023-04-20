@@ -1,121 +1,5 @@
 {
-  "users": [
-    {
-      "email": "ziad@gmail.com",
-      "firstName": "Ziad",
-      "lastName": "Ghanem",
-      "password": "1234567",
-      "id": 1
-    },
-    {
-      "email": "de7ko@gmail.com",
-      "firstName": "Ziad",
-      "lastName": "Ghanem",
-      "password": "1234567",
-      "is_public": true,
-      "image_id": null,
-      "id": 2
-    },
-    {
-      "email": "ziad@gmail.cod",
-      "firstName": "Ziad",
-      "lastName": "Ta3baan",
-      "password": "Awwyyyyyyyyyy",
-      "is_public": true,
-      "image_id": null,
-      "id": 3
-    },
-    {
-      "email": "ziad1234@gmail.com",
-      "firstName": "ZoZz",
-      "lastName": "Ziko",
-      "password": "dasdfsafasfas",
-      "is_public": true,
-      "image_id": null,
-      "id": 4
-    },
-    {
-      "email": "ana-ta3banaa@awwwy.com",
-      "firstName": "Lolo",
-      "lastName": "Uni",
-      "password": "ufgusfgasidu",
-      "is_public": true,
-      "image_id": null,
-      "id": 5
-    },
-    {
-      "email": "dsad@gadjs.com",
-      "firstName": "Zoz",
-      "lastName": "Ziko",
-      "password": "adasdqdfas",
-      "is_public": true,
-      "image_id": null,
-      "id": 6
-    },
-    {
-      "email": "ziad@gogo.com",
-      "firstName": "Zozza",
-      "lastName": "Ta3bana",
-      "password": "5alesssss",
-      "is_public": true,
-      "image_id": null,
-      "id": 7
-    },
-    {
-      "email": "karim@gmail.com",
-      "firstName": "Karim",
-      "lastName": "Elnady",
-      "password": "dsadasdasd",
-      "is_public": true,
-      "image_id": null,
-      "id": 8
-    },
-    {
-      "email": "marwan@gmail.com",
-      "firstName": "Maro",
-      "lastName": "Mousa",
-      "password": "maromousa",
-      "is_public": true,
-      "image_id": null,
-      "id": 9
-    },
-    {
-      "email": "marwan@gmail.com",
-      "firstName": "Maro",
-      "lastName": "Mousa",
-      "password": "maromousa",
-      "is_public": true,
-      "image_id": null,
-      "id": 10
-    },
-    {
-      "email": "ziko@de7k.com",
-      "firstName": "Ziko",
-      "lastName": "CCE",
-      "password": "imBAAAaDDMJ",
-      "is_public": true,
-      "image_id": null,
-      "id": 11
-    },
-    {
-      "email": "ziko@de7k.com",
-      "firstName": "Ziko",
-      "lastName": "CCE",
-      "password": "imBAAAaDDMJ",
-      "is_public": true,
-      "image_id": null,
-      "id": 12
-    },
-    {
-      "email": "jemmy@gmail.com",
-      "firstName": "Ahmed",
-      "lastName": "Gamal",
-      "password": "1234567",
-      "is_public": true,
-      "image_id": null,
-      "id": 13
-    }
-  ],
+  "users": [],
   "eventsData": [
     {
       "path": "https://openclipart.org/download/341148/cantthink-simplecolour.svg",
@@ -177,94 +61,65 @@
       "date": "December 5, 2023",
       "title": "Red Square"
     }
-    
   ],
-  "Event-id": {
-    "Name": "Heidi",
-    "created": "25",
-    "Price": "50$",
-    "Availability": "300",
-    "online_event": "online",
-    "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png"
-  },
-  "Time": {
-    "EventDate": "2023-03-01",
-    "EventTime": "13:18"
-  },
-  "Events": [
+  "Event_id": [
     {
-      "Title": "Party1",
-      "Organizer": "Me",
-      "EventType": "Meeting or Networking Event",
-      "EventCategory": "Food & Drink",
-      "subCategory": "Spirits",
-      "Tags": [
-        "tag1"
-      ],
-      "Location": "Tokio, Japan",
-      "StartDate": "2023-04-12T22:18:21.635Z",
-      "StartTime": "12 AM",
-      "EndDate": "2023-04-12T22:18:21.635Z",
-      "EndTime": "12 AM",
-      "DisplayStartTime": true,
-      "DisplayEndTime": false,
-      "TimeZone": "(GMT-11:00) Midway Island",
-      "Language": "English US",
+      "Name": "Heidi",
+      "created": "25/9/2022",
+      "Price": "50$",
+      "Availability": "300",
+      "online_event": "online",
+      "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png",
+      "Gross": "20",
+      "Nsales": 100,
+      "Sold": "10",
+      "Tickets": "30",
+      "Paid": "5",
+      "Free": "3",
+      "EventURL": "www.google.com"
+    }
+  ],
+  "Time": [
+    {
+      "StartDate": "Sat Apr 15 2023 03:50:46 GMT+0200 (Eastern European Standard Time)",
+      "StartTime": "03:50",
+      "password": "",
       "id": 1
     },
     {
-      "Title": "Ziad",
-      "Organizer": "Ziad",
-      "EventType": "Screening",
-      "EventCategory": "Seasional & Holiday",
-      "subCategory": "Christmas",
-      "Tags": [],
-      "Location": "Tokyo, Japan",
-      "StartDate": "2023-04-13T07:43:13.640Z",
-      "StartTime": "12 AM",
-      "EndDate": "2023-04-13T07:43:13.640Z",
-      "EndTime": "12 AM",
-      "DisplayStartTime": false,
-      "DisplayEndTime": false,
-      "TimeZone": "(GMT-11:00) Midway Island",
-      "Language": "English US",
+      "StartDate": "Tue Apr 25 2023 03:53:57 GMT+0200 (Eastern European Standard Time)",
+      "StartTime": "8:30 AM",
+      "password": "",
       "id": 2
     },
     {
-      "Title": "Ziad",
-      "Organizer": "Ziad",
-      "EventType": "Screening",
-      "EventCategory": "Seasional & Holiday",
-      "subCategory": "Christmas",
-      "Tags": [],
-      "Location": "Tokyo, Japan",
-      "StartDate": "2023-04-13T07:43:13.640Z",
-      "StartTime": "12 AM",
-      "EndDate": "2023-04-13T07:43:13.640Z",
-      "EndTime": "12 AM",
-      "DisplayStartTime": false,
-      "DisplayEndTime": false,
-      "TimeZone": "(GMT-11:00) Midway Island",
-      "Language": "English US",
+      "StartDate": "Tue Apr 25 2023 03:53:57 GMT+0200 (Eastern European Standard Time)",
+      "StartTime": "8:30 AM",
+      "password": "fff",
       "id": 3
-    },
+    }
+  ],
+  "Events": [
     {
-      "Title": "Ziad",
-      "Organizer": "Ziad",
-      "EventType": "Screening",
-      "EventCategory": "Seasional & Holiday",
-      "subCategory": "Christmas",
-      "Tags": [],
-      "Location": "Tokyo, Japan",
-      "StartDate": "2023-04-13T07:43:13.640Z",
-      "StartTime": "12 AM",
-      "EndDate": "2023-04-13T07:43:13.640Z",
-      "EndTime": "12 AM",
-      "DisplayStartTime": false,
-      "DisplayEndTime": false,
-      "TimeZone": "(GMT-11:00) Midway Island",
-      "Language": "English US",
-      "id": 4
+      "id": 1,
+      "name": "Middle East Vape Show 2023",
+      "summary": "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
+      "description": "Will be held 3 days from 6 to 8 July 2023, after the success of the 1st event in Bahrain this year with a new atmosphere it will be held in Cairo, Egypt. We choose Egypt International Exhibition Center as the best venue in Cairo for MEVS 2023.",
+      "start_time": "July 6 · 10am",
+      "end_time": " July 8 · 10pm EET",
+      "url": "https://www.eventbrite.com/e/middle-east-vape-show-2023-tickets-512820940237?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
+      "created": "2023-03-22T10:00:00",
+      "changed": "2023-03-22T12:00:00",
+      "videoURL": "R63RiKdiB2o",
+      "published": true,
+      "online_event": false,
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F438303329%2F1343904084043%2F1%2Foriginal.20230203-023453?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=69cab150771ec45eb6ed627fbf66039d",
+      "venue": {
+        "name": "Egypt International Exhibition Center - EIEC",
+        "address": "El-Moshir Tantawy Axis Al Hay Al Asher, Cairo Governorate 4440301",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      }
     }
   ]
 }

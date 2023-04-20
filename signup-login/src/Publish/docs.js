@@ -39,18 +39,18 @@ function Publish() {
    * @name fetchEventData
    * @returns {void}
    */
-  function fetchEventData() {
-    fetch('http://localhost:3000/Event_id')
-      .then(response => response.json())
-      .then(data => {
-        setEvent_id(data)
-      })
-      .catch(error => console.error(error));
-  }
+  // function fetchEventData() {
+  //   fetch('http://localhost:3000/Event_id')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setEvent_id(data)
+  //     })
+  //     .catch(error => console.error(error));
+  // }
 
-   useEffect(() => {
-    fetchEventData();
-  }, []);
+  //  useEffect(() => {
+  //   fetchEventData();
+  // }, []);
 
   /**
    * Renders the `Publish` component.

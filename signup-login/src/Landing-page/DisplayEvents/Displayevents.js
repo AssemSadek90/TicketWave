@@ -1,57 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Displayevents.module.css';
 import EventsList from './EventList';
 import CategoriesNav from './Categories';
+import MoreEvents from './MoreEvents';
 
-function DisplayEvents(props) {
-  const [displayAll, setDisplayAll] = useState(false);
-  function handleClickButton() {
-    setDisplayAll(true);
-  }
-
+/**
+ * DisplayEvents is a React component that displays a list of events, sorted by category.
+ *
+ * @param {Object} props - Component props.
+ * @param {Array} props.eventsData - An array of objects representing the events to display.
+ *
+ * @returns {JSX.Element} A React component that displays the categories navbar and a list of events.
+ */
+export default function DisplayEvents(props) {
   // assume the props.events an array of objects
   const events = props.eventsData;
 
   return (
     <div>
-      <svg>
-        <image
-          href="https://cdn.evbstatic.com/s3-build/fe/build/images/6c5d49c679ae35c60ad2a035492632d3-1_tablet_1067x470.jpg"
-          width="100%"
-          height="100%"
-        />
-      </svg>
       <CategoriesNav />
-      <h2 data-testid="events-header">Events In Cairo</h2>
-      <div
-        test-id="event-display-container"
-        className={styles.entertainment_events}
-      >
+      <h2 id="events-header">Events In Cairo</h2>
+      <div id="event-display-container" className={styles.entertainment_events}>
         <EventsList eventsData={events.slice(0, 8)} />
       </div>
-      <h2 data-testid="events-header">More Events</h2>
-      {displayAll ? (
-        <div className={styles.entertainment_events}>
-          <EventsList eventsData={events.slice(8)} />
-        </div>
-      ) : (
-        <>
-          <div className={styles.entertainment_events}>
-            <EventsList eventsData={events.slice(8, 12)} />
-          </div>
-          {events[12] && (
-            <button
-              data-testid="see-more-button"
-              className={styles.see_more_button}
-              onClick={handleClickButton}
-            >
-              see more
-            </button>
-          )}
-        </>
-      )}
+      {events[8] && <MoreEvents events={events} />}
     </div>
   );
 }
-
-export default DisplayEvents;

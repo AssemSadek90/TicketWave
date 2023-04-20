@@ -2,16 +2,37 @@ import React from 'react';
 import { useState } from 'react';
 import './Terms.css';
 
-function Terms() {
-  const [cancelClicked, setCancelClicked] = useState(false);
-  const [agreeClicked, setAgreeClicked] = useState(false);
-  function handleAgreeButtonClick(props) {
-    setAgreeClicked(true);
-    props.handleSignUp(props.user);
+/**
+Represents a component for displaying terms and conditions
+@param {Object} props - The props object for the component
+@param {function} props.handleSignUp - The function to handle the sign-up process
+@param {function} props.handleCancelClick - The function to handle the cancellation of the sign-up process
+*/
+
+function Terms(props) {
+  // const [cancelClicked, setCancelClicked] = useState(false);
+  // const [agreeClicked, setAgreeClicked] = useState(false);
+  /**
+  Handles the click event of the "Agree" button
+  @function
+  */
+  function handleAgreeButtonClick() {
+    props.handleSignUp();
+    console.log('Agree button clicked');
   }
+
+  /**
+  Handles the click event of the "Cancel" button
+  @function
+  */
+  function handleCancelClick() {
+    props.handleCancelClick();
+    console.log('Cancel button clicked');
+  }
+
   return (
     <div>
-      {cancelClicked === false && agreeClicked === false && (
+      {
         <div
           id="edsModalContentChildren"
           className="eds-modal__content__children snipcss-QRQUc"
@@ -40,20 +61,20 @@ function Terms() {
                         >
                           <path
                             className="alert-chunky_svg__eds-icon--alert-chunky_base"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M12 18c-3.3 0-6-2.7-6-6s2.7-6 6-6 6 2.7 6 6-2.7 6-6 6zm0-14c-4.4 0-8 3.6-8 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8z"
                           ></path>
                           <path
                             className="alert-chunky_svg__eds-icon--alert-chunky_dot"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M11 14h2v2h-2z"
                           ></path>
                           <path
                             className="alert-chunky_svg__eds-icon--alert-chunky_line"
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
+                            fillRule="evenodd"
+                            clipRule="evenodd"
                             d="M11 8h2v5h-2z"
                           ></path>
                         </svg>
@@ -112,17 +133,17 @@ function Terms() {
                 </div>
                 <div className="tos-form__actions eds-l-pad-bot-8 eds-align--center">
                   <button
-                    data-testid="signup-tos-form-button-cancel"
+                    id="signup-tos-form-button-cancel"
                     className="eds-btn eds-btn--button eds-btn--neutral eds-l-mar-right-8"
                     type="button"
                     onClick={() => {
-                      setCancelClicked(true);
+                      handleCancelClick();
                     }}
                   >
                     Cancel
                   </button>
                   <button
-                    data-testid="signup-tos-form-button-accept"
+                    id="signup-tos-form-button-accept"
                     className="eds-btn eds-btn--button eds-btn--fill eds-l-mar-right-8"
                     type="button"
                     onClick={handleAgreeButtonClick}
@@ -134,7 +155,7 @@ function Terms() {
             </div>
           </div>
         </div>
-      )}
+      }
     </div>
   );
 }
