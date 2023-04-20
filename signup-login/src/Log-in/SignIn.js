@@ -202,7 +202,7 @@ Handles email input change event
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/api/api/users/email/${user.email}/`, requestOptions)
+      .get(`/api/users/email/${user.email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         setIsLoading(false);
