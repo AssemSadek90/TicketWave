@@ -20,7 +20,7 @@ const Home = () => {
       },
     };
     server
-      .get(`/api/events/list/`, requestOptions)
+      .get(`/events/list/`, requestOptions)
       .then((response) => {
         const data = response.data.results;
         if (data) setEvents(data);
