@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import "../index.css";
+import "../App.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -348,7 +348,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">When are tickets available?</label>
                     <select
-                      style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
+                      style={{ maxHeight: "5rem", outline: 'none', border: 'none', fontSize: 'small' }}
                       onChange={(a) => setAvailability(a.target.value)}
                       id="availability"
                       name="availability"

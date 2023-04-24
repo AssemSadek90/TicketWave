@@ -5,7 +5,8 @@ import AdmissionPage from "./components/AdmissionPage";
 import PromoMain from "./promoPage/PromoMain";
 import Sidebar from "./Sidebar/Sidebar";
 import { useLocation } from 'react-router-dom';
-import "./index.css";
+import "./App.css";
+import AddAttendees from "./AddAttendees/AddAttendees";
 
 function MainApp() {
 
@@ -63,13 +64,13 @@ function TicketHandler(e, a){
   // };
 
 
-
+  useEffect(() => {window.scrollTo(0,0)}, [])
 
 
   return (
     // <BrowserRouter>
     <React.Fragment>
-      <Sidebar isShowing={(e) => {e && setPadding('15rem')}} />
+      <Sidebar isShowing={(e) => {e && setPadding('20rem')}} />
       <div style={{paddingLeft: padding}}>
         <Routes>
           <Route path='/' element={<div></div>} />
@@ -79,6 +80,9 @@ function TicketHandler(e, a){
           <Route path='/Events/Tickets/promo-codes' element={<React.Fragment><NavPage /><PromoMain finalData={promoData} Promo={promoHandler}/></React.Fragment>} />
           <Route path='/Events/Tickets/holds' element={<React.Fragment><NavPage /><div>Holds</div></React.Fragment>} />
           <Route path='/Events/Tickets/event-settings' element={<React.Fragment><NavPage /><div>Settings</div></React.Fragment>} />
+
+          <Route path='/Events/Add-Attendees' element={<React.Fragment><AddAttendees finalData={ticketData} /></React.Fragment>} />
+
         </Routes>
       </div>
     </React.Fragment>

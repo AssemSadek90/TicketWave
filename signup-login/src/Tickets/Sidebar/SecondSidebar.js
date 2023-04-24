@@ -55,7 +55,7 @@ const SecondSidebar = () => {
 //   };
 
   return (
-    <div className="sidebar" style={{marginLeft: '5rem', width: '11rem', padding: '10px', position: 'fixed'}}>
+    <div className="sidebar" style={{marginLeft: '5rem', width: '16rem', padding: '10px', position: 'fixed', overflowY: 'auto', overflowX: 'hidden', height: '100%'}}>
       <div style={{width: '100%', backgroundColor: 'none', margin: '1rem', outline: 'none', border: 'none', color: 'blue', fontSize: 'medium', fontWeight: 'bold', paddingBottom: '1rem', borderBottom: '1px solid #ccc', paddingLeft: '1rem', alignItems: 'center', display: 'flex', flexDirection: 'row'}} onClick={CloseHandler}><div style={{fontSize: 'large', marginRight: '1rem'}}><FaBackward /></div><div>Back</div></div>
       <div style={{borderBottom: '1px solid #ccc', width: '100%'}}>
       {icons.map((item) => (
@@ -91,7 +91,7 @@ const SecondSidebar = () => {
 
 
 
-      <div style={{ fontSize: '1.5rem', color: 'rgb(116, 116, 116)',  width: '100%', height: '80%', display: 'flex', borderRadius: '6px', overflow: 'hidden', marginTop: '1rem'}}
+      <div style={{ fontSize: '1.5rem', color: 'rgb(116, 116, 116)',  width: '100%', display: 'flex', borderRadius: '6px', marginTop: '1rem'}}
 >
           <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
           <button 
@@ -117,6 +117,19 @@ const SecondSidebar = () => {
           style={{ marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setManage(!manage)}}>
             Manage Attendees
             </button>
+            {manage && 
+            <React.Fragment>
+              <div style={{fontSize: 'medium', paddingLeft: '1rem', lineHeight: '2rem'}}>
+            <CustomLink to={`/Navigation/Events/Orders`}>Orders</CustomLink><br/>
+            <CustomLink to={`/Navigation/Events/Attendee-Credits`}>Attendee Credits</CustomLink><br/>
+            <CustomLink to={`/Navigation/Events/Add-Attendees`}>Add Attendees</CustomLink><br/>
+            <CustomLink to={`/Navigation/Events/Email-to-Attendees`}>Email to Attendees</CustomLink><br/>
+            <CustomLink to={`/Navigation/Events/Attendee-List`}>Attendee List</CustomLink><br/>
+            <CustomLink to={`/Navigation/Events/Check-in`}>Check-in</CustomLink>
+            </div>
+            
+            </React.Fragment>
+            }
           </div>
           </div>
 

@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormContainer from "../components/FormContainer";
 import CreatePromoForm from "./CreatePromoForm";
 import UploadCsvForm from "./UploadCsvForm";
@@ -8,6 +8,8 @@ import Icon from '../files/Image.png'
 
 
 function PromoMain({Promo, finalData}){
+
+  useEffect(() => {window.scrollTo(0,0)}, [])
 
     const [createPromo, setCreatePromo] = useState(false);
     const [uploadCsv, setUploadCsv] = useState(false);
