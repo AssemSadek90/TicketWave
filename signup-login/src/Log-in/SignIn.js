@@ -202,7 +202,7 @@ Handles email input change event
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/users/email/${user.email}/`, requestOptions)
+      .get(`/api/users/email/${user.email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -217,7 +217,7 @@ Handles email input change event
             headers: { 'Content-Type': 'application/json' },
           };
           server
-            .post('/auth/login/', user, requestOptions)
+            .post('/api/auth/login/', user, requestOptions)
             .then((response) => {
               const accessToken = response.data.access_token;
               const refreshToken = response.data.refresh_token;
@@ -252,19 +252,19 @@ Handles email input change event
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/users/email/${email}/`, requestOptions)
+      .get(`/api/users/email/${email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         if (response.data.username.length > 0) {
           setUserExists(true);
           console.log('User exists');
-          setForgotPasswordUsername(response.data.username);
-          setForgotPasswordEmail(response.data.email);
+          const username = response.data.username;
+          const email = response.data.email;
+          //console.log(forgotPasswordUsername);
+          //console.log(forgotPasswordEmail);
           //send email
           server
-            .get(
-              `auth/password/reset/${forgotPasswordUsername}/${forgotPasswordEmail}/`
-            )
+            .get(`/api/auth/password/reset/${username}/${email}/`)
             .then((response) => {
               console.log(response);
             })

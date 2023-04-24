@@ -177,7 +177,7 @@ function CreateAccount() {
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/users/email/${email}/`, requestOptions)
+      .get(`/api/users/email/${email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -377,7 +377,7 @@ Handles email input change event
     };
     console.log(user);
     server
-      .post('/auth/signup/', user, requestOptions)
+      .post('/api/auth/signup/', user, requestOptions)
       .then((response) => {
         const accessToken = response.data.access_token;
         const refreshToken = response.data.refresh_token;
@@ -388,7 +388,7 @@ Handles email input change event
       })
       .then(() => {
         server
-          .post(`/auth/send_verification_email/${user.pk}/`)
+          .post(`/api/auth/send_verification_email/${user.pk}/`)
           .then((response) => {
             console.log(response);
           })

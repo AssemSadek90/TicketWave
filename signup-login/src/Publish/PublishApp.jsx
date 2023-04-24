@@ -1,6 +1,5 @@
 import React from 'react';
 import Publish from './publish-preview';
-import Footer from './Footer';
 /**
  * @component called "App".
  * @ which contains two child components - "Publish" and "Footer".
@@ -11,7 +10,6 @@ function PublishApp() {
   return (
     <div>
       <Publish />
-      <Footer />
     </div>
   );
 }
