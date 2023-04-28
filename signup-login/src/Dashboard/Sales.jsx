@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './dashboard.css';
 
 
-function Sales() {
+function Sales(Event_id) { 
+   const [ticketData, setTicketData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("http://localhost:3000/ticketData");
+      const data = await response.json();
+      setTicketData(data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
       <div className="eds-l-pad-hor-3 snipcss-DQ9if">
     <div className="eds-l-mar-top-5 eds-g-cell eds-g-cell-12-12 eds-g-cell-sm-8-12">
@@ -37,18 +49,17 @@ function Sales() {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="eds-table-list">
-                    <tr className="eds-data-table-list-item">
-                      <td className="eds-data-table-list-item__column" data-spec="data-table-list-item-column" >
-                        General Admission
+                  <tbody className="eds-table-list"> 
+                  {ticketData.map((Event_id) => (
+                    <tr className="eds-data-table-list-item" key={Event_id.Ticket_type}>
+                      <td className="eds-data-table-list-item__column" data-spec="data-table-list-item-column" >{Event_id.Ticket_type}</td>
+                      <td className="eds-data-table-list-item__column" data-spec="data-table-list-item-column">
+                        £{Event_id.Price}
                       </td>
                       <td className="eds-data-table-list-item__column" data-spec="data-table-list-item-column">
-                        £10.00
+                          {Event_id.Sold}/{Event_id.Tickets}
                       </td>
-                      <td className="eds-data-table-list-item__column" data-spec="data-table-list-item-column">
-                          0/10
-                      </td>
-                    </tr>
+                    </tr>) )}
                   </tbody>
                 </table>
               </div>
