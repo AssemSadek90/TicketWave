@@ -29,11 +29,13 @@
             <pre class="prettyprint source linenums"><code>import React from 'react';
 import { useState } from 'react';
 import '../App.css';
-import './Navbar.css';
+import styles from './Navbar.module.css';
 import NavBarListItem from './NavBarListItem';
 import SearchButton from './NavBarSearch';
 import Dropdown from './DropMenu';
 import Tabs from './Tabs';
+import server from '../server';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * The `Navbar` component is a navigation bar that contains a site title,
@@ -45,34 +47,50 @@ import Tabs from './Tabs';
 export default function Navbar() {
   const [searchText, setSearchText] = useState('');
   const [email, setEmail] = useState('example@example.com');
-
+  const navigate = useNavigate();
+  function handleLogOut() {
+    const accessToken = localStorage.getItem('accessToken');
+    const requestOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    server
+      .get(`/auth/logout/`, requestOptions)
+      .then((response) => {
+        console.log(response);
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        navigate('/');
+      })
+      .catch((error) => console.log(error));
+  }
   return (
-    &lt;nav className="navigation-bar">
+    &lt;nav className={styles.navigation_bar}>
       &lt;ul>
         &lt;a href="#">
-          &lt;sp an className="site-title">
-            TicketWave
-          &lt;/sp>
+          &lt;span className={styles.site_title}>TicketWave&lt;/span>
         &lt;/a>
         &lt;SearchButton to="https://www.eventbrite.com" label="Search events" />
       &lt;/ul>
       &lt;ul>
-        &lt;NavBarListItem className="create-event" title="Create Event">
-          &lt;svg className="svg-icon" viewBox="0 0 20 20">
+        &lt;NavBarListItem className={styles.create_event} title="Create Event">
+          &lt;svg className={styles.svg_icon} viewBox="0 0 20 20">
             &lt;path d="M13 11V4h-2v7H4v2h7v7h2v-7h7v-2z">&lt;/path>
           &lt;/svg>
         &lt;/NavBarListItem>
         &lt;NavBarListItem title="Likes">
-          &lt;svg className="svg-icon" viewBox="0 0 20 20">
+          &lt;svg className={styles.svg_icon} viewBox="0 0 20 20">
             &lt;path d="M18.8 6.2C18.1 5.4 17 5 16 5c-1 0-2 .4-2.8 1.2L12 7.4l-1.2-1.2C10 5.4 9 5 8 5c-1 0-2 .4-2.8 1.2-1.5 1.6-1.5 4.2 0 5.8l6.8 7 6.8-7c1.6-1.6 1.6-4.2 0-5.8zm-1.4 4.4L12 16.1l-5.4-5.5c-.8-.8-.8-2.2 0-3C7 7.2 7.5 7 8 7c.5 0 1 .2 1.4.6l2.6 2.7 2.7-2.7c.3-.4.8-.6 1.3-.6s1 .2 1.4.6c.8.8.8 2.2 0 3z">&lt;/path>
           &lt;/svg>
         &lt;/NavBarListItem>
         &lt;NavBarListItem title="Tickets">
-          &lt;svg className="svg-icon" viewBox="0 0 20 20">
+          &lt;svg className={styles.svg_icon} viewBox="0 0 20 20">
             &lt;path d="M10 13v-2h4v2zm6 5V6h-.4C15 7.4 13.8 8.4 12 8.4S9 7.4 8.4 6H8v12h.4c.6-1.4 1.8-2.4 3.6-2.4s3 1 3.6 2.4zM14 4h4v16h-4s0-2.4-2-2.4-2 2.4-2 2.4H6V4h4s0 2.4 2 2.4S14 4 14 4z">&lt;/path>
           &lt;/svg>
         &lt;/NavBarListItem>
-        &lt;Dropdown className="email-add" title={email}>
+        &lt;Dropdown className={styles.email_add} title={email}>
           &lt;Tabs title="Browse events" />
           &lt;Tabs title="Manage my events" />
           &lt;Tabs title="Tickets" />
@@ -81,7 +99,7 @@ export default function Navbar() {
           &lt;Tabs title="Following" />
           &lt;Tabs title="Intersts" />
           &lt;Tabs title="Account settings" />
-          &lt;Tabs title="Log out" />
+          &lt;Tabs title="Log out" onClick={handleLogOut} id="log-out-tab" />
         &lt;/Dropdown>
       &lt;/ul>
     &lt;/nav>
@@ -98,13 +116,13 @@ export default function Navbar() {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#user">user</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#user">user</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 27 2023 14:52:48 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 19 2023 06:49:15 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

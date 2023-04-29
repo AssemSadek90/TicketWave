@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { GoogleLogin } from '@react-oauth/google';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+//import axios from 'axios';
 import './Log-in-styling/Login.css';
 import server from '../server';
 //import GoogleIcon from './Google_G_Logo.png';
-import FacebookIcon from '../EventDetails/Facebook.png';
+//import FacebookIcon from '../EventDetails/Facebook.png';
 //import { ReactComponent as GoogleIcon } from '.../google-icon.svg';
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
@@ -16,11 +16,42 @@ import FacebookIcon from '../EventDetails/Facebook.png';
  * @function
  */
 function SignIn() {
+  /**
+   * State variables related to the user's existence and the forgot password functionality.
+   *
+   * @typedef {Object} UserState
+   * @property {boolean} userExists - Indicates whether a user exists.
+   * @property {boolean} forgotPasswordClicked - Indicates whether the forgot password button has been clicked.
+   * @property {string} forgotPasswordEmail - The email entered by the user in the forgot password form.
+   * @property {string} forgotPasswordUsername - The username entered by the user in the forgot password form.
+   */
+
+  /**
+   * The state related to the user's existence and the forgot password functionality.
+   *
+   * @type {UserState}
+   */
   const [userExists, setUserExists] = useState(false);
 
+  /**
+   * Indicates whether the forgot password button has been clicked.
+   *
+   * @type {[boolean, function]} A tuple containing the forgot password clicked state and its setter.
+   */
   const [forgotPasswordClicked, setForgotPasswordClicked] = useState(false);
 
+  /**
+   * The email entered by the user in the forgot password form.
+   *
+   * @type {[string, function]} A tuple containing the forgot password email state and its setter.
+   */
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState('');
+
+  /**
+   * The username entered by the user in the forgot password form.
+   *
+   * @type {[string, function]} A tuple containing the forgot password username state and its setter.
+   */
   const [forgotPasswordUsername, setForgotPasswordUsername] = useState('');
 
   /**
@@ -208,6 +239,13 @@ Handles email input change event
       });
   };
 
+  /**
+
+  Handles the forgot password functionality by setting the state to initiate password reset
+  @function
+  @returns {void}
+  */
+
   function handleForgotPassword() {
     setForgotPasswordClicked(true);
     const requestOptions = {
@@ -220,13 +258,13 @@ Handles email input change event
         if (response.data.username.length > 0) {
           setUserExists(true);
           console.log('User exists');
-          setForgotPasswordUsername(response.data.username);
-          setForgotPasswordEmail(response.data.email);
+          const username = response.data.username;
+          const email = response.data.email;
+          //console.log(forgotPasswordUsername);
+          //console.log(forgotPasswordEmail);
           //send email
           server
-            .get(
-              `auth/password/reset/${forgotPasswordUsername}/${forgotPasswordEmail}/`
-            )
+            .get(`/auth/password/reset/${username}/${email}/`)
             .then((response) => {
               console.log(response);
             })
@@ -266,12 +304,12 @@ Handles email input change event
               <div className="company-name">Ticketwave</div>
               <div className="create-account-hl">Log in</div>
             </div>
-            <form test-id="sign-in-form" onSubmit={submitForm}>
+            <form id="sign-in-form" onSubmit={submitForm}>
               <div className="additional-info">
                 <div id="sign-in">
                   <input
-                    test-id="email-sign-in"
                     id="email-sign-in"
+                    //id="email-sign-in"
                     type="email"
                     placeholder="Email address"
                     value={email}
@@ -281,8 +319,8 @@ Handles email input change event
                 </div>
                 <div id="password">
                   <input
-                    test-id="password-sign-in"
-                    id="password"
+                    id="password-sign-in"
+                    //id="password"
                     type="password"
                     placeholder="Password"
                     value={password}
@@ -292,7 +330,7 @@ Handles email input change event
                 </div>
                 <div>
                   <button
-                    test-id="submit-form-sign-in"
+                    id="submit-form-sign-in"
                     className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                     type="submit"
                     onClick={handleLogInClick}
@@ -318,18 +356,21 @@ Handles email input change event
                   )}
                 </div>
                 <div>
-                  <p test-id="navigate-email-sign-up">
+                  <p id="navigate-email-sign-up">
                     Don't have an account? <Link to="/">Sign Up</Link>
-                    <p test-id="signin-reset-password">
-                      <Link href="#" onClick={handleForgotPassword}>
-                        Forgot password?
-                      </Link>
-                    </p>
                     {/* <div>
                       <a href="https://www.facebook.com" target={'_blank'}>
                         <img src={FacebookIcon} alt="logo"></img>
                       </a>
                     </div> */}
+                  </p>
+                  <p id="signin-reset-password">
+                    <Link href="#" onClick={handleForgotPassword}>
+                      Forgot Password?
+                    </Link>
+                  </p>
+                  <p>
+                    <Link to="/change-password">Change Password</Link>
                   </p>
                 </div>
                 <div id="signInDiv">

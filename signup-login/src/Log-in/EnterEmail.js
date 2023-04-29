@@ -129,6 +129,12 @@ function CreateAccount() {
   */
   const [showEditEmail, setShowEditEmail] = useState(false);
 
+  /**
+
+  State hook that holds a boolean value to toggle the display of terms.
+  @function
+  @returns {Array} An array containing the state value and a function to update it.
+  */
   const [showTerms, setShowTerms] = useState(false);
 
   /**
@@ -416,11 +422,11 @@ Handles email input change event
               <div className="company-name">Ticketwave</div>
               <div className="create-account-hl">Create an account</div>
             </div>
-            <form test-id="sign-up-form" onSubmit={submitForm}>
+            <form id="sign-up-form" onSubmit={submitForm}>
               <div className="additional-info" id="create-account">
                 <input
-                  test-id="email-sign-up"
-                  id="email"
+                  id="email-sign-up"
+                  //id="email"
                   type="email"
                   placeholder="Email address"
                   value={email}
@@ -432,7 +438,7 @@ Handles email input change event
                   <div>
                     {showContinueButton && (
                       <button
-                        test-id="continue-button-sign-up"
+                        id="continue-button-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         disabled={isLoading}
                         onClick={handleContinueButtonClick}
@@ -444,7 +450,7 @@ Handles email input change event
                   <span>
                     {showEditEmail && (
                       <button
-                        test-id="edit-email-sign-up"
+                        id="edit-email-sign-up"
                         className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                         onClick={handleEditClick}
                       >
@@ -463,8 +469,8 @@ Handles email input change event
                 <div className="additional-info">
                   <div id="confirm-email">
                     <input
-                      test-id="confirm-email-sign-up"
-                      id="confirmEmail"
+                      id="confirm-email-sign-up"
+                      //id="confirmEmail"
                       type="email"
                       placeholder="Confirm email address"
                       value={confirmEmail}
@@ -474,8 +480,8 @@ Handles email input change event
                   </div>
                   <div id="first-name">
                     <input
-                      test-id="first-name-sign-up"
-                      id="firstName"
+                      id="first-name-sign-up"
+                      //id="firstName"
                       placeholder="First name"
                       value={firstName}
                       onChange={handleFirstNameChange}
@@ -484,15 +490,15 @@ Handles email input change event
                   </div>
                   <div id="last-name">
                     <input
-                      test-id="last-name-sign-up"
-                      id="lastname"
+                      id="last-name-sign-up"
+                      //id="lastname"
                       placeholder="Last name"
                       value={lastName}
                       onChange={handleLastNameChange}
                       required
                     />
                   </div>
-                  <div test-id="password-sign-up" id="password">
+                  <div>
                     <input
                       id="password"
                       type="password"
@@ -504,7 +510,7 @@ Handles email input change event
                   </div>
                   <div>
                     <button
-                      test-id="create-button-sign-up"
+                      id="create-button-sign-up"
                       className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                       type="submit"
                       onClick={handleCreateClick}
@@ -537,7 +543,7 @@ Handles email input change event
               )}
             </form>
             <div>
-              <p test-id="signin-navigate-sign-up">
+              <p id="signin-navigate-sign-up">
                 Already have an account? <Link to="/signin">Sign in</Link>
               </p>
             </div>
@@ -548,16 +554,16 @@ Handles email input change event
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
           ></img>
-          {
-            <div>
-              {showTerms && (
+          {showTerms && (
+            <div className="overlay-CP">
+              <div className="overlay-content-CP">
                 <Terms
                   handleCancelClick={handleCancelClick}
                   handleSignUp={handleSignUp}
                 />
-              )}
+              </div>
             </div>
-          }
+          )}
         </div>
       </div>
     </div>

@@ -40,7 +40,7 @@ const Home = () => {
           height="100%"
         />
       </svg>
-      <DisplayEvents data-testid="event-container" eventsData={events} />
+      <DisplayEvents id="event-container" eventsData={events} />
     </div>
   );
 };

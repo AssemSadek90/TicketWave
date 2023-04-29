@@ -2,13 +2,29 @@ import React from 'react';
 import { useState } from 'react';
 import './Terms.css';
 
+/**
+Represents a component for displaying terms and conditions
+@param {Object} props - The props object for the component
+@param {function} props.handleSignUp - The function to handle the sign-up process
+@param {function} props.handleCancelClick - The function to handle the cancellation of the sign-up process
+*/
+
 function Terms(props) {
   // const [cancelClicked, setCancelClicked] = useState(false);
   // const [agreeClicked, setAgreeClicked] = useState(false);
+  /**
+  Handles the click event of the "Agree" button
+  @function
+  */
   function handleAgreeButtonClick() {
     props.handleSignUp();
     console.log('Agree button clicked');
   }
+
+  /**
+  Handles the click event of the "Cancel" button
+  @function
+  */
   function handleCancelClick() {
     props.handleCancelClick();
     console.log('Cancel button clicked');
@@ -117,7 +133,7 @@ function Terms(props) {
                 </div>
                 <div className="tos-form__actions eds-l-pad-bot-8 eds-align--center">
                   <button
-                    data-testid="signup-tos-form-button-cancel"
+                    id="signup-tos-form-button-cancel"
                     className="eds-btn eds-btn--button eds-btn--neutral eds-l-mar-right-8"
                     type="button"
                     onClick={() => {
@@ -127,7 +143,7 @@ function Terms(props) {
                     Cancel
                   </button>
                   <button
-                    data-testid="signup-tos-form-button-accept"
+                    id="signup-tos-form-button-accept"
                     className="eds-btn eds-btn--button eds-btn--fill eds-l-mar-right-8"
                     type="button"
                     onClick={handleAgreeButtonClick}

@@ -28,19 +28,25 @@ export default function MoreEvents(props) {
    */
   return (
     <div>
-      <h2 data-testid="events-header">More Events</h2>
+      <h2 id="events-header">More Events</h2>
       {displayAll ? (
-        <div className={styles.entertainment_events}>
+        <div
+          id="more-events-container1"
+          className={styles.entertainment_events}
+        >
           <EventsList eventsData={props.events.slice(8)} />
         </div>
       ) : (
         <>
-          <div className={styles.entertainment_events}>
+          <div
+            id="more-events-container2"
+            className={styles.entertainment_events}
+          >
             <EventsList eventsData={props.events.slice(8, 12)} />
           </div>
           {props.events[12] && (
             <button
-              data-testid="see-more-button"
+              id="see-more-button"
               className={styles.see_more_button}
               onClick={handleClickButton}
             >
