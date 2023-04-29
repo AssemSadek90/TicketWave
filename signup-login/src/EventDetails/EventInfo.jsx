@@ -3,7 +3,7 @@ import { BsClockHistory } from "react-icons/bs";
 import { TfiTicket } from "react-icons/tfi";
 import styles from "./EventInfo.module.css";
 
-export default function EventInfo(props) {
+export default function EventInfo(props, isMobile) {
   return (
     <>
       <div>
@@ -40,7 +40,7 @@ export default function EventInfo(props) {
           <div className="mt-4">
             <YoutubeEmbed
               test-id="youtube-video"
-              embedId={props.event.videoURL}
+              embedId={props.event.video_url}
             />
           </div>
         </div>

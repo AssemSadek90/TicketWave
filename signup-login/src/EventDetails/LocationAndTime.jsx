@@ -2,7 +2,7 @@ import styles from "./LocationAndTime.module.css";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
 
-export default function LocationAndTime(props) {
+export default function LocationAndTime(props, isMobile) {
   return (
     <>
       <h2 className="h4 fw-bold mb-2">When and where</h2>
@@ -15,9 +15,7 @@ export default function LocationAndTime(props) {
             <h3 className="h6 fw-bold">Date and time</h3>
             <p>
               <small className="text-body-secondary text-muted">
-                <small>
-                  {props.event.start_time + " - " + props.event.end_time}
-                </small>
+                <small>{props.event.start + " - " + props.event.end}</small>
               </small>
             </p>
           </div>
