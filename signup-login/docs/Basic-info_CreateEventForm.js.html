@@ -1,0 +1,2110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Basic-info/CreateEventForm.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Basic-info/CreateEventForm.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useRef, useState, useEffect } from "react";
+import classes from "./CreateEventForm.module.css";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSearch,
+  faStickyNote,
+  faMapMarkerAlt,
+  faCalendarAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import server from '../server';
+
+
+/**
+
+Component for creating an event form.
+@component
+@returns {JSX.Element} - The rendered component.
+*/
+
+const CreateEventForm = () => {
+  // ASSIGNING VARIABLES ______________________________________________________________________________________________________________________________
+  
+  /**
+  A reference to the event title input field.
+  @type {React.MutableRefObject}
+  */
+  const titleRef = useRef("");
+
+  /**
+A reference to the event organizer input field.
+@type {React.MutableRefObject}
+*/
+const organizerRef = useRef("");
+/**
+
+A reference to the event type input field.
+@type {React.MutableRefObject}
+*/
+const eventTypeRef = useRef("");
+/**
+
+The category of the event.
+@type {string}
+*/
+const [eventCategory, setEventCategory] = useState("Category");
+/**
+
+The subcategory of the event.
+@type {string}
+*/
+const [subCategory, setSubCategory] = useState("Sub Category");
+/**
+
+The start time of the event.
+@type {string}
+*/
+const [startTime, setStartTime] = useState("12 AM");
+/**
+
+The end time of the event.
+@type {string}
+*/
+const [endTime, setEndime] = useState("12 AM");
+/**
+
+Indicates whether to display the start time of the event.
+@type {boolean}
+*/
+const [displayStart, setDisplayStart] = useState(false);
+/**
+
+A reference to the checkbox indicating whether to display the end time of the event.
+@type {React.MutableRefObject}
+*/
+const displayEndRef = useRef(false);
+/**
+
+A reference to the time zone input field.
+@type {React.MutableRefObject}
+*/
+const timeZoneRef = useRef("");
+/**
+
+A reference to the language input field.
+@type {React.MutableRefObject}
+*/
+const languageRef = useRef("");
+
+  
+
+  // ________________________________________________________________________________________________________________________________________________
+
+  // TAG FUNCTIONALITY_____________________________________________________________________________________________________________________________
+
+  /**
+   * An array of tags
+   * @property {string[]} tags
+   */
+  const [tags, setTags] = useState([]);
+
+  /** The current input value for adding a new tag.
+   * @property {string} inputValue
+   */
+  const [inputValue, setInputValue] = useState("");
+
+  /** Indicates whether there is an error with the tags
+   * @property {boolean} tagError
+   */
+  const [tagError, setTagError] = useState(false);
+
+  /**The current count of tags, or null if not yet initialized.
+   * @property {number | null} tagCount
+   */
+  const [tagCount, setTagCount] = useState(null);
+
+
+  /** Handles changes to the input value for adding a new tag.
+   * @param {Event} event - The input change event.
+   */
+  const handleInputChange = (event) => {
+    setInputValue(event.target.value); /* The updated input value. */
+    setTagCount(event.target.value.length); /* The length of the updated input value. */
+  };
+
+
+  /** Handles the addition of a new tag to the form tags state.
+   * @param {Event} event - The form submission event.
+   */
+  const handleAddTag = (event) => {
+    event.preventDefault();
+    setTagCount(0);
+    const newTag = inputValue.trim(); /* The new tag to be added to the tags state. */
+
+    if (newTag !== "" &amp;&amp; !tags.includes(newTag)) {
+      setTagError(false);
+      setTags([...tags, newTag]);
+      setInputValue("");
+    } else setTagError(true);
+  };
+
+  /** Handles the removal of a tag from the form tags state.
+   * @param {string} tagToRemove - The tag to be removed from the tags state.
+   */
+  const handleRemoveTag = (tagToRemove) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
+  // ________________________________________________________________________________________________________________________________________________
+
+  // LOCATION FUNCTIONALITY__________________________________________________________________________________________________________________________
+  
+  /**
+
+The selected location type for the event.
+@type {string}
+*/
+const [myLocation, setMyLocation] = useState("Venue");
+/**
+
+The location for the event.
+@type {string}
+*/
+const [location, setLocation] = useState("");
+/**
+
+An array of suggested locations based on the current input value.
+@type {string[]}
+*/
+const [suggestions, setSuggestions] = useState([]);
+/**
+
+A reference to the select element for the location suggestions.
+@type {Object}
+*/
+const selectRef = useRef(null);
+
+/* A side effect that listens for clicks outside of the location select element and hides the suggestions list when detected.*/
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (selectRef.current &amp;&amp; !selectRef.current.contains(event.target)) {
+        setSuggestions([]);
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  /** Handles changes to the location input field and retrieves location suggestions from the OpenStreetMap API.
+   * @param {Object} event - The input change event.
+   */
+  const handleLocationChange = (event) => {
+    const input = event.target.value;
+    setLocation(input);
+
+    if (input) {
+      axios
+        .get(
+          `https://nominatim.openstreetmap.org/search?q=${input}&amp;format=json&amp;addressdetails=1&amp;limit=5`
+        )
+        .then((response) => {
+          setSuggestions(response.data);
+        })
+        .catch((error) => {});
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  /** Handles the selection of a location suggestion and sets the location state to the suggestion's display name.
+   * @param {Object} suggestion - The selected location suggestion object.
+   */
+  const handleSelectSuggestion = (suggestion) => {
+    setLocation(suggestion.display_name);
+    setSuggestions([]);
+  };
+  // ________________________________________________________________________________________________________________________________________________
+
+  // DATE &amp; TIME FUNCTIONALITY_______________________________________________________________________________________________________________________
+
+  /**
+ * State hook that sets the date type for the event.
+ * @type {[string, function]} Array that contains the current value and a function to update it.
+ */
+const [date, setDate] = useState("Single Event");
+
+/**
+ * State hook that sets the start date for the event.
+ * @type {[object, function]} Array that contains the current date object and a function to update it.
+ */
+const [startDate, setStartDate] = useState(new Date());
+
+/**
+ * State hook that sets the end date for the event.
+ * @type {[object, function]} Array that contains the current date object and a function to update it.
+ */
+const [endDate, setEndDate] = useState(new Date());
+  // ________________________________________________________________________________________________________________________________________________
+
+  // SUBMIT HANDLING_________________________________________________________________________________________________________________________________
+
+  /**  * Function to handle form submission and display form data
+ * @param {Event} event - The submit event from the form
+ */
+  function submitHandler(event) {
+    event.preventDefault();
+    const data = {
+      Title: titleRef.current.value,
+      Organizer: organizerRef.current.value,
+      EventType: eventTypeRef.current.value,
+      EventCategory: eventCategory,
+      subCategory: subCategory,
+      Tags: tags,
+      Location: location,
+      StartDate: startDate,
+      StartTime: startTime,
+      EndDate: endDate,
+      EndTime: endTime,
+      DisplayStartTime: displayStart,
+      DisplayEndTime: displayEndRef.current.checked,
+      TimeZone: timeZoneRef.current.value,
+      Language: languageRef.current.value,
+    };
+
+
+
+    // DISPLAYING DATA_____________________________________________________________________________________________________________________________
+
+    /**
+   * Log form data to console
+   * @param {string} data.Title - The title of the event
+   * @param {string} data.Organizer - The organizer of the event
+   * @param {string} data.EventType - The type of the event
+   * @param {string} data.EventCategory - The category of the event
+   * @param {string} data.subCategory - The subcategory of the event (if applicable)
+   * @param {array} data.Tags - The tags associated with the event
+   * @param {string} data.Location - The location of the event
+   * @param {Date} data.StartDate - The start date of the event
+   * @param {string} data.StartTime - The start time of the event
+   * @param {Date} data.EndDate - The end date of the event
+   * @param {string} data.EndTime - The end time of the event
+   * @param {boolean} data.DisplayStartTime - Whether to display the start time of the event
+   * @param {boolean} data.DisplayEndTime - Whether to display the end time of the event
+   * @param {string} data.TimeZone - The timezone of the event
+   * @param {string} data.Language - The language of the event
+   */
+
+    console.log(
+      "Title: " +
+        data.Title +
+        "\nOrganizer: " +
+        data.Organizer +
+        (data.EventType !== "Type" ? "\nEvent Type: " + data.EventType : "") +
+        (data.EventCategory !== "Category"
+          ? "\nEvent Category: " + data.EventCategory
+          : "") +
+        (data.subCategory !== "Sub Category" &amp;&amp; data.EventCategory !== 'Other'
+          ? "\nSub Category: " + data.subCategory
+          : "") +
+        (data.Tags.length > 0 ? "\nTags: " + data.Tags : "") +
+        (myLocation === "Venue" &amp;&amp; "\nLocation: " + data.Location) +
+        (date === "Single Event"
+          ? "\nStartDate: " +
+            data.StartDate +
+            "\nStartTime: " +
+            data.StartTime +
+            "\nEndDate: " +
+            data.EndDate +
+            "\nEndTime: " +
+            data.EndTime +
+            "\nDisplay Start Time: " +
+            data.DisplayStartTime
+          : "") +
+        "\nDisplay End Time: " +
+        data.DisplayEndTime +
+        "\nTimeZone: " +
+        data.TimeZone +
+        "\nLanguage: " +
+        data.Language
+    );
+
+    console.log(data);
+    handleSignUp(data);
+  }
+
+  // SAVE TO DATABASE ________________________________________________________________________________________________________________________________
+
+  
+  const handleSignUp = (data) => {
+    const requestOptions = {
+      headers: { 'Content-Type': 'application/json' },
+    };
+
+    server
+      .post('/Events', data, requestOptions)
+      .then((response) => console.log(response.data))
+      .catch((error) => console.log(error));
+  };
+
+  // ________________________________________________________________________________________________________________________________________________
+
+  // TITLE ERROR VALIDATION__________________________________________________________________________________________________________________________
+
+  /** 
+   * @property {string} value - The current value of the input field.
+   * @property {function} setValue - A function that updates the current value of the input field. 
+   */
+  const [value, setValue] = useState("");
+
+  /**
+   * @property {boolean} error - A boolean value indicating whether there is an error in the input field.
+   * @property {function} setError - A function that sets the error state.
+   */
+  const [error, setError] = useState(false);
+
+  /**
+   * @property {number} count - The current count of the input field value.
+   * @property {function} setCount - A function that updates the count state.
+   */
+  const [count, setCount] = useState(0);
+
+  /**
+   * @property {boolean} isFocused - A boolean value indicating whether the input field is currently focused.
+   * @property {function} setIsFocused - A function that updates the focus state of the input
+   */
+  const [isFocused, setIsFocused] = useState(false);
+
+
+  /**
+ * Function that handles the onBlur event of the input field.
+ * If the input field value is empty, sets the error state to true.
+ * Sets isFocused state to false.
+ */
+  const handleBlur = () => {
+    if (value.trim().length === 0) {
+      setError(true);
+    }
+    setIsFocused(false);
+  };
+
+  /**
+ * Function that handles the onFocus event of the input field.
+ * Sets isFocused state to true.
+ */
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
+  /**
+ * Function that handles the onChange event of the input field.
+ * Sets the value state to the new input value.
+ * Sets the count state to the length of the new input value.
+ * If the input value is not empty, sets the error state to false.
+ * @param {Object} event - The event object.
+ */
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    setCount(event.target.value.length);
+    if (event.target.value.trim().length > 0) {
+      setError(false);
+    }
+  };
+  // ________________________________________________________________________________________________________________________________________________
+
+  /**
+ * useEffect hook that runs on mount and when eventCategory state changes.
+ * If the eventCategory is "Category" or "Other", sets the subCategory state to "Sub Category".
+ * @param {string} eventCategory - The current event category.
+ */
+  useEffect(() => {
+    if (eventCategory === "Category") {
+      setSubCategory("Sub Category");
+    }
+    if (eventCategory === "Other") {
+      setSubCategory("Sub Category");
+    }
+  }, [eventCategory]);
+
+  // DISPLAYING ITEMS_________________________________________________________________________________________________________________________________
+  return (
+    &lt;div className={classes.basic}>
+    &lt;form className={classes.form} onSubmit={submitHandler}>
+      {/* 1st PART OF PAGE _______________________________________________________________________________________________________________________________ */}
+
+      &lt;div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          paddingBottom: "4rem",
+          borderBottom: "1px solid rgb(212, 212, 212)",
+        }}
+      >
+        &lt;FontAwesomeIcon
+          icon={faStickyNote}
+          style={{ color: "#d8d8d8", marginRight: "2rem", marginTop: "2rem" }}
+          size="5x"
+        />
+
+        {/* TITLE AND ORGANIZER INFORMATION ____________________________________*/}
+
+        &lt;div 
+         style={{display: "flex",flexDirection: "column",width: "100%" }}
+          
+        >
+          &lt;h2>Basic Info&lt;/h2>
+          &lt;p className={classes.para}>
+            Name your event and tell event-goers why they should come. Add
+            details that highlight what makes it unique.
+          &lt;/p>
+
+          &lt;div
+            className={classes.inputContainer}
+            style={{
+              border: `1px solid ${
+                isFocused ? "blue" : error ? "red" : "rgb(212, 212, 212)"
+              }`,
+              padding: "0.5rem",
+            }}
+            onClick={() => titleRef.current.focus()}
+            onMouseOver={(e) => {
+              e.currentTarget.style.border = `1px solid ${
+                error ? "red" : "gray"
+              }`;
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.border = "1px solid rgb(212, 212, 212)";
+            }}
+          >
+            &lt;label
+              style={{
+                color: `${isFocused ? "blue" : error ? "red" : "#8d8d8d"}`,
+              }}
+              className={classes.inputLabel}
+            >
+              Event Title *
+            &lt;/label>
+            &lt;input
+              test-id="basic-info-title"
+              ref={titleRef}
+              style={{ fontSize: "0.85rem" }}
+              type="text"
+              id="eventTitle"
+              name="eventTitle"
+              maxLength="75"
+              value={value}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              onFocus={handleFocus}
+              required
+              placeholder="Be clear and descriptive."
+            />
+          &lt;/div>
+          &lt;div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            &lt;p style={{ color: "red", width: "80%" }}>
+              {error &amp;&amp; "Title is required."}
+            &lt;/p>
+            &lt;p style={{ textAlign: "right" }}>{count}/75&lt;/p>
+          &lt;/div>
+
+          &lt;div
+            className={classes.inputContainer}
+            onClick={() => organizerRef.current.focus()}
+          >
+            &lt;label className={classes.inputLabel}>Organizer&lt;/label>
+            &lt;input
+              test-id="basic-info-organizer"
+              ref={organizerRef}
+              type="text"
+              id="eventTitle"
+              style={{ fontSize: "0.85rem" }}
+              name="eventTitle"
+              maxLength="75"
+              required
+              placeholder="Tell attendees who is organizing this event."
+            />
+          &lt;/div>
+
+          &lt;p
+            className={classes.para}
+            style={{ marginTop: "10px", marginBottom: "10px" }}
+          >
+            This profile describes a unique organizer and shows all of the
+            events on one page.{" "}
+            &lt;a href="https://www.eventbrite.com/myprofile">
+              &lt;span style={{ color: "blue", textDecoration: "underline" }}>
+                View Organizer Info
+              &lt;/span>
+            &lt;/a>
+          &lt;/p>
+
+          &lt;div style={{ flexDirection: "row", display: "flex", width: "100%" }}>
+            &lt;div
+              className={classes.inputContainer}
+              style={{ marginRight: "1rem", padding: "5px", width: "33%" }}
+            >
+              &lt;div className={classes["form-group"]}>
+                &lt;select
+                  test-id="basic-info-type"
+                  ref={eventTypeRef}
+                  id="eventType"
+                  name="eventType"
+                  required
+                >
+                  &lt;option value="Type">Type&lt;/option>
+                  &lt;option value="Appearance or Signing">
+                    Appearance or Signing
+                  &lt;/option>
+                  &lt;option value="Attraction">Attraction&lt;/option>
+                  &lt;option value="Camp, Trip or Retreat">
+                    Camp, Trip or Retreat
+                  &lt;/option>
+                  &lt;option value="Class, Training or Workshop">
+                    Class, Training or Workshop
+                  &lt;/option>
+                  &lt;option value="Concert or Performance">
+                    Concert or Performance
+                  &lt;/option>
+                  &lt;option value="Conference">Conference&lt;/option>
+                  &lt;option value="Convention">Convention&lt;/option>
+                  &lt;option value="Dinner or Gala">Dinner or Gala&lt;/option>
+                  &lt;option value="Festival or Fair">Festival or Fair&lt;/option>
+                  &lt;option value="Game or Competition">
+                    Game or Competition
+                  &lt;/option>
+                  &lt;option value="Meeting or Networking Event">
+                    Meeting or Networking Event
+                  &lt;/option>
+                  &lt;option value="Other">Other&lt;/option>
+                  &lt;option value="Party or Social Gathering">
+                    Party or Social Gathering
+                  &lt;/option>
+                  &lt;option value="Race or Endurance event">
+                    Race or Endurance event
+                  &lt;/option>
+                  &lt;option value="Rally">Rally&lt;/option>
+                  &lt;option value="Screening">Screening&lt;/option>
+                  &lt;option value="Seminar or Talk">Seminar or Talk&lt;/option>
+                  &lt;option value="Tour">Tour&lt;/option>
+                  &lt;option value="Tournament">Tournament&lt;/option>
+                  &lt;option value="Trade Show, Consumer Show or Expo">
+                    Trade Show, Consumer Show or Expo
+                  &lt;/option>
+                &lt;/select>
+              &lt;/div>
+            &lt;/div>
+
+            &lt;div
+              className={classes.inputContainer}
+              style={{ padding: "5px", width: "33%" }}
+            >
+              &lt;div className={classes["form-group"]}>
+                &lt;select
+                  onChange={(d) => {
+                    setEventCategory(d.target.value);
+                  }}
+                  id="eventCategory"
+                  name="eventCategory"
+                  test-id="basic-info-eventcategory"
+                >
+                  &lt;option value="Category">Category&lt;/option>
+                  &lt;option value="Auto, Boat and Air">Auto, Boat and Air&lt;/option>
+                  &lt;option value="Business and Professional">
+                    Business and Professional
+                  &lt;/option>
+                  &lt;option value="Charity &amp; Causes">Charity &amp; Causes&lt;/option>
+                  &lt;option value="Community and Culture">
+                    Community and Culture
+                  &lt;/option>
+                  &lt;option value="Family &amp; Education">Family &amp; Education&lt;/option>
+                  &lt;option value="Fashion &amp; Beauty">Fashion &amp; Beauty&lt;/option>
+                  &lt;option value="Film, Media &amp; Entertainment">
+                    Film, Media &amp; Entertainment
+                  &lt;/option>
+                  &lt;option value="Food &amp; Drink">Food &amp; Drink&lt;/option>
+
+                  &lt;option value="Government &amp; Politics">Government &amp; Politics&lt;/option>
+                  &lt;option value="Health &amp; Wellness">Health &amp; Wellness&lt;/option>
+                  &lt;option value="Hobbies &amp; Special Interest">Hobbies &amp; Special Interest&lt;/option>
+                  &lt;option value="Home &amp; Lifestyle">Home &amp; Lifestyle&lt;/option>
+                  &lt;option value="Music">Music&lt;/option>
+                  &lt;option value="Performing &amp; Visual Arts">Performing &amp; Visual Arts&lt;/option>
+                  &lt;option value="Religion &amp; Spirituality">Religion &amp; Spirituality&lt;/option>
+                  &lt;option value="School Activities">School Activities&lt;/option>
+                  &lt;option value="Science &amp; Technology">Science &amp; Technology&lt;/option>
+                  &lt;option value="Seasional &amp; Holiday">Seasional &amp; Holiday&lt;/option>
+                  &lt;option value="Sports &amp; Fitness">Sports &amp; Fitness&lt;/option>
+                  &lt;option value="Travel &amp; Outdoor">Travel &amp; Outdoor&lt;/option>
+                  &lt;option value="Other">Other&lt;/option>
+
+                &lt;/select>
+              &lt;/div>
+            &lt;/div>
+
+            {eventCategory === "Government &amp; Politics" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory1"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Country / Muncipal Government">Country / Muncipal Government&lt;/option>
+                    &lt;option value="Democratic Party">Democratic Party&lt;/option>
+                    &lt;option value="Federal Government">Federal Government&lt;/option>
+                    &lt;option value="International Affairs">International Affairs&lt;/option>
+                    &lt;option value="Military">Military&lt;/option>
+                    &lt;option value="National Security">National Security&lt;/option>
+                    &lt;option value="Non-partisan">Non-partisan&lt;/option>
+                    &lt;option value="Others">Others&lt;/option>
+                    &lt;option value="Other Party">Other Party&lt;/option>
+                    &lt;option value="Republican Party">Republican Party&lt;/option>
+                    &lt;option value="State Government">State Government&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+{eventCategory === "Health &amp; Wellness" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory2"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Medical">Medical&lt;/option>
+                    &lt;option value="Mental Health">Mental Health&lt;/option>
+                    &lt;option value="Others">Others&lt;/option>
+                    &lt;option value="Personal Health">Personal Health&lt;/option>
+                    &lt;option value="Spa">Spa&lt;/option>
+                    &lt;option value="Yoga">Yoga&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+{eventCategory === "Hobbies &amp; Special Interest" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory3"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Adult">Adult&lt;/option>
+                    &lt;option value="Anime / Comics">Anime / Comics&lt;/option>
+                    &lt;option value="Books">Books&lt;/option>
+                    &lt;option value="DIY">DIY&lt;/option>
+                    &lt;option value="Drawings &amp; Paintings">Drawings &amp; Paintings&lt;/option>
+                    &lt;option value="Gaming">Gaming&lt;/option>
+                    &lt;option value="Knitting">Knitting&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="Photography">Photography&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+
+{eventCategory === "Home &amp; Lifestyle" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory4"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Dating">Dating&lt;/option>
+                    &lt;option value="Home &amp; Garden">Home &amp; Garden&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="Pets &amp; Animal">Pets &amp; Animal&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+{eventCategory === "Music" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory4"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Acoustic">Acoustic&lt;/option>
+                    &lt;option value="Alternative">Alternative&lt;/option>
+                    &lt;option value="Americana">Americana&lt;/option>
+                    &lt;option value="Bluegrass">Bluegrass&lt;/option>
+                    &lt;option value="Blues">Blues&lt;/option>
+                    &lt;option value="Blues &amp; Jazz">Blues &amp; Jazz&lt;/option>
+                    &lt;option value="Classical">Classical&lt;/option>
+                    &lt;option value="Country">Country&lt;/option>
+                    &lt;option value="Cultural">Cultural&lt;/option>
+                    &lt;option value="DJ / Dance">DJ / Dance&lt;/option>
+                    &lt;option value="EDM">EDM&lt;/option>
+                    &lt;option value="EDM / Electronic">EDM / Electronic&lt;/option>
+                    &lt;option value="Experimental">Experimental&lt;/option>
+                    &lt;option value="Folk">Folk&lt;/option>
+                    &lt;option value="Hip Hop / Rap">Hip Hop / Rap&lt;/option>
+                    &lt;option value="Indie">Indie&lt;/option>
+                    &lt;option value="Jazz">Jazz&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+
+{eventCategory === "Other" &amp;&amp; (
+  &lt;div>
+  &lt;/div>
+)}
+
+
+
+
+
+
+{eventCategory === "Performing &amp; Visual Arts" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory5"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Ballet">Ballet&lt;/option>
+                    &lt;option value="Comedy">Comedy&lt;/option>
+                    &lt;option value="Craft">Craft&lt;/option>
+                    &lt;option value="Dance">Dance&lt;/option>
+                    &lt;option value="Design">Design&lt;/option>
+                    &lt;option value="Fine Art">Fine Art&lt;/option>
+                    &lt;option value="Jewelery">Jewelery&lt;/option>
+                    &lt;option value="Literary Arts">Literary Arts&lt;/option>
+                    &lt;option value="Musical">Musical&lt;/option>
+                    &lt;option value="Opera">Opera&lt;/option>
+                    &lt;option value="Orchestra">Orchestra&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="Painting">Painting&lt;/option>
+                    &lt;option value="Sculpture">Sculpture&lt;/option>
+                    &lt;option value="Theater">Theater&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+
+{eventCategory === "Religion &amp; Spirituality" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory6"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Agnosticism">Agnosticism&lt;/option>
+                    &lt;option value="Athiesm">Athiesm&lt;/option>
+                    &lt;option value="Buddhism">Buddhism&lt;/option>
+                    &lt;option value="Christianity">Christianity&lt;/option>
+                    &lt;option value="Eastern Religion">Eastern Religion&lt;/option>
+                    &lt;option value="Folk Religions">Folk Religions&lt;/option>
+                    &lt;option value="Hinduism">Hinduism&lt;/option>
+                    &lt;option value="Islam">Islam&lt;/option>
+                    &lt;option value="Judaism">Judaism&lt;/option>
+                    &lt;option value="Mormonism">Mormonism&lt;/option>
+                    &lt;option value="Mysticism and Occult">Mysticism and Occult&lt;/option>
+                    &lt;option value="New Age">New Age&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="Shintoism">Shintoism&lt;/option>
+                    &lt;option value="Sikhism">Sikhism&lt;/option>
+                    &lt;option value="Unaffiliated">Unaffiliated&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+
+{eventCategory === "School Activities" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory7"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="After School Care">After School Care&lt;/option>
+                    &lt;option value="Dinner">Dinner&lt;/option>
+                    &lt;option value="Fund Raiser">Fund Raiser&lt;/option>
+                    &lt;option value="Parking">Parking&lt;/option>
+                    &lt;option value="Public Speaker">Public Speaker&lt;/option>
+                    &lt;option value="Raffle">Raffle&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+
+{eventCategory === "Science &amp; Technology" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory8"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="BioTech">BioTech&lt;/option>
+                    &lt;option value="HiTech">HiTech&lt;/option>
+                    &lt;option value="Medicine">Medicine&lt;/option>
+                    &lt;option value="Mobile">Mobile&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="Robotics">Robotics&lt;/option>
+                    &lt;option value="Science">Science&lt;/option>
+                    &lt;option value="Social Media">Social Media&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+
+{eventCategory === "Seasional &amp; Holiday" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory9"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Channukah">Channukah&lt;/option>
+                    &lt;option value="Christmas">Christmas&lt;/option>
+                    &lt;option value="Easter">Easter&lt;/option>
+                    &lt;option value="Fall Events">Fall Events&lt;/option>
+                    &lt;option value="Halloween / Haunt">Halloween / Haunt&lt;/option>
+                    &lt;option value="Independence Day">Independence Day&lt;/option>
+                    &lt;option value="New Years Eve">New Years Eve&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="Saint Patrics Day">Saint Patrics Day&lt;/option>
+                    &lt;option value="Thanksgiving">Thanksgiving&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+
+{eventCategory === "Sports &amp; Fitness" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory10"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Baseball">Baseball&lt;/option>
+                    &lt;option value="Basketball">Basketball&lt;/option>
+                    &lt;option value="Camps">Camps&lt;/option>
+                    &lt;option value="Cheer">Cheer&lt;/option>
+                    &lt;option value="Cycling">Cycling&lt;/option>
+                    &lt;option value="Exercise">Exercise&lt;/option>
+                    &lt;option value="Fighting &amp; Martial Arts">Fighting &amp; Martial Arts&lt;/option>
+                    &lt;option value="Football">Football&lt;/option>
+                    &lt;option value="Golf">Golf&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+{eventCategory === "Travel &amp; Outdoor" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory11"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Canoeing">Canoeing&lt;/option>
+                    &lt;option value="Climbing">Climbing&lt;/option>
+                    &lt;option value="Hiking">Hiking&lt;/option>
+                    &lt;option value="Kayaking">Kayaking&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="Rafting">Rafting&lt;/option>
+                    &lt;option value="Travel">Travel&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+
+
+            {eventCategory === "Auto, Boat and Air" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory12"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Air">Air&lt;/option>
+                    &lt;option value="Auto">Auto&lt;/option>
+                    &lt;option value="Boat">Boat&lt;/option>
+                    &lt;option value="Motorcycle/ATV">Motorcycle/ATV&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+            {eventCategory === "Business and Professional" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory13"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Careers">Careers&lt;/option>
+                    &lt;option value="Design">Design&lt;/option>
+                    &lt;option value="Educators">Educators&lt;/option>
+                    &lt;option value="Environment &amp; Sustainability">
+                      Environment &amp; Sustainability
+                    &lt;/option>
+                    &lt;option value="Finance">Finance&lt;/option>
+                    &lt;option value="Investment">Investment&lt;/option>
+                    &lt;option value="Media">Media&lt;/option>
+                    &lt;option value="Non Profit &amp; NGO's">
+                      Non Profit &amp; NGO's
+                    &lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="Real Estate">Real Estate&lt;/option>
+                    &lt;option value="Sales &amp; Marketing">Sales &amp; Marketing&lt;/option>
+                    &lt;option value="Startups and Small Businesses">
+                      Startups and Small Businesses
+                    &lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+            {eventCategory === "Charity &amp; Causes" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory14"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Animal Welfare">Animal Welfare&lt;/option>
+                    &lt;option value="Disaster Relief">Disaster Relief&lt;/option>
+                    &lt;option value="Education">Education&lt;/option>
+                    &lt;option value="Environment">Environment&lt;/option>
+                    &lt;option value="Relief Care">Relief Care&lt;/option>
+                    &lt;option value="Human Right">Human Right&lt;/option>
+                    &lt;option value="International Aid">International Aid&lt;/option>
+                    &lt;option value="Others">Others&lt;/option>
+                    &lt;option value="Poverty">Poverty&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+            {eventCategory === "Community and Culture" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory15"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="City/Town">City/Town&lt;/option>
+                    &lt;option value="Country">Country&lt;/option>
+                    &lt;option value="Heritage">Heritage&lt;/option>
+                    &lt;option value="Historic">Historic&lt;/option>
+                    &lt;option value="LGBT">LGBT&lt;/option>
+                    &lt;option value="Language">Language&lt;/option>
+                    &lt;option value="Medieval">Medieval&lt;/option>
+                    &lt;option value="Nationality">Nationality&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+            {eventCategory === "Family &amp; Education" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory16"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Alumni">Alumni&lt;/option>
+                    &lt;option value="Baby">Baby&lt;/option>
+                    &lt;option value="Children/Youth">Children/Youth&lt;/option>
+                    &lt;option value="Education">Education&lt;/option>
+                    &lt;option value="Parenting">Parenting&lt;/option>
+                    &lt;option value="Parents Association">
+                      Parents Association
+                    &lt;/option>
+                    &lt;option value="Reunion">Reunion&lt;/option>
+                    &lt;option value="Senior Citizen">Senior Citizen&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+            {eventCategory === "Fashion &amp; Beauty" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory17"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Accessories">Accessories&lt;/option>
+                    &lt;option value="Beauty">Beauty&lt;/option>
+                    &lt;option value="Bridal">Bridal&lt;/option>
+                    &lt;option value="Fashion">Fashion&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+            {eventCategory === "Film, Media &amp; Entertainment" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory18"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Adult">Adult&lt;/option>
+                    &lt;option value="Anime">Anime&lt;/option>
+                    &lt;option value="Comedy">Comedy&lt;/option>
+                    &lt;option value="Comics">Comics&lt;/option>
+                    &lt;option value="Film">Film&lt;/option>
+                    &lt;option value="Gaming">Gaming&lt;/option>
+                    &lt;option value="Other">Other&lt;/option>
+                    &lt;option value="TV">TV&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+
+            {eventCategory === "Food &amp; Drink" &amp;&amp; (
+              &lt;div
+                className={classes.inputContainer}
+                style={{ marginLeft: "1rem", padding: "5px", width: "33%" }}
+              >
+                &lt;div className={classes["form-group"]}>
+                  &lt;select
+                    onChange={(d) => {
+                      setSubCategory(d.target.value);
+                    }}
+                    id="subCategory"
+                    name="subCategory"
+                    test-id="basic-info-subcategory19"
+                  >
+                    &lt;option value="Sub Category">Sub Category&lt;/option>
+                    &lt;option value="Beer">Beer&lt;/option>
+                    &lt;option value="Food">Food&lt;/option>
+                    &lt;option value="Others">Others&lt;/option>
+                    &lt;option value="Spirits">Spirits&lt;/option>
+                    &lt;option value="Wine">Wine&lt;/option>
+                  &lt;/select>
+                &lt;/div>
+              &lt;/div>
+            )}
+          &lt;/div>
+
+          {/* TAGS INFORMATION __________________________________________ */}
+
+          &lt;div>
+            &lt;h2 >Tags&lt;/h2>
+            &lt;p
+              className={classes.para}
+              style={{ marginBottom: "1rem", marginTop: "1rem" }}
+            >
+              Improve discoverability of your event by adding tags relevant to
+              the subject matter.
+            &lt;/p>
+            &lt;div>
+              &lt;div
+                style={{
+                  flexDirection: "row",
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignContent: "center",
+                }}
+              >
+                &lt;div
+                  className={classes.inputContainer}
+                  style={
+                    tagError
+                      ? {
+                          borderColor: "red",
+                          width: "90%",
+                          marginRight: "1rem",
+                          marginTop: 0,
+                        }
+                      : { width: "90%", marginRight: "1rem", marginTop: 0 }
+                  }
+                >
+                  &lt;label className={classes.inputLabel} htmlFor="eventTag">
+                    Press Enter to add a tag.
+                  &lt;/label>
+                  &lt;input
+                    test-id="basic-info-add-tag1"
+                    type="text"
+                    style={{ fontSize: "0.85rem" }}
+                    id="eventTag"
+                    name="eventTag"
+                    maxLength="30"
+                    placeholder="Add a tag"
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => e.key === "Enter" &amp;&amp; handleAddTag(e)}
+                  />
+                &lt;/div>
+                &lt;button
+                  test-id="basic-info-add-tag2"
+                  type="tag"
+                  onClick={handleAddTag}
+                  style={{
+                    width: "10%",
+                    height: "3rem",
+                    justifySelf: "center",
+                    alignSelf: "center",
+                    backgroundColor: "white",
+                    border: "2px solid rgb(160, 160, 160)",
+                    borderRadius: "5px",
+                    color: "rgb(60, 60, 60)",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Add
+                &lt;/button>
+              &lt;/div>
+            &lt;/div>
+            &lt;div>
+              &lt;p style={{ color: "red", width: "80%" }}>
+                {tagError &amp;&amp; "Tag already exists."}
+              &lt;/p>
+              &lt;p style={{ textAlign: "right" }}>{tagCount}/30&lt;/p>
+            &lt;/div>
+
+            &lt;div style={{ width: "100%", justifyItems: "left" }}>
+              {tags.length > 0 &amp;&amp; (
+                &lt;ul
+                  style={{
+                    listStyle: "none",
+                    flexDirection: "row",
+                    display: "flex",
+                    marginTop: "2rem",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  {tags.map((tag, index) => (
+                    &lt;li
+                      key={index}
+                      style={{
+                        backgroundColor: "rgb(232, 232, 232)",
+                        width: "max-content",
+                        padding: "1rem",
+                        height: "2.5rem",
+                        // marginRight: '1rem',
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        textAlign: "center",
+                        borderRadius: "2rem",
+                        margin: "0.3rem",
+                      }}
+                    >
+                      {tag}
+                      &lt;button
+                        test-id="basic-info-remove-tag"
+                        type="tag"
+                        style={{
+                          marginLeft: "5px",
+                          border: "none",
+                          background: "none",
+                        }}
+                        onClick={() => handleRemoveTag(tag)}
+                      >
+                        x
+                      &lt;/button>
+                    &lt;/li>
+                  ))}
+                &lt;/ul>
+              )}
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+
+      {/*________________________________________________________________________________________________________________________________________________ */}
+
+      {/* 2nd PART OF PAGE _____________________________________________________________________________________________________________________________ */}
+
+      &lt;div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          paddingBottom: "4rem",
+          borderBottom: "1px solid rgb(212, 212, 212)",
+        }}
+      >
+        &lt;FontAwesomeIcon
+          icon={faMapMarkerAlt}
+          style={{ color: "#d8d8d8", marginRight: "2rem", marginTop: "2rem" }}
+          size="5x"
+        />
+
+        {/* TITLE AND ORGANIZER INFORMATION _______________________________________________*/}
+        &lt;div
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
+          {/* LOCATION INFORMATION _________________________________________________ */}
+
+          &lt;div>
+            &lt;h2 style={{ marginTop: "3rem" }}>
+              Location
+            &lt;/h2>
+            &lt;p className={classes.para} style={{ marginBottom: "1rem" }}>
+              Help people in the area discover your event and let attendees know
+              where to show up.
+            &lt;/p>
+
+            &lt;div
+              style={{
+                flexDirection: "row",
+                display: "flex",
+                width: "100%",
+                marginBottom: "2rem",
+              }}
+            >
+              &lt;button
+                test-id="basic-info-venue-button"
+                type="button"
+                className={
+                  myLocation === "Venue"
+                    ? classes.active
+                    : classes.locationButton
+                }
+                onClick={() => {
+                  setMyLocation("Venue");
+                }}
+              >
+                Venue
+              &lt;/button>
+
+              &lt;button
+                type="button"
+                className={
+                  myLocation === "Online Event"
+                    ? classes.active
+                    : classes.locationButton
+                }
+                onClick={() => {
+                  setMyLocation("Online Event");
+                }}
+              >
+                Online Event
+              &lt;/button>
+
+              &lt;button
+                type="button"
+                className={
+                  myLocation === "To be announced"
+                    ? classes.active
+                    : classes.locationButton
+                }
+                onClick={() => {
+                  setMyLocation("To be announced");
+                }}
+              >
+                To be announced
+              &lt;/button>
+            &lt;/div>
+            {myLocation === "Venue" &amp;&amp; (
+              &lt;React.Fragment>
+                &lt;label className={classes.para} htmlFor="venueLocation">
+                  &lt;b>Venue location&lt;/b>
+                &lt;/label>
+                &lt;div className={classes.inputContainer}>
+                  &lt;div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifySelf: "center",
+                      alignSelf: "center",
+                      verticalAlign: "center",
+                      flex: "1",
+                      minHeight: "3rem",
+                    }}
+                  >
+                    &lt;FontAwesomeIcon
+                      icon={faSearch}
+                      style={{
+                        color: "#8d8d8d",
+                        justifySelf: "center",
+                        alignSelf: "center",
+                        marginRight: "1.5rem",
+                      }}
+                    />
+                    &lt;input
+                      test-id="basic-info-location"
+                      type="text"
+                      id="venueLocation"
+                      name="venueLocation"
+                      maxLength="75"
+                      required
+                      placeholder="Search for a venue or address."
+                      value={location}
+                      onChange={handleLocationChange}
+                      style={{ fontSize: "0.85rem" }}
+                    />
+                  &lt;/div>
+                  {suggestions.length > 0 &amp;&amp; (
+                    &lt;div className={classes.selectContainer} ref={selectRef}>
+                      &lt;select
+                        test-id="basic-info-location-from-list"
+                        className={classes.select}
+                        size={suggestions.length}
+                      >
+                        {suggestions.map((suggestion) => (
+                          &lt;option
+                            key={suggestion.place_id}
+                            value={suggestion.display_name}
+                            onClick={() => handleSelectSuggestion(suggestion)}
+                          >
+                            {suggestion.display_name}
+                          &lt;/option>
+                        ))}
+                      &lt;/select>
+                    &lt;/div>
+                  )}
+                &lt;/div>
+              &lt;/React.Fragment>
+            )}
+            {myLocation === "Online Event" &amp;&amp; (
+              &lt;p>
+                Online events have unique event pages where you can add links to
+                livestreams and more
+              &lt;/p>
+            )}
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+
+      {/*________________________________________________________________________________________________________________________________________________*/}
+
+      {/* 3rd PART OF PAGE _____________________________________________________________________________________________________________________________ */}
+
+      &lt;div style={{ display: "flex", flexDirection: "row" }}>
+        &lt;FontAwesomeIcon
+          icon={faCalendarAlt}
+          style={{ color: "#d8d8d8", marginRight: "2rem", marginTop: "2rem" }}
+          size="5x"
+        />
+
+        &lt;div
+          style={{ display: "flex", flexDirection: "column", width: "100%" }}
+        >
+          {/* DATE AND TIME INFORMATION _________________________________________________________________*/}
+
+          &lt;React.Fragment>
+            &lt;h2>Date &amp; Time&lt;/h2>
+            &lt;p className={classes.para} style={{ marginBottom: "1.5rem" }}>
+              Tell event-goers when your event starts and ends so they can make
+              plans to attend.
+            &lt;/p>
+            &lt;div
+              style={{ flexDirection: "row", display: "flex", width: "100%" }}
+            >
+              &lt;button
+                test-id="basic-info-single-event"
+                type="button"
+                className={
+                  date === "Single Event"
+                    ? classes.active
+                    : classes.locationButton
+                }
+                onClick={() => {
+                  setDate("Single Event");
+                }}
+              >
+                Single Event
+              &lt;/button>
+
+              &lt;button
+                test-id="basic-info-recurring-event"
+                type="button"
+                className={
+                  date === "Recurring Event"
+                    ? classes.active
+                    : classes.locationButton
+                }
+                onClick={() => {
+                  setDate("Recurring Event");
+                }}
+              >
+                Recurring Event
+              &lt;/button>
+            &lt;/div>
+
+            {date === "Single Event" ? (
+              &lt;React.Fragment>
+                &lt;p
+                  className={classes.para}
+                  style={{ marginBottom: "1rem", marginTop: "1rem" }}
+                >
+                  Single event happens once and can last multiple days.
+                &lt;/p>
+
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                  }}
+                >
+                  &lt;div
+                    className={classes.inputContainer}
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                      width: "40%",
+                    }}
+                  >
+                    &lt;label className={classes.inputLabel}>Event Starts&lt;/label>
+                    &lt;DatePicker
+                      test-id="basic-info-start-date"
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                    />
+                  &lt;/div>
+
+                  &lt;div
+                    className={classes.inputContainer}
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                      width: "40%",
+                    }}
+                  >
+                    &lt;label className={classes.inputLabel}>Start Time&lt;/label>
+                    &lt;select
+                      test-id="basic-info-start-time"
+                      style={{ maxHeight: "5rem" }}
+                      onChange={(date) => setStartTime(date.target.value)}
+                      id="startTime"
+                      name="startTime"
+                    >
+                      &lt;option value="12 AM">12:00 AM&lt;/option>
+                      &lt;option value="12:30 AM">12:30 AM&lt;/option>
+                      &lt;option value="1 AM">1:00 AM&lt;/option>
+                      &lt;option value="1:30 AM">1:30 AM&lt;/option>
+                      &lt;option value="2 AM">2:00 AM&lt;/option>
+                      &lt;option value="2:30 AM">2:30 AM&lt;/option>
+                      &lt;option value="3 AM">3:00 AM&lt;/option>
+                      &lt;option value="3:30 AM">3:30 AM&lt;/option>
+                      &lt;option value="4 AM">4:00 AM&lt;/option>
+                      &lt;option value="4:30 AM">4:30 AM&lt;/option>
+                      &lt;option value="5 AM">5:00 AM&lt;/option>
+                      &lt;option value="5:30 AM">5:30 AM&lt;/option>
+                      &lt;option value="6 AM">6:00 AM&lt;/option>
+                      &lt;option value="6:30 AM">6:30 AM&lt;/option>
+                      &lt;option value="7 AM">7:00 AM&lt;/option>
+                      &lt;option value="7:30 AM">7:30 AM&lt;/option>
+                      &lt;option value="8 AM">8:00 AM&lt;/option>
+                      &lt;option value="8:30 AM">8:30 AM&lt;/option>
+                      &lt;option value="9 AM">9:00 AM&lt;/option>
+                      &lt;option value="9:30 AM">9:30 AM&lt;/option>
+                      &lt;option value="10 AM">10:00 AM&lt;/option>
+                      &lt;option value="10:30 AM">10:30 AM&lt;/option>
+                      &lt;option value="11 AM">11:00 AM&lt;/option>
+                      &lt;option value="11:30 AM">11:30 AM&lt;/option>
+                      &lt;option value="12 PM">12:00 PM&lt;/option>
+                      &lt;option value="12:30 PM">12:30 PM&lt;/option>
+                      &lt;option value="1 PM">1:00 PM&lt;/option>
+                      &lt;option value="1:30 PM">1:30 PM&lt;/option>
+                      &lt;option value="2 PM">2:00 PM&lt;/option>
+                      &lt;option value="2:30 PM">2:30 PM&lt;/option>
+                      &lt;option value="3 PM">3:00 PM&lt;/option>
+                      &lt;option value="3:30 PM">3:30 PM&lt;/option>
+                      &lt;option value="4 PM">4:00 PM&lt;/option>
+                      &lt;option value="4:30 PM">4:30 PM&lt;/option>
+                      &lt;option value="5 PM">5:00 PM&lt;/option>
+                      &lt;option value="5:30 PM">5:30 PM&lt;/option>
+                      &lt;option value="6 PM">6:00 PM&lt;/option>
+                      &lt;option value="6:30 PM">6:30 PM&lt;/option>
+                      &lt;option value="7 PM">7:00 PM&lt;/option>
+                      &lt;option value="7:30 PM">7:30 PM&lt;/option>
+                      &lt;option value="8 PM">8:00 AM&lt;/option>
+                      &lt;option value="8:30 PM">8:30 PM&lt;/option>
+                      &lt;option value="9 PM">9:00 PM&lt;/option>
+                      &lt;option value="9:30 PM">9:30 PM&lt;/option>
+                      &lt;option value="10 PM">10:00 PM&lt;/option>
+                      &lt;option value="10:30 PM">10:30 PM&lt;/option>
+                      &lt;option value="11 PM">11:00 PM&lt;/option>
+                      &lt;option value="11:30 PM">11:30 PM&lt;/option>
+                    &lt;/select>
+                  &lt;/div>
+                &lt;/div>
+
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  &lt;div
+                    className={classes.inputContainer}
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                      width: "40%",
+                    }}
+                  >
+                    &lt;label className={classes.inputLabel}>Event Ends&lt;/label>
+                    &lt;DatePicker
+                      test-id="basic-info-end-date"
+                      selected={endDate}
+                      onChange={(date) => setEndDate(date)}
+                    />
+                  &lt;/div>
+
+                  &lt;div
+                    className={classes.inputContainer}
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                      width: "40%",
+                    }}
+                  >
+                    &lt;label className={classes.inputLabel}>End Time&lt;/label>
+                    &lt;select
+                      test-id="basic-info-end-time"
+                      onChange={(date) => setEndime(date.target.value)}
+                      style={{ maxHeight: "5rem" }}
+                      id="endTime"
+                      name="endTime"
+                    >
+                      &lt;option value="12 AM">12:00 AM&lt;/option>
+                      &lt;option value="12:30 AM">12:30 AM&lt;/option>
+                      &lt;option value="1 AM">1:00 AM&lt;/option>
+                      &lt;option value="1:30 AM">1:30 AM&lt;/option>
+                      &lt;option value="2 AM">2:00 AM&lt;/option>
+                      &lt;option value="2:30 AM">2:30 AM&lt;/option>
+                      &lt;option value="3 AM">3:00 AM&lt;/option>
+                      &lt;option value="3:30 AM">3:30 AM&lt;/option>
+                      &lt;option value="4 AM">4:00 AM&lt;/option>
+                      &lt;option value="4:30 AM">4:30 AM&lt;/option>
+                      &lt;option value="5 AM">5:00 AM&lt;/option>
+                      &lt;option value="5:30 AM">5:30 AM&lt;/option>
+                      &lt;option value="6 AM">6:00 AM&lt;/option>
+                      &lt;option value="6:30 AM">6:30 AM&lt;/option>
+                      &lt;option value="7 AM">7:00 AM&lt;/option>
+                      &lt;option value="7:30 AM">7:30 AM&lt;/option>
+                      &lt;option value="8 AM">8:00 AM&lt;/option>
+                      &lt;option value="8:30 AM">8:30 AM&lt;/option>
+                      &lt;option value="9 AM">9:00 AM&lt;/option>
+                      &lt;option value="9:30 AM">9:30 AM&lt;/option>
+                      &lt;option value="10 AM">10:00 AM&lt;/option>
+                      &lt;option value="10:30 AM">10:30 AM&lt;/option>
+                      &lt;option value="11 AM">11:00 AM&lt;/option>
+                      &lt;option value="11:30 AM">11:30 AM&lt;/option>
+                      &lt;option value="12 PM">12:00 PM&lt;/option>
+                      &lt;option value="12:30 PM">12:30 PM&lt;/option>
+                      &lt;option value="1 PM">1:00 PM&lt;/option>
+                      &lt;option value="1:30 PM">1:30 PM&lt;/option>
+                      &lt;option value="2 PM">2:00 PM&lt;/option>
+                      &lt;option value="2:30 PM">2:30 PM&lt;/option>
+                      &lt;option value="3 PM">3:00 PM&lt;/option>
+                      &lt;option value="3:30 PM">3:30 PM&lt;/option>
+                      &lt;option value="4 PM">4:00 PM&lt;/option>
+                      &lt;option value="4:30 PM">4:30 PM&lt;/option>
+                      &lt;option value="5 PM">5:00 PM&lt;/option>
+                      &lt;option value="5:30 PM">5:30 PM&lt;/option>
+                      &lt;option value="6 PM">6:00 PM&lt;/option>
+                      &lt;option value="6:30 PM">6:30 PM&lt;/option>
+                      &lt;option value="7 PM">7:00 PM&lt;/option>
+                      &lt;option value="7:30 PM">7:30 PM&lt;/option>
+                      &lt;option value="8 PM">8:00 AM&lt;/option>
+                      &lt;option value="8:30 PM">8:30 PM&lt;/option>
+                      &lt;option value="9 PM">9:00 PM&lt;/option>
+                      &lt;option value="9:30 PM">9:30 PM&lt;/option>
+                      &lt;option value="10 PM">10:00 PM&lt;/option>
+                      &lt;option value="10:30 PM">10:30 PM&lt;/option>
+                      &lt;option value="11 PM">11:00 PM&lt;/option>
+                      &lt;option value="11:30 PM">11:30 PM&lt;/option>
+                    &lt;/select>
+                  &lt;/div>
+                &lt;/div>
+
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  &lt;input
+                    test-id="basic-info-display-st-time"
+                    onChange={(date) => setDisplayStart(!displayStart)}
+                    type="checkbox"
+                    id="displayStartTime"
+                    name="displayStartTime"
+                    style={{ marginRight: "1rem", marginTop: 0 }}
+                  />
+
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal" }}
+                      htmlFor="displayStartTime"
+                    >
+                      Display start time.
+                    &lt;/label>
+                    &lt;p className={classes.para}>
+                      The start time of your event will be displayed to
+                      attendees.
+                    &lt;/p>
+                  &lt;/div>
+                &lt;/div>
+
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  &lt;input
+                    test-id="basic-info-display-end-time"
+                    ref={displayEndRef}
+                    type="checkbox"
+                    id="displayEndTime"
+                    name="displayEndTime"
+                    style={{ marginRight: "1rem", marginTop: 0 }}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal" }}
+                      htmlFor="displayEndTime"
+                    >
+                      Display end time.
+                    &lt;/label>
+                    &lt;p className={classes.para}>
+                      The end time of your event will be displayed to attendees.
+                    &lt;/p>
+                  &lt;/div>
+                &lt;/div>
+              &lt;/React.Fragment>
+            ) : (
+              &lt;React.Fragment>
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  &lt;input
+                    test-id="basic-info-display-end-time"
+                    ref={displayEndRef}
+                    type="checkbox"
+                    id="displayEndTime"
+                    name="displayEndTime"
+                    style={{ marginRight: "1rem", marginTop: 0 }}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal" }}
+                      htmlFor="displayEndTime"
+                    >
+                      Display end time.
+                    &lt;/label>
+                    &lt;p className={classes.para}>
+                      The end time of your event will be displayed to attendees.
+                    &lt;/p>
+                  &lt;/div>
+                &lt;/div>
+              &lt;/React.Fragment>
+            )}
+
+            {/* TIMEZONE AND LANGUAGE INFORMATION __________________________________________*/}
+
+            &lt;div
+              style={{
+                flexDirection: "column",
+                display: "flex",
+                width: "50%",
+                marginBottom: "2rem",
+              }}
+            >
+              &lt;div className={classes.inputContainer}>
+                &lt;label className={classes.inputLabel}>Time Zone&lt;/label>
+                &lt;select  test-id="basic-info-time-zone" ref={timeZoneRef} id="timeZone" name="timeZone">
+                  &lt;option value="(GMT-11:00) Midway Island">
+                    (GMT-11:00) Midway Island
+                  &lt;/option>
+                  &lt;option value="(GMT-11:00) Samoa">(GMT-11:00) Samoa&lt;/option>
+                  &lt;option value="(GMT-10:00) Hawaii">(GMT-10:00) Hawaii&lt;/option>
+                  &lt;option value="GMT-09:00) Alaska">(GMT-09:00) Alaska&lt;/option>
+                  &lt;option value="(GMT-08:00) Pacific Time (US &amp; Canada)">
+                    (GMT-08:00) Pacific Time (US &amp; Canada)
+                  &lt;/option>
+                  &lt;option value="(GMT-07:00) Arizona">
+                    (GMT-07:00) Arizona
+                  &lt;/option>
+                  &lt;option value="(GMT-07:00) Mountain Time (US &amp; Canada)">
+                    (GMT-07:00) Mountain Time (US &amp; Canada)
+                  &lt;/option>
+                  &lt;option value="(GMT-06:00) Central Time (US &amp; Canada)">
+                    (GMT-06:00) Central Time (US &amp; Canada)
+                  &lt;/option>
+                  &lt;option value="(GMT-05:00) Eastern Time (US &amp; Canada)">
+                    (GMT-05:00) Eastern Time (US &amp; Canada)
+                  &lt;/option>
+                  &lt;option value="(GMT-04:00) Caracas">
+                    (GMT-04:00) Caracas
+                  &lt;/option>
+                  &lt;option value="(GMT-04:00) Santiago">
+                    (GMT-04:00) Santiago
+                  &lt;/option>
+                  &lt;option value="(GMT-04:00) Atlantic Time (Canada)">
+                    (GMT-04:00) Atlantic Time (Canada)
+                  &lt;/option>
+                  &lt;option value="(GMT-03:00) Buenos Aires">
+                    (GMT-03:00) Buenos Aires
+                  &lt;/option>
+                  &lt;option value="(GMT-01:00) Cape Verde Is.">
+                    (GMT-01:00) Cape Verde Is.
+                  &lt;/option>
+                  &lt;option value="(GMT) London, Edinburgh, Dublin, Lisbon">
+                    (GMT) London, Edinburgh, Dublin, Lisbon
+                  &lt;/option>
+                  &lt;option value="(GMT+01:00) Amsterdam, Berlin, Rome, Vienna">
+                    (GMT+01:00) Amsterdam, Berlin, Rome, Vienna
+                  &lt;/option>
+                  &lt;option value="(GMT+02:00) Cairo">(GMT+02:00) Cairo&lt;/option>
+                  &lt;option value="(GMT+03:00) Moscow, St. Petersburg, Volgograd">
+                    (GMT+03:00) Moscow, St. Petersburg, Volgograd
+                  &lt;/option>
+                  &lt;option value="(GMT+04:00) Abu Dhabi, Muscat">
+                    (GMT+04:00) Abu Dhabi, Muscat
+                  &lt;/option>
+                  &lt;option value="(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi">
+                    (GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi
+                  &lt;/option>
+                  &lt;option value="(GMT+05:30) Sri Jayawardenapura">
+                    (GMT+05:30) Sri Jayawardenapura
+                  &lt;/option>
+                  &lt;option value="(GMT+05:45) Kathmandu">
+                    (GMT+05:45) Kathmandu
+                  &lt;/option>
+                  &lt;option value="(GMT+06:00) Astana, Dhaka">
+                    (GMT+06:00) Astana, Dhaka
+                  &lt;/option>
+                  &lt;option value="(GMT+07:00) Bangkok, Hanoi, Jakarta">
+                    (GMT+07:00) Bangkok, Hanoi, Jakarta
+                  &lt;/option>
+                  &lt;option value="(GMT+08:00) Beijing, Hong Kong, Singapore">
+                    (GMT+08:00) Beijing, Hong Kong, Singapore
+                  &lt;/option>
+                  &lt;option value="(GMT+09:00) Tokyo, Osaka, Sapporo, Seoul, Yakutsk">
+                    (GMT+09:00) Tokyo, Osaka, Sapporo, Seoul, Yakutsk
+                  &lt;/option>
+                  &lt;option value="(GMT+10:30) Adelaide">
+                    (GMT+10:30) Adelaide
+                  &lt;/option>
+                  &lt;option value="(GMT+11:00) Sydney, Melbourne, Brisbane">
+                    (GMT+11:00) Sydney, Melbourne, Brisbane
+                  &lt;/option>
+                  &lt;option value="(GMT+12:00) Auckland, Wellington">
+                    (GMT+12:00) Auckland, Wellington
+                  &lt;/option>
+                &lt;/select>
+              &lt;/div>
+
+              &lt;div className={classes.inputContainer}>
+                &lt;label className={classes.inputLabel}>
+                  Event Page Language
+                &lt;/label>
+                &lt;select test-id="basic-info-language" ref={languageRef} id="Language" name="Language">
+                  &lt;option value="English US">English US&lt;/option>
+                  &lt;option value="Chinese">Chinese&lt;/option>
+                  &lt;option value="Spanish">Spanish&lt;/option>
+                  &lt;option value="French">French&lt;/option>
+                  &lt;option value="German">German&lt;/option>
+                  &lt;option value="Japanese">Japanese&lt;/option>
+                  &lt;option value="Korean">Korean&lt;/option>
+                  &lt;option value="Portuguese">Portuguese&lt;/option>
+                  &lt;option value="Russian">Russian&lt;/option>
+                  &lt;option value="Arabic">Arabic&lt;/option>
+                &lt;/select>
+              &lt;/div>
+            &lt;/div>
+          &lt;/React.Fragment>
+
+          &lt;button
+            test-id="basic-info-submit"
+            className={classes.active}
+            type="submit"
+            style={{
+              alignSelf: "center",
+              transition: "transform 0.1s linear",
+              scale: "1.2",
+              marginTop: "2rem",
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.transform = "scale(1.05)";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.transform = "scale(1)";
+            }}
+          >
+            SUBMIT
+          &lt;/button>
+        &lt;/div>
+      &lt;/div>
+
+      {/* ___________________________________________________________________________________________________________________________________________ */}
+    &lt;/form>
+    &lt;/div>
+  );
+};
+
+export default CreateEventForm;
+
+// ___________________________________________________________ THE END ___________________________________________________________________________
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#user">user</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 19 2023 06:49:15 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
