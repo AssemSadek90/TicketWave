@@ -7,7 +7,7 @@ pipeline {
         stage('Fetch frontend') {
             steps {
                 git branch: 'main',
-                credentialsID: GITHUB_PAT,
+                credentialsId: GITHUB_PAT,
 				url: 'https://github.com/TicketWave/TicketWave-Frontend.git'
             }
         }
