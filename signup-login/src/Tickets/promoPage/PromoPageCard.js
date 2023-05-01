@@ -174,10 +174,10 @@ return(
             height: '6rem'
           }}
         >
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={onClickHandler}>Edit</button>
+          <button id="promo-main-edit" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={onClickHandler}>Edit</button>
           {/* <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={duplicateDataHandler}>Duplicate</button> */}
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={deleteHandler}>Delete</button>
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={handleCopyUrl}>Share Url</button>
+          <button id="promo-main-delete" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={deleteHandler}>Delete</button>
+          <button id="promo-main-share-url" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={handleCopyUrl}>Share Url</button>
         </div>
       )}
     </div>

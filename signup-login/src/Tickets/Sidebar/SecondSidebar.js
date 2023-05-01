@@ -56,7 +56,7 @@ const SecondSidebar = () => {
 
   return (
     <div className="sidebar" style={{marginLeft: '5rem', width: '16rem', padding: '10px', position: 'fixed', overflowY: 'auto', overflowX: 'hidden', height: '100%'}}>
-      <div style={{width: '100%', backgroundColor: 'none', margin: '1rem', outline: 'none', border: 'none', color: 'blue', fontSize: 'medium', fontWeight: 'bold', paddingBottom: '1rem', borderBottom: '1px solid #ccc', paddingLeft: '1rem', alignItems: 'center', display: 'flex', flexDirection: 'row'}} onClick={CloseHandler}><div style={{fontSize: 'large', marginRight: '1rem'}}><FaBackward /></div><div>Back</div></div>
+      <div style={{width: '100%', backgroundColor: 'none', margin: '1rem', outline: 'none', border: 'none', color: 'blue', fontSize: 'medium', fontWeight: 'bold', paddingBottom: '1rem', borderBottom: '1px solid #ccc', paddingLeft: '1rem', alignItems: 'center', display: 'flex', flexDirection: 'row'}} id="second-sidebar-back" onClick={CloseHandler}><div style={{fontSize: 'large', marginRight: '1rem'}}><FaBackward /></div><div>Back</div></div>
       <div style={{borderBottom: '1px solid #ccc', width: '100%'}}>
       {icons.map((item) => (
         <div 
@@ -95,30 +95,30 @@ const SecondSidebar = () => {
 >
           <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
           <button 
-          style={{height: '2rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setOptions(!options)}}>
+          id="second-sidebar-dashboard" style={{height: '2rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setOptions(!options)}}>
             Dashboard
             </button>
           <button 
-          style={{marginTop: '1rem', height: '2rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setOptions(!options)}}>
+          id="second-sidebar-options" style={{marginTop: '1rem', height: '2rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setOptions(!options)}}>
             Order Options
             </button>
 
 <button 
-          style={{marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setPayment(!payment)}}>
+          id="second-sidebar-payment" style={{marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setPayment(!payment)}}>
             Payments & Tax
             </button>
 
 
             <button 
-          style={{marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setMarketing(!marketing)}}>
+          id="second-sidebar-marketing" style={{marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setMarketing(!marketing)}}>
             Marketing
             </button>
             <button 
-          style={{ marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setManage(!manage)}}>
+          id="second-sidebar-manage-attendees" style={{ marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setManage(!manage)}}>
             Manage Attendees
             </button>
             {manage && 
-            <React.Fragment>
+            <React.Fragment id="second-sidebar-extension" >
               <div style={{fontSize: 'medium', paddingLeft: '1rem', lineHeight: '2rem'}}>
             <CustomLink to={`/Navigation/Events/Orders`}>Orders</CustomLink><br/>
             <CustomLink to={`/Navigation/Events/Attendee-Credits`}>Attendee Credits</CustomLink><br/>

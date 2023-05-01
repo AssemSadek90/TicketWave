@@ -105,7 +105,7 @@ const location = useLocation();
             
             <div style={{fontSize: '1.5rem', color: '#333', backgroundColor: activeIcon === item.name ? 'white' : '', width: '80%', height: '80%', justifyContent: 'center', alignItems: 'center', display: 'flex', borderRadius: '6px', overflow: 'hidden'}}
 >
-<SecondCustomNavLink  exact={false} to={`/Navigation/${item.name}`}>
+<SecondCustomNavLink  id="second-navbar" exact={false} to={`/Navigation/${item.name}`}>
           {item.icon}
           </SecondCustomNavLink>
           </div>

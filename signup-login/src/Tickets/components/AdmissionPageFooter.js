@@ -19,7 +19,7 @@ function AdmissionPageFooter({onClick}) {
           height: '6rem'
         }}
       >
-        <button onClick={onClick} >Next</button>
+        <button id="admission-page-footer-next" onClick={onClick} >Next</button>
       </div>
     </div>
   );

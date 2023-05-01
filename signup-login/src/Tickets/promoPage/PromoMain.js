@@ -53,9 +53,9 @@ function PromoMain({Promo, finalData}){
   <div className="inputContainer" >
         <label className="inputLabel">Search</label>
         <input
+          id="promo-main-search"
           style={{ fontSize: "0.85rem" }}
           type="text"
-          id="eventName"
           maxLength="50"
           name="eventName"
           value={searchQuery}
@@ -87,6 +87,7 @@ function PromoMain({Promo, finalData}){
         }}
       >
         <button
+          id="promo-main-add-code"
           onClick={() => {setCreatePromo(true); setUploadCsv(false)}}
         >
           Add a code
@@ -192,6 +193,7 @@ You can create codes or upload a CSV to import ones you’ve already made.
         }}
       >
         <button
+        id="promo-main-add-promo-code"
            onClick={() => {setCreatePromo(true); setUploadCsv(false)}}
         >
           Create Promo Code
@@ -200,7 +202,7 @@ You can create codes or upload a CSV to import ones you’ve already made.
 
 
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '10rem', marginLeft: '2rem'}}>
-    <div  onClick={() => {setUploadCsv(true); setCreatePromo(false)}} style={{height: '3rem', width: '100%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Upload Csv</div>
+    <div id="promo-main-upload-csv" onClick={() => {setUploadCsv(true); setCreatePromo(false)}} style={{height: '3rem', width: '100%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Upload Csv</div>
     {/* <button type="submit" style={{height: '3rem', width: '45%'}} >Next</button> */}
     </div>
 

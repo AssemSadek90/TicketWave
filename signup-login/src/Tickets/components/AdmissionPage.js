@@ -69,6 +69,7 @@ function nextHandler(){
         }}
       >
         <button
+          id="admission-page-add-ticket"
           onClick={() => {
             setFormOpen(true);
             setSelectedItem(null);
@@ -215,7 +216,7 @@ function nextHandler(){
           Event Capacity
           </p>
           <p>0/{capacity}</p>
-          <button style={{outline: 'none', color: 'blue', border: 'none', backgroundColor: 'white'}} onClick={() => {setEventForm(true)}} >Edit Capacity</button>
+          <button id="admission-page-edit-capacity" style={{outline: 'none', color: 'blue', border: 'none', backgroundColor: 'white'}} onClick={() => {setEventForm(true)}} >Edit Capacity</button>
           </div>
           
         </div>
