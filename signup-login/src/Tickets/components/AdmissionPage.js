@@ -28,7 +28,7 @@ function AdmissionPage({finalSubmission, Ticket, finalData, finalCapacity}) {
 
   // useEffect(() => {console.log(capacity)}, [capacity])
 
- useEffect(() => {setReverseData(data.reverse())}, [data])
+ useEffect(() => { setReverseData(data.reverse())}, [data])
 
 
 
