@@ -202,7 +202,7 @@ Handles email input change event
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/api/users/email/${user.email}/`, requestOptions)
+      .get(`/users/email/${user.email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         setIsLoading(false);
@@ -217,7 +217,7 @@ Handles email input change event
             headers: { 'Content-Type': 'application/json' },
           };
           server
-            .post('/api/auth/login/', user, requestOptions)
+            .post('/auth/login/', user, requestOptions)
             .then((response) => {
               const accessToken = response.data.access_token;
               const refreshToken = response.data.refresh_token;
@@ -252,7 +252,7 @@ Handles email input change event
       headers: { 'Content-Type': 'application/json' },
     };
     server
-      .get(`/api/users/email/${email}/`, requestOptions)
+      .get(`/users/email/${email}/`, requestOptions)
       .then((response) => {
         console.log(response);
         if (response.data.username.length > 0) {
@@ -264,7 +264,7 @@ Handles email input change event
           //console.log(forgotPasswordEmail);
           //send email
           server
-            .get(`/api/auth/password/reset/${username}/${email}/`)
+            .get(`/auth/password/reset/${username}/${email}/`)
             .then((response) => {
               console.log(response);
             })
