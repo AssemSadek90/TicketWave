@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Displayevents.module.css';
 import './Displayevents';
-import { Navigate, useNavigate } from 'react-router-dom';
 
 /**
  * Displays an event item, including its image, start date, ID, and summary.
@@ -17,25 +16,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
  * @return {JSX.Element} The rendered component.
  */
 export default function EventItem(props) {
-  const [eventId, seteventId] = useState(0);
-
-  /**
-   * Updates local storage with the current `eventId` state and navigates
-   * to the event details page.
-   */
-  useEffect(() => {
-    localStorage.setItem('EventId', eventId);
-    navigate('/event-details');
-  }, [eventId]);
-  const navigate = useNavigate();
-
-  /**
-   * Updates the `eventId` state with the ID of the clicked event.
-   */
-  function handleClick() {
-    seteventId(props.event.id);
-  }
   const eventLink = '/event-details/' + props.event.id;
+
   return (
     <div id="event-element" className={styles.event_element}>
       <a href={eventLink}>
