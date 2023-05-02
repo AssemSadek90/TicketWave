@@ -35,31 +35,30 @@ export default function EventItem(props) {
   function handleClick() {
     seteventId(props.event.id);
   }
+  const eventLink = '/event-details/' + props.event.id;
   return (
-    <div
-      onClick={() => handleClick()}
-      id="event-element"
-      className={styles.event_element}
-    >
-      <svg
-        id="event-poster"
-        className={styles.event_image}
-        width="100%"
-        height="50%"
-      >
-        <image href={props.event.path} width="100%" height="100%" />
-      </svg>
-      <div id="event-details" className={styles.event_details}>
-        <p id="event-detail-1" className={styles.event_detail_1}>
-          {props.event.start}
-        </p>
-        <p id="event-detail-2" className={styles.event_details_2}>
-          {props.event.id}
-        </p>
-        <p id="event-detail-3" className={styles.event_detail_3}>
-          {props.event.organizer}
-        </p>
-      </div>
+    <div id="event-element" className={styles.event_element}>
+      <a href={eventLink}>
+        <svg
+          id="event-poster"
+          className={styles.event_image}
+          width="100%"
+          height="50%"
+        >
+          <image href={props.event.path} width="100%" height="100%" />
+        </svg>
+        <div id="event-details" className={styles.event_details}>
+          <p id="event-detail-1" className={styles.event_detail_1}>
+            {props.event.start}
+          </p>
+          <p id="event-detail-2" className={styles.event_details_2}>
+            {props.event.id}
+          </p>
+          <p id="event-detail-3" className={styles.event_detail_3}>
+            {props.event.organizer}
+          </p>
+        </div>
+      </a>
     </div>
   );
 }
