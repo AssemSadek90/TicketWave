@@ -76,7 +76,8 @@
       "Tickets": "30",
       "Paid": "5",
       "Free": "3",
-      "EventURL": "www.google.com"
+      "EventURL": "www.google.com",
+      "Ticket_type":"Admission"
     }
   ],
   "Time": [
@@ -99,6 +100,14 @@
       "id": 3
     }
   ],
+  
+  "ticketData": [
+    { "Ticket_type": "General Admission", "Price": "20", "Sold":"10", "Tickets":"30" },
+    { "Ticket_type": "VIP", "Price": "50", "Sold":"5", "Tickets":"10" },
+    { "Ticket_type": "Student", "Price": "15",  "Sold":"6", "Tickets":"20" }
+  ],
+
+
   "Events": [
     {
       "id": 1,

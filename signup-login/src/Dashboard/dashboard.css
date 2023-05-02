@@ -1289,6 +1289,9 @@ button[disabled] {
     height: 96px;
   }
 }
+.order-list{
+  padding-left: 20px;
+}
 
 .eds-vector-image-size--reset svg {
   width: 100% !important;
