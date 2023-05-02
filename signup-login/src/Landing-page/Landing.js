@@ -2,6 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../NavBar/Navbar';
 import server from '../server';
 import DisplayEvents from './DisplayEvents/Displayevents';
+import {
+  getUsername,
+  getEmail,
+  getFirstName,
+  getLastName,
+  getUserID,
+  isValidSession,
+} from '../Credentials/Credentials';
 import '../App.css';
 
 /**
@@ -12,6 +20,12 @@ const Home = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    //console.log(isValidSession());
+    // getUserID();
+    // getUsername();
+    // getFirstName();
+    // getLastName();
+    // getEmail();
     const accessToken = localStorage.getItem('accessToken');
     const requestOptions = {
       headers: {

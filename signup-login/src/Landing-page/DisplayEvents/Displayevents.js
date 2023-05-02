@@ -19,11 +19,13 @@ export default function DisplayEvents(props) {
   return (
     <div>
       <CategoriesNav />
-      <h2 id="events-header">Events In Cairo</h2>
+      <h2 id="events-header" className={styles.events_header}>
+        Events In Cairo
+      </h2>
       <div id="event-display-container" className={styles.entertainment_events}>
         <EventsList eventsData={events.slice(0, 8)} />
       </div>
-      {events[8] && <MoreEvents events={events} />}
+      {events[8] && <MoreEvents events={events} header="more events" />}
     </div>
   );
 }
