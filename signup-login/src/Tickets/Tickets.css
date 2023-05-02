@@ -49,8 +49,14 @@ body {
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
+  font-size: small;
 
 }
+
+.inputContainer select {
+  font-size: small;
+}
+
 
 .inputContainer input {
   border: none;

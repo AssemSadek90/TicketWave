@@ -11,6 +11,7 @@ import PublishApp from './Publish/PublishApp';
 import Terms from './Log-in/TermsConditions/Terms';
 import ChangePassword from './Log-in/ChangePassword';
 import Dashboard from './Dashboard/dashboardinsights';
+import Tickets from './Tickets/Tickets';
 import NANavbar from './NavBar/NANavbar';
 
 /**
@@ -60,6 +61,7 @@ function App() {
           <Route path="/" element={<CreateAccount />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/Navigation/*" element={<Tickets />} />
           <Route path="/test" element={<NANavbar />} />
         </Routes>
       </Router>

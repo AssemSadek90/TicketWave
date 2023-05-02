@@ -4,6 +4,7 @@ import SecondCustomNavLink from '../UI/SecondCustomNavLink';
 import { useLocation } from 'react-router-dom';
 import SecondSidebar from './SecondSidebar';
 import { useEffect } from 'react';
+import NavPage from '../components/NavPage';
 
 const icons = [
     {
@@ -57,24 +58,22 @@ const location = useLocation();
   useEffect(() => {
     setCurrentUrl(location.pathname);
     isShowing(isShown);
-    // if (currentUrl === './Events')
   }, [location.pathname]);
 
 
 
   useEffect(() => {
-    if (currentUrl === '/Events') {
+    if (currentUrl === '/Navigation/Events') {
       setIsShown(true);
     }
-    else if (currentUrl.includes('/Events')) {
+    else if (currentUrl.includes('/Navigation/Events')) {
         setIsShown(true);
-        isShowing(true);
       }
 
       else setIsShown(false);
 
       isShowing(isShown)
-  }, [currentUrl, location]);
+  }, [currentUrl]);
 
 
   const handleIconClick = (name) => {
@@ -106,7 +105,7 @@ const location = useLocation();
             
             <div style={{fontSize: '1.5rem', color: '#333', backgroundColor: activeIcon === item.name ? 'white' : '', width: '80%', height: '80%', justifyContent: 'center', alignItems: 'center', display: 'flex', borderRadius: '6px', overflow: 'hidden'}}
 >
-<SecondCustomNavLink  exact={false} to={`/${item.name}`}>
+<SecondCustomNavLink  id="second-navbar" exact={false} to={`/Navigation/${item.name}`}>
           {item.icon}
           </SecondCustomNavLink>
           </div>
@@ -117,7 +116,10 @@ const location = useLocation();
 
 
 {isShown && (
+  <React.Fragment>
   <SecondSidebar />
+  {/* <NavPage /> */}
+  </React.Fragment>
 )}
 
 

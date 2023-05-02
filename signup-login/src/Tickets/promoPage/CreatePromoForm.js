@@ -128,9 +128,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
       <div className="inputContainer" style={{marginTop: '1rem'}}>
         <label className="inputLabel">Code Name</label>
         <input
+          id="promo-code-name"
           style={{ fontSize: "0.85rem" }}
           type="text"
-          id="eventName"
           name="eventName"
           value={codeName}
     onChange={(e) => {
@@ -158,9 +158,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   >
                     <label className="inputLabel">Ticket Limit</label>
                     <select
+                      id="promo-code-limit"
                       style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
                       onChange={(a) => setTicketLimit(a.target.value)}
-                      id="availability"
                       name="availability"
                       value={ticketLimit}
                     >
@@ -180,6 +180,7 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         <div  style={{display: 'flex', flexDirection: 'row', top: 0, bottom: 0, padding: '0px', margin: '0px'}} >
 
         <input
+          id="promo-code-amount"
           style={{ fontSize: "0.85rem", width: '60%' }}
           type="number"
           value={isTicketLimit}
@@ -220,9 +221,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   }}
                 >
                   <input
+                    id="promo-code-reveal"
                     onClick={() => {setReveal(!reveal)}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -252,9 +253,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                 <span style={{color: "#ccc", fontSize: '0.7rem', paddingLeft: '1rem', paddingRight: '1rem'}}>$</span>
         {/* <label className="inputLabel">Code Name</label> */}
         <input
+          id="promo-code-discount"
           style={{ fontSize: "0.85rem", width: '100%' }}
           type="number"
-          id="eventName"
           name="eventName"
           value={discount}
     onChange={(e) => {
@@ -281,9 +282,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   }}
                 >
                   <input
+                    id="promo-code-starts"
                     onClick={() => {setPromoStarts('Now')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -328,9 +329,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   }}
                 >
                   <input
+                    id="promo-code-scheduled-start"
                     onClick={() => {setPromoStarts('Scheduled Time')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -389,6 +390,7 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   >
                     <label className="inputLabel">Start Date</label>
                     <DatePicker
+                      id="promo-code-start-date"
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                     />
@@ -404,9 +406,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   >
                     <label className="inputLabel">Start Time</label>
                     <select
+                      id="promo-code-start-time"
                       onChange={(date) => setStartTime(date.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={startTime}
                     >
@@ -497,9 +499,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   }}
                 >
                   <input
+                    id="promo-code-ends"
                     onClick={() => {setPromoEnds('When ticket sale ends')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -544,9 +546,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   }}
                 >
                   <input
+                    id="promo-code-scheduled-end"
                     onClick={() => {setPromoEnds('Scheduled Time')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -605,6 +607,7 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   >
                     <label className="inputLabel">Start Date</label>
                     <DatePicker
+                      id="promo-code-end-date"
                       selected={endDate}
                       onChange={(date) => setEndDate(date)}
                     />
@@ -620,9 +623,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   >
                     <label className="inputLabel">Start Time</label>
                     <select
+                      id="promo-code-end-time"
                       onChange={(date) => setEndTime(date.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={endTime}
                     >
@@ -703,9 +706,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   }}
                 >
                   <input
+                    id="promo-code-all-tickets"
                     onClick={() => {setApplyCodeTo('All Visible Tickets')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -750,9 +753,9 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   }}
                 >
                   <input
+                    id="promo-code-certain-tickets"
                     onClick={() => {setApplyCodeTo('Only Certain Visible Tickets')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -813,7 +816,7 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
     <div type="cancel" onClick={() => {
         onCancel(true);}} style={{height: '3rem', width: '45%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Cancel</div>
-    <button type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
+    <button id="promo-code-next" type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
     </div>
   
 </div>

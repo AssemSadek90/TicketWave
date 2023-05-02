@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import "../Tickets.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import "./AddTicketForm.css";
 
 // your code here
 
@@ -216,6 +216,7 @@ function submitHandler(event){
 
 
               <button
+                id="add-ticket-form-paid"
                 type="button"
                 className={
                     navButton === "Paid"
@@ -230,6 +231,7 @@ function submitHandler(event){
               </button>
 
               <button
+                id="add-ticket-form-free"
                 type="button"
                 className={
                     navButton === "Free"
@@ -241,7 +243,7 @@ function submitHandler(event){
               </button>
 
               <button
-              
+                id="add-ticket-form-donation"
                 type="button"
                 className={
                     navButton === "Donation"
@@ -260,9 +262,9 @@ function submitHandler(event){
       <div className="inputContainer" style={{marginTop: '1rem'}}>
         <label className="inputLabel">Name</label>
         <input
+          id="add-ticket-form-name"
           style={{ fontSize: "0.85rem" }}
           type="text"
-          id="eventName"
           maxLength="50"
           name="eventName"
           value={name}
@@ -287,9 +289,9 @@ function submitHandler(event){
       <div className="inputContainer">
         <label className="inputLabel">Available Quantity</label>
         <input
+          id="add-ticket-form-quantity"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="quantity"
           name="quantity"
           value={quantity}
           onChange={(e) => {
@@ -315,9 +317,9 @@ function submitHandler(event){
         
         <label className="inputLabel">Price</label>
         <input
+          id="add-ticket-form-price"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="price"
           name="price"
           value={price}
           onChange={(e) => {
@@ -348,9 +350,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">When are tickets available?</label>
                     <select
-                      style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
+                      id="add-ticket-form-availability"
+                      style={{ maxHeight: "5rem", outline: 'none', border: 'none', fontSize: 'small' }}
                       onChange={(a) => setAvailability(a.target.value)}
-                      id="availability"
                       name="availability"
                       value={availability}
                     >
@@ -385,6 +387,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Sales start</label>
                     <DatePicker
+                      id="add-ticket-form-sales-start"
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                       
@@ -401,9 +404,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Start Time</label>
                     <select
+                      id="add-ticket-form-start-time"
                       style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
                       onChange={(date) => setStartTime(date.target.value)}
-                      id="startTime"
                       name="startTime"
                       value={startTime}
                     >
@@ -477,6 +480,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Sales end</label>
                     <DatePicker
+                      id="add-ticket-form-sales-end"
                       selected={endDate}
                       onChange={(date) => setEndDate(date)}
                     />
@@ -492,9 +496,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">End Time</label>
                     <select
+                      id="add-ticket-form-end-time"
                       onChange={(date) => setEndime(date.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={endTime}
                     >
@@ -578,7 +582,8 @@ function submitHandler(event){
 
                     
                     </div>
-                    <div style={{marginBottom: '8rem'}}>
+                    <div 
+                    style={{marginBottom: '8rem'}}>
 
 
                       
@@ -588,7 +593,7 @@ function submitHandler(event){
                     {
                         advancedSettings && 
                         
-                    <React.Fragment>
+                    <React.Fragment id="add-ticket-form-advanced-settings">
 
 
 <div
@@ -601,9 +606,9 @@ function submitHandler(event){
                   }}
                 >
                   <input
+                    id="add-ticket-form-show-ticket-sale"
                     onClick={() => {setShowTicketSale(!showTicketSale)}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -632,9 +637,9 @@ function submitHandler(event){
 <div className="inputContainer" style={{marginTop: '1rem'}}>
         <label className="inputLabel">Description</label>
         <textarea
+          id="add-ticket-form-description"
           style={{ fontSize: "0.85rem" }}
           type="text"
-          id="description"
           maxLength="2500"
           name="description"
           value={description}
@@ -669,9 +674,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Visibility</label>
                     <select
+                      id="add-ticket-form-Visibility"
                       onChange={(e) => setVisibility(e.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={Visibility}
                     >
@@ -687,7 +692,7 @@ function submitHandler(event){
                     {
                         Visibility === 'Custom Schedule' && 
 
-                    <React.Fragment>
+                    <React.Fragment id="add-ticket-form-custom-schedule">
                         <div
                   style={{
                     flexDirection: "row",
@@ -705,6 +710,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Start showing on</label>
                     <DatePicker
+                      id="add-ticket-form-custom-st-date"
                       selected={startShowingDate}
                       onChange={(date) => setStartShowingDate(date)}
                       
@@ -721,9 +727,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Start Time</label>
                     <select
+                      id="add-ticket-form-custom-st-time"
                       style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
                       onChange={(date) => setStartShowingTime(date.target.value)}
-                      id="startTime"
                       name="startTime"
                       value={startShowingTime}
                     >
@@ -797,6 +803,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Stop Showing on</label>
                     <DatePicker
+                      id="add-ticket-form-custom-stop-date"
                       selected={endShowingDate}
                       onChange={(date) => setEndShowingDate(date)}
                     />
@@ -812,9 +819,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">End Time</label>
                     <select
+                      id="add-ticket-form-custom-end-time"
                       onChange={(date) => setEndShowingTime(date.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={endShowingTime}
                     >
@@ -879,9 +886,9 @@ function submitHandler(event){
                   <div className="inputContainer" style={{marginRight: '10%', width:'45%'}}>
         <label className="inputLabel">Minimum quantity</label>
         <input
+          id="add-ticket-form-minimum"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="quantity"
           name="quantity"
           value={minimumQuantity}
           onChange={(e) => {
@@ -894,9 +901,9 @@ function submitHandler(event){
       <div className="inputContainer" style={{width:'45%'}}>
         <label className="inputLabel">Maximum quantity</label>
         <input
+          id="add-ticket-form-maximum"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="quantity"
           name="quantity"
           value={maximumQuantity}
           onChange={(e) => {
@@ -931,9 +938,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Sales Channel</label>
                     <select
+                      id="add-ticket-form-channel"
                       onChange={(e) => setSalesChannel(e.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={salesChannel}
                     >
@@ -955,9 +962,9 @@ function submitHandler(event){
                   }}
                 >
                   <input
+                    id="add-ticket-form-eticket"
                     onClick={() => {setETicket(!eTicket)}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -989,9 +996,9 @@ function submitHandler(event){
                   }}
                 >
                   <input
+                    id="add-ticket-form-willcall"
                     onClick={() => {setWillCall(!willCall)}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -1041,7 +1048,7 @@ function submitHandler(event){
     <div type="cancel" onClick={() => {
         setFormClosed(!formClosed)
         onCancel(formClosed);}} style={{height: '3rem', width: '45%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Cancel</div>
-    <button type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
+    <button id="add-ticket-form-submit" type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
     </div>
   
 </div>
