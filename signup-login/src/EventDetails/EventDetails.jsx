@@ -40,13 +40,17 @@ function EventDetails({ event }) {
         </div>
 
         <div className={styles.aside_booking_container}>
-          <AsideBooking
-            openOverlay={setShowOverlay}
-            alterCount={setCount}
-            count={count}
-            event={event}
-            isMobile={isMobile}
-          />
+          {event.fully_booked === false ? (
+            <AsideBooking
+              openOverlay={setShowOverlay}
+              alterCount={setCount}
+              count={count}
+              event={event}
+              isMobile={isMobile}
+            />
+          ) : (
+            <h3>Event fully booked</h3>
+          )}
         </div>
       </div>
     </>

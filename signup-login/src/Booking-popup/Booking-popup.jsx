@@ -4,7 +4,6 @@ import { FiArrowLeft } from "react-icons/fi";
 
 const Popup = ({ event, closeOverlay, count, isMobile }) => {
   const [delivery, setDelivery] = useState(0);
-  setDelivery(0);
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestOptions = {
@@ -12,7 +11,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     };
-    fetch("http://localhost:4000/userss", requestOptions)
+    fetch("http://localhost:4000/orders/create", requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
@@ -21,6 +20,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
     first_name: "",
     last_name: "",
     email: "",
+    ticket_number: count,
   });
 
   const handleChange = (e) => {
@@ -47,7 +47,6 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
 
             <div className={styles.form_container + " pt-5 "}>
               <h2 className="h4 fw-bold">Contact information</h2>
-              {/* make into seperate component */}
               {event.free === true ? (
                 <form id="free-reg" onSubmit={handleSubmit}>
                   <div className="row pt-3">
@@ -60,6 +59,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                         className="form-control"
                         placeholder="First name"
                         aria-label="First name"
+                        required
                       ></input>
                     </div>
                     <div className="col">
@@ -71,6 +71,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                         className="form-control"
                         placeholder="Last name"
                         aria-label="Last name"
+                        required
                       ></input>
                     </div>
                     <div className="col-12">
@@ -83,6 +84,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                         className="form-control"
                         id="inputAddress"
                         placeholder="Email address"
+                        required
                       ></input>
                     </div>
                     <div className="form-check mt-5 ms-3">
@@ -124,24 +126,30 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                   </div>
                 </form>
               ) : (
-                <form id="checkout-reg">
+                <form id="checkout-reg" onSubmit={handleSubmit}>
                   <div className="row pt-3">
                     <div className="col">
                       <input
                         type="text"
                         name="first_name"
+                        onChange={handleChange}
+                        value={formData.first_name}
                         className="form-control"
                         placeholder="First name"
                         aria-label="First name"
+                        required
                       ></input>
                     </div>
                     <div className="col">
                       <input
                         type="text"
                         name="last_name"
+                        onChange={handleChange}
+                        value={formData.last_name}
                         className="form-control"
                         placeholder="Last name"
                         aria-label="Last name"
+                        required
                       ></input>
                     </div>
                     <div className="col-12">
@@ -150,8 +158,11 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                         type="text"
                         name="email"
                         className="form-control"
+                        onChange={handleChange}
+                        value={formData.email}
                         id="inputAddress"
                         placeholder="Email address"
+                        required
                       ></input>
                     </div>
                     <div className="form-check mt-5 ms-3">

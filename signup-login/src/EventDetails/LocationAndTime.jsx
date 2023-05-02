@@ -3,6 +3,32 @@ import { AiTwotoneCalendar } from "react-icons/ai";
 import { IoLocationSharp } from "react-icons/io5";
 
 export default function LocationAndTime(props, isMobile) {
+  const realStart = () => {
+    const date = new Date(props.event.start);
+    const monthName = date.toLocaleString("default", { month: "long" });
+    const day = date.getDate();
+    let hour = date.getHours();
+    const amPm = hour < 12 ? "am" : "pm";
+    hour = hour % 12 || 12;
+    const minute = date.getMinutes();
+
+    return `${monthName} ${day} · ${hour}:${minute
+      .toString()
+      .padStart(2, "0")} ${amPm}`;
+  };
+  const realEnd = () => {
+    const date = new Date(props.event.end);
+    const monthName = date.toLocaleString("default", { month: "long" });
+    const day = date.getDate();
+    let hour = date.getHours();
+    const amPm = hour < 12 ? "am" : "pm";
+    hour = hour % 12 || 12;
+    const minute = date.getMinutes();
+
+    return `${monthName} ${day} · ${hour}:${minute
+      .toString()
+      .padStart(2, "0")} ${amPm}`;
+  };
   return (
     <>
       <h2 className="h4 fw-bold mb-2">When and where</h2>
@@ -15,7 +41,7 @@ export default function LocationAndTime(props, isMobile) {
             <h3 className="h6 fw-bold">Date and time</h3>
             <p>
               <small className="text-body-secondary text-muted">
-                <small>{props.event.start + " - " + props.event.end}</small>
+                <small>{realStart() + " - " + realEnd()}</small>
               </small>
             </p>
           </div>

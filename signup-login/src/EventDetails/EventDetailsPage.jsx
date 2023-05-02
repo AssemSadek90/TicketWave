@@ -8,12 +8,12 @@ function EventDetailsPage() {
   const [event, setEvent] = useState(null);
 
   async function fetchEvent(id) {
-    const response = await fetch(`http://localhost:4000/events?id=${id}`);
+    const response = await fetch(`http://localhost:4000/events/retrieve/${id}`);
     if (response.status !== 200) {
       // redirect to 404 page
     }
     const data = await response.json();
-    setEvent(data[id - 1]);
+    setEvent(data);
   }
 
   useEffect(() => {
