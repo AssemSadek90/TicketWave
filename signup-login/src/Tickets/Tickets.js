@@ -5,10 +5,10 @@ import AdmissionPage from "./components/AdmissionPage";
 import PromoMain from "./promoPage/PromoMain";
 import Sidebar from "./Sidebar/Sidebar";
 import { useLocation } from 'react-router-dom';
-import "./App.css";
+import "./Tickets.css";
 import AddAttendees from "./AddAttendees/AddAttendees";
 
-function MainApp() {
+function Tickets() {
 
   const [ticketData, setTicketData] = useState([]);
   const [promoData, setPromoData] = useState([]);
@@ -90,4 +90,4 @@ function TicketHandler(e, a){
   );
 }
 
-export default MainApp;
+export default Tickets;
