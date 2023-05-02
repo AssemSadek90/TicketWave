@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Displayevents.module.css';
 import './Displayevents';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 /**
- * A functional component that displays an event item, including its image,
- * start date, ID, and summary. The displayed information is to be updated.
+ * Displays an event item, including its image, start date, ID, and summary.
+ * When clicked, the event ID is stored in local storage and the user is
+ * navigated to the event details page.
  *
- * @component
  * @param {Object} props - The component props.
  * @param {Object} props.event - The event object to display.
  * @param {string} props.event.path - The URL path of the event image.
@@ -16,27 +17,48 @@ import './Displayevents';
  * @return {JSX.Element} The rendered component.
  */
 export default function EventItem(props) {
-  console.log(props);
+  const [eventId, seteventId] = useState(0);
+
+  /**
+   * Updates local storage with the current `eventId` state and navigates
+   * to the event details page.
+   */
+  useEffect(() => {
+    localStorage.setItem('EventId', eventId);
+    navigate('/event-details');
+  }, [eventId]);
+  const navigate = useNavigate();
+
+  /**
+   * Updates the `eventId` state with the ID of the clicked event.
+   */
+  function handleClick() {
+    seteventId(props.event.id);
+  }
   return (
-    <div id="event-element" className={styles.event_element} style={{}}>
+    <div
+      onClick={() => handleClick()}
+      id="event-element"
+      className={styles.event_element}
+    >
       <svg
         id="event-poster"
         className={styles.event_image}
         width="100%"
-        height="70%"
+        height="50%"
       >
         <image href={props.event.path} width="100%" height="100%" />
       </svg>
-      <div
-        id="event-details"
-        className={styles.event_details}
-        style={{ marginTop: '10px' }}
-      >
-        <p id="event-detail-1" style={{ fontWeight: 'bold' }}>
+      <div id="event-details" className={styles.event_details}>
+        <p id="event-detail-1" className={styles.event_detail_1}>
           {props.event.start}
         </p>
-        <p id="event-detail-2">{props.event.id}</p>
-        <p id="event-detail-3">{props.event.organizer}</p>
+        <p id="event-detail-2" className={styles.event_details_2}>
+          {props.event.id}
+        </p>
+        <p id="event-detail-3" className={styles.event_detail_3}>
+          {props.event.organizer}
+        </p>
       </div>
     </div>
   );
