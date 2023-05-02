@@ -85,7 +85,7 @@ whether the passwords are valid, the current password, and whether the form is l
       };
       server
         .post(
-          '/api/auth/password/change/',
+          '/auth/password/change/',
           { new_password1: newPassword, new_password2: confirmPassword },
           requestOptions
         )

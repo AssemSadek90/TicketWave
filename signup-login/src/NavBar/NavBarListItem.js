@@ -1,4 +1,4 @@
-import "../App.css";
+import '../App.css';
 
 /**
  * A component for rendering a navigation bar list item.
@@ -12,10 +12,10 @@ import "../App.css";
 export default function NavBarListItem(props) {
   return (
     <li>
-      <a href="#">
+      <span onClick={props.onClick}>
         {props.children}
         <span>{props.title}</span>
-      </a>
+      </span>
     </li>
   );
 }
