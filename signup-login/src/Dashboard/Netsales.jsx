@@ -29,9 +29,6 @@ function  Netsales(Event_id){return(
           £{Event_id.Gross} gross sales
         </div>
         <div className="eds-text-bs card-footer eds-l-mar-top-2 snipcss0-2-2-13">
-          Open
-          <a href="www.google.com" className="snipcss0-3-13-14"> event sales breakdown
-          </a>
         </div>
       </div> </div>
     <div className="cards-carousel-item eds-g-cell eds-g-cell-4-12">
