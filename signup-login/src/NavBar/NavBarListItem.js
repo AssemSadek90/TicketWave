@@ -12,10 +12,8 @@ import '../App.css';
 export default function NavBarListItem(props) {
   return (
     <li>
-      <span onClick={props.onClick}>
-        {props.children}
-        <span>{props.title}</span>
-      </span>
+      {props.children}
+      <span>{props.title}</span>
     </li>
   );
 }

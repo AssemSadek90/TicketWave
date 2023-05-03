@@ -32,7 +32,7 @@
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-direction: column;
   }
@@ -161,7 +161,7 @@
   .dropdown_container:hover .dropdown-button {
     background-color: #f2f2f246;
   }
-  @media screen and (min-width: 800px) and (max-width: 1150px){
+  @media screen and (min-width: 800px) and (max-width: 1200px){
     .search_button .label {
       display: none;
       }
@@ -174,7 +174,7 @@
       width: 100%;
       }
   }
-  @media screen and (min-width: 400px) and (max-width: 800px) {
+  @media screen and (max-width: 800px) {
     .navigation_bar {
     flex-direction: row;
     justify-content: space-between;

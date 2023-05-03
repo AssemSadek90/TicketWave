@@ -2,9 +2,10 @@
     display: flex;
     align-items: center;
     height: 50px;
-    width:fit-content;
     background-color: #dbdbdb46;
     margin-top: 1rem;
+    width: 100%;
+    overflow-x: scroll;
   }
   
   .tabs {
@@ -19,6 +20,7 @@
     cursor: pointer;
     position: relative;
     color: #666;
+    width: max-content;
   }
   
   .tab:hover {
