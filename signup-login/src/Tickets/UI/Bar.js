@@ -6,7 +6,7 @@ function Bar(){
   
   return (
     <div  style={{height: '2rem'}}>
-        <p className='BarPara'  style={{fontSize: '1.5rem'}}>This service is only available for Pakistan Nationals</p>
+        <p className='BarPara'  style={{fontSize: '1.5rem'}}>This service is only available here</p>
     </div>
   );
 };

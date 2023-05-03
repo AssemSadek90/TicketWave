@@ -43,7 +43,7 @@ const icons = [
 
 
 
-const Sidebar = ({isShowing}) => {
+const Sidebar = ({isShowing, visible}) => {
   const [activeIcon, setActiveIcon] = useState(null);
   const [isShown, setIsShown] = useState(false);
 //   const [activedIcon, setActivedIcon] = useState(null);
@@ -88,7 +88,9 @@ const location = useLocation();
 //     setActivedIcon(name);
 //     console.log(name)
 //   };
+  if (visible){
 
+ 
   return (
     <div className="sidebar" style={{borderRight: '1px solid #ccc'}}>
         
@@ -105,7 +107,7 @@ const location = useLocation();
             
             <div style={{fontSize: '1.5rem', color: '#333', backgroundColor: activeIcon === item.name ? 'white' : '', width: '80%', height: '80%', justifyContent: 'center', alignItems: 'center', display: 'flex', borderRadius: '6px', overflow: 'hidden'}}
 >
-<SecondCustomNavLink  id="second-navbar" exact={false} to={`/Navigation/${item.name}`}>
+<SecondCustomNavLink id="second-navbar" exact={false} to={`/Navigation/${item.name}`}>
           {item.icon}
           </SecondCustomNavLink>
           </div>
@@ -130,6 +132,9 @@ const location = useLocation();
       ))}
     </div>
   );
+}
+
+
 };
 
 export default Sidebar;

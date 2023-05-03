@@ -21,7 +21,7 @@ const CustomNavLink = ({ to, children }) => {
   }, []);
   
   return(
-    <NavLink exact={true} to={to} style={isMobile ? {padding: '2vw'}:{}} className="no-underline" activeClassName='active'>
+    <NavLink exact={true} to={to} style={isMobile ? {padding: '2vw'}:{}} className="no-underline">
   {children}
 </NavLink>
 );

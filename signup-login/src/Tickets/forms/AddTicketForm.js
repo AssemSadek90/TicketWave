@@ -153,7 +153,8 @@ function submitHandler(event){
     maximumQuantity: maximumQuantity,
     salesChannel: salesChannel,
     eTicket: eTicket,
-    willCall: willCall
+    willCall: willCall,
+    chosenQuantity: 0
   }
 
   onSubmit(data);
