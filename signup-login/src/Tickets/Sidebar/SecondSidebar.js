@@ -7,24 +7,24 @@ import CustomLink from '../UI/CustomLink';
 
 const icons = [
     {
-      name: 'basic-info',
+      name: '/basic-info',
       title: "Basic",
     },
     {
-      name: 'details',
+      name: '/details',
       title: "Details",
     },
     {
-      name: 'Tickets/admission',
+      name: '/Tickets/admission',
       title: "Tickets",
     },
     {
-      name: 'publish',
+      name: '/publish',
       title: "Publish",
     }
   ];
 
-const SecondSidebar = () => {
+const SecondSidebar = ({showSecond}) => {
   const [activeIcon, setActiveIcon] = useState(null);
   const [options, setOptions] = useState(false);
   const [payment, setPayment] = useState(false);
@@ -46,7 +46,7 @@ const SecondSidebar = () => {
   };
 
   function CloseHandler(){
-    history('/Navigation/Events')
+    history('/home')
   }
 
 //   const handleClick = (name) => {
@@ -55,8 +55,9 @@ const SecondSidebar = () => {
 //   };
 
   return (
-    <div className="sidebar" style={{marginLeft: '5rem',minWidth: '12rem', maxWidth: '20rem', padding: '10px', position: 'fixed', overflowY: 'auto', overflowX: 'hidden', height: '100%'}}>
-      <div style={{width: '100%', backgroundColor: 'none', margin: '1rem', outline: 'none', border: 'none', color: 'blue', fontSize: 'medium', fontWeight: 'bold', paddingBottom: '1rem', borderBottom: '1px solid #ccc', paddingLeft: '1rem', alignItems: 'center', display: 'flex', flexDirection: 'row'}}  id="second-sidebar-back" onClick={CloseHandler}><div style={{fontSize: 'large', marginRight: '1rem'}}><FaBackward /></div><div>Back</div></div>
+    <div className="no-underline">{showSecond && 
+    <div className="sidebar" style={{ zIndex: 99999,marginLeft: '5rem',minWidth: '12rem', maxWidth: '20rem', padding: '10px', position: 'fixed', overflowY: 'auto', overflowX: 'hidden', height: '100%'}}>
+      <div style={{width: '100%', backgroundColor: 'none', margin: '1rem', outline: 'none', border: 'none', color: 'blue', fontSize: 'medium', fontWeight: 'bold', paddingBottom: '1rem', borderBottom: '1px solid #ccc', paddingLeft: '1rem', alignItems: 'center', display: 'flex', flexDirection: 'row'}} onClick={CloseHandler}><div style={{fontSize: 'large', marginRight: '1rem'}}><FaBackward /></div><div>Back</div></div>
       <div style={{borderBottom: '1px solid #ccc', width: '100%'}}>
       {icons.map((item) => (
         <div 
@@ -72,7 +73,7 @@ const SecondSidebar = () => {
             <div style={{ fontSize: '1.5rem', color: '#333', backgroundColor: activeIcon === item.name ? 'white' : '', width: '80%', height: '80%', alignItems: 'center', display: 'flex', borderRadius: '6px', overflow: 'hidden'}}
 >
 
-<CustomLink exact={false} to={`/Navigation/Events/${item.name}`}>
+<CustomLink exact={false} to={`${item.name}`}>
           <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%', padding: '10px'}}>
           <div style={{fontSize: 'medium', paddingRight: '10px'}} >● </div>
           <p style={{fontSize: 'medium'}}>{item.title}</p>
@@ -95,37 +96,37 @@ const SecondSidebar = () => {
 >
           <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
           <button 
-          id="second-sidebar-dashboard" style={{height: '2rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setOptions(!options); history('/Navigation/Events/Dashboard')}}>
+           id="second-sidebar-dashboard" style={{height: '2rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setOptions(!options); history('/dashboard')}}>
             Dashboard
             </button>
           <button 
-          id="second-sidebar-options" style={{marginTop: '1rem', height: '2rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setOptions(!options); history('/Navigation/Events/Order-Options')}}>
+          id="second-sidebar-options" style={{marginTop: '1rem', height: '2rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setOptions(!options); history('/Order-Options')}}>
             Order Options
             </button>
 
 <button 
-           id="second-sidebar-payment" style={{marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setPayment(!payment); history('/Navigation/Events/Payments-and-Tax')}}>
+          id="second-sidebar-payment" style={{marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setPayment(!payment); history('/Payments-and-Tax')}}>
             Payments & Tax
             </button>
 
 
             <button 
-           id="second-sidebar-marketing" style={{marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setMarketing(!marketing); history('/Navigation/Events/Marketing')}}>
+           id="second-sidebar-marketing" style={{marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setMarketing(!marketing); history('/Marketing')}}>
             Marketing
             </button>
             <button 
-          id="second-sidebar-manage-attendees" style={{ marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setManage(!manage)}}>
+          id="second-sidebar-manage-attendees"  style={{ marginTop: '1rem', fontSize: 'medium', border: 'none', cursor: 'pointer', height: '2rem', background: 'none', color: 'rgb(116, 116, 116)', textAlign: 'left'}} onClick={() => {setManage(!manage)}}>
             Manage Attendees
             </button>
             {manage && 
             <React.Fragment id="second-sidebar-extension">
               <div style={{fontSize: 'medium', paddingLeft: '1rem', lineHeight: '2rem'}}>
-            <CustomLink to={`/Navigation/Events/Orders`}>Orders</CustomLink><br/>
-            <CustomLink to={`/Navigation/Events/Attendee-Credits`}>Attendee Credits</CustomLink><br/>
-            <CustomLink to={`/Navigation/Events/Add-Attendees`}>Add Attendees</CustomLink><br/>
-            <CustomLink to={`/Navigation/Events/Attendee-List`}>Attendee List</CustomLink><br/>
-            <CustomLink to={`/Navigation/Events/Check-in`}>Check-in</CustomLink><br/>
-            <CustomLink to={`/Navigation/Events/Sold-Tickets`}>Sold Tickets</CustomLink>
+            <CustomLink to={`/Orders`}>Orders</CustomLink><br/>
+            <CustomLink to={`/Attendee-Credits`}>Attendee Credits</CustomLink><br/>
+            <CustomLink to={`/Add-Attendees`}>Add Attendees</CustomLink><br/>
+            <CustomLink to={`/Attendee-List`}>Attendee List</CustomLink><br/>
+            <CustomLink to={`/Check-in`}>Check-in</CustomLink><br/>
+            <CustomLink to={`/Sold-Tickets`}>Sold Tickets</CustomLink>
             </div>
             
             </React.Fragment>
@@ -134,6 +135,9 @@ const SecondSidebar = () => {
           </div>
 
     </div>
+
+}</div>
+
   );
 };
 

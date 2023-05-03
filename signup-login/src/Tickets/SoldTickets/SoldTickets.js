@@ -36,7 +36,7 @@ if (myData) {
     return(
       <div style={{height: '100%', width: '100%', paddingBottom: '2rem'}}>
         <div style={{position: 'relative', margin: 'auto', maxWidth: '800px', padding: '1rem', backgroundColor: '#fff', boxShadow: '0 0.5rem 1rem rgba(0,0,0,0.15)', borderRadius: '0.5rem'}}>
-  <Link to={"/Navigation/Events/Sold-Tickets"} style={{marginBottom: '1rem', color: '#555', textDecoration: 'none', fontSize: '1.2rem', fontWeight: 'bold'}}>&larr; Back</Link>
+  <Link to={"/Sold-Tickets"} style={{marginBottom: '1rem', color: '#555', textDecoration: 'none', fontSize: '1.2rem', fontWeight: 'bold'}}>&larr; Back</Link>
   <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: '1px solid #ccc', paddingBottom: '1rem', marginBottom: '1rem'}}>
     <h1 style={{margin: 0, fontSize: '2.4rem', fontWeight: 'bold'}}>{myData ? myData.name : ''}</h1>
     <p style={{margin: 0, fontSize: '1.6rem', color: '#888'}}>{myData ? myData.soldTickets : ''} sold out of {myData ? myData.quantity : ''}</p>

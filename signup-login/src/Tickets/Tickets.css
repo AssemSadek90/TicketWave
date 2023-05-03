@@ -13,6 +13,7 @@ body {
   align-items: center;
   padding: 10vh;
   background-color: white;
+
 }
 
 
@@ -195,4 +196,18 @@ body {
 
 .activated{
   background-color: blue;
+}
+
+
+.nav-link:hover,
+.link:hover {
+  text-decoration: none;
+}
+
+a:hover{
+  text-decoration: none;
+}
+
+.no-underline:hover {
+  text-decoration: none;
 }

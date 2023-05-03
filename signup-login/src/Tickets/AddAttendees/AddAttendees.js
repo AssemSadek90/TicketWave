@@ -199,7 +199,7 @@ const [name, setName] = useState('')
 
 
 
-            href="https://react-ea708.web.app/Navigation/${item.id}"
+            href="https://react-ea708.web.app/${item.id}"
             
 
 
