@@ -4,8 +4,7 @@
     height: 50px;
     background-color: #dbdbdb46;
     margin-top: 1rem;
-    width: 100%;
-    overflow-x: scroll;
+    width: fit-content;
   }
   
   .tabs {
@@ -47,3 +46,9 @@
     background-color: #333;
   }
   
+  @media screen and (max-width: 850px){
+    .navbar{
+      width: 100%;
+      overflow-x: scroll;
+    }
+  }

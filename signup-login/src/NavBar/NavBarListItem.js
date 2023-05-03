@@ -1,4 +1,5 @@
 import '../App.css';
+import styles from './Navbar.module.css';
 
 /**
  * A component for rendering a navigation bar list item.
@@ -10,10 +11,13 @@ import '../App.css';
  * @returns {JSX.Element} The JSX element representing the navigation bar list item.
  */
 export default function NavBarListItem(props) {
+  console.log(props.path);
   return (
     <li>
-      {props.children}
-      <span>{props.title}</span>
+      <a className={styles.navbar_a} href={props.path}>
+        {props.children}
+        <span>{props.title}</span>
+      </a>
     </li>
   );
 }
