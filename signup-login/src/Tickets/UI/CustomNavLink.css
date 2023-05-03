@@ -1,0 +1,16 @@
+.no-underline {
+    text-decoration: none;
+    color: rgb(116, 116, 116);
+    font-weight: 500;
+  }
+  
+
+.active{
+    color: blue;
+/* border-color: blue; */
+    border-bottom: 2px solid blue;
+    padding-bottom: 2vh;
+    /* margin-right: 1rem; */
+}
+
+.sample{color: rgb(255, 255, 255, 0.8)}
