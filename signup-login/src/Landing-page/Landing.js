@@ -26,11 +26,11 @@ const Home = () => {
     // getFirstName();
     // getLastName();
     // getEmail();
-    const accessToken = localStorage.getItem('accessToken');
+    // const accessToken = localStorage.getItem('accessToken');
     const requestOptions = {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
+        // Authorization: `Bearer ${accessToken}`,
       },
     };
     server
