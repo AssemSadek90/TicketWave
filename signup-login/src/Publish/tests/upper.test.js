@@ -1,9 +1,10 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
-import Upper from '../upper part';
+import Upper from "../upper part";
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
+
 
 describe('Upper component', () => {
   const event = {
@@ -11,7 +12,7 @@ describe('Upper component', () => {
     created: '2022-03-23',
     EventState: 'online',
     price: '$50',
-    Availability: 'Limited',
+    Availability: 'Limited'
   };
 
   it('renders event name correctly', () => {
@@ -21,9 +22,7 @@ describe('Upper component', () => {
 
   it('renders event date correctly', () => {
     const wrapper = shallow(<Upper {...event} />);
-    expect(wrapper.find('.event-preview-card__date').text()).toEqual(
-      '2022-03-23'
-    );
+    expect(wrapper.find('.event-preview-card__date').text()).toEqual('2022-03-23');
   });
 
   it('renders event location correctly', () => {
@@ -38,8 +37,6 @@ describe('Upper component', () => {
 
   it('renders event availability correctly', () => {
     const wrapper = shallow(<Upper {...event} />);
-    expect(wrapper.find('.eds-vector-image i').last().text()).toEqual(
-      'Limited'
-    );
+    expect(wrapper.find('.eds-vector-image i').last().text()).toEqual('Limited');
   });
 });

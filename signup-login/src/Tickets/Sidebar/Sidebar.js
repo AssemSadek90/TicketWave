@@ -8,7 +8,7 @@ import NavPage from '../components/NavPage';
 
 const icons = [
     {
-      name: 'Home',
+      name: 'home',
       icon: <FaHome />,
     },
     {
@@ -16,36 +16,36 @@ const icons = [
       icon: <FaCalendarAlt />,
     },
     {
-      name: 'Orders',
+      name: 'home-orders',
       icon: <FaShoppingCart />,
     },
     {
-      name: 'Marketing',
+      name: 'home-marketing',
       icon: <FaBullhorn />,
     },
     {
-      name: 'Reports',
+      name: 'home-reports',
       icon: <FaFileAlt />,
     },
     {
-      name: 'Finance',
+      name: 'home-finance',
       icon: <FaMoneyBill />,
     },
     {
-      name: 'Settings',
+      name: 'home-settings',
       icon: <FaCog />,
     },
     {
-      name: 'App-Marketplace',
+      name: 'home-app-Marketplace',
       icon: <FaThLarge />,
     },
   ];
 
 
 
-const Sidebar = ({isShowing, visible}) => {
+const Sidebar = ({visible, showSecond}) => {
   const [activeIcon, setActiveIcon] = useState(null);
-  const [isShown, setIsShown] = useState(false);
+  const [isShown, setIsShown] = useState(true);
 //   const [activedIcon, setActivedIcon] = useState(null);
 
 
@@ -57,23 +57,25 @@ const location = useLocation();
 
   useEffect(() => {
     setCurrentUrl(location.pathname);
-    isShowing(isShown);
   }, [location.pathname]);
 
 
 
   useEffect(() => {
-    if (currentUrl === '/Navigation/Events') {
+    if (showSecond === true){
       setIsShown(true);
     }
-    else if (currentUrl.includes('/Navigation/Events')) {
-        setIsShown(true);
-      }
+    // if (currentUrl === '/Events') {
+    //   setIsShown(true);
+    // }
+    // else if (currentUrl.includes('/Events' || "dashboard")) {
+    //     setIsShown(true);
+    //   }
 
-      else setIsShown(false);
+    //   else setIsShown(false);
 
-      isShowing(isShown)
-  }, [currentUrl]);
+    //   isShowing(isShown)
+  }, [showSecond]);
 
 
   const handleIconClick = (name) => {
@@ -107,7 +109,7 @@ const location = useLocation();
             
             <div style={{fontSize: '1.5rem', color: '#333', backgroundColor: activeIcon === item.name ? 'white' : '', width: '80%', height: '80%', justifyContent: 'center', alignItems: 'center', display: 'flex', borderRadius: '6px', overflow: 'hidden'}}
 >
-<SecondCustomNavLink id="second-navbar" exact={false} to={`/Navigation/${item.name}`}>
+<SecondCustomNavLink  id="second-navbar" exact={false} to={`/${item.name}`}>
           {item.icon}
           </SecondCustomNavLink>
           </div>
@@ -119,7 +121,7 @@ const location = useLocation();
 
 {isShown && (
   <React.Fragment>
-  <SecondSidebar />
+  <SecondSidebar showSecond={showSecond} />
   {/* <NavPage /> */}
   </React.Fragment>
 )}

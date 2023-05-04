@@ -8,9 +8,25 @@ import Sales from './Sales';
  * @function
  * @returns {JSX.Element} - The dashboard UI.
  */
-function dashboard() {
+function Dashboard({soldTicketData, ticketData}) {
    // eslint-disable-next-line react-hooks/rules-of-hooks
    const [Event_id, setEvent_id] = useState("");
+
+   const [sold, setSold] = useState(0);
+  const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        const totalSoldTickets = soldTicketData.reduce((acc, cur) => acc + cur.soldTickets, 0);
+        
+        setSold(totalSoldTickets);
+      }, [soldTicketData]);
+
+      useEffect(() => {
+        const totalTickets = ticketData.reduce((acc, cur) => acc + parseInt(cur.quantity), 0);
+        setTotal(totalTickets)
+      }, [ticketData])
+      
+
      /**
    * Fetches event data from the server and updates the state with the data.
    * @function
@@ -39,9 +55,9 @@ function dashboard() {
   <div className="eds-g-cell eds-g-cell-12-12 eds-text-hm__title dashboard-main-title eds-l-pad-hor-3">
   <h1 className="st-hover">Dashboard</h1>
   </div>
-   <Upperdashboard/>
+   <Upperdashboard sold={sold} total={total} />
    <Share EventURL={Event_id.EventURL}/>
-   <Sales/>
+   <Sales />
   </div>
   </div>
    
@@ -52,4 +68,4 @@ function dashboard() {
   )
 }
 
-export default dashboard;
+export default Dashboard;
