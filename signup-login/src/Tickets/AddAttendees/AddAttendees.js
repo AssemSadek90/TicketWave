@@ -7,33 +7,78 @@ import { useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 
 
-
-  
-
+/**
+A component for adding attendees to an event
+@param {object} props - The props object
+@param {array} props.finalData - The array of attendees to be displayed
+@param {function} props.addAttendee - The function to add an attendee to the event
+@param {number} props.soldTickets - The number of tickets already sold for the event
+@returns {JSX.Element} - The AddAttendees component
+/function AddAttendees({finalData, addAttendee, soldTickets}) { /*
+The react-router-dom hook to navigate between pages
+@type {function}
+*/
 function AddAttendees({finalData, addAttendee, soldTickets}) {
 
+
+  /**
+The state variable to store the attendees that are not yet added to the event
+@type {array} 
+*/
   const navigate = useNavigate();
-  
+  /** The state variable to store the attendees that are not yet added to the event
+@type {array}
+*/
   const [pendingData, setPendingData] = useState([])
+  /** The state variable to store the total cost of all selected attendees
+@type {string}
+*/
   const [totalCost, setTotalCost] = useState('');
+  /** The state variable to store the initial quantity of attendees
+@type {number}
+*/
   const [initialQuantity, setInitialQuantity] = useState(0);
+  /** The state variable to store the number of attendees currently selected
+@type {number}
+*/
   const [selected, setSelected] = useState(0)
+  /** The state variable to store the search query for filtering attendees
+@type {string}
+*/
   const [searchQuery, setSearchQuery] = useState("");
-
-
+  /** The state variable to store whether data is currently being sent
+@type {boolean}
+*/
   const [sending, setSending] = useState(false);
-const [timer, setTimer] = useState(0);
+  /** The state variable to store the current time in seconds
+@type {number}
+*/
+  const [timer, setTimer] = useState(0);
+  /** The number of minutes in the current timer value
+@type {number}
+*/
+  const minutes = Math.floor(timer / 60);
+  /** The number of seconds remaining in the current timer value
+@type {number}
+*/
+  const seconds = timer % 60;
+  /** The formatted time string for display purposes
+@type {string}
+*/
+  const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-const minutes = Math.floor(timer / 60);
-const seconds = timer % 60;
-const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-
+/** Starts the countdown timer for a specified duration and sets the sending state to true
+@function
+@returns {void}
+*/
 const startTimer = () => {
   setTimer(780); // 720 seconds = 12 minutes
   setSending(true);
 }
-
+/** The useEffect hook to update the timer every second when sending is true
+@effect
+@returns {void}
+*/
 useEffect(() => {
   let intervalId;
 
@@ -46,6 +91,10 @@ useEffect(() => {
   return () => clearInterval(intervalId);
 }, [sending]);
 
+/**The useEffect hook to set sending to false and reset the timer to 0 when it reaches 0
+@effect
+@returns {void}
+*/
 useEffect(() => {
   if (timer === 0) {
     setSending(false);
@@ -53,7 +102,12 @@ useEffect(() => {
   }
 }, [timer]);
 
-
+/** Filters the final data based on the search query and sets the filtered data state
+@function
+@param {object[]} finalData - The array of data to be filtered
+@param {string} searchQuery - The search query to filter the data with
+@returns {object[]} The filtered data
+*/
   const filtered = finalData.filter(
     (item) =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -73,12 +127,19 @@ useEffect(() => {
 
 
 
-
+/** Sets the pending data state with the provided data
+@function
+@param {object[]} e - The array of data to set the pending data state with
+@returns {void}
+*/
 function finalDataHandler(e){
   setPendingData(e);
 }
 
-
+/** Handles the next button click by setting the initial quantity state to 0, starting the timer, and navigating to the next page
+@function
+@returns {void}
+*/
 function nextHandler(){
   // addAttendee(pendingData);
   // console.log(pendingData)
@@ -88,6 +149,10 @@ function nextHandler(){
   // navigate('/Navigation/Events/Send-Email');
 }
 
+/** The useEffect hook to update the total cost and selected state whenever the pending data changes
+@effect
+@returns {void}
+*/
 useEffect(() => {
   setTotalCost(finalData.reduce((acc, cur) => acc + cur.totalCost, 0));
   setSelected(finalData.reduce((acc, cur) => acc + cur.chosenQuantity, 0));
@@ -100,25 +165,13 @@ useEffect(() => {
 // console.log(selected)
 // }, [selected])
 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const [name, setName] = useState('')
+    /**The useState hook to store the name input value*/
+    const [name, setName] = useState('')
+    /**The useState hook to store the last name input value*/
     const [lastName, setLastName] = useState('')
+    /**The useState hook to store the email input value*/
     const [email, setEmail] = useState('')
+    /**The useState hook to store the filtered data*/
     const [filteredData, setFilteredData] = useState([]);
 
 
@@ -130,14 +183,22 @@ const [name, setName] = useState('')
     //   // console.log(totalCost)
     //   }, [data])
 
-
-
+    /** useEffect hook to filter the data and update the state
+@function
+@param {Array} pendingData - The array of data to filter
+@returns {void} - Nothing
+*/
     useEffect(() => {
       const filtered = pendingData.filter((item) => item.chosenQuantity > 0);
         setFilteredData(filtered);
         // console.log(filtered);
     }, [pendingData]);
 
+    /** Sends an email to attendees with the invitation details
+@function
+@param {Object} e - The event object
+@returns {void} - Nothing
+*/
     function sendEmail(e) {
         e.preventDefault();
         addAttendee(pendingData);
@@ -146,6 +207,7 @@ const [name, setName] = useState('')
         // console.log("Data to email is = ", filteredData)
 
 
+// Construct the message to be sent via email
         const message = `
   <html>
     <head>
@@ -231,6 +293,8 @@ const [name, setName] = useState('')
 `;
 
 
+
+// Send email via emailjs service
 
         emailjs.send('service_raj17x9', 'template_pk6pl9g', {
             from_email: "ticketwave_01@outlook.com",
