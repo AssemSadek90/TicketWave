@@ -188,6 +188,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
   <label style={{ fontWeight: 'bold', fontSize: '1.2rem', color: '#333', marginBottom: '0.5rem', display: 'block' }}>Import Codes</label>
   <div style={{ position: 'relative', width: '100%' }}>
     <input
+      id="upload-csv-import"
       type="file"
       accept=".csv"
       onChange={handleCsvUpload}
@@ -195,7 +196,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
       style={{ position: 'absolute', top: 0, left: 0, opacity: 0, width: '100%', height: '100%', cursor: 'pointer' }}
       className="csvInput"
     />
-    <button style={{ fontSize: '0.85rem', padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ccc', transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out', width: '100%', height: '5rem' }}>
+    <button id="upload-csv-codename" style={{ fontSize: '0.85rem', padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ccc', transition: 'border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out', width: '100%', height: '5rem' }}>
       {codeName || 'Choose File'}
     </button>
   </div>
@@ -232,9 +233,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   >
                     <label className="inputLabel">Ticket Limit</label>
                     <select
+                      id="upload-csv-limit"
                       style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
                       onChange={(a) => setTicketLimit(a.target.value)}
-                      id="availability"
                       name="availability"
                       value={ticketLimit}
                     >
@@ -254,6 +255,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
         <div  style={{display: 'flex', flexDirection: 'row', top: 0, bottom: 0, padding: '0px', margin: '0px'}} >
 
         <input
+          id="upload-csv-amount"
           style={{ fontSize: "0.85rem", width: '60%' }}
           type="number"
           value={isTicketLimit}
@@ -294,9 +296,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   }}
                 >
                   <input
+                    id="upload-csv-reveal"
                     onClick={() => {setReveal(!reveal)}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -326,9 +328,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                 <span style={{color: "#ccc", fontSize: '0.7rem', paddingLeft: '1rem', paddingRight: '1rem'}}>$</span>
         {/* <label className="inputLabel">Code Name</label> */}
         <input
+          id="upload-csv-discount"
           style={{ fontSize: "0.85rem", width: '100%' }}
           type="number"
-          id="eventName"
           name="eventName"
           value={discount}
     onChange={(e) => {
@@ -355,9 +357,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   }}
                 >
                   <input
+                    id="upload-csv-starts"
                     onClick={() => {setPromoStarts('Now')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -402,9 +404,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   }}
                 >
                   <input
+                    id="upload-csv-scheduled-start"
                     onClick={() => {setPromoStarts('Scheduled Time')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -463,6 +465,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   >
                     <label className="inputLabel">Start Date</label>
                     <DatePicker
+                      id="upload-csv-scheduled-start-date"
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                     />
@@ -478,9 +481,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   >
                     <label className="inputLabel">Start Time</label>
                     <select
+                      id="upload-csv-scheduled-start-time"
                       onChange={(date) => setStartTime(date.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={startTime}
                     >
@@ -571,9 +574,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   }}
                 >
                   <input
+                    id="upload-csv-ends"
                     onClick={() => {setPromoEnds('When ticket sale ends')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -618,9 +621,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   }}
                 >
                   <input
+                    id="upload-csv-scheduled-end"
                     onClick={() => {setPromoEnds('Scheduled Time')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -679,6 +682,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   >
                     <label className="inputLabel">End Date</label>
                     <DatePicker
+                      id="upload-csv-scheduled-end-date"
                       selected={endDate}
                       onChange={(date) => setEndDate(date)}
                     />
@@ -694,9 +698,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   >
                     <label className="inputLabel">End Time</label>
                     <select
+                      id="upload-csv-scheduled-end-time"
                       onChange={(date) => setEndTime(date.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={endTime}
                     >
@@ -777,9 +781,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   }}
                 >
                   <input
+                    id="upload-csv-all-tickets"
                     onClick={() => {setApplyCodeTo('All Visible Tickets')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -824,9 +828,9 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                   }}
                 >
                   <input
+                    id="upload-csv-certain-tickets"
                     onClick={() => {setApplyCodeTo('Only Certain Visible Tickets')}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{
                         display: "inline-block",
@@ -887,7 +891,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
     <div type="cancel" onClick={() => {
         onCancel(true);}} style={{height: '3rem', width: '45%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Cancel</div>
-    <button type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
+    <button id="upload-csv-submit" type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
     </div>
   
 </div>

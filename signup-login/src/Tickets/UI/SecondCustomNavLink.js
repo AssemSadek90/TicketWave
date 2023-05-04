@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './SecondCustomNavLink.css';
 import { useState, useEffect } from 'react';
 
@@ -21,9 +22,13 @@ const SecondCustomNavLink = ({ to, children, exact }) => {
   }, []);
   
   return(
-    <NavLink exact={exact} to={to} style={isMobile ? {padding: '2vw'}:{}} className="no-underlines" activeClassName='actived'>
+<Link exact={exact} to={to} style={isMobile ? {padding: '2vw'} : {}} 
+  className="no-underlines" 
+  activeClassName='actived' 
+>
   {children}
-</NavLink>
+</Link>
+
 );
   };
 

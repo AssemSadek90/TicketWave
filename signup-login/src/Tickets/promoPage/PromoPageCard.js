@@ -30,11 +30,11 @@ function PromoPageCard({data, onClick, onDuplicate, onDelete}){
       };
       
 
-      // const formattedDate='When event ends'
+      const formattedDate='When event ends'
 
-      // if (data.endDate){
-      //   formattedDate = data.endDate?.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-      // }
+      if (data.endDate){
+        formattedDate = data.endDate?.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+      }
     
 
 
@@ -174,10 +174,10 @@ return(
             height: '6rem'
           }}
         >
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={onClickHandler}>Edit</button>
+          <button id="promo-main-edit" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={onClickHandler}>Edit</button>
           {/* <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={duplicateDataHandler}>Duplicate</button> */}
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={deleteHandler}>Delete</button>
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={handleCopyUrl}>Share Url</button>
+          <button id="promo-main-delete" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={deleteHandler}>Delete</button>
+          <button id="promo-main-share-url" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={handleCopyUrl}>Share Url</button>
         </div>
       )}
     </div>

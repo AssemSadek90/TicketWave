@@ -7,7 +7,7 @@ import AddTicketForm from "../forms/AddTicketForm";
 import AdmissionPageCard from "./AdmissionPageCard";
 import EventCapacity from "../forms/EventCapacity";
 
-function AdmissionPage({finalSubmission, Ticket, finalData, finalCapacity}) {
+function AdmissionPage({finalSubmission, Ticket, finalData, finalCapacity, soldTicketData}) {
   const [formOpen, setFormOpen] = useState(false);
   const [data, setData] = useState(finalData ? finalData : []);
   const [reverseData, setReverseData] = useState([]);
@@ -28,7 +28,10 @@ function AdmissionPage({finalSubmission, Ticket, finalData, finalCapacity}) {
 
   // useEffect(() => {console.log(capacity)}, [capacity])
 
- useEffect(() => {setReverseData(data.reverse())}, [data])
+ useEffect(() => {
+
+  
+  setReverseData(data.reverse())}, [data])
 
 
 
@@ -69,6 +72,7 @@ function nextHandler(){
         }}
       >
         <button
+        id="admission-page-add-ticket"
           onClick={() => {
             setFormOpen(true);
             setSelectedItem(null);
@@ -86,6 +90,7 @@ function nextHandler(){
           <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}>
   <AdmissionPageCard
     data={item}
+    soldTicketData={soldTicketData}
     key={index}
     index={index}
     onClick={() => {
@@ -206,16 +211,19 @@ function nextHandler(){
             borderBottom: "1px solid #ccc",
             alignItems: "center",
             display: "flex",
-            width: '100%'
+            width: '100%',
+            minWidth: '30rem'
           }}
           
         >
           <div style={{display: 'flex',flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
-            <p style={{paddingRight: '50%'}}>
+            <p style={{paddingRight: '30%', width: '30rem'}}>
           Event Capacity
           </p>
           <p>0/{capacity}</p>
-          <button style={{outline: 'none', color: 'blue', border: 'none', backgroundColor: 'white'}} onClick={() => {setEventForm(true)}} >Edit Capacity</button>
+          <div style={{width: '20rem', textAlign: 'right'}}>
+          <button id="admission-page-edit-capacity" style={{outline: 'none', color: 'blue', border: 'none', backgroundColor: 'white'}} onClick={() => {setEventForm(true)}} >Edit Capacity</button>
+          </div>
           </div>
           
         </div>

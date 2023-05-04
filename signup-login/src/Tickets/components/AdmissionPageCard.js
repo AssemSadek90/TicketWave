@@ -1,12 +1,23 @@
 import React, { useState } from "react";
 import Card from "../UI/Card";
 import { hover } from "@testing-library/user-event/dist/hover";
+import { useEffect } from "react";
 
 
-function AdmissionPageCard({data, onClick, onDuplicate, onDelete}){
+function AdmissionPageCard({data, onClick, onDuplicate, onDelete, soldTicketData}){
 
   const [open, setIsOpen] = useState(false)
   const [isHovered, setIsHovered] = useState(false);
+  const [soldData, setSoldData] = useState([]);
+
+
+  useEffect(() => {
+    const reqData = soldTicketData?.find((item) => item.id === data.id);
+    setSoldData(reqData);
+    // console.log("Sold Data", reqData)
+
+
+}, [data, soldTicketData])
 
 
 
@@ -38,7 +49,7 @@ function AdmissionPageCard({data, onClick, onDuplicate, onDelete}){
           ...data,
           id: Math.floor(Math.random() * 10000000) // Generate a random 7-digit ID
         };
-        console.log(duplicatedData)
+        // console.log(duplicatedData)
         onDuplicate(duplicatedData);
         closeDropdown();
       }
@@ -68,6 +79,7 @@ function AdmissionPageCard({data, onClick, onDuplicate, onDelete}){
 return(
     <div style={{
       height: '5rem',
+      minWidth: '30rem',
     borderBottom: '1px solid #ccc',
     alignItems: 'center',
     display: 'flex',
@@ -82,10 +94,21 @@ return(
         <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
         <div onClick={onClick} style={{paddingLeft: '1rem', margin: 0, width: '100%'}}>
   <p style={{margin: '0px', padding: '0px', marginRight: '1rem', fontWeight: 'bold', fontSize: 'large'}}>{data.name}</p>
-  <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: 'small'}}>
+  <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', fontSize: 'small', width: '20rem'}}>
     <p style={{margin: '0px'}} ><span style={{fontSize: '5px', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>🟢<span style={{fontSize: 'small', marginLeft: '5px'}}>On Sale</span></span></p>
     <p style={{margin: '0px', marginLeft: '1rem'}}>&#8226; Ends {formattedDate} at {data.endTime}</p>
   </div>
+</div>
+
+
+
+<div style={{marginRight: '5rem', width: '6rem'}}>
+  {soldData?.soldTickets }/{ data.quantity}
+</div>
+
+
+<div style={{marginRight: '5rem'}}>
+  ${data.price}
 </div>
 
 
@@ -142,9 +165,9 @@ return(
             height: '6rem'
           }}
         >
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={onClickHandler}>Edit</button>
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={duplicateDataHandler}>Duplicate</button>
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={deleteHandler}>Delete</button>
+          <button id="admission-page-card-edit" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={onClickHandler}>Edit</button>
+          <button id="admission-page-card-duplicate" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={duplicateDataHandler}>Duplicate</button>
+          <button id="admission-page-card-delete" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={deleteHandler}>Delete</button>
         </div>
       )}
     </div>
