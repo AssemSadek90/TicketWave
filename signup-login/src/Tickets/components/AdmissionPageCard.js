@@ -14,22 +14,43 @@ import { useEffect } from "react";
 */
 function AdmissionPageCard({data, onClick, onDuplicate, onDelete, soldTicketData}){
 
-  const [open, setIsOpen] = useState(false)
+  /** The open state hook that manages a boolean value to represent whether a component is open or not.
+@type {OpenStateHook}
+*/
+  const [open, setIsOpen] = useState(false);
+  /** Hook to manage the state of a hovered element
+@function
+@typedef {boolean} HoveredState
+@returns {[HoveredState, function]} An array with two elements:
+isHovered: A boolean indicating if the element is being hovered or not.
+setIsHovered: A function to set the state of isHovered.
+*/
   const [isHovered, setIsHovered] = useState(false);
+  /**
+@typedef {function} SetSoldData
+@param {SoldData} soldData - The sold data to set
+@returns {void}
+*/
   const [soldData, setSoldData] = useState([]);
 
-  /** useEffect hook that sets the sold data for an event
-@returns {undefined}
-*/
+  /** Fetches sold ticket data based on the ID of the ticket.
+ * @function
+ * @name useEffectSoldTicketData
+ * @param {Object} data - The data object representing a ticket.
+ * @param {Array} soldTicketData - The array of sold ticket data.
+ * @returns {undefined}
+ */
   useEffect(() => {
     const reqData = soldTicketData?.find((item) => item.id === data.id);
     setSoldData(reqData);
     // console.log("Sold Data", reqData)
 }, [data, soldTicketData])
 
-  /** A function that toggles the dropdown menu
- @returns {undefined}
- */
+/** Toggle the dropdown visibility state.
+@function
+@name toggleDropdown
+@returns {void}
+*/
     function toggleDropdown() {
       setIsOpen(!open);
         // const dropdownContent = document.getElementById("dropdown-content");
@@ -40,19 +61,24 @@ function AdmissionPageCard({data, onClick, onDuplicate, onDelete, soldTicketData
         // }
       }
 
-      /** A function that closes the dropdown menu
- @returns {undefined}
- */
+      /** Closes the dropdown by setting the isOpen state to false.
+@param {Object} event - The event object.
+*/
       const closeDropdown = (event) => {
         // const dropdownContent = document.getElementById("dropdown-content");
         // dropdownContent.style.display = "none";
         setIsOpen(false);
       };
    
+      /** Formats the date from data.endDate to a string in the format "Month Day, Year".
+@type {string|undefined} The formatted date string or undefined if data.endDate is falsy.
+*/
     const formattedDate = data.endDate?.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-/** A function that duplicates an event
- * @returns {undefined}
- */
+
+    /** Duplicates data by creating a copy of the current data with a new random 7-digit ID.
+@function
+@returns {void}
+*/
     function duplicateDataHandler() {
         const duplicatedData = {
           ...data,
@@ -63,31 +89,37 @@ function AdmissionPageCard({data, onClick, onDuplicate, onDelete, soldTicketData
         closeDropdown();
       }
       
-      /** A function that deletes an event
- * @returns {undefined}
+     /** Handles deleting the data and invoking the onDelete callback.
+ * @function
+ * @returns {void}
  */
       function deleteHandler() {
         onDelete(data.id);
         closeDropdown();
       }
-
-      /** A function that handles the click event of the card
- * @returns {undefined}
+      /**Handles the click event and invokes the onClick callback.
+ * @function
+ * @returns {void}
  */
       function onClickHandler() {
         onClick();
         closeDropdown();
       }
 
-      /** A function that sets the value of isHovered state to true
- * @returns {undefined}
- */
+    /** A function that sets the state to indicate that the mouse is hovering over an element.
+@function
+@name handleMouseOver
+@returns {void}
+*/
       const handleMouseOver = () => {
         setIsHovered(true);
       };
-      /** A function that sets the value of isHovered state to false
- * @returns {undefined}
- */    
+      
+      /** A function that sets the state to indicate that the mouse is no longer hovering over an element.
+@function
+@name handleMouseLeave
+@returns {void}
+*/
       const handleMouseLeave = () => {
         setIsHovered(false);
       };
