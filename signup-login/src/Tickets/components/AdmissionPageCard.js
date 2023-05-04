@@ -3,47 +3,56 @@ import Card from "../UI/Card";
 import { hover } from "@testing-library/user-event/dist/hover";
 import { useEffect } from "react";
 
-
+/** A component that displays a card with event data and provides options to interact with the data
+@param {Object} props - The props object
+@param {Object} props.data - An object containing data for an event
+@param {Function} props.onClick - A function to handle the click event of the card
+@param {Function} props.onDuplicate - A function to duplicate an event
+@param {Function} props.onDelete - A function to delete an event
+@param {Array} props.soldTicketData - An array of objects containing sold ticket data
+@returns {JSX.Element} - A card component with event data and interaction options
+*/
 function AdmissionPageCard({data, onClick, onDuplicate, onDelete, soldTicketData}){
 
   const [open, setIsOpen] = useState(false)
   const [isHovered, setIsHovered] = useState(false);
   const [soldData, setSoldData] = useState([]);
 
-
+  /** useEffect hook that sets the sold data for an event
+@returns {undefined}
+*/
   useEffect(() => {
     const reqData = soldTicketData?.find((item) => item.id === data.id);
     setSoldData(reqData);
     // console.log("Sold Data", reqData)
-
-
 }, [data, soldTicketData])
 
-
-
+  /** A function that toggles the dropdown menu
+ @returns {undefined}
+ */
     function toggleDropdown() {
       setIsOpen(!open);
         // const dropdownContent = document.getElementById("dropdown-content");
         // if (dropdownContent.style.display === "none") {
         //   dropdownContent.style.display = "block";
-          
         // } else {
         //   dropdownContent.style.display = "none";
         // }
       }
 
-
+      /** A function that closes the dropdown menu
+ @returns {undefined}
+ */
       const closeDropdown = (event) => {
-        
         // const dropdownContent = document.getElementById("dropdown-content");
         // dropdownContent.style.display = "none";
         setIsOpen(false);
       };
-      
-
+   
     const formattedDate = data.endDate?.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-
-
+/** A function that duplicates an event
+ * @returns {undefined}
+ */
     function duplicateDataHandler() {
         const duplicatedData = {
           ...data,
@@ -54,24 +63,31 @@ function AdmissionPageCard({data, onClick, onDuplicate, onDelete, soldTicketData
         closeDropdown();
       }
       
-
+      /** A function that deletes an event
+ * @returns {undefined}
+ */
       function deleteHandler() {
         onDelete(data.id);
         closeDropdown();
       }
 
-
+      /** A function that handles the click event of the card
+ * @returns {undefined}
+ */
       function onClickHandler() {
         onClick();
         closeDropdown();
       }
-      
 
-
+      /** A function that sets the value of isHovered state to true
+ * @returns {undefined}
+ */
       const handleMouseOver = () => {
         setIsHovered(true);
       };
-    
+      /** A function that sets the value of isHovered state to false
+ * @returns {undefined}
+ */    
       const handleMouseLeave = () => {
         setIsHovered(false);
       };
