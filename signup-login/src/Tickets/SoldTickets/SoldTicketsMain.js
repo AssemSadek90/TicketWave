@@ -15,10 +15,9 @@ function SoldTicketsMain({data}){
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: '1px solid #ccc', padding: '0.5rem 0' }}>
             <span style={{ fontWeight: 'bold' }}>{item.name}</span>
             
-            <Link to={`/${item.id}`} className='mainButton' 
-            
-
-><button>View</button></Link>
+            <Link to={`/${item.id}`} className='mainButton' >
+              
+              <button id="sold-tickets-main-view-button" >View</button></Link>
           </div>
         );
       } else {

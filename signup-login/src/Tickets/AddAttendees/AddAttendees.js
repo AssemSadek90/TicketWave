@@ -285,6 +285,7 @@ const [name, setName] = useState('')
                     }}
                   >
                     <select
+                      id="add-attendees-order-type"
                       style={{ maxHeight: "5rem", outline: 'none', border: 'none', fontSize: 'small' }}
                       // onChange={(a) => setAvailability(a.target.value)}
                     >
@@ -345,7 +346,7 @@ const [name, setName] = useState('')
 
   <div className="mainButton">
   {selected > 0 ? (
-    <button onClick={nextHandler}>Next</button>
+    <button id ="add-attendees-next-button" onClick={nextHandler}>Next</button>
   ) : (
     <button disabled>Next</button>
   )}
@@ -396,6 +397,7 @@ const [name, setName] = useState('')
         <div style={{width: '48%', marginRight: '4%'}} className="inputContainer">
         <label className="inputLabel">First Name</label>
         <input
+          id ="add-attendees-first-name"
           style={{ fontSize: "0.85rem" }}
           value={name}
           onChange={(e) => {
@@ -408,6 +410,7 @@ const [name, setName] = useState('')
       <div style={{width: '48%'}} className="inputContainer">
         <label className="inputLabel">Last Name</label>
         <input
+          id ="add-attendees-last-name"
           style={{ fontSize: "0.85rem" }}
           value={lastName}
           onChange={(e) => {
@@ -427,6 +430,7 @@ const [name, setName] = useState('')
     <div style={{width: '100%', marginBottom: '1rem'}} className="inputContainer">
         <label className="inputLabel">Email Address</label>
         <input
+          id ="add-attendees-email"
           style={{ fontSize: "0.85rem" }}
           value={email}
           type="email"
@@ -452,7 +456,7 @@ const [name, setName] = useState('')
       <input type="email" required={true} onChange={(e) => { setEmail(e.target.value) }} value={email} style={{ padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ccc', marginBottom: '1rem', minWidth: '200px' }} /> */}
     
     <div className="mainButton">
-      <button type="submit" >Send</button>
+      <button id ="add-attendees-send" type="submit" >Send</button>
       </div>
     </form>
     
