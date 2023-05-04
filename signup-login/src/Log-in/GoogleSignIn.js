@@ -11,7 +11,7 @@ export default function GoogleLogin({ params }) {
       .post('google/login/connect', codeParams)
       .then((res) => {
         console.log('putting token in local storage');
-        localStorage.setItem('accessToken', res.data.key);
+        localStorage.setItem('token', res.data.key);
         //setToken(token);
         console.log('Logged in successfully with google');
         navigate('/home');
@@ -23,5 +23,5 @@ export default function GoogleLogin({ params }) {
   useEffect(() => {
     submitCode();
   }, []);
-  return <div>Sign in with Google</div>;
+  return <></>;
 }

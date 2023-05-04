@@ -399,7 +399,7 @@ Handles email input change event
                   </p>
                 </div>
                 <div>
-                  <a href="https://ticketwave.me/api/google/login/connect">
+                  <a href="https://ticketwave.me/api/google/login/login">
                     Sign in with Google
                   </a>
                 </div>
