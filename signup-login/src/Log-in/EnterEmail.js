@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom';
 import './Log-in-styling/Login.css';
 import Terms from './TermsConditions/Terms';
 import server from '../server';
+import {
+  getCredentials,
+  getUserID,
+  isValidSession,
+} from '../Credentials/Credentials';
 
 /**
  * A React component for creating an account.
@@ -385,6 +390,11 @@ Handles email input change event
         localStorage.setItem('refreshToken', refreshToken);
         user.pk = response.data.user.pk;
         console.log(user.pk);
+        isValidSession();
+        getUserID();
+      })
+      .then(() => {
+        getCredentials();
       })
       .then(() => {
         server
@@ -392,8 +402,18 @@ Handles email input change event
           .then((response) => {
             console.log(response);
           })
-          .then(navigateHome())
+          // .then(navigateHome())
           .catch((error) => console.log(error));
+      })
+      .then(() => {
+        if (isValidSession === 'true') {
+          //setIsLoading(false);
+          navigate('/SignIn');
+        } else {
+          navigate('/SignIn');
+          alert('Please verify your email address before signing in.');
+          //setIsLoading(false);
+        }
       })
       .catch((error) => console.log(error));
   };
