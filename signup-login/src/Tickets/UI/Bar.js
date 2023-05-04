@@ -1,7 +1,9 @@
 import React from 'react';
 import './Bar.css';
 
-
+/** A functional component for rendering a bar.
+@returns {JSX.Element} - The JSX element of the component.
+*/
 function Bar(){
   
   return (

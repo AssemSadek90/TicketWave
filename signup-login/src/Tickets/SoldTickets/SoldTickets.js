@@ -2,24 +2,42 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 
+/** A functional component for rendering sold tickets details.
+@param {Object} data - The data of the sold tickets.
+@returns {JSX.Element} - The JSX element of the component.
+*/
 function SoldTickets({data}){
-
+/** State hook to store the data of the sold tickets.
+@type {Object}
+*/
     const [myData, setMyData] = useState({})
-
-
+    /** State hook to store the end date of the sold tickets.
+@type {string}
+*/
     const [myEndDate, setMyEndDate] = useState('')
-
+    /** The parameters of the current URL.
+@type {Object}
+*/
     const params = useParams();
+    /** The ID of the requested data.
+@type {number}
+*/
     const reqId = parseInt(params.id)
 
+    /** A hook that runs when the component mounts and updates the state with the requested data.*/
     useEffect(() => {
         const reqData = data.find((item) => item.id === reqId);
         setMyData(reqData);
 
-
     }, [data, reqId])
 
+/** A variable to store the formatted end date of the sold tickets.
+@type {string}
+*/
     let formattedEndDate = ""
+/** A variable to store the formatted start date of the sold tickets.
+@type {string}
+*/
     let formattedStartDate = ""
 
 
@@ -28,9 +46,6 @@ if (myData) {
     formattedStartDate = myData.startDate?.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
    
   }
-
-
-
 
 
     return(
@@ -63,10 +78,7 @@ if (myData) {
 </div>
 </div>
 
-
-
     )
-
 
 };
 

@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
+/** A functional component for rendering the main page of sold tickets.
+@param {Object} data - The data of the sold tickets.
+@returns {JSX.Element} - The JSX element of the component.
+*/
 function SoldTicketsMain({data}){
 
 
