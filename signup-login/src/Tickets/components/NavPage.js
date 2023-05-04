@@ -1,7 +1,9 @@
 import React from "react";
 import CustomNavLink from "../UI/CustomNavLink";
 
-
+/** Renders the navigation page component.
+@return {JSX.Element} Navigation page component.
+*/
 function NavPage(){
 
 

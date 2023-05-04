@@ -68,7 +68,11 @@ function AdmissionPage({finalSubmission, Ticket, finalData, finalCapacity, soldT
 */
   const [isOpen, setIsOpen] = useState(false);
 
-  /**Toggles the dropdown state between open and close*/
+  /** Toggles the dropdown state.
+@function
+@name toggleDropdown
+@returns {void}
+*/
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -82,7 +86,11 @@ function AdmissionPage({finalSubmission, Ticket, finalData, finalCapacity, soldT
 
 // useEffect(()=> {console.log(selectedItem)}, [selectedItem])
 
-/** Handler function for next button click to submit the final data*/  
+/** Handles the "Next" button click event to submit the final data with capacity.
+@function
+@name nextHandler
+@returns {void}
+*/
 function nextHandler(){
   const finalData={data, capacity}
   finalSubmission(finalData)

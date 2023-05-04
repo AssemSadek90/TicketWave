@@ -67,7 +67,7 @@ The state variable to store the attendees that are not yet added to the event
 */
   const timeString = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-/** Starts the countdown timer for a specified duration and sets the sending state to true
+/** Starts a timer for 12 minutes and sets the 'sending' state to true
 @function
 @returns {void}
 */
@@ -75,25 +75,30 @@ const startTimer = () => {
   setTimer(780); // 720 seconds = 12 minutes
   setSending(true);
 }
-/** The useEffect hook to update the timer every second when sending is true
-@effect
+
+/** A hook that sets up a countdown timer that decrements every second
+while sending is true.
+@function useTimer
+@param {boolean} sending - A boolean that determines whether the timer should start or stop.
+@param {number} timer - A number that represents the current timer value in seconds.
 @returns {void}
 */
 useEffect(() => {
   let intervalId;
-
   if (sending) {
     intervalId = setInterval(() => {
       setTimer(prevTimer => prevTimer - 1);
     }, 1000);
   }
-
   return () => clearInterval(intervalId);
 }, [sending]);
 
-/**The useEffect hook to set sending to false and reset the timer to 0 when it reaches 0
-@effect
-@returns {void}
+/** Executes the effect to check if the timer has reached 0 and stops sending data
+@function
+@param {number} timer - The timer in seconds
+@param {boolean} sending - The boolean that indicates whether data is being sent
+@param {timerCallback} setSending - Callback function to stop sending data
+@param {number} setTimer - Callback function to set the timer
 */
 useEffect(() => {
   if (timer === 0) {
@@ -135,10 +140,8 @@ useEffect(() => {
 function finalDataHandler(e){
   setPendingData(e);
 }
-
-/** Handles the next button click by setting the initial quantity state to 0, starting the timer, and navigating to the next page
-@function
-@returns {void}
+/**Resets initial quantity, starts the timer, and navigates to the "Send-Email" page
+@return {void}
 */
 function nextHandler(){
   // addAttendee(pendingData);
@@ -148,34 +151,41 @@ function nextHandler(){
   startTimer()
   // navigate('/Navigation/Events/Send-Email');
 }
-
-/** The useEffect hook to update the total cost and selected state whenever the pending data changes
-@effect
-@returns {void}
+/** A hook that sets the total cost and selected count based on final data.
+@param {Array} finalData - An array of objects containing the final data.
+@param {number} totalCost - The total cost of all selected items.
+@param {number} selected - The number of selected items.
 */
 useEffect(() => {
   setTotalCost(finalData.reduce((acc, cur) => acc + cur.totalCost, 0));
   setSelected(finalData.reduce((acc, cur) => acc + cur.chosenQuantity, 0));
 // console.log(totalCost)
 }, [pendingData])
-
-
-// useEffect(() => {
-  
+// useEffect(() => {  
 // console.log(selected)
 // }, [selected])
 
-    /**The useState hook to store the name input value*/
+    /** State hook for storing a name.
+@type {[string, function]}
+*/
     const [name, setName] = useState('')
-    /**The useState hook to store the last name input value*/
+    /**
+@typedef {string} LastName
+*/
     const [lastName, setLastName] = useState('')
-    /**The useState hook to store the email input value*/
+    
+/** State hook to store the email input value.
+@typedef {string} Email
+@typedef {function(string): void} SetEmail
+@type {[Email, SetEmail]} EmailState
+*/
     const [email, setEmail] = useState('')
-    /**The useState hook to store the filtered data*/
+    /** Represents a hook that defines the filtered data state and its setter.
+@function
+@returns {FilteredDataState} An array containing the filtered data state and its setter.
+*/
     const [filteredData, setFilteredData] = useState([]);
 
-
-    
   // const [totalCost, setTotalCost] = useState('');
 
     // useEffect(() => {
