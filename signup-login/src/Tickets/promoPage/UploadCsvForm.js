@@ -2,37 +2,91 @@ import React from "react";
 import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker';
 
+/**
 
+Renders a form for uploading a CSV file and allows for editing data.
+@function
+@param {Object} props - The props object.
+@param {Function} props.onCancel - The function to call when the cancel button is clicked.
+@param {Function} props.onSubmit - The function to call when the form is submitted.
+@param {Object} props.myData - The data object to edit.
+@returns {JSX.Element} - A JSX form element.
+*/
 function UploadCsvForm({onCancel, onSubmit, myData}){
 
-
-  const [id, setId] = useState(myData ? myData.id : Math.floor(Math.random() * 10000000));
+  /** The ID of the data object.
+@type {number}
+*/
+    const [id, setId] = useState(myData ? myData.id : Math.floor(Math.random() * 10000000));
+    /** The code name of the data object.
+@type {string}
+*/
     const [codeName, setCodeName] = useState(myData ? myData.codeName : '')
+    /** The names of the data object.
+@type {string}
+*/
     const [names, setNames] = useState(myData ? myData.names : '')
+    /** The ticket limit of the data object.
+@type {string}
+*/
     const [ticketLimit, setTicketLimit] = useState(myData ? myData.ticketLimit : 'Unlimited')
+    /** Determines if the ticket limit is enabled or not.
+@type {number}
+*/
     const [isTicketLimit, setIsTicketLimit] = useState(myData ? myData.isTicketLimit : 0)
+    /** Determines if the reveal feature is enabled or not.
+@type {boolean}
+*/
     const [reveal, setReveal] = useState(myData ? myData.reveal : false);
-
+/** The state of when the promotion starts
+@type {[string, Function]} promoStarts
+*/
     const [promoStarts, setPromoStarts] = useState(myData ? myData.promoStarts : "Now");
+    /** The state of when the promotion ends
+@type {[string, Function]} promoEnds
+*/
     const [promoEnds, setPromoEnds] = useState(myData ? myData.promoEnds : "When ticket sale ends");
+    /** The start date for the uploaded data
+@type {[Date, Function]} startDate
+*/
     const [startDate, setStartDate] = useState(myData ? myData.startDate : null);
+    /** The start time for the uploaded data
+@type {[Date, Function]} startTime
+*/
     const [startTime, setStartTime] = useState(myData ? myData.startTime : null);
+    /** The end date for the uploaded data
+@type {[Date, Function]} endDate
+*/
     const [endDate, setEndDate] = useState(myData ? myData.endDate : null);
+    /** The end time for the uploaded data
+@type {[Date, Function]} endTime
+*/
     const [endTime, setEndTime] = useState(myData ? myData.endTime : null);
+    /** The type of code for the uploaded data
+@type {[string, Function]} codeType
+*/
     const [codeType, setCodeType] = useState("");
-
+    /** A state hook for the discount field of the form.
+ @type {[boolean, function]} - A state tuple.
+ */
     const [discount, setDiscount] = useState(myData ? myData.discount : false);
-
+    /** A state hook for the applyCodeTo field of the form.
+ @type {[string, function]} - A state tuple.
+ */
     const [applyCodeTo, setApplyCodeTo] = useState(myData ? myData.applyCodeTo : "All Visible Tickets");
 
-
+/**
+Executes an effect function when the component mounts or when the value of the state variable promoStarts/promoEnds changes.
+If the value of promoStarts/promoEnds is "Scheduled Time", sets the startDate/endDate state variable to the current date and the startTime/endTime state variable to "12 AM".
+@param {string} promoStarts - The value of the promoStarts state variable.
+@param {string} promoEnds - The value of the promoEnds state variable.
+*/
     useEffect(() => {
         if (promoStarts === 'Scheduled Time') {
             setStartDate(new Date());
             setStartTime('12 AM');
         }
       }, [promoStarts]);
-
 
       useEffect(() => {
         if (promoEnds === 'Scheduled Time') {
@@ -41,7 +95,11 @@ function UploadCsvForm({onCancel, onSubmit, myData}){
         }
       }, [promoEnds]);
 
-
+/** Executes an effect that sets the type of the code based on whether the discount is applied and/or the tickets are revealed
+@param {boolean} reveal - Indicates whether the hidden tickets should be revealed or not
+@param {boolean} discount - Indicates whether a discount should be applied or not
+@returns {void}
+*/
       useEffect(() => {
         if (reveal && discount){
           setCodeType("Reveals hidden tickets , Applies discount")
@@ -55,10 +113,11 @@ function UploadCsvForm({onCancel, onSubmit, myData}){
 
       }, [reveal, discount])
 
-
-
-
-      
+/** Handles the CSV file upload event by reading and parsing the CSV file data
+and setting the state values for code names and code name of the uploaded file.
+@param {Object} event - The event object of the file input change event.
+@returns {void}
+*/
   function handleCsvUpload(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -82,12 +141,12 @@ function UploadCsvForm({onCancel, onSubmit, myData}){
     reader.readAsText(file);
   }
 
-
+  /** Handles form submission event.
+@param {object} event - The form submission event.
+@returns {void}
+*/
     function submitHandler(event){
         event.preventDefault();
-
-
-
 
         const data = {
           id: id,
@@ -135,12 +194,8 @@ function UploadCsvForm({onCancel, onSubmit, myData}){
         //     <button onClick={() => {onCancel(true)}}>Cancel</button>
         // </div>
 
-
         <form style={{overflowY: 'auto', maxHeight: '100vh', width: '100%', overflowX: 'hidden', paddingRight: '1rem'}} onSubmit={submitHandler} >
             <div style={{height: 'max-content', marginBottom: '7rem'}}>
-
-            
-
 
 
 <div style={{display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #ccc'}}>
@@ -215,8 +270,6 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
 </div>
 
 
-
-
       {/* _______________________________________________________________________________________________________________________________ */}
 
 
@@ -244,8 +297,6 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                     </select>
                   </div>
 
-
-
                         {
                             ticketLimit === 'Limited to' && 
 
@@ -266,9 +317,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
           required
         />
         <span style={{color: "#ccc", fontSize: '0.7rem'}}>Tickets</span>
-
-
-        
+    
         </div>
         
       </div>
@@ -276,15 +325,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
 
                   </div>
 
-
                   <p style={{fontSize: 'small'}}>Total number of tickets that can be purchased with this code</p>
-
-
-
-
-
-
-
 
                   <div
                   style={{
@@ -319,10 +360,6 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                 </div>
 
 
-
-
-
-
                     <p>Discount amount (optional)</p>
                 <div className="inputContainer" style={{marginTop: '1rem', alignItems: 'center', display: 'flex', flexDirection: 'row'}}>
                 <span style={{color: "#ccc", fontSize: '0.7rem', paddingLeft: '1rem', paddingRight: '1rem'}}>$</span>
@@ -339,9 +376,6 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
     }}
         />
       </div>
-
-
-
 
 
                 <div>
@@ -440,9 +474,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                     </label>
                   </div>
                 </div>
-
-                
-
+              
                 {
                     promoStarts === 'Scheduled Time' && 
 
@@ -540,23 +572,6 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
                 </div>
                     </div>
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -763,9 +778,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
 
 
 
-
                 {/* ____________________________________________________________________________________________________________________ */}
-
 
                 
 <div>
@@ -895,9 +908,6 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
     </div>
   
 </div>
-
-     
-
 
     </form>
 
