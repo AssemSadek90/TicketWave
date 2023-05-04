@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import '../App.css';
-import styles from './Navbar.module.css';
+import styles from './NANavbar.module.css';
 import NavBarListItem from './NavBarListItem';
 import SearchButton from './NavBarSearch';
 import { useNavigate } from 'react-router-dom';
@@ -18,11 +18,17 @@ export default function Navbar() {
   const [searchText, setSearchText] = useState('');
   const [email, setEmail] = useState('example@example.com');
   const navigate = useNavigate();
+  function handleLogClick() {
+    navigate('/signin');
+  }
+  function handleSignClick() {
+    navigate('/');
+  }
 
   return (
     <nav className={styles.navigation_bar}>
       <ul>
-        <a href="#">
+        <a href="/home">
           <span className={styles.site_title}>TicketWave</span>
         </a>
         <SearchButton to="https://www.eventbrite.com" label="Search events" />
@@ -33,8 +39,12 @@ export default function Navbar() {
             <path d="M13 11V4h-2v7H4v2h7v7h2v-7h7v-2z"></path>
           </svg>
         </NavBarListItem>
-        <NavBarListItem title="Log in"></NavBarListItem>
-        <NavBarListItem title="Sign up"></NavBarListItem>
+        <button className={styles.auth_button} onClick={handleLogClick}>
+          Log in
+        </button>
+        <button className={styles.auth_button} onClick={handleSignClick}>
+          Sign up
+        </button>
       </ul>
     </nav>
   );
