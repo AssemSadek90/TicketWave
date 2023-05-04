@@ -6,7 +6,7 @@ function NavPage(){
 
 
     return(
-        <div style={{flexDirection: 'row', display: 'flex', borderBottom: '1px solid #ccc', paddingBottom: '2vh', maxWidth: 'max-content'}}>
+        <div style={{flexDirection: 'row', display: 'flex', borderBottom: '1px solid #ccc', paddingBottom: '2vh', maxWidth: '30rem', minWidth: '30rem'}}>
             
             <div style={{marginRight: '2rem'}}>
             <CustomNavLink id="nav-page-admission" exact  to={"/Navigation/Events/Tickets/admission"}>Admission</CustomNavLink>

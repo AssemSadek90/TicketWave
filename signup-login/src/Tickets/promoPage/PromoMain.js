@@ -46,7 +46,7 @@ function PromoMain({Promo, finalData}){
 
 <React.Fragment>
 
-  <div style={{width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', marginBottom: '1rem'}}>
+  <div style={{width: '100%',minWidth: '30rem', flexDirection: 'row', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', marginBottom: '1rem'}}>
 
 
 
@@ -151,7 +151,7 @@ function PromoMain({Promo, finalData}){
 :
 
 <React.Fragment>
-  <div style={{padding: '1rem'}}>
+  <div style={{padding: '1rem', minWidth: '30rem'}}>
 
   <p>To create promo codes that apply across multiple events, visit Marketing.</p>
   <div style={{display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center'}}>
@@ -172,7 +172,7 @@ You can create codes or upload a CSV to import ones you’ve already made.
 
 
 <div style={{width: '100%'}}>
-  <img src={Icon} alt="Image" />
+<img src={Icon} style={{marginTop: '2rem'}} alt="Image" />
     {/* <Icon /> */}
 </div>
 

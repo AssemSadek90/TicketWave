@@ -7,19 +7,41 @@ import Sidebar from './Sidebar/Sidebar';
 import { useLocation } from 'react-router-dom';
 import './Tickets.css';
 import AddAttendees from './AddAttendees/AddAttendees';
+import SoldTickets from './SoldTickets/SoldTickets';
+import SoldTicketsMain from './SoldTickets/SoldTicketsMain';
+
+import Dashboard from './Dashboard/Dashboard';
 
 function Tickets() {
-  const [ticketData, setTicketData] = useState([]);
   const [promoData, setPromoData] = useState([]);
   const [capacity, setCapacity] = useState(null);
   const [padding, setPadding] = useState('5rem');
+  const [visible, setVisible] = useState(true);
+  const [submitted, setSubmitted] = useState('Not Submitted');
 
-  // const location = useLocation();
-  // const [currentUrl, setCurrentUrl] = useState(location.pathname);
+  // _________________________________________________ THESE TWO ARE FOR THE BACKEND CURRENTLY ______________________________________________________
 
-  // useEffect(() => {
-  //   setCurrentUrl(location.pathname);
-  // }, [location.pathname]);
+  const [ticketData, setTicketData] = useState([]);
+  const [soldTicketData, setSoldTicketData] = useState([]);
+
+  // __________________________________________________________________________________________________________________________________________________
+
+  useEffect(() => {
+    setSoldTicketData((prevSoldTickets) =>
+      ticketData.map((obj) => {
+        const prevSoldTicket = prevSoldTickets.find(
+          (ticket) => ticket.id === obj.id
+        );
+        const prevSoldQuantity = prevSoldTicket
+          ? prevSoldTicket.soldTickets
+          : 0;
+        return {
+          ...obj,
+          soldTickets: obj.chosenQuantity + prevSoldQuantity,
+        };
+      })
+    );
+  }, [ticketData]);
 
   function TicketHandler(e, a) {
     setTicketData(e);
@@ -29,6 +51,26 @@ function Tickets() {
   function promoHandler(b) {
     setPromoData(b);
     // console.log(b);
+  }
+
+  function addAttendeeData(e) {
+    setSoldTicketData((prevSoldTickets) =>
+      ticketData.map((obj) => {
+        const prevSoldTicket = prevSoldTickets.find(
+          (ticket) => ticket.id === obj.id
+        );
+        const prevSoldQuantity = prevSoldTicket
+          ? prevSoldTicket.soldTickets
+          : 0;
+        return {
+          ...obj,
+          soldTickets: obj.chosenQuantity + prevSoldQuantity,
+        };
+      })
+    );
+
+    setTicketData(e);
+    // console.log("ADDED")
   }
 
   function submitHandler() {
@@ -64,78 +106,238 @@ function Tickets() {
     <React.Fragment>
       <div className="tickets-body">
         <Sidebar
+          visible={visible}
           isShowing={(e) => {
-            e && setPadding('20rem');
+            e && setPadding('16rem');
           }}
         />
         <div style={{ paddingLeft: padding }}>
           <Routes>
-            <Route path="/" element={<div></div>} />
+            <Route exact={true} path="/" element={<div></div>} />
+            <Route exact={true} path="/Events" element={<div></div>} />
+            <Route exact={true} path="/Home" element={<div></div>} />
+            <Route exact={true} path="/Orders" element={<div></div>} />
+            <Route exact={true} path="/Marketing" element={<div></div>} />
+            <Route exact={true} path="/Reports" element={<div></div>} />
+            <Route exact={true} path="/Finance" element={<div></div>} />
+            <Route exact={true} path="/Settings" element={<div></div>} />
+            <Route exact={true} path="/App-Marketplace" element={<div></div>} />
+
+            {/* ____________________________________________________ YOUR MENTIONED PAGES_______________________________________________________________ */}
+
+            <Route
+              path="/Events/basic-info"
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <div>Basic Info Page</div>
+                  </React.Fragment>
+                );
+              }}
+            />
+
+            <Route
+              path="/Events/publish"
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <div>Publish Page</div>
+                  </React.Fragment>
+                );
+              }}
+            />
+
+            <Route
+              path="/Events/Dashboard"
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <Dashboard soldTicketData={soldTicketData} />
+                  </React.Fragment>
+                );
+              }}
+            />
+
+            {/* _________________________________________________________________________________________________________________________________________ */}
+
+            <Route
+              path="/Events/details"
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <div>Details Page</div>
+                  </React.Fragment>
+                );
+              }}
+            />
+
+            <Route
+              path="/Events/Order-Options"
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <div>Order Options Page</div>
+                  </React.Fragment>
+                );
+              }}
+            />
+
+            <Route
+              path="/Events/Payments-and-Tax"
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <div>Payments and Tax Page</div>
+                  </React.Fragment>
+                );
+              }}
+            />
+
+            <Route
+              path="/Events/Marketing"
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <div>Marketing Page</div>
+                  </React.Fragment>
+                );
+              }}
+            />
 
             <Route
               path="/Events/Tickets/admission"
-              element={
-                <React.Fragment>
-                  <NavPage />
-                  <AdmissionPage
-                    finalCapacity={capacity}
-                    finalData={ticketData}
-                    Ticket={TicketHandler}
-                    finalSubmission={submitHandler}
-                  />
-                </React.Fragment>
-              }
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <NavPage />
+                    <AdmissionPage
+                      soldTicketData={soldTicketData}
+                      finalCapacity={capacity}
+                      finalData={ticketData}
+                      Ticket={TicketHandler}
+                      finalSubmission={submitHandler}
+                    />
+                  </React.Fragment>
+                );
+              }}
             />
             <Route
               path="Events/Tickets/add-ons"
-              element={
-                <React.Fragment>
-                  <NavPage />
-                  <div>Add-ons</div>
-                </React.Fragment>
-              }
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <NavPage />
+                    <div></div>
+                  </React.Fragment>
+                );
+              }}
             />
             <Route
               path="/Events/Tickets/promo-codes"
-              element={
-                <React.Fragment>
-                  <NavPage />
-                  <PromoMain finalData={promoData} Promo={promoHandler} />
-                </React.Fragment>
-              }
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <NavPage />
+                    <PromoMain finalData={promoData} Promo={promoHandler} />
+                  </React.Fragment>
+                );
+              }}
             />
             <Route
               path="/Events/Tickets/holds"
-              element={
-                <React.Fragment>
-                  <NavPage />
-                  <div>Holds</div>
-                </React.Fragment>
-              }
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <NavPage />
+                    <div></div>
+                  </React.Fragment>
+                );
+              }}
             />
             <Route
               path="/Events/Tickets/event-settings"
-              element={
-                <React.Fragment>
-                  <NavPage />
-                  <div>Settings</div>
-                </React.Fragment>
-              }
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <NavPage />
+                    <div></div>
+                  </React.Fragment>
+                );
+              }}
             />
 
             <Route
               path="/Events/Add-Attendees"
-              element={
-                <React.Fragment>
-                  <AddAttendees finalData={ticketData} />
-                </React.Fragment>
-              }
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <AddAttendees
+                      submitted={submitted}
+                      soldTickets={soldTicketData}
+                      finalData={ticketData}
+                      addAttendee={addAttendeeData}
+                    />
+                  </React.Fragment>
+                );
+              }}
+            />
+
+            <Route
+              path="/Events/Sold-Tickets"
+              Component={() => {
+                setPadding('16rem');
+                setVisible(true);
+                return (
+                  <React.Fragment>
+                    <SoldTicketsMain data={soldTicketData} />
+                  </React.Fragment>
+                );
+              }}
+            />
+
+            <Route
+              path="/:id"
+              exact={true}
+              Component={() => {
+                setPadding('0rem');
+                setVisible(false);
+                return (
+                  <React.Fragment>
+                    <SoldTickets data={soldTicketData} />
+                  </React.Fragment>
+                );
+              }}
             />
           </Routes>
         </div>
       </div>
     </React.Fragment>
-
     // </BrowserRouter>
   );
 }
