@@ -43,13 +43,13 @@ export default function Navbar() {
   }
   return (
     <nav className={styles.navigation_bar}>
-      <ul>
+      <ul className={styles.navbar_ul}>
         <a className={styles.navbar_a} href="/home">
           <span className={styles.site_title}>TicketWave</span>
         </a>
         <SearchButton to="https://www.eventbrite.com" label="Search events" />
       </ul>
-      <ul>
+      <ul className={styles.navbar_ul}>
         <NavBarListItem title="Create Event" path="/signin">
           <svg className={styles.svg_icon} viewBox="0 0 20 20">
             <path d="M13 11V4h-2v7H4v2h7v7h2v-7h7v-2z"></path>

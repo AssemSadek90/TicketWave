@@ -12,8 +12,8 @@ import styles from './Navbar.module.css';
 
 export default function Tabs(props) {
   return (
-    <p className={styles.tabs} onClick={props.onClick}>
+    <li className={styles.tabs} onClick={props.onClick}>
       {props.title}
-    </p>
+    </li>
   );
 }
