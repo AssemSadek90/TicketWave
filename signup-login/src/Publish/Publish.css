@@ -131,7 +131,7 @@ flex-direction: row;
     line-height: 22px;
     font-weight: 400;
     color: var(--eds-ui-700,#4b4d63);
-    margin: 0 16px 0 0;
+    margin:0 16px 16px 0;
     border: 1px solid var(--eds-ui-300,#dbdae3);
     border-radius: 50%;
     box-sizing: border-box;
@@ -142,8 +142,19 @@ flex-direction: row;
     text-indent: -999px;
     background-color: transparent;
     -webkit-box-flex: 0;
-    display: flex;
+    /* display: flex; */
    }
+   .SelectAudience{
+    display: block;
+    width: 100%;
+    /* padding: 10px; */
+    border-radius: 5px;
+ 
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    transition: border-color 0.3s ease-in-out;
+}
    .sideradio{ 
     display: inline-block;
     position:flex;

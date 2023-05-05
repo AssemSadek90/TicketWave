@@ -6,9 +6,9 @@
     position: sticky;
     bottom:0; */
   position: fixed;
-  display: flex;
+  /* display: flex; */
   justify-content: space-between;
-  bottom: 0;
+  bottom: 30px;
   padding: 16px 0 16px 24px;
   height: 44px;
   width: 100%;
@@ -17,6 +17,22 @@
   border-top: 1px solid #eeedf2;
   
 
+}
+.eds-fixed-bottom-bar-layout__bar {
+    background-color: #fff;
+    border-top: 1px solid #eeedf2;
+    bottom: 0;
+    left: 0;
+    min-height: 64px;
+    overflow: hidden;
+    -webkit-transform: translateY(100%);
+    transform: translateY(100%);
+    -webkit-transition: -webkit-transform .32s cubic-bezier(.4,0,.3,1);
+    transition: -webkit-transform .32s cubic-bezier(.4,0,.3,1);
+    transition: transform .32s cubic-bezier(.4,0,.3,1);
+    transition: transform .32s cubic-bezier(.4,0,.3,1),-webkit-transform .32s cubic-bezier(.4,0,.3,1);
+    width: 100%;
+    will-change: transform;
 }
 .footerButton{ 
     transform: translateZ(0);
