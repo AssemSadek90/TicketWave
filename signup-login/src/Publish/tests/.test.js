@@ -1,10 +1,12 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, {shallow } from 'enzyme';
 import Footer from '../Footer';
+
 
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 
 Enzyme.configure({ adapter: new Adapter() });
+
 
 describe('Footer component', () => {
   it('renders without crashing', () => {
@@ -20,8 +22,6 @@ describe('Footer component', () => {
 
   it('has a form with the correct action URL', () => {
     const wrapper = shallow(<Footer />);
-    expect(wrapper.find('form').prop('action')).toEqual(
-      'https://www.nextPage.com'
-    );
+    expect(wrapper.find('form').prop('action')).toEqual('https://www.nextPage.com');
   });
 });
