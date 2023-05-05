@@ -63,14 +63,9 @@ export default function Navbar() {
           </svg>
         </NavBarListItem>
         <Dropdown className={styles.email_add} title={email}>
-          <Tabs title="Browse events" />
-          <Tabs title="Manage my events" />
-          <Tabs title="Tickets" />
-          <Tabs title="Credits" />
-          <Tabs title="Liked" />
-          <Tabs title="Following" />
-          <Tabs title="Intersts" />
-          <Tabs title="Account settings" />
+          <Tabs title="Browse events" path="#" />
+          <Tabs title="Manage my events" path="#" />
+          <Tabs title="Change password" path="#" />
           <Tabs title="Log out" onClick={handleLogOut} id="log-out-tab" />
         </Dropdown>
       </ul>
