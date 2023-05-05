@@ -1,6 +1,6 @@
 // import react from "react";
 import "./dashboard.css";
-import MyComponent from './csv';
+import CSVExport from './csv';
 
 function  Netsales(Event_id){return(
 <div>
@@ -65,7 +65,7 @@ function  Netsales(Event_id){return(
               </i>
             </span>
             <div>
-              <MyComponent/>
+              <CSVExport/>
             </div>
           </div>
         </div>

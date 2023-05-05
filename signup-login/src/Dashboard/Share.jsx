@@ -48,7 +48,7 @@ function Share(Event_id) {
             <div className="eds-g-cell eds-g-cell-12-12 eds-text-weight--heavy">
               Event URL
             </div>
-            <div className="eds-g-cell eds-g-cell-4-12">
+            <div className="eds-g-cell 2">
                 <UrlEditor/>  
             </div>
           </div>

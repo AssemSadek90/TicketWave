@@ -9,7 +9,7 @@ import './dashboard.css';
 const Orders = () => {
   //const [orders, setOrders] = useState([]);
   const [orders, setOrders] = useState([]);
-  const [isloaded, setisloaded] = useState(false);
+//   const [isloaded, setisloaded] = useState(false);
   //const [data, setdata] = useState();
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
@@ -271,7 +271,7 @@ const Orders = () => {
                         {order.cost}
                       </td>
                       <td className="eds-data-table-list-item__column">
-                        {order.created}
+                        {order.created.substr(0,10)}
                       </td>
                     </tr>
                   ))}

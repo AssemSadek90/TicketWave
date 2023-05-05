@@ -528,6 +528,10 @@ h1 {
     letter-spacing: 0.5px;
     margin-right: -0.5px;
   }
+   .eds-text-bs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
 }
 
 .eds-text-bs {
@@ -535,14 +539,6 @@ h1 {
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-
-@media (min-width: 960px) {
-  .eds-text-bs {
-    font-size: 0.75rem;
-    line-height: 1rem;
-  }
-}
-
 .dashboard-insights .dashboard-amount-card .card-footer {
   pointer-events: none;
   margin-top: auto;
@@ -1012,7 +1008,7 @@ svg:not(:root) {
   align-items: center;
   padding-right: 10px;
 }
-.buttonselect{padding-left: 10px;}
+.buttonselect{padding-right: 10px;}
 .icon-button-combo--button:hover {
   color: #3d64ff;
 }
@@ -1173,6 +1169,12 @@ th {
     width: 96px;
     height: 96px;
   }
+  .eds-graphic-halo--xsmall i {
+    margin: 32px;
+    text-align: center;
+    width: 48px !important;
+    height: 48px;
+  }
 }
 
 .eds-graphic-halo--xsmall i {
@@ -1182,14 +1184,6 @@ th {
   height: 48px;
 }
 
-@media (min-width: 792px) {
-  .eds-graphic-halo--xsmall i {
-    margin: 32px;
-    text-align: center;
-    width: 48px !important;
-    height: 48px;
-  }
-}
 
 .eds-graphic--halo .eds-vector-image-halo-size-override {
   margin: 0 !important;
@@ -1407,6 +1401,7 @@ input {
     line-height: 22px;
     min-height: 22px;
   }
+
 }
 
 .copy-update-input .eds-field-styled__input {
