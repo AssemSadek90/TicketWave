@@ -1,6 +1,5 @@
 import React from 'react';
-import EventsListCreator from './EventsList';
-import EventsListNavBar from './EventsListNavBar';
+import EventsListCreator from './EventsListCreator';
 
 export default function DisplayEvents(props) {
   // assume the props.events an array of objects
@@ -9,7 +8,7 @@ export default function DisplayEvents(props) {
   return (
     <div>
       <div>
-        <EventsListCreator eventsData={events.slice(0, 8)} />
+        <EventsListCreator eventsData={events} />
       </div>
     </div>
   );
