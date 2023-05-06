@@ -13,6 +13,7 @@ import ChangePassword from './Log-in/ChangePassword';
 import Tickets from './Tickets/Tickets';
 import Sidebar from './Tickets/Sidebar/Sidebar';
 import { useState } from 'react';
+import CreatorEvent from './EventsList/CreatorEvent';
 /**
  * Renders the main application component.
  * @function
@@ -38,6 +39,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/creator" element={<CreatorEvent />}></Route>
           <Route
             path="/home"
             Component={() => {
