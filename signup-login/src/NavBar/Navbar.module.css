@@ -182,7 +182,7 @@
     width: 100%;
   }
 }
-@media screen and (max-width: 814px) {
+@media screen and (max-width: 826px) {
   .navigation_bar {
     flex-direction: row;
     justify-content: space-between;

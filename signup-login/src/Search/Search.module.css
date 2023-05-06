@@ -1,0 +1,41 @@
+.search_page_container{
+    padding: 1.5rem;
+    padding-top: 6.5rem;
+    background-color: cadetblue;
+    display: flex;
+    justify-content: space-between;
+}
+.page_comp1{
+    background-color: aliceblue;
+}
+.page_comp2{
+    background-color: aliceblue;
+}
+.search_container {
+    display: flex;
+    align-items: center;
+    border: 1px solid gray;
+    padding: 10px;
+    border-radius: 5px;
+}
+  
+.search_icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+  
+.search_input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 34px;
+}
+  
+.search_button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+  

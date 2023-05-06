@@ -13,6 +13,7 @@ import ChangePassword from './Log-in/ChangePassword';
 import Dashboard from './Dashboard/dashboardinsights';
 import Tickets from './Tickets/Tickets';
 import NANavbar from './NavBar/NANavbar';
+import Search from './Search/Search';
 
 /**
  * Renders the main application component.
@@ -63,6 +64,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/Navigation/*" element={<Tickets />} />
           <Route path="/test" element={<NANavbar />} />
+          <Route path="/search" element={<Search />} />
         </Routes>
       </Router>
     </div>

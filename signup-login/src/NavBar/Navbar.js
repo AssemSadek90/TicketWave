@@ -41,13 +41,16 @@ export default function Navbar() {
   function handleChangePassword() {
     navigate('/change-password');
   }
+  function handleSearch() {
+    navigate('/Search');
+  }
   return (
     <nav className={styles.navigation_bar}>
       <ul className={styles.navbar_ul}>
         <a className={styles.navbar_a} href="/home">
           <span className={styles.site_title}>TicketWave</span>
         </a>
-        <SearchButton to="https://www.eventbrite.com" label="Search events" />
+        <SearchButton onClick={handleSearch} label="Search events" />
       </ul>
       <ul className={styles.navbar_ul}>
         <NavBarListItem title="Create Event" path="/signin">
