@@ -10,6 +10,7 @@ import AddAttendees from './AddAttendees/AddAttendees';
 import SoldTickets from './SoldTickets/SoldTickets';
 import SoldTicketsMain from './SoldTickets/SoldTicketsMain';
 import EventDetails from '../EventDetails/EventDetails';
+import CreatorEvent from '../EventsList/CreatorEvent';
 
 // import Dashboard from "./Dashboard/Dashboard";
 import Dashboard from '../Dashboard/dashboardinsights';
@@ -133,7 +134,9 @@ function Tickets({
               setShowSecondSidebar(true);
               return (
                 <React.Fragment>
-                  <div style={{ padding: '5rem' }}>Events Page</div>
+                  <div style={{ padding: '5rem' }}>
+                    <CreatorEvent />
+                  </div>
                 </React.Fragment>
               );
             }}

@@ -1,5 +1,5 @@
 import { useEffect, useState, React } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { CSVLink } from 'react-csv';
 import DisplayEvents from './DisplayCreatorEvents';
 import EventsListNavBar from './EventsListNavBar';
 import SecondNav from './SecondNav';
@@ -110,14 +110,65 @@ const CreatorEvent = () => {
     ]);
   }, []);
 
+  const EventsData = events.map((event) => ({
+    Event: event.name,
+    Date: new Date(event.start),
+    Status: event.status,
+    'Tickets Sold': event.ticketsSold,
+    'Tickets Available': event.ticketsAvailable,
+  }));
+
   return (
-    <div>
-      <SecondNav />
-      <div>
+    <>
+      <div className="creator-events-view">
+        <p className="eds-text-hm__title snipcss0-0-0-1 snipcss-vBV7a">
+          Events
+        </p>
+        <SecondNav />
         <EventsListNavBar />
+        <DisplayEvents eventsData={events} />
       </div>
-      <DisplayEvents eventsData={events} />
-    </div>
+      <footer
+        className="creator-events-view eds-align--space-between eds-align--center eds-l-mar-top-10 snipcss-oBft8"
+        data-spec="events-screen-list-footer-links"
+      >
+        <CSVLink
+          data={EventsData}
+          filename="Events.csv"
+          href="/myevents/events?fmt=csv&amp;org=-1"
+          rel="noopener noreferrer"
+          target="_blank"
+          data-spec="events-screen-csv-link"
+        >
+          <i
+            className="eds-vector-image eds-icon--small"
+            data-spec="icon"
+            data-testid="icon"
+            aria-hidden="true"
+          >
+            <svg
+              id="download_svg__eds-icon--download_svg"
+              x="0"
+              y="0"
+              viewBox="0 0 24 24"
+            >
+              <path
+                id="download_svg__eds-icon--download_base"
+                fill="#231F20"
+                d="M16 16v1h5v4H3v-4h5v-1H2v6h20v-6z"
+              ></path>
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                fill="#231F20"
+                d="M17.3 11.4l-4.8 4.7V2h-1v14.1l-4.8-4.7-.7.7 6 5.9 6-5.8z"
+              ></path>
+            </svg>
+          </i>
+          &nbsp; CSV Export
+        </CSVLink>
+      </footer>
+    </>
   );
 };
 

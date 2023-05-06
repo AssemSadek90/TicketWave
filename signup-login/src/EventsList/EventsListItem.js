@@ -1,15 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './EventsList.css';
 const EventsListItem = (props) => {
+  const navigate = useNavigate();
   console.log(props.event.start);
   // //const username = localStorage.getItem('userName');
   const start_date = new Date(props.event.start);
   const day = start_date.getDate();
   const month = start_date.toLocaleString('default', { month: 'long' });
+  const handleEventClick = () => {
+    localStorage.setItem('eventID', props.event.id);
+    navigate('/basic-info');
+  };
 
   return (
     <div
-      className="eds-g-group eds-list-item edit-list-item eds-align--space-between eds-l-pad-all-4 eds-l-mn-pad-hor-6 eds-l-md-pad-hor-6 eds-l-mw-pad-hor-6 eds-l-ln-pad-hor-6 eds-l-lg-pad-hor-6 eds-l-lw-pad-hor-6 snipcss-lLxHJ"
+      onClick={handleEventClick}
+      className="events-list-creator-item eds-g-group eds-list-item edit-list-item eds-align--space-between eds-l-pad-all-4 eds-l-mn-pad-hor-6 eds-l-md-pad-hor-6 eds-l-mw-pad-hor-6 eds-l-ln-pad-hor-6 eds-l-lg-pad-hor-6 eds-l-lw-pad-hor-6 snipcss-lLxHJ"
       data-spec="edit-list-item"
     >
       <div className="eds-g-cell-11-12">
@@ -56,7 +63,7 @@ const EventsListItem = (props) => {
                     alt=""
                   >
                     <img
-                      src="./images/no-event-image-placeholder-2x.png"
+                      src="https://cdn.evbstatic.com/s3-build/perm_001/5287e3/django/images/pages/organizations/no-event-image-placeholder-2x.png"
                       alt=""
                       data-spec="list-item-graphic-image"
                     />
