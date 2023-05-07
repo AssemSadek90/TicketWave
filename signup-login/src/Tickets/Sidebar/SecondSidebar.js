@@ -92,7 +92,7 @@ const SecondSidebar = ({ showSecond }) => {
 @returns {void}
 */
   function CloseHandler() {
-    history('/home');
+    history('/Events');
   }
 
   //   const handleClick = (name) => {
