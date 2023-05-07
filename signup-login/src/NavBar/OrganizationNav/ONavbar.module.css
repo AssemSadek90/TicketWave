@@ -68,6 +68,10 @@
     width: 34px;
     height: 34px;
     border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
   }
   
   .tabs:hover {

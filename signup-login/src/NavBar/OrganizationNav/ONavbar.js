@@ -15,8 +15,10 @@ import { getFirstName, getLastName } from '../../Credentials/Credentials';
  *and Tabs components.
  */
 export default function ONavbar() {
-  const fname = getFirstName();
-  const lname = getLastName();
+  const fname = 'karim';
+  // getFirstName();
+  const lname = 'elnady';
+  // getLastName();
   const name = fname + ' ' + lname;
   const initials =
     fname.slice(0, 1).toUpperCase() + lname.slice(0, 1).toUpperCase();
@@ -54,7 +56,7 @@ export default function ONavbar() {
         </div>
         <div className={styles.navbar_li_2} id="navbar-li">
           <Dropdown title={name} tag={initialsSvg}>
-            <Tabs title="Switch To Attending" path="#" />
+            <Tabs title="Switch To Attending" path="/home" />
             <Tabs title="Log out" onClick={handleLogOut} id="log-out-tab" />
           </Dropdown>
         </div>
