@@ -12,6 +12,7 @@ import Terms from "./Log-in/TermsConditions/Terms";
 import ChangePassword from "./Log-in/ChangePassword";
 import Dashboard from "./Dashboard/dashboardinsights";
 import NANavbar from "./NavBar/NANavbar";
+import TicketsPage from "./TicketsPage/TicketsPage";
 
 /**
  * Renders the main application component.
@@ -61,6 +62,7 @@ function App() {
           <Route path="/signin" element={<SignIn />} />
           <Route path="/home" element={<Home />} />
           <Route path="/test" element={<NANavbar />} />
+          <Route path="/ticketspage" element={<TicketsPage />} />
         </Routes>
       </Router>
     </div>

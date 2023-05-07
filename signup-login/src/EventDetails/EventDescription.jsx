@@ -1,8 +1,28 @@
 const EventDescription = (props, isMobile) => {
+  function realStart() {
+    const date = new Date(props.event.start);
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const monthIndex = date.getMonth();
+    const day = date.getDate();
+    return `${monthNames[monthIndex]} ${day}`;
+  }
   return (
     <>
       <small>
-        <time className="fw-bold">{props.event.start}</time>
+        <h6 className="fw-bold">{realStart()}</h6>
       </small>
       <h1 className="display-5 fw-bold mb-4">{props.event.name}</h1>
       <div className="mb-5">

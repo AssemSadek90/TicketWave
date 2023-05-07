@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../NavBar/Navbar";
+import Navbar from "../NavBar/Navbar";
 import EventDetails from "./EventDetails";
 import { useParams } from "react-router-dom";
-
+import Footer from "../Footer/Footer";
 function EventDetailsPage() {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
@@ -22,8 +22,9 @@ function EventDetailsPage() {
 
   return (
     <div>
-      <NavBar />
+      <Navbar />
       {event && <EventDetails event={event} />}
+      <Footer />
     </div>
   );
 }

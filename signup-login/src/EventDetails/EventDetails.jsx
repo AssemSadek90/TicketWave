@@ -9,7 +9,7 @@ import AsideBooking from "./AsideBooking";
 import Banner from "./Banner/Banner";
 
 function EventDetails({ event }) {
-  const isMobile = window.matchMedia("(max-width: 960px").matches;
+  const isMobile = window.matchMedia("(max-width: 960px)").matches;
   const [showOverlay, setShowOverlay] = useState(false);
   const [count, setCount] = useState(1);
 
@@ -49,7 +49,7 @@ function EventDetails({ event }) {
               isMobile={isMobile}
             />
           ) : (
-            <h3>Event fully booked</h3>
+            <h3 className="fw-bold">Event fully booked</h3>
           )}
         </div>
       </div>
