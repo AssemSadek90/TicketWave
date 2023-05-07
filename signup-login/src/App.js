@@ -14,6 +14,7 @@ import Dashboard from './Dashboard/dashboardinsights';
 import Tickets from './Tickets/Tickets';
 import NANavbar from './NavBar/NANavbar';
 import Search from './Search/Search';
+import ONavbar from './NavBar/OrganizationNav/ONavbar';
 
 /**
  * Renders the main application component.
@@ -65,6 +66,7 @@ function App() {
           <Route path="/Navigation/*" element={<Tickets />} />
           <Route path="/test" element={<NANavbar />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/testt" element={<ONavbar />} />
         </Routes>
       </Router>
     </div>
