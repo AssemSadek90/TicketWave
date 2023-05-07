@@ -101,7 +101,7 @@ function App() {
             }}
           />
 
-          <Route path="/event-details:eventId" element={<EventDetails />} />
+          <Route path="/event-details/:eventId" element={<EventDetails />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/publish" element={<PublishApp />} />
