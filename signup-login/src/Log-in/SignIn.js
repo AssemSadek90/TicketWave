@@ -15,6 +15,7 @@ import {
 //import FacebookIcon from '../EventDetails/Facebook.png';
 //import { ReactComponent as GoogleIcon } from '.../google-icon.svg';
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import GoogleLogin from './GoogleSignIn';
 
 /**
  * A React component for creating an account.
@@ -396,6 +397,11 @@ Handles email input change event
                   <p>
                     <Link to="/change-password">Change Password</Link>
                   </p>
+                </div>
+                <div>
+                  <a href="https://ticketwave.me/api/google/login/login">
+                    Sign in with Google
+                  </a>
                 </div>
                 <div id="signInDiv">
                   {/* <GoogleLogin
