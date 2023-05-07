@@ -1,12 +1,27 @@
 import React, { useState, useEffect } from "react";
 
+/** A container component that wraps a form and allows for opening and closing.
+@param {boolean} open - Determines if the form should be open or closed.
+@param {boolean} isClosed - Determines if the form should be closed or open.
+@param {ReactNode} children - The child components to be rendered within the container.
+*/
 const FormContainer = ({ open, isClosed, children }) => {
+ /**
+@typedef {Object} FormContainerState
+@property {boolean} isOpen - Whether the form container is open or not.
+*/ 
 const [isOpen, setIsOpen] = useState(open);
 
+/** Set the state of the modal container to open or close.
+@param {boolean} open - Indicates if the modal is open or not.
+*/
 useEffect(() => {
 setIsOpen(open);
 }, [open]);
 
+/** useEffect that sets the state of isOpen based on the isClosed prop
+@param {boolean} isClosed - prop indicating if the container is closed
+*/
 useEffect(() => {
 setIsOpen(isClosed);
 }, [isClosed]);

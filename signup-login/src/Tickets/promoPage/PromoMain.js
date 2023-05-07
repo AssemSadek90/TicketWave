@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import FormContainer from "../components/FormContainer";
 import CreatePromoForm from "./CreatePromoForm";
@@ -6,31 +5,50 @@ import UploadCsvForm from "./UploadCsvForm";
 import PromoPageCard from "./PromoPageCard";
 import Icon from '../files/Image.png'
 
-
+/** Renders the main component for managing promo codes, including the ability to create and upload promo codes
+@param {Object} Promo - A Promo object containing properties for each promo code
+@param {Array} finalData - An array of data containing promo code information
+@returns {JSX.Element} - Returns the main component as a JSX element
+*/
 function PromoMain({Promo, finalData}){
 
+  /**Scrolls to the top of the window on page load*/
   useEffect(() => {window.scrollTo(0,0)}, [])
 
+    /** State to manage whether or not to show the create promo code form
+@type {[Boolean, Function]}
+*/
     const [createPromo, setCreatePromo] = useState(false);
+    /**State to manage whether or not to show the upload CSV form
+@type {[Boolean, Function]}
+*/
     const [uploadCsv, setUploadCsv] = useState(false);
+    /** State to manage the selected promo code
+@type {[Object, Function]}
+*/
     const [selectedItem, setSelectedItem] = useState(null);
+    /** State to manage all promo codes
+@type {[Array, Function]}
+*/
     const [promoCodes, setPromoCodes] = useState(finalData ? finalData : []);
+    /** State to manage the search query for filtering promo codes
+@type {[String, Function]}
+*/
     const [searchQuery, setSearchQuery] = useState("");
+    /** State to manage filtered promo codes based on the search query
+@type {[Array, Function]}
+*/
     const [filtered, setFiltered] = useState(promoCodes)
-
-
+    /** Filters promo codes based on the search query
+@type {Array}
+*/
     const filteredPromoCodes = promoCodes.filter(
       (item) =>
         item.codeName.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     // setFiltered(filteredPromoCodes);
-
-  // else setFiltered(promoCodes)
-
-    
-
-
+    // else setFiltered(promoCodes) 
     // console.log(promoCodes);
     // console.log(selectedItem);
     Promo(promoCodes);
@@ -42,7 +60,6 @@ function PromoMain({Promo, finalData}){
           {
             promoCodes.length > 0 ?
           
-
 
 <React.Fragment>
 
