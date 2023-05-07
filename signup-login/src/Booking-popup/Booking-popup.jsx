@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Booking-popup.module.css";
 import { FiArrowLeft } from "react-icons/fi";
+import Timer from "./Timer";
 
 const Popup = ({ event, closeOverlay, count, isMobile }) => {
   const [delivery, setDelivery] = useState(0);
+  const [promoAccept, setPromoAccept] = useState(false);
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestOptions = {
@@ -20,7 +22,13 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
     first_name: "",
     last_name: "",
     email: "",
-    ticket_number: count,
+    promo_code: "",
+    status: "",
+    cost: count * event.price,
+    created: "2023-05-12T12:30:46.019Z",
+    event: event.id,
+    user: localStorage.getItem(""),
+    attendee: "",
   });
 
   const handleChange = (e) => {
@@ -29,6 +37,16 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
       [e.target.name]: e.target.value,
     });
   };
+  function fetchPromos() {
+    fetch("http://localhost:4000/promocodes")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.promoCodes.includes(formData.promo_code)) {
+          setPromoAccept(true);
+        }
+      })
+      .catch((error) => console.error(error));
+  }
   return (
     <>
       <div className={styles.overlay}>
@@ -39,10 +57,12 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
               <FiArrowLeft
                 onClick={() => closeOverlay(false)}
                 className={styles.closing_button + " fs-4 "}
-                test-id="close-overlay-button"
+                id="close-overlay-button"
               />
-              <h4 className="h5">Checkout</h4>
-              <small className="text-secondary muted">timer</small>
+              <h4 className="h5 me-4">Checkout</h4>
+              <small className="text-secondary muted">
+                <Timer id="timer" seconds={1800} closeOverlay={closeOverlay} />{" "}
+              </small>
             </div>
 
             <div className={styles.form_container + " pt-5 "}>
@@ -127,6 +147,30 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                 </form>
               ) : (
                 <form id="checkout-reg" onSubmit={handleSubmit}>
+                  <div className="col-12 pt-3 d-flex justify-content-between">
+                    <input
+                      type="text"
+                      name="promo_code"
+                      onChange={handleChange}
+                      value={formData.promo_code}
+                      className="form-control"
+                      placeholder="Promo Code"
+                      aria-label="Promo Code"
+                    />
+                    <button
+                      className="btn btn-outline-secondary ms-2"
+                      type="button"
+                      id="apply-promocode-button"
+                      onClick={fetchPromos}
+                    >
+                      Apply
+                    </button>
+                    {promoAccept && (
+                      <p className="text-success align-self-center">
+                        Success!!
+                      </p>
+                    )}
+                  </div>
                   <div className="row pt-3">
                     <div className="col">
                       <input
@@ -182,9 +226,9 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                       <input
                         className="form-check-input fs-5"
                         type="checkbox"
-                        id="gridCheck1"
+                        id="gridCheck2"
                       ></input>
-                      <label className="form-check-label fs-5" for="gridCheck1">
+                      <label className="form-check-label fs-5" for="gridCheck2">
                         <small>
                           Send me emails about the best events happening nearby
                           or online.
@@ -195,9 +239,9 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                       <input
                         className="form-check-input fs-5"
                         type="checkbox"
-                        id="gridCheck1"
+                        id="gridCheck3"
                       ></input>
-                      <label className="form-check-label fs-5" for="gridCheck1">
+                      <label className="form-check-label fs-5" for="gridCheck3">
                         <small>I accept the terms of service</small>
                       </label>
                     </div>
@@ -212,7 +256,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                   className={styles.register}
                   type="submit"
                   form="free-reg"
-                  test-id="register-button"
+                  id="register-button"
                 >
                   <small>Register</small>
                 </button>
@@ -221,7 +265,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                   className={styles.register}
                   type="submit"
                   form="checkout-reg"
-                  test-id="checkout-button"
+                  id="checkout-button"
                 >
                   <small>Checkout</small>
                 </button>
