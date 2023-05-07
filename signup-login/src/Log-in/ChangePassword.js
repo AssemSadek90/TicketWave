@@ -163,7 +163,7 @@ whether the passwords are valid, the current password, and whether the form is l
                                 </div>
                                 <input
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  placeholder="Current Password"
+                                  placeholder=""
                                   id="current_password"
                                   name="current_password"
                                   type="password"
@@ -273,7 +273,7 @@ whether the passwords are valid, the current password, and whether the form is l
                                 </div>
                                 <input
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  placeholder="New Password"
+                                  placeholder=""
                                   id="new_password"
                                   name="new_password"
                                   type="password"
@@ -372,7 +372,7 @@ whether the passwords are valid, the current password, and whether the form is l
                                 </div>
                                 <input
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  placeholder="Repeat Password"
+                                  placeholder=""
                                   id="repeat_password"
                                   name="repeat_password"
                                   type="password"
