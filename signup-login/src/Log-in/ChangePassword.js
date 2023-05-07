@@ -147,14 +147,10 @@ whether the passwords are valid, the current password, and whether the form is l
                                     htmlFor="current_password"
                                     data-spec="label-label"
                                   >
-                                    <span className="eds-label__content">
-                                      Current Password
-                                    </span>
                                     <span
                                       className="eds-label__required-indicator eds-text-bs"
                                       data-spec="required-indicator"
                                     >
-                                      <span> *</span>
                                       <span className="eds-is-hidden-accessible">
                                         (required)
                                       </span>
@@ -163,7 +159,7 @@ whether the passwords are valid, the current password, and whether the form is l
                                 </div>
                                 <input
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  placeholder=""
+                                  placeholder="Current Password"
                                   id="current_password"
                                   name="current_password"
                                   type="password"
@@ -257,14 +253,10 @@ whether the passwords are valid, the current password, and whether the form is l
                                     htmlFor="new_password"
                                     data-spec="label-label"
                                   >
-                                    <span className="eds-label__content">
-                                      New Password
-                                    </span>
                                     <span
                                       className="eds-label__required-indicator eds-text-bm"
                                       data-spec="required-indicator"
                                     >
-                                      <span> *</span>
                                       <span className="eds-is-hidden-accessible">
                                         (required)
                                       </span>
@@ -273,7 +265,7 @@ whether the passwords are valid, the current password, and whether the form is l
                                 </div>
                                 <input
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  placeholder=""
+                                  placeholder="New Password"
                                   id="new_password"
                                   name="new_password"
                                   type="password"
@@ -356,14 +348,10 @@ whether the passwords are valid, the current password, and whether the form is l
                                     htmlFor="repeat_password"
                                     data-spec="label-label"
                                   >
-                                    <span className="eds-label__content">
-                                      Repeat Password
-                                    </span>
                                     <span
                                       className="eds-label__required-indicator eds-text-bm"
                                       data-spec="required-indicator"
                                     >
-                                      <span> *</span>
                                       <span className="eds-is-hidden-accessible">
                                         (required)
                                       </span>
@@ -372,7 +360,7 @@ whether the passwords are valid, the current password, and whether the form is l
                                 </div>
                                 <input
                                   className="eds-field-styled__input eds-field-styled__input--has-suffix"
-                                  placeholder=""
+                                  placeholder="Repeat Password"
                                   id="repeat_password"
                                   name="repeat_password"
                                   type="password"
