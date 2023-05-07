@@ -2,42 +2,65 @@ import React, { useState } from "react";
 import Card from "../UI/Card";
 import { hover } from "@testing-library/user-event/dist/hover";
 
-
+/** Renders a promotional card on the promo page.
+ * @param {Object} data - The data to render the promotional card.
+ * @param {Function} onClick - The function to call when the card is clicked.
+ * @param {Function} onDuplicate - The function to call when the card's duplicate button is clicked.
+ * @param {Function} onDelete - The function to call when the card's delete button is clicked.
+ * @returns {JSX.Element} - A JSX element representing the promotional card.
+ */
 function PromoPageCard({data, onClick, onDuplicate, onDelete}){
 
+  /** Sets the state of a React component to show or hide it.
+@function
+@param {boolean} value - Indicates whether the component should be shown or hidden.
+@returns {void}
+*/
   const [open, setIsOpen] = useState(false)
+  /** Sets the state of a React component to indicate whether the mouse is hovering over it or not.
+@function
+@param {boolean} value - Indicates whether the mouse is hovering over the component or not.
+@returns {void}
+*/
   const [isHovered, setIsHovered] = useState(false);
 
-
-
+/** Toggles the state of a React component's dropdown.
+@function
+@returns {void}
+*/
     function toggleDropdown() {
       setIsOpen(!open);
         // const dropdownContent = document.getElementById("dropdown-content");
         // if (dropdownContent.style.display === "none") {
         //   dropdownContent.style.display = "block";
-          
         // } else {
         //   dropdownContent.style.display = "none";
         // }
       }
 
-
+      /** Closes the dropdown of a React component.
+@function
+@param {Event} event - The event object associated with the event that triggered the dropdown to close.
+@returns {void}
+*/
       const closeDropdown = (event) => {
-        
         // const dropdownContent = document.getElementById("dropdown-content");
         // dropdownContent.style.display = "none";
         setIsOpen(false);
       };
       
+    /** The formatted date string representing the end date of an event.
+@type {string}
+*/
+      const formattedDate='When event ends'
+      if (data.endDate){
+        formattedDate = data.endDate?.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
+      }
 
-      // const formattedDate='When event ends'
-
-      // if (data.endDate){
-      //   formattedDate = data.endDate?.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
-      // }
-    
-
-
+      /** Handles the copying of the current URL to the user's clipboard.
+@function
+@returns {void}
+*/  
     function handleCopyUrl() {
         navigator.clipboard.writeText(window.location.href)
           .then(() => {
@@ -48,7 +71,11 @@ function PromoPageCard({data, onClick, onDuplicate, onDelete}){
           });
       }
 
-
+      /** Handles the duplication of data by creating a duplicate of a given data object.
+@function
+@returns {void}
+@type {Object}
+/function duplicateDataHandler() {*/
     function duplicateDataHandler() {
         const duplicatedData = {
           ...data,
@@ -58,25 +85,37 @@ function PromoPageCard({data, onClick, onDuplicate, onDelete}){
         onDuplicate(duplicatedData);
         closeDropdown();
       }
-      
 
+      /** Handles the deletion of a data object by its ID.
+@function
+@returns {void}
+*/
       function deleteHandler() {
         onDelete(data.id);
         closeDropdown();
       }
 
-
+      /** Handles the click event of a React component.
+@function
+@returns {void}
+*/
       function onClickHandler() {
         onClick();
         closeDropdown();
       }
-      
 
-
+      /** Handles the mouseover event of a React component.
+@function
+@returns {void}
+*/
       const handleMouseOver = () => {
         setIsHovered(true);
       };
     
+      /** Handles the mouseleave event of a React component.
+@function
+@returns {void}
+*/
       const handleMouseLeave = () => {
         setIsHovered(false);
       };
@@ -92,8 +131,6 @@ return(
     onMouseLeave={handleMouseLeave}
        >
         <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%'}}>
-
-
 
         {/* <div onClick={onClick} style={{paddingLeft: '1rem', margin: 0, width: '100%'}}>
   <p style={{margin: '0px', padding: '0px', marginRight: '1rem', fontWeight: 'bold', fontSize: 'large'}}>{data.codeName}</p>
@@ -120,15 +157,12 @@ return(
             </div>
             </div>
 
-
 {open && 
       <div
           style={{ position: "fixed", top: 0, left: 0, bottom: 0, right: 0 }}
           onClick={closeDropdown}
         ></div>
 }
-
-
 
 {/* <div style={{position: 'relative', display: 'inline-block', zIndex: 20}}>
   <button style={{backgroundColor: 'transparent', border: 'none', fontSize: '24px', cursor: 'pointer'}} onClick={toggleDropdown}>...{data.name}</button>
@@ -138,8 +172,6 @@ return(
     <div onClick={deleteHandler} style={{display: 'block', padding: '8px 16px', textDecoration: 'none', color: '#333'}}>Delete</div>
   </div>
 </div> */}
-
-
 
 
 <div style={{ position: 'relative', display: 'inline-block', width: '5%' }}>
@@ -174,10 +206,10 @@ return(
             height: '6rem'
           }}
         >
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={onClickHandler}>Edit</button>
+          <button id="promo-main-edit" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={onClickHandler}>Edit</button>
           {/* <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={duplicateDataHandler}>Duplicate</button> */}
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={deleteHandler}>Delete</button>
-          <button style={{height: '2rem', border: 'none', outline: 'none'}} onClick={handleCopyUrl}>Share Url</button>
+          <button id="promo-main-delete" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={deleteHandler}>Delete</button>
+          <button id="promo-main-share-url" style={{height: '2rem', border: 'none', outline: 'none'}} onClick={handleCopyUrl}>Share Url</button>
         </div>
       )}
     </div>
@@ -197,7 +229,6 @@ return(
     </div>
 )
 }
-
 
 
 export default PromoPageCard;

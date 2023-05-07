@@ -8,13 +8,12 @@ html {
   font-family: 'Noto Sans JP', sans-serif;
 }
 
-body {
+.tickets-body {
   margin: 0;
   align-items: center;
   padding: 10vh;
   background-color: white;
 }
-
 
 .mainButton button {
   background-color: rgb(205, 73, 26);
@@ -35,9 +34,6 @@ body {
   background-color: rgb(232, 95, 45);
 }
 
-
-
-
 .inputContainer {
   /* margin-top: 1rem; */
   padding: 5px;
@@ -49,13 +45,16 @@ body {
   padding: 0.5rem;
   display: flex;
   flex-direction: column;
+  font-size: small;
+}
 
+.inputContainer select {
+  font-size: small;
 }
 
 .inputContainer input {
   border: none;
 }
-
 
 .inputContainer textarea {
   border: none;
@@ -63,10 +62,8 @@ body {
 
 .inputContainer:hover {
   border-color: gray;
-  color: gray
+  color: gray;
 }
-
-
 
 .inputContainer input:focus {
   outline: 0;
@@ -79,7 +76,7 @@ body {
 .inputContainer:focus-within {
   outline: 0;
   border-color: blue;
-  color: blue
+  color: blue;
 }
 
 .inputContainer:focus-within .inputLabel {
@@ -93,11 +90,7 @@ body {
   transition: color 0.2s ease-out;
 }
 
-
-
-
-
-.formButtons button{
+.formButtons button {
   background-color: white;
   justify-content: center;
   align-items: center;
@@ -112,11 +105,11 @@ body {
   font-size: medium;
   border-radius: 5px;
 }
-.formButtons button:hover{
+.formButtons button:hover {
   border: 1px solid gray;
 }
 
-.formButtons button.active{
+.formButtons button.active {
   background-color: rgb(234, 234, 255);
   justify-content: center;
   align-items: center;
@@ -132,16 +125,9 @@ body {
   border-radius: 5px;
 }
 
-
-.formButtons button:active{
+.formButtons button:active {
   opacity: 70%;
 }
-
-
-
-
-
-
 
 .sidebar {
   position: fixed;
@@ -185,8 +171,6 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 } */
 
-
-
-.activated{
+.activated {
   background-color: blue;
 }

@@ -1,42 +1,28 @@
-.overlay-container {
-    position: relative;
-  }
-  
-  .overlay-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-  }
-  
-  .overlay {
-    position: fixed;
-    top: 0;
-    right: -25rem;
-    bottom: 0;
-    width: 25rem;
-    background-color: #fff;
-    z-index: 9999;
-    transition: right 0.3s ease-in-out;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* shadow on hover */
-    
-  }
-  
-  .overlay.open {
-    right: 0;
-  }
-  
-  .overlay-content {
-    padding: 1rem;
-  }
-  
-  .overlay-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-  
+.overlay-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: relative;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 20rem;
+  background-color: #fff;
+  z-index: 9999;
+  transform: translateX(100rem);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.overlay.open {
+  transform: translateX(65rem);
+  right: 0
+}
+
+.overlay-content {
+  padding: 1rem;
+}

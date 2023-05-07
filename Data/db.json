@@ -1,65 +1,55 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "2",
+      "password": "BNMbnm123",
+      "is_superuser": false,
+      "username": "ZiadGhanem",
+      "first_name": "",
+      "last_name": "",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+
+      "is_public": true,
+      "image_id": "-1"
+    }
+  ],
   "eventsData": [
     {
-      "path": "https://openclipart.org/download/341148/cantthink-simplecolour.svg",
-      "location": "New York City",
-      "date": "March 28, 2023",
-      "title": "My Trip to NYC"
-    },
-    {
-      "path": "https://openclipart.org/download/341147/building-engineer-colour.svg",
-      "location": "San Francisco",
-      "date": "April 15, 2023",
-      "title": "Golden Gate Bridge"
-    },
-    {
-      "path": "https://openclipart.org/download/341145/ladyinreddances-remix.svg",
-      "location": "Paris",
-      "date": "May 3, 2023",
-      "title": "Eiffel Tower"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Tokyo",
-      "date": "June 7, 2023",
-      "title": "Cherry Blossoms"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "London",
-      "date": "July 12, 2023",
-      "title": "Big Ben"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Sydney",
-      "date": "August 21, 2023",
-      "title": "Opera House"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Rio de Janeiro",
-      "date": "September 4, 2023",
-      "title": "Christ the Redeemer"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Dubai",
-      "date": "October 1, 2023",
-      "title": "Burj Khalifa"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Rome",
-      "date": "November 10, 2023",
-      "title": "Colosseum"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Moscow",
-      "date": "December 5, 2023",
-      "title": "Red Square"
+      "id": 1,
+      "name": "Middle East Vape Show 2023",
+      "summary": "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
+      "description": "Will be held 3 days from 6 to 8 July 2023, after the success of the 1st event in Bahrain this year with a new atmosphere it will be held in Cairo, Egypt. We choose Egypt International Exhibition Center as the best venue in Cairo for MEVS 2023.",
+      "start": "2023-07-06T10:00:00",
+      "end": "2023-07-08T22:00:00",
+      "url": "https://www.eventbrite.com/e/middle-east-vape-show-2023-tickets-512820940237?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
+      "created": "2023-03-22T10:00:00",
+      "changed": "2023-03-22T12:00:00",
+      "status": "draft",
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": false,
+      "view_counter": 0,
+      "owner": 1,
+      "category": 1,
+      "age_restriction": false,
+      "language": "English",
+      "timezone": "6GMT",
+      "video_url": "R63RiKdiB2o",
+      "published": true,
+      "fully_booked": false,
+      "organizer": "Sawa",
+      "online_event": false,
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F438303329%2F1343904084043%2F1%2Foriginal.20230203-023453?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=69cab150771ec45eb6ed627fbf66039d",
+      "venue": {
+        "name": "Egypt International Exhibition Center - EIEC",
+        "address": "El-Moshir Tantawy Axis Al Hay Al Asher, Cairo Governorate 4440301",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      }
     }
   ],
   "Event_id": [
@@ -77,7 +67,7 @@
       "Paid": "5",
       "Free": "3",
       "EventURL": "www.google.com",
-      "Ticket_type":"Admission"
+      "Ticket_type": "Admission"
     }
   ],
   "Time": [
@@ -100,13 +90,17 @@
       "id": 3
     }
   ],
-  
-  "ticketData": [
-    { "Ticket_type": "General Admission", "Price": "20", "Sold":"10", "Tickets":"30" },
-    { "Ticket_type": "VIP", "Price": "50", "Sold":"5", "Tickets":"10" },
-    { "Ticket_type": "Student", "Price": "15",  "Sold":"6", "Tickets":"20" }
-  ],
 
+  "ticketData": [
+    {
+      "Ticket_type": "General Admission",
+      "Price": "20",
+      "Sold": "10",
+      "Tickets": "30"
+    },
+    { "Ticket_type": "VIP", "Price": "50", "Sold": "5", "Tickets": "10" },
+    { "Ticket_type": "Student", "Price": "15", "Sold": "6", "Tickets": "20" }
+  ],
 
   "Events": [
     {
@@ -114,13 +108,27 @@
       "name": "Middle East Vape Show 2023",
       "summary": "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
       "description": "Will be held 3 days from 6 to 8 July 2023, after the success of the 1st event in Bahrain this year with a new atmosphere it will be held in Cairo, Egypt. We choose Egypt International Exhibition Center as the best venue in Cairo for MEVS 2023.",
-      "start_time": "July 6 · 10am",
-      "end_time": " July 8 · 10pm EET",
+      "start": "2023-07-06T10:00:00",
+      "end": "2023-07-08T22:00:00",
       "url": "https://www.eventbrite.com/e/middle-east-vape-show-2023-tickets-512820940237?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
       "created": "2023-03-22T10:00:00",
       "changed": "2023-03-22T12:00:00",
-      "videoURL": "R63RiKdiB2o",
+      "status": "draft",
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": false,
+      "view_counter": 0,
+      "owner": 1,
+      "category": 1,
+      "age_restriction": false,
+      "language": "English",
+      "timezone": "6GMT",
+      "video_url": "R63RiKdiB2o",
       "published": true,
+      "fully_booked": false,
+      "organizer": "Sawa",
       "online_event": false,
       "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F438303329%2F1343904084043%2F1%2Foriginal.20230203-023453?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=69cab150771ec45eb6ed627fbf66039d",
       "venue": {
