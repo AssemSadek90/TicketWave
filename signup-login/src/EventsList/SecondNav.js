@@ -54,7 +54,7 @@ const SecondNav = () => {
               tabIndex="-1"
               className="eds-dropdown-menu snipcss0-6-60-61"
             >
-              <a
+              <div
                 className="eds-dropdown-menu__link ignore-react-onclickoutside snipcss0-7-61-62"
                 data-spec="dropdown-menu-link"
                 role="menuitem"
@@ -126,53 +126,25 @@ const SecondNav = () => {
                     </svg>
                   </i>
                 </span>
-              </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div className="eds-show-up-md eds-g-cell eds-g-cell-2-12 snipcss0-3-15-74">
         <div className="create-event-creator snipcss0-4-74-75">
-          <a
+          <div
             onClick={handleCreateEventClick}
-            className="eds-btn eds-btn--link eds-btn--fill snipcss0-5-75-76"
+            className=" eds-btn eds-btn--link eds-btn--fill snipcss0-5-75-76"
+            style={{
+              padding: '0',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
           >
             Create Event
-          </a>
-        </div>
-      </div>
-      <div className="eds-show-down-mn events-phab-container snipcss0-3-15-77">
-        <div
-          className="eds-phab-button eds-phab-button--large snipcss0-4-77-78"
-          data-spec="eds-phab-button"
-        >
-          <button
-            aria-label="Create Event"
-            className="eds-btn eds-btn--button eds-btn--fill eds-btn--phab eds-btn--icon-only snipcss0-5-78-79"
-            type="button"
-          >
-            <i
-              className="eds-vector-image eds-icon--small eds-vector-image--block snipcss0-6-79-80"
-              data-spec="icon"
-              data-testid="icon"
-              aria-hidden="true"
-            >
-              <svg
-                id="plus-chunky_svg__eds-icon--plus-chunky_svg"
-                x="0"
-                y="0"
-                viewBox="0 0 24 24"
-                className="snipcss0-7-80-81"
-              >
-                <path
-                  id="plus-chunky_svg__eds-icon--plus-chunky_base"
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d="M13 11V4h-2v7H4v2h7v7h2v-7h7v-2z"
-                ></path>
-              </svg>
-            </i>
-          </button>
+          </div>
         </div>
       </div>
     </div>
