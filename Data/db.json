@@ -1,5 +1,20 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": "2",
+      "password": "BNMbnm123",
+      "is_superuser": false,
+      "username": "ZiadGhanem",
+      "first_name": "",
+      "last_name": "",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+
+      "is_public": true,
+      "image_id": "-1"
+    }
+  ],
   "eventsData": [
     {
       "id": 1,
@@ -52,7 +67,7 @@
       "Paid": "5",
       "Free": "3",
       "EventURL": "www.google.com",
-      "Ticket_type":"Admission"
+      "Ticket_type": "Admission"
     }
   ],
   "Time": [
@@ -75,13 +90,17 @@
       "id": 3
     }
   ],
-  
-  "ticketData": [
-    { "Ticket_type": "General Admission", "Price": "20", "Sold":"10", "Tickets":"30" },
-    { "Ticket_type": "VIP", "Price": "50", "Sold":"5", "Tickets":"10" },
-    { "Ticket_type": "Student", "Price": "15",  "Sold":"6", "Tickets":"20" }
-  ],
 
+  "ticketData": [
+    {
+      "Ticket_type": "General Admission",
+      "Price": "20",
+      "Sold": "10",
+      "Tickets": "30"
+    },
+    { "Ticket_type": "VIP", "Price": "50", "Sold": "5", "Tickets": "10" },
+    { "Ticket_type": "Student", "Price": "15", "Sold": "6", "Tickets": "20" }
+  ],
 
   "Events": [
     {
