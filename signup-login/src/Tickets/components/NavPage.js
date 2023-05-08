@@ -1,6 +1,9 @@
 import React from 'react';
 import CustomNavLink from '../UI/CustomNavLink';
 
+/** Renders the navigation page component.
+@return {JSX.Element} Navigation page component.
+*/
 function NavPage() {
   return (
     <div
@@ -22,18 +25,6 @@ function NavPage() {
       <div style={{ marginRight: '2rem' }}>
         <CustomNavLink id="nav-page-add-ons" to={'/Tickets/add-ons'}>
           Add-ons
-        </CustomNavLink>
-      </div>
-
-      <div style={{ marginRight: '2rem' }}>
-        <CustomNavLink id="nav-page-promo-codes" to={'/Tickets/promo-codes'}>
-          Promo codes
-        </CustomNavLink>
-      </div>
-
-      <div style={{ marginRight: '2rem' }}>
-        <CustomNavLink id="nav-page-holds" to={'/Tickets/holds'}>
-          Holds
         </CustomNavLink>
       </div>
 

@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/** A functional component for rendering the main page of sold tickets.
+@param {Object} data - The data of the sold tickets.
+@returns {JSX.Element} - The JSX element of the component.
+*/
 function SoldTicketsMain({ data }) {
   return (
     <div style={{ backgroundColor: '#f2f2f2', padding: '1rem' }}>
@@ -24,7 +28,7 @@ function SoldTicketsMain({ data }) {
               <span style={{ fontWeight: 'bold' }}>{item.name}</span>
 
               <Link to={`/${item.id}`} className="mainButton">
-                <button>View</button>
+                <button id="sold-tickets-main-view-button">View</button>
               </Link>
             </div>
           );

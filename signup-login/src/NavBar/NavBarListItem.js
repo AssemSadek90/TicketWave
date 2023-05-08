@@ -13,7 +13,7 @@ import styles from './Navbar.module.css';
 export default function NavBarListItem(props) {
   console.log(props.path);
   return (
-    <li>
+    <li className={styles.navbar_li} id="navbar-li">
       <a className={styles.navbar_a} href={props.path}>
         {props.children}
         <span>{props.title}</span>
