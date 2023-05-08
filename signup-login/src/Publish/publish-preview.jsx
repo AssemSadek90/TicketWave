@@ -8,19 +8,29 @@ import server from '../server';
 import "./Publish.css";
 
 function Publish() {
-  const [event_id, setevent_id] = useState("");
-  const dateObject = new Date(event_id.created);
+// const event_id= localStorage.getItem('event_id');
 
+  const [event_id, setevent_id] = useState("");
+  // const dateObject = new Date(event_id.created);
+  const [dateObject, setdateObject]=useState(new Date())
     // fetch the data from the API OR BackEnd
   useEffect(() => {
-  fetch('http://localhost:3000/Event_id')
+  // const id=localStorage.getItem('event_id')
+  const id=1;
+  // const event_id= localStorage.getItem('event_id');
+  fetch(`http://localhost:3000/Event/?id=${id}`)
+  // fetch('http://localhost:3000/Event/?id=${event_id}')
   .then(response => response.json())
   .then(data => {
-    // console.log(data)
+    console.log(data)
     setevent_id(data[0])
+    const dates=new Date(data[0].created);
+    setdateObject(dates)
+    console.log(data[0].created)
   })
   .catch(error => console.error(error))
- }, []);    // useEffect(() => {
+ }, []);   
+  // useEffect(() => {
     // const accessToken = localStorage.getItem('accessToken');
     // const requestOptions = {
     //   headers: {

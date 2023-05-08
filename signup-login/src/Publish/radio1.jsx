@@ -19,7 +19,8 @@ function RadioApp() {
   const [selectedTime, setSelectedTime] = useState(moment().format('HH:mm'));
   const [EnableDate, SetEnableDate] = useState(true);
   const optionRef = useRef(null);
-
+  const id=1
+  // const id=localStorage.getItem('event_id')
   const handleClickPublish = async () => {
     // Get the value attribute of the option element, which contains the time value
     const timeValue = optionRef.current.value;
@@ -429,7 +430,7 @@ function RadioApp() {
       </div>
       <form onSubmit={eventHandler}>
         <div className="footerContainer">
-        <Link to="/event-details" element={<EventDetails />}>
+        <Link to={`/event-details/${id}`} element={<EventDetails />}>
          <div>
           <button className="footerButton" id="footer" type="submit" onClick={handleClickPublish}>
             Publish
