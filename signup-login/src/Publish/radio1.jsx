@@ -1,9 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, } from 'react';
+import { Link } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import './Publish.css';
 import server from '../server';
+import EventDetails from '../EventDetails/EventDetailsPage';
+
 
 function RadioApp() {
   const [radioValue, setRadioValue] = useState('option1');
@@ -16,11 +19,14 @@ function RadioApp() {
   const [selectedTime, setSelectedTime] = useState(moment().format('HH:mm'));
   const [EnableDate, SetEnableDate] = useState(true);
   const optionRef = useRef(null);
+
   const handleClickPublish = async () => {
     // Get the value attribute of the option element, which contains the time value
     const timeValue = optionRef.current.value;
     console.log(timeValue);
+
   };
+
   useEffect(() => {
     setSelectedDate(new Date());
     setSelectedTime(moment().format('HH:mm'));
@@ -134,31 +140,31 @@ function RadioApp() {
       .catch((error) => console.log(error));
   };
 
-  //       fetch('http://localhost:3000/Time', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': 'Bearer <your access token>'
-  //     },
-  //     body: JSON.stringify([{
-  //       "EventDate": selectedDate,
-  //       "EventTime": selectedTime
-  //     },
-  //   { "Password": textInputValue }])
-  //   })
-  //     .then(response => {
-  //       if (!response.ok) {
-  //         throw new Error('Network response was not ok');
-  //       }
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       // handle the response data
-  //     })
-  //     .catch(error => {
-  //       console.error('There was a problem with the push request:', error);
-  //     });
-  // }
+        fetch('http://localhost:3000/Time', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer <your access token>'
+      },
+      body: JSON.stringify([{
+        "EventDate": selectedDate,
+        "EventTime": selectedTime
+      },
+    { "Password": textInputValue }])
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // handle the response data
+      })
+      .catch(error => {
+        console.error('There was a problem with the push request:', error);
+      });
+  
 
   return (
     <div>
@@ -423,11 +429,13 @@ function RadioApp() {
       </div>
       <form onSubmit={eventHandler}>
         <div className="footerContainer">
+        <Link to="/event-details" element={<EventDetails />}>
          <div>
           <button className="footerButton" id="footer" type="submit" onClick={handleClickPublish}>
             Publish
           </button>
           </div>
+          </Link>
         </div>
       </form>
     </div>
