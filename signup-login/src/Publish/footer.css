@@ -36,8 +36,8 @@
 }
 .footerButton{ 
     transform: translateZ(0);
-    position: absolute;
-    right: 24px;
+    /* position: absolute; */
+    /* right: 24px; */
     margin-right: 24px;
     box-align: right;
     height: 44px;

@@ -4,7 +4,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import moment from 'moment';
 import './Publish.css';
 import server from '../server';
-import './footer.css';
 
 function RadioApp() {
   const [radioValue, setRadioValue] = useState('option1');
@@ -282,7 +281,6 @@ function RadioApp() {
               />
               No, keep it private
               <br />
-              <br />
                <input
               className="Radio"
               type="radio"
@@ -355,7 +353,7 @@ function RadioApp() {
           
               <label className="eds-field-styled__label eds-label-primary snipcss0-12-79-80 snipcss0-10-24-25">
                 <span className="eds-label__content snipcss0-13-80-81 snipcss0-11-25-26">
-                  Start Time
+                  Start time
                 </span>
               </label>
               <select
@@ -365,6 +363,7 @@ function RadioApp() {
                 name="startTime"
                 type="time"
                 disabled={EnableDate}
+                className="Time-Selected"
               >
                 <option id="12AM" value="T12:00:00Z" ref={optionRef}>00:00</option>
                 <option id="12-30AM" value="T12:30:00Z">00:30</option>
@@ -423,14 +422,12 @@ function RadioApp() {
         </p>
       </div>
       <form onSubmit={eventHandler}>
-      <div classNsme="eds-fixed-bottom-bar-layout__bar">
         <div className="footerContainer">
          <div>
           <button className="footerButton" id="footer" type="submit" onClick={handleClickPublish}>
             Publish
           </button>
           </div>
-        </div>
         </div>
       </form>
     </div>

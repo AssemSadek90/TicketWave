@@ -1,17 +1,17 @@
 import React from 'react';
 import './Publish.css';
 
-function Upper(Event_id) {
+function Upper(event_id) {
   return (
     <section className="event-preview-card__content">
-      <h1 className="eds-textl"> {Event_id.Name}</h1>
+      <h1 className="eds-textl"> {event_id.Name}</h1>
       <div className="event-preview-card__date eds-text--truncate eds-l-mar-top-1">
-        {Event_id.created.toLocaleString()}
+        {event_id.created.toLocaleString().substr(0,15)}
       </div>
       <div className="event-preview-card__venue eds-text--truncate eds-l-mar-top-1">
-        {Event_id.status}
+        {event_id.status}
       </div>
-      <div className="eds-vector-image">
+      <div className="Ticket-Capacity">
         <svg
           className="icon-1"
           xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ function Upper(Event_id) {
             </g>
           </g>{' '}
         </svg>
-        <i className="eds-vector">{Event_id.price}</i>
+        <i className="eds-vector">{event_id.price}</i>
         <svg
           className="icon-1"
           xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ function Upper(Event_id) {
           <path d="M0 0h24v24H0z" fill="none" />
           <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
         </svg>
-        <i className="eds-vector">{Event_id.capacity}</i>
+        <i className="eds-vector">{event_id.capacity}</i>
       </div>
     </section>
   );

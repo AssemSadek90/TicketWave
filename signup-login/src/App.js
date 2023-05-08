@@ -43,9 +43,9 @@ function App() {
           <Route
             path="/publish"
             element={
-              <ProtectedRoutes>
+              // <ProtectedRoutes>
                 <PublishApp />
-              </ProtectedRoutes>
+              // </ProtectedRoutes>
             }
           />
           <Route
