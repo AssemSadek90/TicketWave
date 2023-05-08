@@ -3,7 +3,23 @@ import { BsClockHistory } from "react-icons/bs";
 import { TfiTicket } from "react-icons/tfi";
 import styles from "./EventInfo.module.css";
 
-export default function EventInfo(props) {
+export default function EventInfo(props, isMobile) {
+  const duration = () => {
+    const startDate = new Date(props.event.start);
+    const endDate = new Date(props.event.end);
+
+    const timeDifferenceInMs = endDate.getTime() - startDate.getTime();
+    const seconds = Math.floor(timeDifferenceInMs / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    const hoursRemaining = hours % 24;
+    const daysText = days > 0 ? `${days} days ` : "";
+    const hoursText = hoursRemaining > 0 ? `${hoursRemaining} hours` : "";
+
+    return `${daysText}${hoursText}`;
+  };
   return (
     <>
       <div>
@@ -16,7 +32,7 @@ export default function EventInfo(props) {
               <BsClockHistory className="text-primary fs-5 m-3" />
             </span>
             <span className="fw-bold">
-              <small>2 days 12 hours</small>
+              <small>{duration()}</small>
             </span>
           </div>
 
@@ -40,7 +56,7 @@ export default function EventInfo(props) {
           <div className="mt-4">
             <YoutubeEmbed
               test-id="youtube-video"
-              embedId={props.event.videoURL}
+              embedId={props.event.video_url}
             />
           </div>
         </div>
