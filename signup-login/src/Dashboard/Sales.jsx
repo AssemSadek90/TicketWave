@@ -26,7 +26,7 @@ function Sales(Event_id) {
           </div>
           <div className="ticket-table__header eds-l-mar-top-5">
             <div className="eds-data-table">
-              <div className="eds-data-table__wrapper">
+              {/* <div className="eds-data-table__wrapper"> */}
                 <table className="eds-data-table__main eds-l-mar-vert-2" data-spec="data-table-main">
                   <thead>
                     <tr data-spec="data-table-header" className="eds-data-table-header">
@@ -63,7 +63,7 @@ function Sales(Event_id) {
                     </tr>) )}
                   </tbody>
                 </table>
-              </div>
+              {/* </div> */}
             </div>
             {/* <div className="ticket-table__all eds-l-mar-top-4 eds-l-mar-right-2" data-testid="all-ticket-sales">
               <a data-spec="eds-link" href="myevent/591102953847/reports/sales-by-ticket-type/" className="eds-link">

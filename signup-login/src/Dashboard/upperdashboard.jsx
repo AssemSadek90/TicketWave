@@ -12,9 +12,10 @@ function upperdashboard() {
     setEvent_id(data[0])
   })
   .catch(error => console.error(error));
-   return (  
+   return (<div className="eds-data-table__wrapper">
   <div className="cards-carousel eds-g-cell eds-g-cell-12-12">
           <Netsales Nsales={Event_id.Nsales} Sold={Event_id.Sold} Paid={Event_id.Paid} Tickets={Event_id.Tickets} Gross={Event_id.Gross} Free={Event_id.Free} />
+        </div>
         <div className="eds-g-cell eds-g-cell-12-12 eds-g-cell-sm-4-12">
     </div>
   </div>

@@ -56,7 +56,7 @@ function Share(Event_id) {
         <div className="eds-text-weight--heavy eds-l-pad-left-3">Share on</div>
         <div className="share-box-container">
           <div className="display-flex" data-testid="custom-share-box">
-            <div data-spec="share-box-container">
+           <div data-spec="share-box-container">
             <FacebookShareButton url={Event_id.EventURL}>
               <span className="eds-l-pad-right-1" data-spec="facebook-share-box-container">
                 <span className="eds-icon-button eds-icon-button--neutral" data-spec="icon-button">
@@ -68,7 +68,7 @@ function Share(Event_id) {
                       data-testid="icon"
                     >
                       <svg viewBox="0 0 22 22">
-                        <path d="M14.893 11.89L15.336 9h-2.773V7.124c0-.79.387-1.562 1.63-1.562h1.26v-2.46s-1.144-.196-2.238-.196c-2.285 0-3.777 1.385-3.777 3.89V9h-2.54v2.89h2.54v6.989a10.075 10.075 0 003.124 0V11.89h2.33"></path>
+                      <path d="M14.893 11.89L15.336 9h-2.773V7.124c0-.79.387-1.562 1.63-1.562h1.26v-2.46s-1.144-.196-2.238-.196c-2.285 0-3.777 1.385-3.777 3.89V9h-2.54v2.89h2.54v6.989a10.075 10.075 0 003.124 0V11.89h2.33"></path>
                       </svg>
                       <span className="eds-is-hidden-accessible">
                         Share on Facebook

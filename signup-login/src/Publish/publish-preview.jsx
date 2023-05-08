@@ -12,22 +12,22 @@ function Publish() {
   const dateObject = new Date(event_id.created);
 
     // fetch the data from the API OR BackEnd
-  
+  useEffect(() => {
   fetch('http://localhost:3000/Event_id')
   .then(response => response.json())
   .then(data => {
     // console.log(data)
     setevent_id(data[0])
   })
-  .catch(error => console.error(error));
-    useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    const requestOptions = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    };})
+  .catch(error => console.error(error))
+ }, []);    // useEffect(() => {
+    // const accessToken = localStorage.getItem('accessToken');
+    // const requestOptions = {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     Authorization: `Bearer ${accessToken}`,
+    //   },
+    // };})
   //   server
   //     .get(`/events/retrieve/${event_id}`, requestOptions)
   //     .then((response) => {
@@ -55,6 +55,30 @@ function Publish() {
   //     .catch((error) => console.log(error));
   //   //console.log('orders', orders);
   // }, []);
+//   useEffect(() => {
+//   const accessToken = localStorage.getItem('accessToken');
+//   const requestOptions = {
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${accessToken}`,
+//     },
+//   };
+
+//   Promise.all([
+//     server.get(`/events/retrieve/${event_id}`, requestOptions),
+//     server.get(`/events/price/${event_id}`, requestOptions),
+//   ])
+//     .then((responses) => {
+//       const data = responses.map((response) => response.data.results);
+
+//       if (data) {
+//         setevent_id(data);
+//         console.log(data);
+//       }
+//     })
+//     .catch((error) => console.log(error));
+// }, []);
+
 
   return <div className='publish-preview'>
     <Header />
