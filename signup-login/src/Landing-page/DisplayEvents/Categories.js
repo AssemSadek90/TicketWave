@@ -45,6 +45,9 @@ export default function CategoriesNav() {
         'Content-Type': 'application/json',
         // Authorization: `Bearer ${accessToken}`,
       },
+      params: {
+        category: selectedTab,
+      },
     };
     server
       .get(`/events/list/`, requestOptions)
