@@ -28,6 +28,16 @@ export default function ONavbar() {
     </div>
   );
   const navigate = useNavigate();
+  const downSvg = (
+    <svg x="0" y="0" viewBox="0 0 24 24">
+      <path d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z"></path>
+    </svg>
+  );
+  const upSvg = (
+    <svg x="0" y="0" viewBox="0 0 24 24">
+      <path d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z"></path>
+    </svg>
+  );
   function handleLogOut() {
     const accessToken = localStorage.getItem('accessToken');
     const requestOptions = {

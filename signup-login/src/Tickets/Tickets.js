@@ -14,6 +14,7 @@ import EventDetails from '../EventDetails/EventDetails';
 // import Dashboard from "./Dashboard/Dashboard";
 import Dashboard from '../Dashboard/dashboardinsights';
 import CreateEventForm from '../Basic-info/CreateEventForm';
+import ONavbar from '../NavBar/OrganizationNav/ONavbar';
 
 function Tickets({
   finalTicketData,
@@ -122,6 +123,7 @@ function Tickets({
   return (
     // <BrowserRouter>
     <React.Fragment>
+      <ONavbar />
       <Sidebar showSecond={showSecondSidebar} visible={visible} />
       <div style={{ paddingLeft: padding }}>
         <Routes>

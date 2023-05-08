@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './Displayevents.module.css';
 import EventsList from './EventList';
-import CategoriesNav from './Categories';
 import MoreEvents from './MoreEvents';
 
 /**
@@ -18,7 +17,6 @@ export default function DisplayEvents(props) {
 
   return (
     <div>
-      <CategoriesNav />
       <h2 id="events-header" className={styles.events_header}>
         Events In Cairo
       </h2>

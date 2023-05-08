@@ -49,14 +49,9 @@ function App() {
               setVisible(true);
               setShowSecondSidebar(false);
               return (
-                <React.Fragment>
-                  <Sidebar showSecond={showSecondSidebar} visible={visible} />
-                  <div style={{ paddingLeft: padding }}>
-                    <div style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
-                      <Home />
-                    </div>
-                  </div>
-                </React.Fragment>
+                <div style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+                  <Home />
+                </div>
               );
             }}
           />
