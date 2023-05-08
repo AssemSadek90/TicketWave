@@ -14,6 +14,10 @@ import Tickets from './Tickets/Tickets';
 import Sidebar from './Tickets/Sidebar/Sidebar';
 import { useState } from 'react';
 import CreatorEvent from './EventsList/CreatorEvent';
+import NANavbar from './NavBar/NANavbar';
+import Search from './Search/Search';
+import ONavbar from './NavBar/OrganizationNav/ONavbar';
+
 /**
  * Renders the main application component.
  * @function
@@ -40,7 +44,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/creator" element={<CreatorEvent />}></Route>
-          <Route
+          {/* <Route
             path="/home"
             Component={() => {
               return (
@@ -49,7 +53,7 @@ function App() {
                 </React.Fragment>
               );
             }}
-          />
+          /> */}
 
           <Route
             path="/basic-info"
@@ -114,6 +118,11 @@ function App() {
               />
             }
           />
+          <Route path="/home" element={<Home />} />
+          <Route path="/Navigation/*" element={<Tickets />} />
+          <Route path="/test" element={<NANavbar />} />
+          <Route path="/search" element={<Search />} />
+          <Route path="/testt" element={<ONavbar />} />
         </Routes>
       </Router>
     </div>
