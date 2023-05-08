@@ -22,7 +22,7 @@ export default function ONavbar() {
   const name = fname + ' ' + lname;
   const initials =
     fname.slice(0, 1).toUpperCase() + lname.slice(0, 1).toUpperCase();
-  const initialsSvg = (
+  const initialsContainer = (
     <div className={styles.initials_container} id="initials-container">
       <span>{initials}</span>
     </div>
@@ -65,7 +65,7 @@ export default function ONavbar() {
           </a>
         </div>
         <div className={styles.navbar_li_2} id="navbar-li">
-          <Dropdown title={name} tag={initialsSvg}>
+          <Dropdown title={name} tag={initialsContainer}>
             <Tabs title="Switch To Attending" path="/home" />
             <Tabs title="Log out" onClick={handleLogOut} id="log-out-tab" />
           </Dropdown>
