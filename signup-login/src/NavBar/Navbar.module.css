@@ -199,7 +199,7 @@
     width: 100%;
     text-align: center;
   }
-  .navbar_ul li p {
+  .navbar_ul li span {
     display: none;
   }
 

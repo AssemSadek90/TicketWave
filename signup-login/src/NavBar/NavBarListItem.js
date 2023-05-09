@@ -16,7 +16,7 @@ export default function NavBarListItem(props) {
     <li className={styles.navbar_li} id="navbar-li">
       <a className={styles.navbar_a} href={props.path}>
         {props.children}
-        <p>{props.title}</p>
+        <span>{props.title}</span>
       </a>
     </li>
   );

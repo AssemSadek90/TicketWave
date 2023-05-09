@@ -11,13 +11,38 @@ import {
   isValidSession,
 } from '../Credentials/Credentials';
 import '../App.css';
-import CategoriesNav from './DisplayEvents/Categories';
 
 /**
  * Represents the Home component, which displays the main page of the application.
  * @returns {JSX.Element} The Home component UI.
  */
 const Home = () => {
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    //console.log(isValidSession());
+    // getUserID();
+    // getUsername();
+    // getFirstName();
+    // getLastName();
+    // getEmail();
+    // const accessToken = localStorage.getItem('accessToken');
+    const requestOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    server
+      .get(`/events/list/`, requestOptions)
+      .then((response) => {
+        const data = response.data.results;
+        if (data) setEvents(data);
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     //this svg is temporary and is going to be replaced
     <div>
@@ -31,7 +56,7 @@ const Home = () => {
         style={{ backgroundColor: '#89A2BE', width: '100%', height: 'auto' }}
         loading="eager"
       ></img>
-      <CategoriesNav id="categories-container" />
+      <DisplayEvents id="event-container" eventsData={events} />
     </div>
   );
 };

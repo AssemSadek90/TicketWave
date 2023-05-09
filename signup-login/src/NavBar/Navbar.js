@@ -59,7 +59,7 @@ export default function Navbar() {
         <SearchButton onClick={handleSearch} label="Search events" />
       </ul>
       <ul className={styles.navbar_ul} id="navbar-ul">
-        <NavBarListItem title="Create Event" path="/basic-info">
+        <NavBarListItem title="Create Event" path="/signin">
           <svg className={styles.svg_icon} viewBox="0 0 20 20">
             <path d="M13 11V4h-2v7H4v2h7v7h2v-7h7v-2z"></path>
           </svg>

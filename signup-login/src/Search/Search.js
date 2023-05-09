@@ -28,8 +28,9 @@ export default function Search() {
             </svg>
           </button>
         </div>
-        <div className={styles.venue_container}>
-          <svg className={styles.search_icon} x="0" y="0" viewBox="0 0 24 24">
+        <div>
+          hi
+          <svg x="0" y="0" viewBox="0 0 24 24">
             <path d="M11.6 11.6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-7.6C8.5 4 6 6.5 6 9.6 6 13.8 11.6 20 11.6 20s5.6-6.2 5.6-10.4c0-3.1-2.5-5.6-5.6-5.6z"></path>
           </svg>
         </div>

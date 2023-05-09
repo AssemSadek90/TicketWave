@@ -2,24 +2,8 @@ import YoutubeEmbed from "./YoutubeEmbed";
 import { BsClockHistory } from "react-icons/bs";
 import { TfiTicket } from "react-icons/tfi";
 import styles from "./EventInfo.module.css";
-/**
 
-A component that displays information about an event, including its duration,
-ticket type, description, and an embedded YouTube video.
-@param {Object} props - The props passed to the component.
-@param {Object} props.event - An object representing the event to display.
-@param {string} props.event.start - The start time of the event in ISO 8601 format.
-@param {string} props.event.end - The end time of the event in ISO 8601 format.
-@param {string} props.event.video_url - The URL of the YouTube video to embed.
-@param {string} props.event.description - A description of the event.
-@param {boolean} isMobile - Whether the component is being displayed on a mobile device.
-@returns {JSX.Element} - A React component that displays information about the event.
-*/
 export default function EventInfo(props, isMobile) {
-  /**
-  Calculates the duration of the event based on its start and end times.
-  @returns {string} - A string representing the duration of the event.
-  */
   const duration = () => {
     const startDate = new Date(props.event.start);
     const endDate = new Date(props.event.end);

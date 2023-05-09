@@ -3,7 +3,6 @@ import styles from './Displayevents.module.css';
 import EventsList from './EventList';
 import CategoriesNav from './Categories';
 import MoreEvents from './MoreEvents';
-import Location from '../Location/Location';
 
 /**
  * DisplayEvents is a React component that displays a list of events, sorted by category.
@@ -19,8 +18,9 @@ export default function DisplayEvents(props) {
 
   return (
     <div>
+      <CategoriesNav />
       <h2 id="events-header" className={styles.events_header}>
-        Events In {<Location />}
+        Events In Cairo
       </h2>
       <div id="event-display-container" className={styles.entertainment_events}>
         <EventsList eventsData={events.slice(0, 8)} />

@@ -202,7 +202,6 @@ function Tickets({
      * @return {JSX.Element}
      */
     <React.Fragment>
-      <ONavbar />
       <Sidebar showSecond={showSecondSidebar} visible={visible} />
       <div style={{ paddingLeft: padding }}>
         <Routes>

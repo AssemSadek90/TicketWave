@@ -1,45 +1,14 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './EventsList.css';
-
-/**
- * Component for rendering an individual event item.
- * @component
- * @param {Object} props - The props object containing the event data.
- * @returns {JSX.Element} JSX representation of the component.
- */
 const EventsListItem = (props) => {
-  /**
-   * Hook for navigation within the application.
-   */
   const navigate = useNavigate();
-
   console.log(props.event.start);
   //console.log(props.ticketsSold);
   // //const username = localStorage.getItem('userName');
-
-  /**
-   * Start date of the event.
-   * @type {Date}
-   */
   const start_date = new Date(props.event.start);
-
-  /**
-   * Day of the month for the start date.
-   * @type {number}
-   */
   const day = start_date.getDate();
-
-  /**
-   * Month name for the start date.
-   * @type {string}
-   */
   const month = start_date.toLocaleString('default', { month: 'long' });
-
-  /**
-   * Handles the event click and navigates to the basic-info route.
-   * @function
-   */
   const handleEventClick = () => {
     localStorage.setItem('eventID', props.event.id);
     navigate('/basic-info');

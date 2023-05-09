@@ -41,7 +41,6 @@ padding: 0;
 height: 72px;
 list-style: none;
 display: flex;
-align-items: center;
 gap: 2rem;
 }
 
@@ -95,8 +94,8 @@ gap: 2rem;
     display: none;
 }
 
-.site_title {
-    text-overflow: none;
+.search_button .label {
+    display: none;
 }
 .search_bar {
     width: 100%;

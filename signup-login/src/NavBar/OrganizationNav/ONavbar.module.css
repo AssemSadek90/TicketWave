@@ -68,10 +68,6 @@
     width: 34px;
     height: 34px;
     border-radius: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
   }
   
   .tabs:hover {
@@ -165,6 +161,9 @@
       width: 100%;
       text-align: center;
     }
+    .navbar_ul li span {
+      display: none;
+    }
   
     .search_button .label {
       display: none;
@@ -189,9 +188,4 @@
     }
   }
   
-  @media screen and (max-width: 480px){
-    .navbar_ul p {
-      display: none;
-    }
-  }
   
