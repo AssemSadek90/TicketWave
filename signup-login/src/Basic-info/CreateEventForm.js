@@ -388,10 +388,11 @@ const [id, setId] = useState(Math.floor(Math.random() * 10000000));
     
 
     server
-      // .post('/events/create/', data, requestOptions)
-      .post('http://localhost:8000/eventInfo', data, requestOptions)
+      .post('/events/create/', data, requestOptions)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
+
+
   };
 
   // ________________________________________________________________________________________________________________________________________________

@@ -78,12 +78,17 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
+const routes = require('./routes.json');
 
+server.use(jsonServer.rewriter(routes));
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
 
+var event_ID = 0;
+
 server.post('/auth/signup', (req, res) => {
   const { username, password1, email } = req.body;
+  test = test + 1;
   const newUser = {
     id: Date.now(),
     username,
@@ -101,6 +106,7 @@ server.post('/auth/signup', (req, res) => {
     username: newUser.username,
     user: {
       pk: newUser.pk,
+      test: test,
     },
     // Include any additional user credentials you need
   };
@@ -178,68 +184,68 @@ server.get('/users/id/:id', (req, res) => {
   }
 });
 
-server.get('/events/retrieve/:id', (req, res) => {
-  const { id } = req.params;
+// server.get('/events/retrieve/:id', (req, res) => {
+//   const { id } = req.params;
 
-  // Perform the search logic to find the event by its ID
-  const db = router.db; // Access the database object
-  const events = db.get('events').value(); // Get the events array from the database
+//   // Perform the search logic to find the event by its ID
+//   const db = router.db; // Access the database object
+//   const events = db.get('events').value(); // Get the events array from the database
 
-  const foundEvent = events.find((event) => event.id === parseInt(id));
-  if (foundEvent) {
-    // Return the event information in the response
-    const {
-      start,
-      end,
-      name,
-      video_url,
-      status,
-      timezone,
-      logo,
-      organizer,
-      venue,
-      category,
-      summary,
-      description,
-      url,
-      type,
-      price,
-      waitlist,
-      fully_booked,
-      created,
-      changed,
-      age_restriction,
-    } = foundEvent;
-    res.json({
-      start,
-      end,
-      name,
-      video_url,
-      status,
-      timezone,
-      logo,
-      organizer,
-      venue,
-      category,
-      summary,
-      description,
-      url,
-      type,
-      price,
-      waitlist,
-      fully_booked,
-      timezone,
-      created,
-      changed,
-      age_restriction,
-    });
-  } else {
-    // Return an error response if the event is not found
-    res.status(404).json({
-      error: 'Event not found',
-    });
-  }
-});
+//   const foundEvent = events.find((event) => event.id === parseInt(id));
+//   if (foundEvent) {
+//     // Return the event information in the response
+//     const {
+//       start,
+//       end,
+//       name,
+//       video_url,
+//       status,
+//       timezone,
+//       logo,
+//       organizer,
+//       venue,
+//       category,
+//       summary,
+//       description,
+//       url,
+//       type,
+//       price,
+//       waitlist,
+//       fully_booked,
+//       created,
+//       changed,
+//       age_restriction,
+//     } = foundEvent;
+//     res.json({
+//       start,
+//       end,
+//       name,
+//       video_url,
+//       status,
+//       timezone,
+//       logo,
+//       organizer,
+//       venue,
+//       category,
+//       summary,
+//       description,
+//       url,
+//       type,
+//       price,
+//       waitlist,
+//       fully_booked,
+//       timezone,
+//       created,
+//       changed,
+//       age_restriction,
+//     });
+//   } else {
+//     // Return an error response if the event is not found
+//     res.status(404).json({
+//       error: 'Event not found',
+//     });
+//   }
+// });
 
 server.get('/events/list', (req, res) => {
   const { owner } = req.query;
@@ -284,6 +290,24 @@ server.get('/events/amount_of_tickets_sold/:event_id', (req, res) => {
   const ticketsSold = router.db.get('ticketsSold').get(event_id).value();
 
   res.json({ ticketsSold });
+});
+
+// Custom route handler for /events/create
+server.post('/events/create', (req, res) => {
+  const { event } = req.body;
+
+  // Generate an event ID
+  event_ID = event_ID + 1;
+  const eventId = event_ID;
+
+  // Add the event to the database
+  router.db
+    .get('events')
+    .push({ id: eventId, ...event })
+    .write();
+
+  // Return the event ID in the response
+  res.json({ id: eventId });
 });
 
 server.use(router);
