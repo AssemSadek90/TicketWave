@@ -7,29 +7,33 @@ import './EventsList.css';
 import server from '../server';
 
 const CreatorEvent = () => {
-  //const userID = 1;
+  /**
+   * User ID of the creator.
+   * @type {string}
+   */
   const userID = localStorage.getItem('userID');
+
+  /**
+   * State variable for storing the events.
+   * @type {Array}
+   */
   const [events, setEvents] = useState([]);
+
+  /**
+   * State variable for storing the number of tickets sold.
+   * @type {Array}
+   */
   const [ticketsSold, setTicketsSold] = useState([]);
 
-  //   useEffect(() => {
-  //     const accessToken = localStorage.getItem('accessToken');
-  //     const requestOptions = {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         //Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     };
-  //     server
-  //       .get(`/events/list/`, requestOptions)
-  //       .then((response) => {
-  //         const data = response.data.results;
-  //         if (data) setEvents(data);
-  //         console.log(data);
-  //       })
-  //       .catch((error) => console.log(error));
-  //   }, []);
-
+  /**
+   * Fetches the list of events and the number of tickets sold for each event.
+   * @function
+   * @name useEffect
+   * @memberof CreatorEvent
+   * @inner
+   * @param {Array} [] - An empty dependency array, meaning the effect runs only once after the initial render.
+   * @returns {void}
+   */
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     const requestOptions = {
@@ -71,6 +75,10 @@ const CreatorEvent = () => {
       .catch((error) => console.log(error));
   }, []);
 
+  /**
+   * Maps the events data to the desired format.
+   * @type {Array}
+   */
   const EventsData = events.map((event) => ({
     Event: event.name,
     Date: new Date(event.start),
