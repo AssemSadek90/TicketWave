@@ -29,6 +29,8 @@ const CreateEventForm = () => {
   */
   const titleRef = useRef("");
 
+  
+
   /**
 A reference to the event organizer input field.
 @type {React.MutableRefObject}
@@ -88,6 +90,8 @@ A reference to the language input field.
 @type {React.MutableRefObject}
 */
 const languageRef = useRef("");
+
+
 
   
 
@@ -239,7 +243,14 @@ const [startDate, setStartDate] = useState(new Date());
  * @type {[object, function]} Array that contains the current date object and a function to update it.
  */
 const [endDate, setEndDate] = useState(new Date());
-  // ________________________________________________________________________________________________________________________________________________
+
+/**
+A reference to the Ticket's ID.
+@type {number}
+*/
+const [id, setId] = useState(Math.floor(Math.random() * 10000000));
+
+
 
   // SUBMIT HANDLING_________________________________________________________________________________________________________________________________
 
@@ -249,6 +260,7 @@ const [endDate, setEndDate] = useState(new Date());
   function submitHandler(event) {
     event.preventDefault();
     const data = {
+      id: id,
       Title: titleRef.current.value,
       name:titleRef.current.value,
       Organizer: organizerRef.current.value,
@@ -305,6 +317,7 @@ const [endDate, setEndDate] = useState(new Date());
 
     /**
    * Log form data to console
+   * @param {number} data.id - The id of the event
    * @param {string} data.Title - The title of the event
    * @param {string} data.Organizer - The organizer of the event
    * @param {string} data.EventType - The type of the event
@@ -323,6 +336,8 @@ const [endDate, setEndDate] = useState(new Date());
    */
 
     console.log(
+      "ID: " +
+        data.id +
       "Title: " +
         data.Title +
         "\nOrganizer: " +
