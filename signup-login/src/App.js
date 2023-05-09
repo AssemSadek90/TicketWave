@@ -1,22 +1,22 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //import './App.css';
-import CreateAccount from './Log-in/EnterEmail';
-import SignIn from './Log-in/SignIn';
-import Home from './Landing-page/Landing';
-import Navbar from './NavBar/Navbar';
-import EventDetails from './EventDetails/EventDetailsPage';
-import CreateEventForm from './Basic-info/CreateEventForm';
-import PublishApp from './Publish/PublishApp';
-import Terms from './Log-in/TermsConditions/Terms';
-import ChangePassword from './Log-in/ChangePassword';
-import Tickets from './Tickets/Tickets';
-import Sidebar from './Tickets/Sidebar/Sidebar';
-import { useState } from 'react';
-import CreatorEvent from './EventsList/CreatorEvent';
-import NANavbar from './NavBar/NANavbar';
-import Search from './Search/Search';
-import ONavbar from './NavBar/OrganizationNav/ONavbar';
+import CreateAccount from "./Log-in/EnterEmail";
+import SignIn from "./Log-in/SignIn";
+import Home from "./Landing-page/Landing";
+import Navbar from "./NavBar/Navbar";
+import EventDetails from "./EventDetails/EventDetailsPage";
+import CreateEventForm from "./Basic-info/CreateEventForm";
+import PublishApp from "./Publish/PublishApp";
+import Terms from "./Log-in/TermsConditions/Terms";
+import ChangePassword from "./Log-in/ChangePassword";
+import Tickets from "./Tickets/Tickets";
+import Sidebar from "./Tickets/Sidebar/Sidebar";
+import { useState } from "react";
+import CreatorEvent from "./EventsList/CreatorEvent";
+import NANavbar from "./NavBar/NANavbar";
+import Search from "./Search/Search";
+import ONavbar from "./NavBar/OrganizationNav/ONavbar";
 
 /**
  * Renders the main application component.
@@ -24,7 +24,7 @@ import ONavbar from './NavBar/OrganizationNav/ONavbar';
  * @returns {JSX.Element} The rendered application component.
  */
 function App() {
-  const [padding, setPadding] = useState('5rem');
+  const [padding, setPadding] = useState("5rem");
   const [visible, setVisible] = useState(true);
   const [showSecondSidebar, setShowSecondSidebar] = useState(false);
 
@@ -58,13 +58,13 @@ function App() {
           <Route
             path="/basic-info"
             Component={() => {
-              setPadding('18rem');
+              setPadding("18rem");
               setVisible(true);
               setShowSecondSidebar(true);
               return (
                 <React.Fragment>
                   <Sidebar showSecond={showSecondSidebar} visible={visible} />
-                  <div style={{ paddingLeft: padding, paddingBottom: '1rem' }}>
+                  <div style={{ paddingLeft: padding, paddingBottom: "1rem" }}>
                     <CreateEventForm />
                   </div>
                 </React.Fragment>
@@ -75,7 +75,7 @@ function App() {
           <Route
             path="/publish"
             Component={() => {
-              setPadding('18rem');
+              setPadding("18rem");
               setVisible(true);
               setShowSecondSidebar(true);
               return (
@@ -84,9 +84,9 @@ function App() {
                   <div style={{ paddingLeft: padding }}>
                     <div
                       style={{
-                        paddingTop: '1rem',
-                        paddingRight: '1rem',
-                        paddingBottom: '1rem',
+                        paddingTop: "1rem",
+                        paddingRight: "1rem",
+                        paddingBottom: "1rem",
                       }}
                     >
                       <PublishApp />

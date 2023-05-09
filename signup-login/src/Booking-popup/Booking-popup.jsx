@@ -2,43 +2,90 @@ import React, { useState } from "react";
 import styles from "./Booking-popup.module.css";
 import { FiArrowLeft } from "react-icons/fi";
 import Timer from "./Timer";
+import { getEmail } from "../Credentials/Credentials";
+import { getUserID } from "../Credentials/Credentials";
+import { getUsername } from "../Credentials/Credentials";
+
+/**
+ * A popup component for booking events.
+ * @param {Object} props - The props object.
+ * @param {Object} props.event - The event object to book.
+ * @param {Function} props.closeOverlay - The function to close the overlay.
+ * @param {number} props.count - The number of event tickets to book.
+ * @param {boolean} props.isMobile - Flag indicating if the user is using a mobile device.
+ * @returns {JSX.Element} - The JSX element representing the popup.
+ */
 
 const Popup = ({ event, closeOverlay, count, isMobile }) => {
   const [delivery, setDelivery] = useState(0);
   const [promoAccept, setPromoAccept] = useState(false);
+  const discount_id = null;
+  /**
+   * The access token stored in the local storage.
+   * @type {string|null}
+   */
+  const accessToken = localStorage.getItem("accessToken");
+  /**
+   * The headers to be sent with the fetch requests.
+   * @type {{Content-Type: string, Authorization: string}}
+   */
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${accessToken}`,
+  };
+  /**
+   * Function to handle the form submission.
+   * @param {Event} e - The event object representing the form submission.
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestOptions = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
       body: JSON.stringify(formData),
     };
-    fetch("http://localhost:4000/orders/create", requestOptions)
+    fetch(`${process.env.REACT_APP_SERVER_NAME}/orders/create/`, requestOptions)
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
+  /**
+   * The form data for the booking.
+   * @type {[Object, function]}
+   */
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
     email: "",
     promo_code: "",
-    status: "",
+    status: null,
     cost: count * event.price,
-    created: "2023-05-12T12:30:46.019Z",
     event: event.id,
-    user: localStorage.getItem(""),
-    attendee: "",
+    user: getUserID(),
+    attendee: 0,
+    ticket: null,
   });
-
+  /**
+   * Function to handle the change of the input fields in the form.
+   * @param {Event} e - The event object representing the input change.
+   */
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
+  /**
+   * Function to fetch the promo codes from the server.
+   */
   function fetchPromos() {
-    fetch("http://localhost:4000/promocodes")
+    fetch(
+      `${process.env.REACT_APP_SERVER_NAME}/discount/${discount_id}`,
+      headers
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.promoCodes.includes(formData.promo_code)) {

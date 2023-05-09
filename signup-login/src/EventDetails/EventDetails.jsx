@@ -1,3 +1,6 @@
+/**
+@module EventDetails
+*/
 import React, { useState } from "react";
 import styles from "./EventDetails.module.css";
 import Popup from "../Booking-popup/Booking-popup";
@@ -7,7 +10,12 @@ import EventInfo from "./EventInfo";
 import SocialShare from "./SocialShare";
 import AsideBooking from "./AsideBooking";
 import Banner from "./Banner/Banner";
-
+/**
+Event details component
+@function
+@param {object} event - Event data
+@returns {JSX.Element} EventDetails component
+*/
 function EventDetails({ event }) {
   const isMobile = window.matchMedia("(max-width: 960px)").matches;
   const [showOverlay, setShowOverlay] = useState(false);
@@ -16,8 +24,10 @@ function EventDetails({ event }) {
   return (
     <>
       <Banner event={event} />
-
-      <div className={styles.main_body}>
+      <div
+        className="container m-auto row mt-5"
+        // className={styles.main_body}
+      >
         {showOverlay && (
           <Popup
             event={event}
@@ -27,7 +37,10 @@ function EventDetails({ event }) {
           />
         )}
 
-        <div className={styles.left_part}>
+        <div
+          className="col-12 col-xl-9"
+          // className={styles.left_part}
+        >
           <EventDescription event={event} isMobile={isMobile} />
 
           <LocationAndTime event={event} isMobile={isMobile} />
@@ -39,7 +52,10 @@ function EventDetails({ event }) {
           </div>
         </div>
 
-        <div className={styles.aside_booking_container}>
+        <div
+          className="col-12 col-xl-3"
+          // className={styles.aside_booking_container}
+        >
           {event.fully_booked === false ? (
             <AsideBooking
               openOverlay={setShowOverlay}
@@ -49,7 +65,15 @@ function EventDetails({ event }) {
               isMobile={isMobile}
             />
           ) : (
-            <h3 className="fw-bold">Event fully booked</h3>
+            <a
+              class="btn btn-secondary disabled w-100 sticky-top"
+              role="button"
+              aria-disabled="true"
+              href="j"
+              style={{ top: "24px" }}
+            >
+              Event Fully Booked
+            </a>
           )}
         </div>
       </div>

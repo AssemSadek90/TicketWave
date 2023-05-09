@@ -1,4 +1,14 @@
+/**
+ * A functional component that displays an event's date, name, and summary.
+ * @param {object} props - The props object that contains event details.
+ * @param {boolean} isMobile - A boolean that indicates whether the device is mobile or not.
+ * @returns {JSX.Element} The event description element.
+ */
 const EventDescription = (props, isMobile) => {
+  /**
+   * A function that returns the formatted start date of the event.
+   * @returns {string} The formatted start date.
+   */
   function realStart() {
     const date = new Date(props.event.start);
     const monthNames = [
