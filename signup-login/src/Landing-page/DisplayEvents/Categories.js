@@ -15,20 +15,22 @@ export default function CategoriesNav() {
 
   const tabs = [
     { label: 'All', id: 1 },
-    { label: 'For You', id: 2 },
-    { label: 'Online', id: 3 },
-    { label: 'Today', id: 4 },
-    { label: 'This Weekend', id: 5 },
-    { label: 'Earth Day', id: 6 },
-    { label: 'Free', id: 7 },
-    { label: 'Music', id: 8 },
+    { label: 'upcoming', id: 2 },
+    { label: 'Today', id: 3 },
+    { label: 'Next Week', id: 4 },
+    { label: 'Free', id: 5 },
+    { label: 'Fashion & Beauty', id: 6 },
+    { label: 'Music', id: 7 },
+    { label: 'School Activities', id: 8 },
     { label: 'Food & Drinks', id: 9 },
     { label: 'Charity & Causes', id: 10 },
   ];
   const [selectedTab, setSelectedTab] = useState(1);
+  const [selectedTabLabel, setSelectedTabLabel] = useState('');
 
-  const handleTabClick = (tabId) => {
-    setSelectedTab(tabId);
+  const handleTabClick = (tab) => {
+    setSelectedTab(tab.id);
+    setSelectedTabLabel(tab.label);
     console.log(selectedTab);
   };
 
@@ -40,23 +42,128 @@ export default function CategoriesNav() {
     // getLastName();
     // getEmail();
     // const accessToken = localStorage.getItem('accessToken');
-    const requestOptions = {
-      headers: {
-        'Content-Type': 'application/json',
-        // Authorization: `Bearer ${accessToken}`,
-      },
-      params: {
-        category: selectedTab,
-      },
-    };
-    server
-      .get(`/events/list/`, requestOptions)
-      .then((response) => {
-        const data = response.data.results;
-        if (data) setEvents(data);
-        console.log(data);
-      })
-      .catch((error) => console.log(error));
+    if (selectedTab == 1 || selectedTab == 5) {
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      server
+        .get(`/events/list/`, requestOptions)
+        .then((response) => {
+          const data = response.data.results;
+          if (data) setEvents(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
+    }
+    if (selectedTab == 2) {
+      const date = new Date();
+      const isoDate = date.toISOString();
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          start__gte: isoDate,
+        },
+      };
+      server
+        .get(`/events/list/`, requestOptions)
+        .then((response) => {
+          const data = response.data.results;
+          if (data) setEvents(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
+    }
+    if (selectedTab == 3) {
+      const date = new Date();
+      const endOfDay = new Date();
+      endOfDay.setHours(23, 59, 59, 999); // set to end of day
+      const isoDate = endOfDay.toISOString();
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          start__gte: date,
+          start__lte: isoDate,
+        },
+      };
+      server
+        .get(`/events/list/`, requestOptions)
+        .then((response) => {
+          const data = response.data.results;
+          if (data) setEvents(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
+    }
+    if (selectedTab == 4) {
+      // Get the current date
+      const now = new Date();
+
+      // Get the date for next week
+      const nextWeek = new Date();
+      const endNextWeek = new Date();
+      nextWeek.setDate(now.getDate() + 6);
+      endNextWeek.setDate(now.getDate() + 13);
+
+      // Set the time for the end of the day
+      nextWeek.setHours(23, 59, 59, 999);
+
+      // Format the date in ISO 8601 format
+      const isoString = nextWeek.toISOString();
+      const isoStringEnd = endNextWeek.toISOString();
+
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          start__gte: isoString,
+          start__lte: isoStringEnd,
+        },
+      };
+      server
+        .get(`/events/list/`, requestOptions)
+        .then((response) => {
+          const data = response.data.results;
+          if (data) setEvents(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
+    }
+    if (
+      selectedTab == 6 ||
+      selectedTab == 7 ||
+      selectedTab == 8 ||
+      selectedTab == 9 ||
+      selectedTab == 10
+    ) {
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          // Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          category: selectedTabLabel,
+        },
+      };
+      server
+        .get(`/events/list/`, requestOptions)
+        .then((response) => {
+          const data = response.data.results;
+          if (data) setEvents(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
+    }
   }, [selectedTab]);
   return (
     <div>
@@ -67,7 +174,7 @@ export default function CategoriesNav() {
               id="categoriesnav-list-item"
               key={tab.id}
               className={styles.tab}
-              onClick={() => handleTabClick(tab.id)}
+              onClick={() => handleTabClick(tab)}
             >
               <div className={selectedTab === tab.id ? 'active' : ''}>
                 {tab.label}
