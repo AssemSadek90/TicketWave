@@ -244,15 +244,22 @@ server.get('/events/retrieve/:id', (req, res) => {
 server.get('/events/list', (req, res) => {
   const { owner } = req.query;
 
-  // Perform the logic to retrieve events owned by the specified user
+  // Perform the logic to retrieve events based on the specified owner or all events if no owner is provided
   const db = router.db; // Access the database object
   const events = db.get('events').value(); // Get the events array from the database
 
-  const results = events.filter((event) => event.owner === parseInt(owner));
+  let results;
+  if (owner) {
+    // Filter events by owner if owner is provided
+    results = events.filter((event) => event.owner === parseInt(owner));
+  } else {
+    // Return all events if no owner is provided
+    results = events;
+  }
 
-  const userEvents = { results };
-  // Return the list of events owned by the user in the response
-  res.json(userEvents);
+  const eventList = { results };
+  // Return the list of events in the response
+  res.json(eventList);
 });
 
 // server.get('/events/amount_of_tickets_sold/:event_id', (req, res) => {
