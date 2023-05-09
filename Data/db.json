@@ -12,6 +12,38 @@
       "is_active": true,
       "is_public": true,
       "image_id": "-1"
+    },
+    {
+      "id": 4,
+      "username": "ZiadGhanem",
+      "password1": "BNMbnm123",
+      "pk": "1",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "is_active": true
+    },
+    {
+      "id": 1683629042695,
+      "username": "AhmedGhanem",
+      "password1": "BNMbnm123",
+      "pk": "1",
+      "email": "ziad@ziad.com",
+      "is_active": true
+    },
+    {
+      "id": 1683629219279,
+      "username": "Ziadmido",
+      "password1": "fhsfaglfhgas",
+      "pk": "1",
+      "email": "ziad@ziad1.com",
+      "is_active": true
+    },
+    {
+      "id": 1683629269634,
+      "username": "BiboBsheer",
+      "password1": "hasgdjsafoiw",
+      "pk": "1",
+      "email": "ziad@ziad12.com",
+      "is_active": true
     }
   ],
   "eventsData": [
@@ -383,5 +415,15 @@
       "latitude": 37.7749,
       "longitude": -122.4194
     }
-  ]
+  ],
+  "ticketsSold": {
+    "1": 100,
+    "2": 50,
+    "3": 30,
+    "4": 20,
+    "5": 10,
+    "6": 5,
+    "7": 2,
+    "8": 1
+  }
 }
