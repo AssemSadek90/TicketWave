@@ -372,14 +372,14 @@ const [id, setId] = useState(Math.floor(Math.random() * 10000000));
     );
 
     console.log(data);
-    handleSignUp(data);
+    handleCreate(data);
     
   }
 
   // SAVE TO DATABASE ________________________________________________________________________________________________________________________________
 
   
-  const handleSignUp = (data) => {
+  const handleCreate = (data) => {
 
     const accessToken = localStorage.getItem("accessToken")
     const requestOptions = {
@@ -388,7 +388,8 @@ const [id, setId] = useState(Math.floor(Math.random() * 10000000));
     
 
     server
-      .post('/events/create/', data, requestOptions)
+      // .post('/events/create/', data, requestOptions)
+      .post('http://localhost:8000/eventInfo', data, requestOptions)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
   };
