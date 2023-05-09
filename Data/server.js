@@ -319,7 +319,7 @@ server.post('/tickets/create', (req, res) => {
     .write();
 });
 
-server.post('/promocode/create', (req, res) => {
+server.post('/discounts/create', (req, res) => {
   const data = req.body;
   // Add the event to the database
   router.db

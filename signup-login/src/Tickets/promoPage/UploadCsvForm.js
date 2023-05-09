@@ -193,7 +193,10 @@ and setting the state values for code names and code name of the uploaded file.
     const handleCSV = (data) => {
       const accessToken = localStorage.getItem("accessToken")
       const requestOptions = {
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${accessToken}`,
+        },
       };
         
       server.post('/CSV', JSON.stringify(data), requestOptions)

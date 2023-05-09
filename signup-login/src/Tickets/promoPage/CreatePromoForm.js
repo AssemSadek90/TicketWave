@@ -158,17 +158,17 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         const data = {
           id: id,
           codeName: codeName,
-          ticketLimit: ticketLimit,
+          quantity_available: ticketLimit,
           isTicketLimit: isTicketLimit,
           promoStarts: promoStarts,
           promoEnds: promoEnds,
-          startDate: startDate,
+          start_date: startDate,
           startTime: startTime,
-          endDate: endDate,
+          end_date: endDate,
           endTime: endTime,
           applyCodeTo: applyCodeTo,
           discount: discount,
-          codeType: codeType,
+          type: codeType,
           names: names,
           type: 'CreatePromo'
         }
@@ -197,10 +197,13 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
     const handlePromo = (data) => {
       const accessToken = localStorage.getItem("accessToken")
       const requestOptions = {
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${accessToken}`,
+        },
       };
         
-      server.post('/promocode', JSON.stringify(data), requestOptions)
+      server.post('/discounts', JSON.stringify(data), requestOptions)
         .then((response) => {
           console.log(response.data);
         })

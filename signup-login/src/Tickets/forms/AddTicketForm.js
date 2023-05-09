@@ -268,13 +268,13 @@ function submitHandler(event){
   const data = {
     id: id,
     name: name,
-    quantity: quantity,
+    capacity: quantity,
     count: count,
     price: price,
-    startDate: startDate,
-    startTime: startTime,
-    endDate: endDate,
-    endTime: endTime,
+    SalesStart: startDate,
+    StartTime: startTime,
+    SalesEnd: endDate,
+    EndTime: endTime,
     availability: availability,
     advancedSettings: advancedSettings,
     showTicketSale: showTicketSale,
@@ -286,7 +286,7 @@ function submitHandler(event){
     endShowingDate: endShowingDate,
     endShowingTime: endShowingTime,
     minimumQuantity: minimumQuantity,
-    maximumQuantity: maximumQuantity,
+    TicketLimit: maximumQuantity,
     salesChannel: salesChannel,
     eTicket: eTicket,
     willCall: willCall,
@@ -329,7 +329,10 @@ const handleTicket = (data) => {
 
   const accessToken = localStorage.getItem("accessToken")
   const requestOptions = {
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+       Authorization: `Bearer ${accessToken}`,
+    },
   };
   
 
