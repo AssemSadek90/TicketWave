@@ -217,7 +217,7 @@ and setting the state values for code names and code name of the uploaded file.
 
 <div style={{display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #ccc'}}>
     <h2>
-        Add Code
+        Upload CSV
     </h2>
 </div>
 
