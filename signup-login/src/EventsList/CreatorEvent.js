@@ -38,6 +38,7 @@ const CreatorEvent = () => {
         Authorization: `Bearer ${accessToken}`,
       },
     };
+
     server
       .get(`/events/list/?owner=${userID}`, requestOptions)
       .then((response) => {
@@ -49,27 +50,23 @@ const CreatorEvent = () => {
         console.log(data);
 
         // Loop through each event and fetch the amount of tickets sold
-        data.forEach((event) => {
-          server
-            .get(`/events/amount_of_tickets_sold/${event.id}`, requestOptions)
-            .then((response) => {
-              console.log(response);
-              const ticketsSold = response.data; // Get the ticket sold information for the current event
-              console.log(events);
-              // Update the event object with the ticket sold information
-              setEvents((prevEvents) =>
-                prevEvents.map((prevEvent) => {
-                  if (prevEvent.id === event.id) {
-                    console.log(events);
-                    return { ...prevEvent, ticketsSold };
-                  }
-                  console.log(events);
-                  return prevEvent;
-                })
-              );
-            })
-            .catch((error) => console.log(error));
-        });
+        // data.forEach((event) => {
+        //   server
+        //     .get(`/events/amount_of_tickets_sold/${event.id}`, requestOptions)
+        //     .then((response) => {
+        //       console.log(response);
+        //       const ticketsSold = response.data; // Get the ticket sold information for the current event
+        //       setEvents((prevEvents) =>
+        //         prevEvents.map((prevEvent) => {
+        //           if (prevEvent.id === event.id) {
+        //             return { ...prevEvent, ticketsSold };
+        //           }
+        //           return prevEvent;
+        //         })
+        //       );
+        //     })
+        //     .catch((error) => console.log(error));
+        // });
       })
       .catch((error) => console.log(error));
   }, []);
@@ -79,7 +76,7 @@ const CreatorEvent = () => {
     Date: new Date(event.start),
     Status: event.status,
     'Tickets Sold': event.ticketsSold,
-    'Tickets Available': event.ticketsAvailable,
+    'Tickets Available': event.capacity - event.ticketsSold,
   }));
 
   return (
@@ -97,6 +94,7 @@ const CreatorEvent = () => {
         data-spec="events-screen-list-footer-links"
       >
         <CSVLink
+          id="csvlink"
           data={EventsData}
           filename="Events.csv"
           href="/myevents/events?fmt=csv&amp;org=-1"

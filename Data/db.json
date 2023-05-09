@@ -14,7 +14,7 @@
       "image_id": "-1"
     },
     {
-      "id": 1,
+      "id": 4,
       "username": "ZiadGhanem",
       "password1": "BNMbnm123",
       "pk": "1",
@@ -187,7 +187,8 @@
       "category": "1",
       "sub_category": "2",
       "venue": 1,
-      "ticketsSold": 5
+      "ticketsSold": 5,
+      "capacity": 100
     },
     {
       "id": 2,
@@ -220,7 +221,8 @@
       "category": "1",
       "sub_category": "4",
       "venue": 2,
-      "ticketsSold": 5
+      "ticketsSold": 5,
+      "capacity": 90
     },
     {
       "id": 3,
@@ -253,7 +255,8 @@
       "category": "2",
       "sub_category": "1",
       "venue": 3,
-      "ticketsSold": 5
+      "ticketsSold": 5,
+      "capacity": 80
     },
     {
       "id": 4,
@@ -286,7 +289,8 @@
       "category": "5",
       "sub_category": "1",
       "venue": 4,
-      "ticketsSold": 5
+      "ticketsSold": 5,
+      "capacity": 65
     },
     {
       "id": 5,
@@ -319,34 +323,18 @@
       "category": "3",
       "sub_category": "2",
       "venue": 5,
-      "ticketsSold": 5
+      "ticketsSold": 5,
+      "capacity": 30
     }
   ],
-  "tickets": [
-    {
-      "id": 1,
-      "event_id": 2,
-      "user_id": 4
-    },
-    {
-      "id": 2,
-      "event_id": 2,
-      "user_id": 4
-    },
-    {
-      "id": 3,
-      "event_id": 2,
-      "user_id": 4
-    },
-    {
-      "id": 4,
-      "event_id": 3,
-      "user_id": 4
-    },
-    {
-      "id": 5,
-      "event_id": 3,
-      "user_id": 4
-    }
-  ]
+  "ticketsSold": {
+    "1": 100,
+    "2": 50,
+    "3": 30,
+    "4": 20,
+    "5": 10,
+    "6": 5,
+    "7": 2,
+    "8": 1
+  }
 }

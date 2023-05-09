@@ -188,13 +188,50 @@ server.get('/events/retrieve/:id', (req, res) => {
   const foundEvent = events.find((event) => event.id === parseInt(id));
   if (foundEvent) {
     // Return the event information in the response
-    const { start, end, name, video_url, status } = foundEvent;
+    const {
+      start,
+      end,
+      name,
+      video_url,
+      status,
+      timezone,
+      logo,
+      organizer,
+      venue,
+      category,
+      summary,
+      description,
+      url,
+      type,
+      price,
+      waitlist,
+      fully_booked,
+      created,
+      changed,
+      age_restriction,
+    } = foundEvent;
     res.json({
       start,
       end,
       name,
       video_url,
       status,
+      timezone,
+      logo,
+      organizer,
+      venue,
+      category,
+      summary,
+      description,
+      url,
+      type,
+      price,
+      waitlist,
+      fully_booked,
+      timezone,
+      created,
+      changed,
+      age_restriction,
     });
   } else {
     // Return an error response if the event is not found
@@ -218,21 +255,28 @@ server.get('/events/list', (req, res) => {
   res.json(userEvents);
 });
 
+// server.get('/events/amount_of_tickets_sold/:event_id', (req, res) => {
+//   const { event_id } = req.params;
+
+//   // Perform the logic to retrieve the number of tickets sold for the specified event
+//   const db = router.db; // Access the database object
+//   const tickets = db.get('tickets').value(); // Get the tickets array from the database
+
+//   const soldTickets = tickets.filter(
+//     (ticket) => ticket.event_id === parseInt(event_id)
+//   );
+
+//   // Return the number of tickets sold in the response
+//   res.json({
+//     ticketsSold: soldTickets.length,
+//   });
+// });
+
 server.get('/events/amount_of_tickets_sold/:event_id', (req, res) => {
   const { event_id } = req.params;
+  const ticketsSold = router.db.get('ticketsSold').get(event_id).value();
 
-  // Perform the logic to retrieve the number of tickets sold for the specified event
-  const db = router.db; // Access the database object
-  const tickets = db.get('tickets').value(); // Get the tickets array from the database
-
-  const soldTickets = tickets.filter(
-    (ticket) => ticket.event_id === parseInt(event_id)
-  );
-
-  // Return the number of tickets sold in the response
-  res.json({
-    ticketsSold: soldTickets.length,
-  });
+  res.json({ ticketsSold });
 });
 
 server.use(router);
