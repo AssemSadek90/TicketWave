@@ -78,7 +78,9 @@ const jsonServer = require('json-server');
 const server = jsonServer.create();
 const router = jsonServer.router('db.json');
 const middlewares = jsonServer.defaults();
+const routes = require('./routes.json');
 
+server.use(jsonServer.rewriter(routes));
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
 
@@ -182,68 +184,68 @@ server.get('/users/id/:id', (req, res) => {
   }
 });
 
-server.get('/events/retrieve/:id', (req, res) => {
-  const { id } = req.params;
+// server.get('/events/retrieve/:id', (req, res) => {
+//   const { id } = req.params;
 
-  // Perform the search logic to find the event by its ID
-  const db = router.db; // Access the database object
-  const events = db.get('events').value(); // Get the events array from the database
+//   // Perform the search logic to find the event by its ID
+//   const db = router.db; // Access the database object
+//   const events = db.get('events').value(); // Get the events array from the database
 
-  const foundEvent = events.find((event) => event.id === parseInt(id));
-  if (foundEvent) {
-    // Return the event information in the response
-    const {
-      start,
-      end,
-      name,
-      video_url,
-      status,
-      timezone,
-      logo,
-      organizer,
-      venue,
-      category,
-      summary,
-      description,
-      url,
-      type,
-      price,
-      waitlist,
-      fully_booked,
-      created,
-      changed,
-      age_restriction,
-    } = foundEvent;
-    res.json({
-      start,
-      end,
-      name,
-      video_url,
-      status,
-      timezone,
-      logo,
-      organizer,
-      venue,
-      category,
-      summary,
-      description,
-      url,
-      type,
-      price,
-      waitlist,
-      fully_booked,
-      timezone,
-      created,
-      changed,
-      age_restriction,
-    });
-  } else {
-    // Return an error response if the event is not found
-    res.status(404).json({
-      error: 'Event not found',
-    });
-  }
-});
+//   const foundEvent = events.find((event) => event.id === parseInt(id));
+//   if (foundEvent) {
+//     // Return the event information in the response
+//     const {
+//       start,
+//       end,
+//       name,
+//       video_url,
+//       status,
+//       timezone,
+//       logo,
+//       organizer,
+//       venue,
+//       category,
+//       summary,
+//       description,
+//       url,
+//       type,
+//       price,
+//       waitlist,
+//       fully_booked,
+//       created,
+//       changed,
+//       age_restriction,
+//     } = foundEvent;
+//     res.json({
+//       start,
+//       end,
+//       name,
+//       video_url,
+//       status,
+//       timezone,
+//       logo,
+//       organizer,
+//       venue,
+//       category,
+//       summary,
+//       description,
+//       url,
+//       type,
+//       price,
+//       waitlist,
+//       fully_booked,
+//       timezone,
+//       created,
+//       changed,
+//       age_restriction,
+//     });
+//   } else {
+//     // Return an error response if the event is not found
+//     res.status(404).json({
+//       error: 'Event not found',
+//     });
+//   }
+// });
 
 server.get('/events/list', (req, res) => {
   const { owner } = req.query;

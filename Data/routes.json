@@ -1,7 +1,6 @@
 {
-    "/events/retrieve/:id": "/events/:id",
-    "/orders/create/": "/orders",
-    "/discount/:id": "/discounts/:id",
-    "/venues/retrieve/:id": "/venues/:id",
-    "/events/list/": "/events"
+  "/events/retrieve/:id": "/events/:id",
+  "/orders/create/": "/orders",
+  "/discount/:id": "/discounts/:id",
+  "/venues/retrieve/:id": "/venues/:id"
 }

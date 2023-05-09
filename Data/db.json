@@ -327,6 +327,45 @@
       "attendee": 0,
       "ticket": null,
       "id": 2
+    },
+    {
+      "first_name": "Ziad",
+      "last_name": "Ghanem",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "promo_code": "",
+      "status": null,
+      "cost": 0,
+      "event": 1,
+      "user": 4,
+      "attendee": 0,
+      "ticket": null,
+      "id": 3
+    },
+    {
+      "first_name": "Ziad",
+      "last_name": "Ghanem",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "promo_code": "",
+      "status": null,
+      "cost": 0,
+      "event": 1,
+      "user": 4,
+      "attendee": 0,
+      "ticket": null,
+      "id": 4
+    },
+    {
+      "first_name": "Ziad",
+      "last_name": "Ghanem",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "promo_code": "SEP",
+      "status": null,
+      "cost": 45,
+      "event": 2,
+      "user": 4,
+      "attendee": 0,
+      "ticket": null,
+      "id": 5
     }
   ],
   "discounts": [
