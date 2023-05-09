@@ -1,5 +1,11 @@
 import './EventsList.css';
 
+/**
+ * Component for the navigation bar in the events list.
+ * @component
+ * @returns {JSX.Element} JSX representation of the component.
+ */
+
 const EventsListNavBar = () => {
   return (
     <div
