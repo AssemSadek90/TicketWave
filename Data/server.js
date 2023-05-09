@@ -292,9 +292,10 @@ server.get('/events/amount_of_tickets_sold/:event_id', (req, res) => {
   res.json({ ticketsSold });
 });
 
+
 // Custom route handler for /events/create
 server.post('/events/create', (req, res) => {
-  const { event } = req.body;
+  const data = req.body;
 
   // Generate an event ID
   event_ID = event_ID + 1;
@@ -303,13 +304,38 @@ server.post('/events/create', (req, res) => {
   // Add the event to the database
   router.db
     .get('events')
-    .push({ id: eventId, ...event })
+    .push({ id: eventId, ...data })
     .write();
 
   // Return the event ID in the response
   res.json({ id: eventId });
 });
 
+server.post('/tickets/create', (req, res) => {
+  const data = req.body;
+  // Add the event to the database
+  router.db
+    .push({ data })
+    .write();
+});
+
+server.post('/promocode/create', (req, res) => {
+  const data = req.body;
+  // Add the event to the database
+  router.db
+    .push({ data })
+    .write();
+});
+
+server.post('/CSV/create', (req, res) => {
+  const data = req.body;
+  // Add the event to the database
+  router.db
+    .push({ data })
+    .write();
+});
+
+  
 server.use(router);
 server.listen(3000, () => {
   console.log('JSON Server is running on port 3000');

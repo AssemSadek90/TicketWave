@@ -3,6 +3,8 @@ import { useState } from "react";
 import "../Tickets.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import server from '../../server';
+
 
 /** A form component for adding tickets
 @param {Function} onCancel - Function to handle canceling the form
@@ -318,8 +320,25 @@ function submitHandler(event){
   setId(Math.floor(Math.random() * 10000000));
 
   onCancel(true);
+  console.log(data);
+  handleTicket(data);
 
 }
+
+const handleTicket = (data) => {
+
+  const accessToken = localStorage.getItem("accessToken")
+  const requestOptions = {
+    headers: { 'Content-Type': 'application/json' },
+  };
+  
+
+  server
+    // .post('/events/create/', data, requestOptions)
+    .post('/tickets/', JSON.stringify(data), requestOptions)
+    .then((response) => console.log(response.data))
+    .catch((error) => console.log(error));
+};
 
   return (
     <form style={{overflowY: 'auto', maxHeight: '100vh', width: '100%', overflowX: 'hidden', paddingRight: '1rem'}} onSubmit={submitHandler} >

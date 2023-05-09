@@ -244,12 +244,6 @@ const [startDate, setStartDate] = useState(new Date());
  */
 const [endDate, setEndDate] = useState(new Date());
 
-/**
-A reference to the Ticket's ID.
-@type {number}
-*/
-const [id, setId] = useState(Math.floor(Math.random() * 10000000));
-
 
 
   // SUBMIT HANDLING_________________________________________________________________________________________________________________________________
@@ -260,7 +254,6 @@ const [id, setId] = useState(Math.floor(Math.random() * 10000000));
   function submitHandler(event) {
     event.preventDefault();
     const data = {
-      id: id,
       Title: titleRef.current.value,
       name:titleRef.current.value,
       Organizer: organizerRef.current.value,
@@ -336,8 +329,6 @@ const [id, setId] = useState(Math.floor(Math.random() * 10000000));
    */
 
     console.log(
-      "ID: " +
-        data.id +
       "Title: " +
         data.Title +
         "\nOrganizer: " +
@@ -380,19 +371,20 @@ const [id, setId] = useState(Math.floor(Math.random() * 10000000));
 
   
   const handleCreate = (data) => {
-
     const accessToken = localStorage.getItem("accessToken")
     const requestOptions = {
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+         Authorization: `Bearer ${accessToken}`,
+      },
     };
-    
-
-    server
-      .post('/events/create/', data, requestOptions)
-      .then((response) => console.log(response.data))
+      
+    server.post('/events/create/', JSON.stringify(data), requestOptions)
+      .then((response) => {
+        console.log(response.data);
+        localStorage.setItem("Event_id", response.data.id);
+      })
       .catch((error) => console.log(error));
-
-
   };
 
   // ________________________________________________________________________________________________________________________________________________
