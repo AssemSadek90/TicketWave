@@ -15,17 +15,29 @@ import { getFirstName, getLastName } from '../../Credentials/Credentials';
  *and Tabs components.
  */
 export default function ONavbar() {
-  const fname = getFirstName();
-  const lname = getLastName();
+  const fname = 'karim';
+  // getFirstName();
+  const lname = 'elnady';
+  // getLastName();
   const name = fname + ' ' + lname;
   const initials =
     fname.slice(0, 1).toUpperCase() + lname.slice(0, 1).toUpperCase();
-  const initialsSvg = (
+  const initialsContainer = (
     <div className={styles.initials_container} id="initials-container">
       <span>{initials}</span>
     </div>
   );
   const navigate = useNavigate();
+  const downSvg = (
+    <svg x="0" y="0" viewBox="0 0 24 24">
+      <path d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z"></path>
+    </svg>
+  );
+  const upSvg = (
+    <svg x="0" y="0" viewBox="0 0 24 24">
+      <path d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z"></path>
+    </svg>
+  );
   function handleLogOut() {
     const accessToken = localStorage.getItem('accessToken');
     const requestOptions = {
@@ -53,8 +65,8 @@ export default function ONavbar() {
           </a>
         </div>
         <div className={styles.navbar_li_2} id="navbar-li">
-          <Dropdown title={name} tag={initialsSvg}>
-            <Tabs title="Switch To Attending" path="#" />
+          <Dropdown title={name} tag={initialsContainer}>
+            <Tabs title="Switch To Attending" path="/home" />
             <Tabs title="Log out" onClick={handleLogOut} id="log-out-tab" />
           </Dropdown>
         </div>

@@ -31,7 +31,7 @@ function Dropdown(props) {
     >
       <button className={styles.dropdown_button} id="dropdown-button">
         <span>{props.tag}</span>
-        <span>{props.title}</span>
+        <p style={{ marginRight: '0.5rem' }}>{props.title}</p>
       </button>
       {isOpen && (
         <div className={styles.dropdown_menu} id="dropdown-menu">

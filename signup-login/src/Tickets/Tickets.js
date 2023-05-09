@@ -15,6 +15,7 @@ import CreatorEvent from '../EventsList/CreatorEvent';
 // import Dashboard from "./Dashboard/Dashboard";
 import Dashboard from '../Dashboard/dashboardinsights';
 import CreateEventForm from '../Basic-info/CreateEventForm';
+import ONavbar from '../NavBar/OrganizationNav/ONavbar';
 
 /** Represents a component for managing tickets and sold tickets.
 @constructor
@@ -201,6 +202,7 @@ function Tickets({
      * @return {JSX.Element}
      */
     <React.Fragment>
+      <ONavbar />
       <Sidebar showSecond={showSecondSidebar} visible={visible} />
       <div style={{ paddingLeft: padding }}>
         <Routes>

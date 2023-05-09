@@ -1,5 +1,14 @@
 import styles from "./AsideBooking.module.css";
-
+/** 
+A functional component for displaying event registration and booking details
+@param {Object} props - The props object
+@param {function} props.openOverlay - A function to open an overlay for booking
+@param {function} props.alterCount - A function to alter the ticket count
+@param {number} props.count - The current count of tickets selected
+@param {Object} props.event - The event object containing information about the event
+@param {boolean} props.isMobile - A boolean indicating whether the user is on a mobile device
+@returns {JSX.Element} - The JSX element to be rendered
+*/
 export default function AsideBooking({
   openOverlay,
   alterCount,
@@ -11,8 +20,8 @@ export default function AsideBooking({
   const minTicket = 1;
 
   return (
-    <>
-      <div className={styles.aside_card}>
+    <div className="sticky-top card p-3 rounded-4" style={{ top: "24px" }}>
+      <div className="">
         <div className="d-flex justify-content-between align-items-center">
           <span>
             <strong>Registration</strong>
@@ -62,6 +71,6 @@ export default function AsideBooking({
           )}
         </button>
       </div>
-    </>
+    </div>
   );
 }

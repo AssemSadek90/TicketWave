@@ -1,0 +1,6 @@
+{
+  "/events/retrieve/:id": "/events/:id",
+  "/orders/create/": "/orders",
+  "/discount/:id": "/discounts/:id",
+  "/venues/retrieve/:id": "/venues/:id"
+}

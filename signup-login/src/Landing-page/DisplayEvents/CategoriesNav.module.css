@@ -27,10 +27,6 @@
     cursor: pointer;
   }
   
-  .tab.active {
-    color: #333333;
-  }
-  
   .tab .underline {
     position: absolute;
     bottom: -3px;
@@ -41,11 +37,17 @@
     transition: background-color 0.3s ease-in-out;
   }
   
-  .tab:hover .underline,
-  .tab.active .underline {
-    background-color: #333;
-  }
-  
+  .tab:hover .underline {
+  background-color: #333;
+}
+
+.active {
+  color: #2f65fa;
+}
+
+.active .underline {
+  background-color: #2f65fa;
+}
   @media screen and (max-width: 850px){
     .navbar{
       width: 100%;

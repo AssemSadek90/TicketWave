@@ -141,43 +141,6 @@
       "Tickets": "20"
     }
   ],
-  "Events": [
-    {
-      "id": 1,
-      "name": "Middle East Vape Show 2023",
-      "summary": "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
-      "description": "Will be held 3 days from 6 to 8 July 2023, after the success of the 1st event in Bahrain this year with a new atmosphere it will be held in Cairo, Egypt. We choose Egypt International Exhibition Center as the best venue in Cairo for MEVS 2023.",
-      "start": "2023-07-06T10:00:00",
-      "end": "2023-07-08T22:00:00",
-      "url": "https://www.eventbrite.com/e/middle-east-vape-show-2023-tickets-512820940237?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
-      "created": "2023-03-22T10:00:00",
-      "changed": "2023-03-22T12:00:00",
-      "status": "draft",
-      "hide_start_date": false,
-      "hide_end_date": false,
-      "free": true,
-      "price": 0,
-      "waitlist": false,
-      "view_counter": 0,
-      "owner": 1,
-      "category": 1,
-      "age_restriction": false,
-      "language": "English",
-      "timezone": "6GMT",
-      "video_url": "R63RiKdiB2o",
-      "published": true,
-      "fully_booked": false,
-      "organizer": "Sawa",
-      "online_event": false,
-      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F438303329%2F1343904084043%2F1%2Foriginal.20230203-023453?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=69cab150771ec45eb6ed627fbf66039d",
-      "venue": {
-        "name": "Egypt International Exhibition Center - EIEC",
-        "address": "El-Moshir Tantawy Axis Al Hay Al Asher, Cairo Governorate 4440301",
-        "latitude": 37.7749,
-        "longitude": -122.4194
-      }
-    }
-  ],
   "events": [
     {
       "id": 1,
@@ -209,9 +172,7 @@
       "owner": 1,
       "category": "1",
       "sub_category": "2",
-      "venue": 1,
-      "ticketsSold": 5,
-      "capacity": 100
+      "venue": 1
     },
     {
       "id": 2,
@@ -240,12 +201,10 @@
       "timezone": "6GMT",
       "language": "English",
       "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F312475989%2F726391040543%2F1%2Foriginal.20220703-131002?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=257b8ab40d4e7ae0ba99ebaac8df2a00",
-      "owner": 4,
+      "owner": 1,
       "category": "1",
       "sub_category": "4",
-      "venue": 2,
-      "ticketsSold": 5,
-      "capacity": 90
+      "venue": 2
     },
     {
       "id": 3,
@@ -277,9 +236,7 @@
       "owner": 4,
       "category": "2",
       "sub_category": "1",
-      "venue": 3,
-      "ticketsSold": 5,
-      "capacity": 80
+      "venue": 3
     },
     {
       "id": 4,
@@ -308,12 +265,10 @@
       "timezone": "6GMT",
       "language": "English",
       "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F280894799%2F951323845083%2F1%2Foriginal.20220509-015632?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C1200%2C600&s=8bb7ffbf47853e81bfbb70a8d94193a7",
-      "owner": 4,
+      "owner": 5,
       "category": "5",
       "sub_category": "1",
-      "venue": 4,
-      "ticketsSold": 5,
-      "capacity": 65
+      "venue": 4
     },
     {
       "id": 5,
@@ -342,12 +297,162 @@
       "timezone": "6GMT",
       "language": "English",
       "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F379023309%2F449795840092%2F1%2Foriginal.20201111-182043?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=958%2C0%2C2558%2C1279&s=ccb3c01560e87269f5bc979000569ffd",
-      "owner": 4,
+      "owner": 8,
       "category": "3",
       "sub_category": "2",
-      "venue": 5,
-      "ticketsSold": 5,
-      "capacity": 30
+      "venue": 5
+    }
+  ],
+  "orders": [
+    {
+      "first_name": "Assem",
+      "last_name": "Sadek",
+      "email": "abdelhamid.ssen@gmail.com",
+      "promo_code": "",
+      "status": null,
+      "cost": 200,
+      "event": 3,
+      "attendee": 0,
+      "ticket": null,
+      "id": 1
+    },
+    {
+      "first_name": "Assem",
+      "last_name": "Sadek",
+      "email": "abdelhamid.ssen@gmail.com",
+      "promo_code": "",
+      "status": null,
+      "cost": 0,
+      "event": 1,
+      "attendee": 0,
+      "ticket": null,
+      "id": 2
+    },
+    {
+      "first_name": "Ziad",
+      "last_name": "Ghanem",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "promo_code": "",
+      "status": null,
+      "cost": 0,
+      "event": 1,
+      "user": 4,
+      "attendee": 0,
+      "ticket": null,
+      "id": 3
+    },
+    {
+      "first_name": "Ziad",
+      "last_name": "Ghanem",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "promo_code": "",
+      "status": null,
+      "cost": 0,
+      "event": 1,
+      "user": 4,
+      "attendee": 0,
+      "ticket": null,
+      "id": 4
+    },
+    {
+      "first_name": "Ziad",
+      "last_name": "Ghanem",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "promo_code": "SEP",
+      "status": null,
+      "cost": 45,
+      "event": 2,
+      "user": 4,
+      "attendee": 0,
+      "ticket": null,
+      "id": 5
+    }
+  ],
+  "discounts": [
+    {
+      "id": 1,
+      "code": "SEP",
+      "amount_off": 10,
+      "percent_off": 5,
+      "event_id": 2,
+      "quantity_available": 1000,
+      "start_date": "2023-05-08T22:31:11.480Z",
+      "quantity_sold": 0,
+      "end_date": "2023-05-08T22:31:11.481Z"
+    },
+    {
+      "id": 2,
+      "code": "XYZ",
+      "amount_off": 15,
+      "percent_off": 10,
+      "event_id": 3,
+      "quantity_available": 1000,
+      "start_date": "2023-05-08T22:31:11.480Z",
+      "quantity_sold": 0,
+      "end_date": "2023-05-08T22:31:11.481Z"
+    },
+    {
+      "id": 3,
+      "code": "QRS",
+      "amount_off": 8,
+      "percent_off": 5,
+      "event_id": 4,
+      "quantity_available": 1000,
+      "start_date": "2023-05-08T22:31:11.480Z",
+      "quantity_sold": 0,
+      "end_date": "2023-05-08T22:31:11.481Z"
+    }
+  ],
+  "venues": [
+    {
+      "id": 1,
+      "name": "Egypt International Exhibition Center - EIEC",
+      "country": "Egypt",
+      "state": "",
+      "city": "Cairo",
+      "address": "El-Moshir Tantawy Axis Al Hay Al Asher, Cairo Governorate 4440301",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    {
+      "id": 2,
+      "name": "Tolip Hotel and Spa",
+      "country": "Egypt",
+      "state": "",
+      "city": "Cairo",
+      "address": "Tolip Hotel and Spa New Cairo, New Cairo 1111",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    {
+      "id": 3,
+      "name": "Sheraton Cairo Hotel & Casino",
+      "country": "Egypt",
+      "state": "",
+      "city": "Cairo",
+      "address": "Charles de Gaulle Ad Doqi A, Giza Governorate 3750412",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    {
+      "id": 4,
+      "name": "Four Seasons Hotel Cairo at Nile Plaza",
+      "country": "Egypt",
+      "state": "",
+      "city": "Cairo",
+      "address": "1089 Nile Corniche Cairo, Cairo Governorate 11519",
+      "latitude": 37.7749,
+      "longitude": -122.4194
+    },
+    {
+      "id": 5,
+      "name": "Uptown Cairo",
+      "country": "Egypt",
+      "state": "",
+      "city": "Cairo",
+      "address": "Uptown Cairo Al Abageyah, Cairo Governorate 11571",
+      "latitude": 37.7749,
+      "longitude": -122.4194
     }
   ],
   "ticketsSold": {
