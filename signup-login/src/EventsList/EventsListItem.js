@@ -207,7 +207,7 @@ const EventsListItem = (props) => {
                       data-spec="contents-grid-second-column"
                     >
                       <p data-spec="event-list-item-gross">
-                        ${props.event.ticketsSold}
+                        ${props.event.gross}
                       </p>
                     </div>
                     <div className="eds-g-cell eds-g-cell-lg-4-12 eds-show-up-lg eds-l-pad-hor-0">

@@ -53,7 +53,6 @@ const CreatorEvent = () => {
         }
         console.log(data);
 
-        // Loop through each event and fetch the amount of tickets sold
         // data.forEach((event) => {
         //   server
         //     .get(`/events/amount_of_tickets_sold/${event.id}`, requestOptions)
@@ -72,8 +71,20 @@ const CreatorEvent = () => {
         //     .catch((error) => console.log(error));
         // });
       })
+      .then(() => {
+        setEvents(updatedEvents);
+        console.log(updatedEvents);
+        console.log(events);
+      })
       .catch((error) => console.log(error));
   }, []);
+
+  const updatedEvents = events.map((event) => {
+    const { capacity, price } = event; // Extract capacity and price from event object
+    const gross = capacity * price; // Calculate the gross property
+
+    return { ...event, gross }; // Return a new object with the updated gross property
+  });
 
   /**
    * Maps the events data to the desired format.
