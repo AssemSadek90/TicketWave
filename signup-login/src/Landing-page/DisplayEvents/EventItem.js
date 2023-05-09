@@ -47,11 +47,15 @@ export default function EventItem(props) {
           <p id="event-detail-1" className={styles.event_detail_1}>
             {props.event.name}
           </p>
-          <p id="event-detail-2" className={styles.event_details_2}>
+          <p id="event-detail-2" className={styles.event_detail_2}>
             {realStart()}
           </p>
           <p id="event-detail-3" className={styles.event_detail_3}>
             {props.event.organizer}
+          </p>
+          <p id="event-detail-3" className={styles.event_detail_4}>
+            {props.event.description.slice(0, 70)}
+            {props.event.description[71] && '...'}
           </p>
         </div>
       </a>
