@@ -1,75 +1,95 @@
 {
-  "users": [],
-  "eventsData": [
+  "users": [
     {
-      "path": "https://openclipart.org/download/341148/cantthink-simplecolour.svg",
-      "location": "New York City",
-      "date": "March 28, 2023",
-      "title": "My Trip to NYC"
+      "id": "2",
+      "password": "BNMbnm123",
+      "is_superuser": false,
+      "username": "ZiadGhanem",
+      "first_name": "",
+      "last_name": "",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "is_public": true,
+      "image_id": "-1"
     },
     {
-      "path": "https://openclipart.org/download/341147/building-engineer-colour.svg",
-      "location": "San Francisco",
-      "date": "April 15, 2023",
-      "title": "Golden Gate Bridge"
+      "id": 4,
+      "username": "ZiadGhanem",
+      "password1": "BNMbnm123",
+      "pk": "1",
+      "email": "ziad.m.ghanem02@gmail.com",
+      "is_active": true
     },
     {
-      "path": "https://openclipart.org/download/341145/ladyinreddances-remix.svg",
-      "location": "Paris",
-      "date": "May 3, 2023",
-      "title": "Eiffel Tower"
+      "id": 1683629042695,
+      "username": "AhmedGhanem",
+      "password1": "BNMbnm123",
+      "pk": "1",
+      "email": "ziad@ziad.com",
+      "is_active": true
     },
     {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Tokyo",
-      "date": "June 7, 2023",
-      "title": "Cherry Blossoms"
+      "id": 1683629219279,
+      "username": "Ziadmido",
+      "password1": "fhsfaglfhgas",
+      "pk": "1",
+      "email": "ziad@ziad1.com",
+      "is_active": true
     },
     {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "London",
-      "date": "July 12, 2023",
-      "title": "Big Ben"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Sydney",
-      "date": "August 21, 2023",
-      "title": "Opera House"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Rio de Janeiro",
-      "date": "September 4, 2023",
-      "title": "Christ the Redeemer"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Dubai",
-      "date": "October 1, 2023",
-      "title": "Burj Khalifa"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Rome",
-      "date": "November 10, 2023",
-      "title": "Colosseum"
-    },
-    {
-      "path": "https://openclipart.org/download/341143/coupleonaboatguytriestokiss.svg",
-      "location": "Moscow",
-      "date": "December 5, 2023",
-      "title": "Red Square"
+      "id": 1683629269634,
+      "username": "BiboBsheer",
+      "password1": "hasgdjsafoiw",
+      "pk": "1",
+      "email": "ziad@ziad12.com",
+      "is_active": true
     }
   ],
-  "Event": [
+  "eventsData": [
     {
       "id": 1,
+      "name": "Middle East Vape Show 2023",
+      "summary": "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
+      "description": "Will be held 3 days from 6 to 8 July 2023, after the success of the 1st event in Bahrain this year with a new atmosphere it will be held in Cairo, Egypt. We choose Egypt International Exhibition Center as the best venue in Cairo for MEVS 2023.",
+      "start": "2023-07-06T10:00:00",
+      "end": "2023-07-08T22:00:00",
+      "url": "https://www.eventbrite.com/e/middle-east-vape-show-2023-tickets-512820940237?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
+      "created": "2023-03-22T10:00:00",
+      "changed": "2023-03-22T12:00:00",
+      "status": "draft",
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": false,
+      "view_counter": 0,
+      "owner": 1,
+      "category": 1,
+      "age_restriction": false,
+      "language": "English",
+      "timezone": "6GMT",
+      "video_url": "R63RiKdiB2o",
+      "published": true,
+      "fully_booked": false,
+      "organizer": "Sawa",
+      "online_event": false,
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F438303329%2F1343904084043%2F1%2Foriginal.20230203-023453?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=69cab150771ec45eb6ed627fbf66039d",
+      "venue": {
+        "name": "Egypt International Exhibition Center - EIEC",
+        "address": "El-Moshir Tantawy Axis Al Hay Al Asher, Cairo Governorate 4440301",
+        "latitude": 37.7749,
+        "longitude": -122.4194
+      }
+    }
+  ],
+  "Event_id": [
+    {
       "Name": "Heidi",
-      "created": "9/25/2023",
+      "created": "25/9/2022",
       "Price": "50$",
-      "capacity": "300",
-      "status": "online",
+      "Availability": "300",
+      "online_event": "online",
       "logo": "https://artsmidnorthcoast.com/wp-content/uploads/2014/05/no-image-available-icon-6.png",
       "Gross": "20",
       "Nsales": 100,
@@ -102,116 +122,683 @@
     },
     [
       {
-        "EventDate": "2023-05-16T10:11:03.000Z",
-        "EventTime": "T07:00:00Z"
+        "EventDate": "2023-05-09T12:11:03.789Z",
+        "EventTime": "15:11"
       },
       {
-        "Password": "bbnbn"
+        "Password": ""
       }
     ],
     [
       {
-        "EventDate": "2023-05-08T10:25:30.678Z",
-        "EventTime": "13:25"
+        "EventDate": "2023-05-09T12:11:03.799Z",
+        "EventTime": "15:11"
       },
       {
-        "Password": "bbnbn"
+        "Password": ""
       }
     ],
     [
       {
-        "EventDate": "2023-05-08T10:25:30.678Z",
-        "EventTime": "13:25"
+        "EventDate": "2023-05-09T12:11:06.445Z",
+        "EventTime": "15:11"
       },
       {
-        "Password": "bbnbn"
+        "Password": ""
       }
     ],
     [
       {
-        "EventDate": "2023-05-16T10:25:30.000Z",
-        "EventTime": "13:25"
+        "EventDate": "2023-05-09T12:11:06.449Z",
+        "EventTime": "15:11"
       },
       {
-        "Password": "bbnbn"
+        "Password": ""
       }
     ],
     [
       {
-        "EventDate": "2023-05-16T10:25:30.000Z",
+        "EventDate": "2023-05-09T12:11:08.348Z",
+        "EventTime": "15:11"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:11:08.353Z",
+        "EventTime": "15:11"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:13:05.464Z",
+        "EventTime": "15:13"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:13:05.473Z",
+        "EventTime": "15:13"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:13:07.861Z",
+        "EventTime": "15:13"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:13:07.866Z",
+        "EventTime": "15:13"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:13:07.866Z",
+        "EventTime": "15:13"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:00.803Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:00.827Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:13.804Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:13.816Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:16.280Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:16.293Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:16.293Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:16.293Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:16.293Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:15:16.293Z",
+        "EventTime": "15:15"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:21:22.416Z",
+        "EventTime": "15:21"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:21:22.429Z",
+        "EventTime": "15:21"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:21:22.429Z",
+        "EventTime": "15:21"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:53:55.066Z",
+        "EventTime": "15:53"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:53:55.077Z",
+        "EventTime": "15:53"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:53:55.077Z",
+        "EventTime": "15:53"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:54:24.552Z",
+        "EventTime": "15:54"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:54:24.561Z",
+        "EventTime": "15:54"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:54:24.561Z",
+        "EventTime": "15:54"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:58:08.607Z",
+        "EventTime": "15:58"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:58:08.619Z",
+        "EventTime": "15:58"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:58:08.619Z",
+        "EventTime": "15:58"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:59:52.111Z",
+        "EventTime": "15:59"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:59:52.122Z",
+        "EventTime": "15:59"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T12:59:52.122Z",
+        "EventTime": "15:59"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:01:07.177Z",
+        "EventTime": "16:01"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:01:07.187Z",
+        "EventTime": "16:01"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:01:07.187Z",
+        "EventTime": "16:01"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:01:07.187Z",
+        "EventTime": "16:01"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:01:07.187Z",
+        "EventTime": "16:01"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:42:14.389Z",
+        "EventTime": "16:42"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:42:14.401Z",
+        "EventTime": "16:42"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:42:14.401Z",
+        "EventTime": "16:42"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T13:42:14.401Z",
+        "EventTime": "16:42"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T13:42:14.000Z",
+        "EventTime": "16:42"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T13:42:14.000Z",
+        "EventTime": "T05:00:00Z"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:43:52.991Z",
+        "EventTime": "20:43"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:43:52.998Z",
+        "EventTime": "20:43"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:43:52.998Z",
+        "EventTime": "20:43"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:56:34.136Z",
+        "EventTime": "20:56"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:56:34.145Z",
+        "EventTime": "20:56"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:56:34.161Z",
+        "EventTime": "20:56"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:56:34.220Z",
+        "EventTime": "20:56"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:57:10.824Z",
+        "EventTime": "20:57"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:57:10.848Z",
+        "EventTime": "20:57"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:57:10.848Z",
+        "EventTime": "20:57"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T17:57:10.848Z",
+        "EventTime": "20:57"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T17:57:10.000Z",
+        "EventTime": "20:57"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T17:57:10.000Z",
+        "EventTime": "T09:00:00Z"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:00:17.658Z",
+        "EventTime": "21:00"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:00:17.670Z",
+        "EventTime": "21:00"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:00:17.670Z",
+        "EventTime": "21:00"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:00:17.670Z",
+        "EventTime": "21:00"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T18:00:17.000Z",
+        "EventTime": "21:00"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T18:00:17.000Z",
+        "EventTime": "T08:30:00Z"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:03:45.134Z",
+        "EventTime": ""
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:03:45.137Z",
+        "EventTime": ""
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:03:45.146Z",
+        "EventTime": "21:03"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:03:45.151Z",
+        "EventTime": "21:03"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-09T18:03:45.146Z",
+        "EventTime": "21:03"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T18:03:45.000Z",
+        "EventTime": "21:03"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T18:03:45.000Z",
         "EventTime": "T07:30:00Z"
       },
       {
-        "Password": "bbnbn"
+        "Password": ""
       }
     ],
     [
       {
-        "EventDate": "2023-05-16T10:25:30.000Z",
+        "EventDate": "2023-05-09T18:03:45.151Z",
+        "EventTime": "21:03"
+      },
+      {
+        "Password": ""
+      }
+    ],
+    [
+      {
+        "EventDate": "2023-05-10T18:03:45.000Z",
         "EventTime": "T07:30:00Z"
       },
       {
-        "Password": "bbnbn"
+        "Password": ""
       }
     ],
     [
       {
-        "EventDate": "2023-05-08T10:30:00.063Z",
-        "EventTime": "13:30"
-      },
-      {
-        "Password": "bbnbn"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-16T10:30:00.000Z",
-        "EventTime": "13:30"
-      },
-      {
-        "Password": "bbnbn"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-16T10:30:00.000Z",
-        "EventTime": "T08:30:00Z"
-      },
-      {
-        "Password": "bbnbn"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-24T10:30:00.000Z",
-        "EventTime": "T08:30:00Z"
-      },
-      {
-        "Password": "bbnbn"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-24T10:30:00.000Z",
-        "EventTime": "T08:30:00Z"
-      },
-      {
-        "Password": "bbnbn"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T10:33:16.835Z",
-        "EventTime": "13:33"
-      },
-      {
-        "Password": "bbnbn"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.893Z",
-        "EventTime": "19:42"
+        "EventDate": "2023-05-10T18:03:45.000Z",
+        "EventTime": "T07:30:00Z"
       },
       {
         "Password": ""
@@ -219,8 +806,8 @@
     ],
     [
       {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
+        "EventDate": "2023-05-10T18:03:45.000Z",
+        "EventTime": "T07:30:00Z"
       },
       {
         "Password": ""
@@ -228,233 +815,8 @@
     ],
     [
       {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": "m"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": "mb"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": "mbm"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": "mbmh"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T16:42:10.902Z",
-        "EventTime": "19:42"
-      },
-      {
-        "Password": "mbmhj"
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:28:52.540Z",
-        "EventTime": "20:28"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:29:03.862Z",
-        "EventTime": "20:29"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:31:03.198Z",
-        "EventTime": "20:31"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:32:36.190Z",
-        "EventTime": "20:32"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:44:45.204Z",
-        "EventTime": "20:44"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:50:45.190Z",
-        "EventTime": "20:50"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:50:45.205Z",
-        "EventTime": "20:50"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:57:34.039Z",
-        "EventTime": "20:57"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:57:34.059Z",
-        "EventTime": "20:57"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:57:34.059Z",
-        "EventTime": "20:57"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:57:34.059Z",
-        "EventTime": "20:57"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:57:34.059Z",
-        "EventTime": "20:57"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:58:00.912Z",
-        "EventTime": "20:58"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:58:00.941Z",
-        "EventTime": "20:58"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:58:00.941Z",
-        "EventTime": "20:58"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T17:58:00.941Z",
-        "EventTime": "20:58"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-08T18:06:45.208Z",
-        "EventTime": "21:06"
+        "EventDate": "2023-05-10T18:03:45.000Z",
+        "EventTime": "T07:30:00Z"
       },
       {
         "Password": ""
@@ -487,13 +849,27 @@
       "name": "Middle East Vape Show 2023",
       "summary": "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
       "description": "Will be held 3 days from 6 to 8 July 2023, after the success of the 1st event in Bahrain this year with a new atmosphere it will be held in Cairo, Egypt. We choose Egypt International Exhibition Center as the best venue in Cairo for MEVS 2023.",
-      "start_time": "July 6 · 10am",
-      "end_time": " July 8 · 10pm EET",
+      "start": "2023-07-06T10:00:00",
+      "end": "2023-07-08T22:00:00",
       "url": "https://www.eventbrite.com/e/middle-east-vape-show-2023-tickets-512820940237?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
       "created": "2023-03-22T10:00:00",
       "changed": "2023-03-22T12:00:00",
-      "videoURL": "R63RiKdiB2o",
+      "status": "draft",
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": false,
+      "view_counter": 0,
+      "owner": 1,
+      "category": 1,
+      "age_restriction": false,
+      "language": "English",
+      "timezone": "6GMT",
+      "video_url": "R63RiKdiB2o",
       "published": true,
+      "fully_booked": false,
+      "organizer": "Sawa",
       "online_event": false,
       "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F438303329%2F1343904084043%2F1%2Foriginal.20230203-023453?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=69cab150771ec45eb6ed627fbf66039d",
       "venue": {
@@ -503,5 +879,187 @@
         "longitude": -122.4194
       }
     }
-  ]
+  ],
+  "events": [
+    {
+      "id": 1,
+      "name": "Middle East Vape Show 2023",
+      "summary": "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
+      "description": "Will be held 3 days from 6 to 8 July 2023, after the success of the 1st event in Bahrain this year with a new atmosphere it will be held in Cairo, Egypt. We choose Egypt International Exhibition Center as the best venue in Cairo for MEVS 2023.",
+      "url": "https://www.eventbrite.com/e/middle-east-vape-show-2023-tickets-512820940237?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
+      "type": "string",
+      "start": "2023-07-06T10:00:00",
+      "end": "2023-07-08T22:00:00",
+      "created": "2023-05-08T16:48:50.048Z",
+      "changed": "2023-05-08T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": false,
+      "published": true,
+      "organizer": "Sawa",
+      "video_url": "R63RiKdiB2o",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F438303329%2F1343904084043%2F1%2Foriginal.20230203-023453?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=69cab150771ec45eb6ed627fbf66039d",
+      "owner": 1,
+      "category": "1",
+      "sub_category": "2",
+      "venue": 1,
+      "ticketsSold": 5,
+      "capacity": 100
+    },
+    {
+      "id": 2,
+      "name": "The Design Show Egypt",
+      "summary": "The Design Show Egypt is taking place from 1-3 June 2023 at Cairo International Convention Center, Cairo, Egypt.",
+      "description": "The Design Show - TDS is the largest and most significant Architecture, Interior, and Product Design show in the MENA region. The exhibition is covering all design aspects regarding Architecture designs, Interior & Exterior designs, Product designs, Landscape designs, Furnishing & fit-out solutions.",
+      "url": "https://www.eventbrite.com/e/the-design-show-egypt-tickets-372686233557?aff=ebdssbcitybrowse",
+      "type": "string",
+      "start": "2023-06-01T11:00:00",
+      "end": "2023-06-03T21:00:00",
+      "created": "2023-05-08T16:48:50.048Z",
+      "changed": "2023-05-08T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": false,
+      "price": 15,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": false,
+      "published": true,
+      "organizer": "ICEC",
+      "video_url": "xv2_F4FwFiM",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F312475989%2F726391040543%2F1%2Foriginal.20220703-131002?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=257b8ab40d4e7ae0ba99ebaac8df2a00",
+      "owner": 4,
+      "category": "1",
+      "sub_category": "4",
+      "venue": 2,
+      "ticketsSold": 5,
+      "capacity": 90
+    },
+    {
+      "id": 3,
+      "name": "Power and (Dis)Connect: The Middle East and Northern Africa (MENA)",
+      "summary": "Power and (Dis)Connect: The Middle East and North Africa (MENA) Between Modernization, Democratization, and Self- Preservation",
+      "description": "The Political Science department hosts an annual conference with the aim of bridging the academic and non-academic worlds of theory and practice. This is the fourth annual conference. The objective of the conference is to present a forum for research development, discussion, and networking for AUC faculty and graduate and undergraduate students on the one hand and faculty and researchers from Egyptian, Arab, and International universities and institutes from the Global South, on the other.",
+      "url": "https://www.eventbrite.com/e/power-and-disconnect-the-middle-east-and-northern-africa-mena-tickets-538508973837?aff=ebdssbcitybrowse&keep_tld=1",
+      "type": "string",
+      "start": "2023-05-12T09:00:00",
+      "end": "2023-05-13T20:00:00",
+      "created": "2023-05-12T16:48:50.048Z",
+      "changed": "2023-05-13T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": false,
+      "price": 50,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": false,
+      "published": true,
+      "organizer": "AUC",
+      "video_url": "mqUPkk9cWT0",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F488551959%2F147231206264%2F1%2Foriginal.20230409-135212?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C14%2C1686%2C843&s=93832d09b0cabc4795413df87969b7ed",
+      "owner": 4,
+      "category": "2",
+      "sub_category": "1",
+      "venue": 3,
+      "ticketsSold": 5,
+      "capacity": 80
+    },
+    {
+      "id": 4,
+      "name": "Certified Crypto Associate | Cairo",
+      "summary": "The workshop presents you with an opportunity to understand the basic concepts of cryptocurrency application of blockchain technology, and what makes it so special in today’s technologically advanced world.",
+      "description": "We aim to empower you with concrete knowledge and understanding of various dynamics of cryptocurrency trading and enable you to get started and grow your cryptocurrency portfolio. We aim to empower you with concrete knowledge and understanding of various dynamics of cryptocurrency trading and enable you to get started and grow your cryptocurrency portfolio.",
+      "url": "https://www.eventbrite.com/e/certified-crypto-associate-cairo-tickets-491108427527?aff=ebdssbcitybrowse&keep_tld=1",
+      "type": "string",
+      "start": "2023-05-23T04:00:00",
+      "end": "2023-05-25T15:00:00",
+      "created": "2023-05-08T16:48:50.048Z",
+      "changed": "2023-05-08T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": false,
+      "published": true,
+      "organizer": "Blockchain Smart Solutions",
+      "video_url": "xOmDm477NPQ",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F280894799%2F951323845083%2F1%2Foriginal.20220509-015632?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C1200%2C600&s=8bb7ffbf47853e81bfbb70a8d94193a7",
+      "owner": 4,
+      "category": "5",
+      "sub_category": "1",
+      "venue": 4,
+      "ticketsSold": 5,
+      "capacity": 65
+    },
+    {
+      "id": 5,
+      "name": "Cairo Leadership: Overcome Anxiety with Discipline and Termination!",
+      "summary": "You should attend if you are a manager or a business owner, managing a team of employees, or managing a team of managers.",
+      "description": "Do you feel uneasy, when it comes to disciplining and terminating bad employees? Your head says: This bad employee should be terminated, but you just can't bring yourself to start the disciplinary action?\nProblems like this will not solve themselves! The more you try to avoid confronting this kind of problems, the more this kind of problems grow and they grow exponentially! The more you try to run away from this kind of problems, the more they chase you!!!\nShort term pain but long term pleasure, or, short term pleasure but long term pain, which one do you want?",
+      "url": "https://www.eventbrite.com/e/cairo-leadership-overcome-anxiety-with-discipline-and-termination-tickets-449335744307?aff=ebdssbcitybrowse",
+      "type": "string",
+      "start": "2023-05-09T14:00:00",
+      "end": "2023-05-10T18:00:00",
+      "created": "2023-05-08T16:48:50.048Z",
+      "changed": "2023-05-08T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": true,
+      "published": true,
+      "organizer": "Coach Michael Lin",
+      "video_url": "BVJkf8IuRjE",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F379023309%2F449795840092%2F1%2Foriginal.20201111-182043?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=958%2C0%2C2558%2C1279&s=ccb3c01560e87269f5bc979000569ffd",
+      "owner": 4,
+      "category": "3",
+      "sub_category": "2",
+      "venue": 5,
+      "ticketsSold": 5,
+      "capacity": 30
+    }
+  ],
+  "ticketsSold": {
+    "1": 100,
+    "2": 50,
+    "3": 30,
+    "4": 20,
+    "5": 10,
+    "6": 5,
+    "7": 2,
+    "8": 1
+  }
 }

@@ -1,9 +1,9 @@
-import { FaEdit, FaCopy } from 'react-icons/fa';
-import './dashboard.css';
-import React, { useState } from 'react';
-import { ClipLoader } from 'react-spinners';
-import ClipboardJS from 'clipboard';
-new ClipboardJS('.button');
+import { FaEdit, FaCopy } from "react-icons/fa";
+import "./dashboard.css";
+import React, { useState } from "react";
+import { ClipLoader } from "react-spinners";
+import ClipboardJS from "clipboard";
+new ClipboardJS(".button");
 /**
  * React component for editing and copying a URL.
  * @function UrlEditor
@@ -19,7 +19,7 @@ function UrlEditor() {
    * State to hold the current URL.
    * @type {[string, function]} url - [initialValue, updaterFunction]
    */
-  const [url, setUrl] = useState('https://example.com');
+  const [url, setUrl] = useState("https://example.com");
   /**
    * State to hold the URL being edited.
    * @type {[string, function]} tempUrl - [initialValue, updaterFunction]

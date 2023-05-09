@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import server from '../server';
-import './dashboard.css';
+import React, { useState, useEffect } from "react";
+import server from "../server";
+import "./dashboard.css";
 //    const mockOrders = [
 //   { id: 1, first_name: 'John Doe',cost:"123"  },
 //   { id: 2, first_name: 'Jane Smith'  },
@@ -9,18 +9,21 @@ import './dashboard.css';
 const Orders = () => {
   //const [orders, setOrders] = useState([]);
   const [orders, setOrders] = useState([]);
-//   const [isloaded, setisloaded] = useState(false);
+  //   const [isloaded, setisloaded] = useState(false);
   //const [data, setdata] = useState();
+  localStorage.setItem("Event_id", 2);
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem("accessToken");
+    const Event_id = localStorage.getItem("Event_id");
+
     const requestOptions = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
     };
     server
-      .get(`/orders/list`, requestOptions)
+      .get(`/orders/list/?event=${Event_id}`, requestOptions)
       .then((response) => {
         const data = response.data.results;
         //console.log('data', data);
@@ -39,8 +42,10 @@ const Orders = () => {
       <div>
         <div className="eds-text-hs eds-l-pad-vert-1">Recent Orders</div>
         <div className="attendees-section__empty-state eds-l-mar-top-5">
-          <div className="eds-empty-state eds-align--center" data-spec="empty-state">
-          
+          <div
+            className="eds-empty-state eds-align--center"
+            data-spec="empty-state"
+          >
             <div>
               <div className="eds-empty-state__graphic eds-align--center">
                 <span className="eds-graphic--halo eds-graphic-halo--xsmall">
@@ -173,36 +178,81 @@ const Orders = () => {
       </div>
     );
   }
-  console.log('Orders: ', orders);
+  console.log("Orders: ", orders);
   return (
-    <div className="dashboard-attendees-section eds-l-pad-right-4" data-testid="recent-orders-section" >
-    <div className="eds-text-hs eds-l-pad-vert-1">Recent Orders</div>
+    <div
+      className="dashboard-attendees-section eds-l-pad-right-4"
+      data-testid="recent-orders-section"
+    >
+      <div className="eds-text-hs eds-l-pad-vert-1">Recent Orders</div>
       <div className="attendees-section__table-header eds-l-mar-top-5">
         <div className="eds-data-table">
           <div className="eds-data-table__wrapper">
-            <table className="eds-data-table__main eds-l-mar-vert-2" data-spec="data-table-main" >
+            <table
+              className="eds-data-table__main eds-l-mar-vert-2"
+              data-spec="data-table-main"
+            >
               <thead>
-                <tr data-spec="data-table-header" className="eds-data-table-header">
-                  <th className="eds-data-table-header__column" data-spec="data-table-header-column">
-                    <button aria-label="" disabled="" className="eds-btn--button eds-btn--none eds-btn--disabled eds-data-table-header__column-button" aria-disabled="true" type="button">
+                <tr
+                  data-spec="data-table-header"
+                  className="eds-data-table-header"
+                >
+                  <th
+                    className="eds-data-table-header__column"
+                    data-spec="data-table-header-column"
+                  >
+                    <button
+                      aria-label=""
+                      disabled=""
+                      className="eds-btn--button eds-btn--none eds-btn--disabled eds-data-table-header__column-button"
+                      aria-disabled="true"
+                      type="button"
+                    >
                       <span className="eds-text-bm">Order no.</span>
                       <span className="eds-data-table-header__column__icon"></span>
                     </button>
                   </th>
-                  <th className="eds-data-table-header__column" data-spec="data-table-header-column">
-                    <button aria-label="" disabled="" className="eds-btn--button eds-btn--none eds-btn--disabled eds-data-table-header__column-button" aria-disabled="true" type="button">
+                  <th
+                    className="eds-data-table-header__column"
+                    data-spec="data-table-header-column"
+                  >
+                    <button
+                      aria-label=""
+                      disabled=""
+                      className="eds-btn--button eds-btn--none eds-btn--disabled eds-data-table-header__column-button"
+                      aria-disabled="true"
+                      type="button"
+                    >
                       <span className="eds-text-bm">Name</span>
                       <span className="eds-data-table-header__column__icon"></span>
                     </button>
                   </th>
-                  <th className="eds-data-table-header__column" data-spec="data-table-hoeader-column">
-                    <button aria-label="" disabled="" className="eds-btn--button eds-btn--none eds-btn--disabled eds-data-table-header__column-button" aria-disabled="true" type="button">
+                  <th
+                    className="eds-data-table-header__column"
+                    data-spec="data-table-hoeader-column"
+                  >
+                    <button
+                      aria-label=""
+                      disabled=""
+                      className="eds-btn--button eds-btn--none eds-btn--disabled eds-data-table-header__column-button"
+                      aria-disabled="true"
+                      type="button"
+                    >
                       <span className="eds-text-bm">Price</span>
                       <span className="eds-data-table-header__column__icon"></span>
                     </button>
                   </th>
-                  <th className="eds-data-table-header__column" data-spec="data-table-header-column">
-                    <button aria-label="" disabled="" className="eds-btn--button eds-btn--none eds-btn--disabled eds-data-table-header__column-button" aria-disabled="true" type="button">
+                  <th
+                    className="eds-data-table-header__column"
+                    data-spec="data-table-header-column"
+                  >
+                    <button
+                      aria-label=""
+                      disabled=""
+                      className="eds-btn--button eds-btn--none eds-btn--disabled eds-data-table-header__column-button"
+                      aria-disabled="true"
+                      type="button"
+                    >
                       <span className="eds-text-bm">Date</span>
                       <span className="eds-data-table-header__column__icon"></span>
                     </button>
@@ -224,7 +274,7 @@ const Orders = () => {
                         {order.cost}
                       </td>
                       <td className="eds-data-table-list-item__column">
-                        {order.created.substr(0,10)}
+                        {order.created.substr(0, 10)}
                       </td>
                     </tr>
                   ))}

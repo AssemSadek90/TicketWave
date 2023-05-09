@@ -1437,7 +1437,7 @@ label.eds-label-primary {
 
 .eds-label__content {
   display: flex;
-  cursor: pointer;
+  cursor: poin0ter;
   font-weight: 400;
 }
 
@@ -1460,3 +1460,6 @@ label.eds-label-primary {
 .layout{
   width: 70%;
 }
+@media (max-width:500px){.layout{
+  width: 100%;
+}}
