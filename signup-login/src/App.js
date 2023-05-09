@@ -70,6 +70,8 @@ function App() {
                     <div
                       style={{ paddingLeft: padding, paddingBottom: '1rem' }}
                     >
+                      {" "}
+                    <ONavbar />
                       <CreateEventForm />
                     </div>
                   </ProtectedRoutes>
@@ -89,6 +91,8 @@ function App() {
                   <ProtectedRoutes>
                     <Sidebar showSecond={showSecondSidebar} visible={visible} />
                     <div style={{ paddingLeft: padding }}>
+                    {" "}
+                    <ONavbar />{" "}
                       <div
                         style={{
                           paddingTop: '1rem',
