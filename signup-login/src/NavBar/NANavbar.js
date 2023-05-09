@@ -13,20 +13,9 @@ import { Link } from 'react-router-dom';
  * @returns {JSX.Element} The Navbar component.
  */
 export default function Navbar() {
-  const [searchText, setSearchText] = useState('');
-  const [email, setEmail] = useState('example@example.com');
   const navigate = useNavigate();
-  /**
-   * Navigates to the sign-in page when the "LOG IN" link is clicked.
-   */
-  function handleLogClick() {
-    navigate('/signin');
-  }
-  /**
-   * Navigates to the sign-up page when the "SIGN UP" link is clicked.
-   */
-  function handleSignClick() {
-    navigate('/');
+  function handleSearch() {
+    navigate('/Search');
   }
 
   return (
@@ -35,10 +24,10 @@ export default function Navbar() {
         <a href="/home">
           <span className={styles.site_title}>TicketWave</span>
         </a>
-        <SearchButton to="https://www.eventbrite.com" label="Search events" />
+        <SearchButton onClick={handleSearch} label="Search events" />
       </ul>
       <ul id="navbar-ul">
-        <NavBarListItem title="Create Event">
+        <NavBarListItem title="Create Event" path="/basic-info">
           <svg className={styles.svg_icon} viewBox="0 0 20 20">
             <path d="M13 11V4h-2v7H4v2h7v7h2v-7h7v-2z"></path>
           </svg>

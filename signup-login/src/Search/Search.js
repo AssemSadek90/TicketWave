@@ -1,7 +1,36 @@
 import React from 'react';
 import styles from './Search.module.css';
+import Location from '../Landing-page/Location/Location';
+import { useState, useEffect } from 'react';
+import server from '../server';
 
 export default function Search() {
+  const [events, setEvents] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const handleSubmit = (event) => {
+    setSearchText(event.target.value);
+    console.log(searchText);
+  };
+  useEffect(() => {
+    const requestOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        //Authorization: `Bearer ${accessToken}`,
+      },
+      params: {
+        search: searchText,
+      },
+    };
+    server
+      .get(`/events/list/`, requestOptions)
+      .then((response) => {
+        const data = response.data.results;
+        if (data) setEvents(data);
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+  }, [searchText]);
+
   return (
     <div className={styles.search_page_container}>
       <div className={styles.page_comp1}>
@@ -17,6 +46,7 @@ export default function Search() {
             type="text"
             className={styles.search_input}
             placeholder="Search for anything"
+            onChange={handleSubmit}
           />
           <button type="submit" className={styles.search_button}>
             <svg
@@ -32,7 +62,9 @@ export default function Search() {
           <svg className={styles.search_icon} x="0" y="0" viewBox="0 0 24 24">
             <path d="M11.6 11.6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-7.6C8.5 4 6 6.5 6 9.6 6 13.8 11.6 20 11.6 20s5.6-6.2 5.6-10.4c0-3.1-2.5-5.6-5.6-5.6z"></path>
           </svg>
+          <Location />
         </div>
+        <div className={styles.results_container}></div>
       </div>
       <div className={styles.page_comp2}>
         <div>
