@@ -25,6 +25,13 @@ const CreatorEvent = () => {
    */
   const [ticketsSold, setTicketsSold] = useState([]);
 
+  const updatedEvents = events.map((event) => {
+    const { ticketsSold, price } = event; // Extract capacity and price from event object
+    const gross = ticketsSold * price; // Calculate the gross property
+
+    return { ...event, gross }; // Return a new object with the updated gross property
+  });
+
   /**
    * Fetches the list of events and the number of tickets sold for each event.
    * @function
@@ -71,20 +78,13 @@ const CreatorEvent = () => {
         //     .catch((error) => console.log(error));
         // });
       })
-      .then(() => {
-        setEvents(updatedEvents);
-        console.log(updatedEvents);
-        console.log(events);
-      })
+      // .then(() => {
+      //   setEvents(updatedEvents);
+      //   console.log(updatedEvents);
+      //   console.log(events);
+      // })
       .catch((error) => console.log(error));
   }, []);
-
-  const updatedEvents = events.map((event) => {
-    const { capacity, price } = event; // Extract capacity and price from event object
-    const gross = capacity * price; // Calculate the gross property
-
-    return { ...event, gross }; // Return a new object with the updated gross property
-  });
 
   /**
    * Maps the events data to the desired format.

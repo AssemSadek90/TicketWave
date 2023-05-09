@@ -242,7 +242,8 @@
       "sub_category": "1",
       "venue": 3,
       "capacity": 35,
-      "ticketsSold": 30
+      "ticketsSold": 30,
+      "gross": 1500
     },
     {
       "id": 4,
@@ -260,7 +261,7 @@
       "hide_start_date": false,
       "hide_end_date": false,
       "free": true,
-      "price": 0,
+      "price": 10,
       "waitlist": true,
       "view_counter": 0,
       "age_restriction": true,
@@ -276,7 +277,8 @@
       "sub_category": "1",
       "venue": 4,
       "capacity": 30,
-      "ticketsSold": 11
+      "ticketsSold": 11,
+      "gross": 110
     },
     {
       "id": 5,
