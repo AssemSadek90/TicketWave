@@ -256,9 +256,9 @@ const [endDate, setEndDate] = useState(new Date());
     const data = {
       Title: titleRef.current.value,
       name:titleRef.current.value,
-      Organizer: organizerRef.current.value,
-      EventType: eventTypeRef.current.value,
-      EventCategory: eventCategory,
+      organizer: organizerRef.current.value,
+      type: eventTypeRef.current.value,
+      category: eventCategory,
       subCategory: subCategory,
       Tags: tags,
       Location: location,
@@ -268,8 +268,8 @@ const [endDate, setEndDate] = useState(new Date());
       EndTime: endTime,
       DisplayStartTime: displayStart,
       DisplayEndTime: displayEndRef.current.checked,
-      TimeZone: timeZoneRef.current.value,
-      Language: languageRef.current.value,
+      timezone: timeZoneRef.current.value,
+      language: languageRef.current.value,
     };
     //   name: titleRef.current.value,
     //   summary: -1,
@@ -312,9 +312,9 @@ const [endDate, setEndDate] = useState(new Date());
    * Log form data to console
    * @param {number} data.id - The id of the event
    * @param {string} data.Title - The title of the event
-   * @param {string} data.Organizer - The organizer of the event
-   * @param {string} data.EventType - The type of the event
-   * @param {string} data.EventCategory - The category of the event
+   * @param {string} data.organizer - The organizer of the event
+   * @param {string} data.type - The type of the event
+   * @param {string} data.category - The category of the event
    * @param {string} data.subCategory - The subcategory of the event (if applicable)
    * @param {array} data.Tags - The tags associated with the event
    * @param {string} data.Location - The location of the event
@@ -324,20 +324,20 @@ const [endDate, setEndDate] = useState(new Date());
    * @param {string} data.EndTime - The end time of the event
    * @param {boolean} data.DisplayStartTime - Whether to display the start time of the event
    * @param {boolean} data.DisplayEndTime - Whether to display the end time of the event
-   * @param {string} data.TimeZone - The timezone of the event
-   * @param {string} data.Language - The language of the event
+   * @param {string} data.timezone - The timezone of the event
+   * @param {string} data.language - The language of the event
    */
 
     console.log(
       "Title: " +
         data.Title +
         "\nOrganizer: " +
-        data.Organizer +
-        (data.EventType !== "Type" ? "\nEvent Type: " + data.EventType : "") +
-        (data.EventCategory !== "Category"
-          ? "\nEvent Category: " + data.EventCategory
+        data.organizer +
+        (data.type !== "Type" ? "\nEvent Type: " + data.type : "") +
+        (data.category !== "Category"
+          ? "\nEvent Category: " + data.category
           : "") +
-        (data.subCategory !== "Sub Category" && data.EventCategory !== 'Other'
+        (data.subCategory !== "Sub Category" && data.category !== 'Other'
           ? "\nSub Category: " + data.subCategory
           : "") +
         (data.Tags.length > 0 ? "\nTags: " + data.Tags : "") +
@@ -357,9 +357,9 @@ const [endDate, setEndDate] = useState(new Date());
         "\nDisplay End Time: " +
         data.DisplayEndTime +
         "\nTimeZone: " +
-        data.TimeZone +
+        data.timezone +
         "\nLanguage: " +
-        data.Language
+        data.language
     );
 
     console.log(data);
