@@ -24,7 +24,7 @@ export default function Navbar() {
     </svg>
   );
   const [searchText, setSearchText] = useState('');
-  const email = getEmail();
+  const email = localStorage.getItem('userEmail');
   const navigate = useNavigate();
   function handleLogOut() {
     const accessToken = localStorage.getItem('accessToken');
