@@ -15,9 +15,12 @@ import SecondSidebar from './SecondSidebar';
 import { useEffect } from 'react';
 import NavPage from '../components/NavPage';
 
+/** An array of objects that contains the name and icon of each menu item.
+@typedef {Array.<{name: string, icon: React.ReactNode}>} IconArray
+*/
 const icons = [
   {
-    name: 'home',
+    name: 'Events',
     icon: <FaHome />,
   },
   {
@@ -50,18 +53,32 @@ const icons = [
   },
 ];
 
+/** Sidebar component that displays a list of menu items with icons.
+@param {Object} props - The props object that contains the visible and showSecond boolean values.
+@param {boolean} props.visible - A boolean value that determines whether the sidebar is visible or not.
+@param {boolean} props.showSecond - A boolean value that determines whether the second sidebar is shown or not.
+@returns {JSX.Element} A JSX element that represents the Sidebar component.
+*/
 const Sidebar = ({ visible, showSecond }) => {
   const [activeIcon, setActiveIcon] = useState(null);
   const [isShown, setIsShown] = useState(true);
   //   const [activedIcon, setActivedIcon] = useState(null);
 
+  /** The location object that represents the current URL path.
+@typedef {Object} LocationObject
+@property {string} pathname - The current URL path.
+*/
   const location = useLocation();
   const [currentUrl, setCurrentUrl] = useState(location.pathname);
 
+  /** Updates the current URL path state when the location pathname changes.
+@type {function} - A useEffect hook that updates the current URL path state when the location pathname changes.
+*/
   useEffect(() => {
     setCurrentUrl(location.pathname);
   }, [location.pathname]);
 
+  /** A useEffect hook that sets the isShown state to true if the showSecond prop is true. */
   useEffect(() => {
     if (showSecond === true) {
       setIsShown(true);
@@ -72,16 +89,18 @@ const Sidebar = ({ visible, showSecond }) => {
     // else if (currentUrl.includes('/Events' || "dashboard")) {
     //     setIsShown(true);
     //   }
-
     //   else setIsShown(false);
-
     //   isShowing(isShown)
   }, [showSecond]);
 
+  /** Handles the click event on a menu item icon and sets the active icon state.
+@param {string} name - The name of the menu item.
+*/
   const handleIconClick = (name) => {
     setActiveIcon(name);
   };
 
+  /** Handles the mouse leave event on a menu item icon and sets the active icon state to null.*/
   const handleIconLeave = () => {
     setActiveIcon(null);
   };

@@ -2,29 +2,111 @@ import React from "react";
 import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker';
 
-
+/** Renders a form for creating a promotional event
+@param {Object} onCancel - Function to cancel the form and return to previous screen
+@param {Object} onSubmit - Function to submit the form and create a new promotional event
+@param {Object} myData - Object containing existing promotional event data to pre-fill the form
+*/
 function CreatePromoForm({onCancel, onSubmit, myData}){
 
+  /** Function that updates the state for the 'id' variable
+@function setId
+@param {number} newId - A new value for the 'id' state variable
+@returns {void}
+*/
   const [id, setId] = useState(myData ? myData.id : Math.floor(Math.random() * 10000000));
-    const [codeName, setCodeName] = useState(myData ? myData.codeName : '')
-    const [names, setNames] = useState(myData ? myData.names : '')
-    const [ticketLimit, setTicketLimit] = useState(myData ? myData.ticketLimit : 'Unlimited')
-    const [isTicketLimit, setIsTicketLimit] = useState(myData ? myData.isTicketLimit : 0)
-    const [reveal, setReveal] = useState(myData ? myData.reveal : false);
+  /** Function that updates the state for the 'codeName' variable
+@function setCodeName
+@param {string} newCodeName - A new value for the 'codeName' state variable
+@returns {void}
+*/
+  const [codeName, setCodeName] = useState(myData ? myData.codeName : '')
+  /** Function that updates the state for the 'names' variable
+@function setNames
+@param {string} newNames - A new value for the 'names' state variable
+@returns {void}
+*/
+  const [names, setNames] = useState(myData ? myData.names : '')
+  /** Function that updates the state for the 'ticketLimit' variable
+@function setTicketLimit
+@param {string} newTicketLimit - A new value for the 'ticketLimit' state variable
+@returns {void}
+*/
+  const [ticketLimit, setTicketLimit] = useState(myData ? myData.ticketLimit : 'Unlimited')
+  /** Function that updates the state for the 'isTicketLimit' variable
+@function setIsTicketLimit
+@param {number} newIsTicketLimit - A new value for the 'isTicketLimit' state variable
+@returns {void}
+*/
+  const [isTicketLimit, setIsTicketLimit] = useState(myData ? myData.isTicketLimit : 0)
+  /** Function that updates the state for the 'reveal' variable
+@function setReveal
+@param {boolean} newReveal - A new value for the 'reveal' state variable
+@returns {void}
+*/
+  const [reveal, setReveal] = useState(myData ? myData.reveal : false);
 
-    const [promoStarts, setPromoStarts] = useState(myData ? myData.promoStarts : "Now");
-    const [promoEnds, setPromoEnds] = useState(myData ? myData.promoEnds : "When ticket sale ends");
-    const [startDate, setStartDate] = useState(myData ? myData.startDate : null);
-    const [startTime, setStartTime] = useState(myData ? myData.startTime : null);
-    const [endDate, setEndDate] = useState(myData ? myData.endDate : null);
-    const [endTime, setEndTime] = useState(myData ? myData.endTime : null);
-    const [codeType, setCodeType] = useState("");
+  /** Function that updates the state for the 'promoStarts' variable
+@function setPromoStarts
+@param {string} newPromoStarts - A new value for the 'promoStarts' state variable
+@returns {void}
+*/
+  const [promoStarts, setPromoStarts] = useState(myData ? myData.promoStarts : "Now");
+  /** Function that updates the state for the 'promoEnds' variable
+@function setPromoEnds
+@param {string} newPromoEnds - A new value for the 'promoEnds' state variable
+@returns {void}
+*/
+  const [promoEnds, setPromoEnds] = useState(myData ? myData.promoEnds : "When ticket sale ends");
+  /** Function that updates the state for the 'startDate' variable
+@function setStartDate
+@param {Date} newStartDate - A new value for the 'startDate' state variable
+@returns {void}
+*/
+  const [startDate, setStartDate] = useState(myData ? myData.startDate : null);
+  /** Function that updates the state for the 'startTime' variable
+@function setStartTime
+@param {string} newStartTime - A new value for the 'startTime' state variable
+@returns {void}
+*/
+  const [startTime, setStartTime] = useState(myData ? myData.startTime : null);
+  /** Function that updates the state for the 'endDate' variable
+@function setEndDate
+@param {Date} newEndDate - A new value for the 'endDate' state variable
+@returns {void}
+*/
+  const [endDate, setEndDate] = useState(myData ? myData.endDate : null);
+  /** Function that updates the state for the 'endTime' variable
+@function setEndTime
+@param {string} newEndTime - A new value for the 'endTime' state variable
+@returns {void}
+*/
+  const [endTime, setEndTime] = useState(myData ? myData.endTime : null);
+  /** Function that updates the state for the 'codeType' variable
+@function setCodeType
+@param {string} newCodeType
+@returns {void}
+*/
+  const [codeType, setCodeType] = useState("");
+  /** Function that updates the state for the 'discount' variable
+@function setDiscount
+@param {boolean} newDiscount - A new value for the 'discount' state variable
+@returns {void}
+*/
+  const [discount, setDiscount] = useState(myData ? myData.discount : false);
+  /** Function that updates the state for the 'applyCodeTo' variable
+@function setApplyCodeTo
+@param {string} newApplyCodeTo - A new value for the 'applyCodeTo' state variable
+@returns {void}
+*/
+  const [applyCodeTo, setApplyCodeTo] = useState(myData ? myData.applyCodeTo : "All Visible Tickets");
 
-    const [discount, setDiscount] = useState(myData ? myData.discount : false);
-
-    const [applyCodeTo, setApplyCodeTo] = useState(myData ? myData.applyCodeTo : "All Visible Tickets");
-
-
+/** Function that sets the start date and time to the current date and time if the 'promoStarts' state variable is set to 'Scheduled Time'
+@function useEffect
+@param {function} effect - A function to be executed after rendering
+@param {Array} dependencies - An array of dependencies for the effect
+@returns {void}
+*/
     useEffect(() => {
         if (promoStarts === 'Scheduled Time') {
             setStartDate(new Date());
@@ -32,7 +114,12 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         }
       }, [promoStarts]);
 
-
+/** Function that sets the end date and time to the current date and time if the 'promoEnds' state variable is set to 'Scheduled Time'
+@function useEffect
+@param {function} effect - A function to be executed after rendering
+@param {Array} dependencies - An array of dependencies for the effect
+@returns {void}
+*/
       useEffect(() => {
         if (promoEnds === 'Scheduled Time') {
             setEndDate(new Date());
@@ -40,7 +127,12 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         }
       }, [promoEnds]);
 
-
+/** Function that sets the 'codeType' state variable depending on the values of 'reveal' and 'discount' state variables
+@function useEffect
+@param {function} effect - A function to be executed after rendering
+@param {Array} dependencies - An array of dependencies for the effect
+@returns {void}
+*/
       useEffect(() => {
         if (reveal && discount){
           setCodeType("Reveals hidden tickets , Applies discount")
@@ -54,12 +146,13 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
 
       }, [reveal, discount])
 
-
+/** Function that handles the submission of form data
+@function submitHandler
+@param {Object} event - The event object that triggered the form submission
+@returns {void}
+*/
     function submitHandler(event){
         event.preventDefault();
-
-
-
 
         const data = {
           id: id,
@@ -93,26 +186,17 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         setEndTime(null)
         setApplyCodeTo(null)
         setDiscount(null)
-
         onCancel(true);
 
-
     };
-
-
 
     return(
         // <div>
         //     Create Promo Form
         //     <button onClick={() => {onCancel(true)}}>Cancel</button>
         // </div>
-
-
         <form style={{overflowY: 'auto', maxHeight: '100vh', width: '100%', overflowX: 'hidden', paddingRight: '1rem'}} onSubmit={submitHandler} >
-            <div style={{height: 'max-content', marginBottom: '7rem'}}>
-
-            
-
+            <div style={{height: 'max-content', marginBottom: '7rem'}}>      
 
 
 <div style={{display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #ccc'}}>
@@ -120,7 +204,6 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         Add Code
     </h2>
 </div>
-
 
 {/* ____________________________________________________________________________________________________________________ */}
 
@@ -141,10 +224,7 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         />
       </div>
 
-
       {/* _______________________________________________________________________________________________________________________________ */}
-
-
 
 <div style={{display: 'flex', flexDirection: 'row'}}>
       <div
@@ -169,8 +249,6 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                     </select>
                   </div>
 
-
-
                         {
                             ticketLimit === 'Limited to' && 
 
@@ -191,25 +269,14 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
           required
         />
         <span style={{color: "#ccc", fontSize: '0.7rem'}}>Tickets</span>
-
-
         
         </div>
         
       </div>
             }
-
                   </div>
 
-
                   <p style={{fontSize: 'small'}}>Total number of tickets that can be purchased with this code</p>
-
-
-
-
-
-
-
 
                   <div
                   style={{
@@ -243,11 +310,6 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                   </div>
                 </div>
 
-
-
-
-
-
                     <p>Discount amount (optional)</p>
                 <div className="inputContainer" style={{marginTop: '1rem', alignItems: 'center', display: 'flex', flexDirection: 'row'}}>
                 <span style={{color: "#ccc", fontSize: '0.7rem', paddingLeft: '1rem', paddingRight: '1rem'}}>$</span>
@@ -264,10 +326,6 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
     }}
         />
       </div>
-
-
-
-
 
                 <div>
                     <p style={{fontWeight: 'bold'}}>Promo code starts</p>
@@ -365,8 +423,6 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                     </label>
                   </div>
                 </div>
-
-                
 
                 {
                     promoStarts === 'Scheduled Time' && 
@@ -468,24 +524,6 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                
 <div>
                     <p style={{fontWeight: 'bold'}}>Promo code ends</p>
                 </div>
@@ -687,10 +725,7 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
                 <div style={{width: '100%', borderBottom: '1px solid #ccc'}}></div>
 
 
-
-
                 {/* ____________________________________________________________________________________________________________________ */}
-
 
                 
 <div>

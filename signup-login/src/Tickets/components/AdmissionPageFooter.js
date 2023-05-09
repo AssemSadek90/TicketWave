@@ -1,5 +1,9 @@
 import React from "react";
 
+/** Renders the footer component for the Admission Page
+@param {Function} onClick - A function to be called when the button is clicked
+@returns {JSX.Element} - The Admission Page footer component
+*/
 function AdmissionPageFooter({onClick}) {
   return (
     <div>

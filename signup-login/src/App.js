@@ -11,12 +11,15 @@ import PublishApp from './Publish/PublishApp';
 import Terms from './Log-in/TermsConditions/Terms';
 import ChangePassword from './Log-in/ChangePassword';
 import Tickets from './Tickets/Tickets';
+import Sidebar from './Tickets/Sidebar/Sidebar';
+import { useState } from 'react';
+import CreatorEvent from './EventsList/CreatorEvent';
 import NANavbar from './NavBar/NANavbar';
 import Search from './Search/Search';
 import ONavbar from './NavBar/OrganizationNav/ONavbar';
+import ProtectedRoutes from './Authorization/ProtectedRoutes';
+import Footer from './Footer/Footer';
 
-import Sidebar from './Tickets/Sidebar/Sidebar';
-import { useState } from 'react';
 /**
  * Renders the main application component.
  * @function
@@ -42,19 +45,17 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route
+          <Route path="/creator" element={<CreatorEvent />}></Route>
+          {/* <Route
             path="/home"
             Component={() => {
-              setPadding('5rem');
-              setVisible(true);
-              setShowSecondSidebar(false);
               return (
-                <div style={{ paddingLeft: '1rem', paddingRight: '1rem' }}>
+                <React.Fragment>
                   <Home />
-                </div>
+                </React.Fragment>
               );
             }}
-          />
+          /> */}
 
           <Route
             path="/basic-info"
@@ -64,10 +65,14 @@ function App() {
               setShowSecondSidebar(true);
               return (
                 <React.Fragment>
-                  <Sidebar showSecond={showSecondSidebar} visible={visible} />
-                  <div style={{ paddingLeft: padding, paddingBottom: '1rem' }}>
-                    <CreateEventForm />
-                  </div>
+                  <ProtectedRoutes>
+                    <Sidebar showSecond={showSecondSidebar} visible={visible} />
+                    <div
+                      style={{ paddingLeft: padding, paddingBottom: '1rem' }}
+                    >
+                      <CreateEventForm />
+                    </div>
+                  </ProtectedRoutes>
                 </React.Fragment>
               );
             }}
@@ -81,25 +86,34 @@ function App() {
               setShowSecondSidebar(true);
               return (
                 <React.Fragment>
-                  <Sidebar showSecond={showSecondSidebar} visible={visible} />
-                  <div style={{ paddingLeft: padding }}>
-                    <div
-                      style={{
-                        paddingTop: '1rem',
-                        paddingRight: '1rem',
-                        paddingBottom: '1rem',
-                      }}
-                    >
-                      <PublishApp />
+                  <ProtectedRoutes>
+                    <Sidebar showSecond={showSecondSidebar} visible={visible} />
+                    <div style={{ paddingLeft: padding }}>
+                      <div
+                        style={{
+                          paddingTop: '1rem',
+                          paddingRight: '1rem',
+                          paddingBottom: '1rem',
+                        }}
+                      >
+                        <PublishApp />
+                      </div>
                     </div>
-                  </div>
+                  </ProtectedRoutes>
                 </React.Fragment>
               );
             }}
           />
 
-          <Route path="/event-details" element={<EventDetails />} />
-          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/event-details/:eventId" element={<EventDetails />} />
+          <Route
+            path="/change-password"
+            element={
+              <ProtectedRoutes>
+                <ChangePassword />
+              </ProtectedRoutes>
+            }
+          />
           <Route path="/terms" element={<Terms />} />
           <Route path="/publish" element={<PublishApp />} />
           {/* <Route path="/basic-info" element={<CreateEventForm />} /> */}
@@ -107,23 +121,25 @@ function App() {
           <Route path="/navbar" element={<Navbar />} />
           <Route path="/" element={<CreateAccount />} />
           <Route path="/signin" element={<SignIn />} />
+
+          <Route
+            path="/*"
+            element={
+              <ProtectedRoutes>
+                <Tickets
+                  finalTickets={myfinalTicketData}
+                  finalSoldTickets={myfinalSoldTicketData}
+                  finalSoldTicketData={finalSoldTicketData}
+                  finalTicketData={finalTicketData}
+                />
+              </ProtectedRoutes>
+            }
+          />
           <Route path="/home" element={<Home />} />
           <Route path="/Navigation/*" element={<Tickets />} />
           <Route path="/test" element={<NANavbar />} />
           <Route path="/search" element={<Search />} />
           <Route path="/testt" element={<ONavbar />} />
-
-          <Route
-            path="/*"
-            element={
-              <Tickets
-                finalTickets={myfinalTicketData}
-                finalSoldTickets={myfinalSoldTicketData}
-                finalSoldTicketData={finalSoldTicketData}
-                finalTicketData={finalTicketData}
-              />
-            }
-          />
         </Routes>
       </Router>
     </div>

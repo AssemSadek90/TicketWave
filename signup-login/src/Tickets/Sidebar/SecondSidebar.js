@@ -5,6 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import CustomNavLink from '../UI/CustomNavLink';
 import CustomLink from '../UI/CustomLink';
 
+/** An array of objects representing the icons in the second sidebar.
+@typedef {Object[]} IconObject
+@property {string} IconObject.name - The name of the icon.
+@property {string} IconObject.title - The title of the icon.
+*/
 const icons = [
   {
     name: '/basic-info',
@@ -24,27 +29,70 @@ const icons = [
   },
 ];
 
+/** Represents the second sidebar component.
+@param {Object} props - The props object.
+@param {boolean} props.showSecond - A boolean value indicating whether to show the second sidebar or not.
+@returns {JSX.Element} - The JSX element representing the second sidebar component.
+*/
 const SecondSidebar = ({ showSecond }) => {
+  /** Represents the state of the active icon.
+@typedef {Object} ActiveIconState
+@property {string|null} ActiveIconState.activeIcon - The name of the active icon.
+@property {Function} ActiveIconState.setActiveIcon - The function to set the state of the active icon.
+*/
   const [activeIcon, setActiveIcon] = useState(null);
+  /** Represents the state of the options.
+@typedef {Object} OptionsState
+@property {boolean} OptionsState.options - The value indicating whether to show options or not.
+@property {Function} OptionsState.setOptions - The function to set the state of the options.
+*/
   const [options, setOptions] = useState(false);
+  /** Represents the state of the payment.
+@typedef {Object} PaymentState
+@property {boolean} PaymentState.payment - The value indicating whether to show payment or not.
+@property {Function} PaymentState.setPayment - The function to set the state of the payment.
+*/
   const [payment, setPayment] = useState(false);
+  /** Represents the state of the marketing.
+@typedef {Object} MarketingState
+@property {boolean} MarketingState.marketing - The value indicating whether to show marketing or not.
+@property {Function} MarketingState.setMarketing - The function to set the state of the marketing.
+*/
   const [marketing, setMarketing] = useState(false);
+  /** Represents the state of the manage.
+@typedef {Object} ManageState
+@property {boolean} ManageState.manage - The value indicating whether to show manage or not.
+@property {Function} ManageState.setManage - The function to set the state of the manage.
+*/
   const [manage, setManage] = useState(false);
 
+  /** Represents the navigate object from react-router-dom.
+@type {Object}
+@property {Function} history - The function to navigate to a new location.
+*/
   const history = useNavigate();
-
   //   const [activedIcon, setActivedIcon] = useState(null);
 
+  /** Sets the state of the active icon when an icon is clicked.
+@param {string} name - The name of the icon that was clicked.
+@returns {void}
+*/
   const handleIconClick = (name) => {
     setActiveIcon(name);
   };
 
+  /** Sets the state of the active icon to null when the mouse leaves the icon.
+@returns {void}
+*/
   const handleIconLeave = () => {
     setActiveIcon(null);
   };
 
+  /** Navigates to the home page.
+@returns {void}
+*/
   function CloseHandler() {
-    history('/home');
+    history('/Events');
   }
 
   //   const handleClick = (name) => {

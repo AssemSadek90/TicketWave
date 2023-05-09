@@ -5,7 +5,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
 
-export default function SocialShare(props) {
+export default function SocialShare(props, isMobile) {
   function handleFacebookShare() {
     const message = " ";
     let url = props.event.url;

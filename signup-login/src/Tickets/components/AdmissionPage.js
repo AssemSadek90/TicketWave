@@ -7,55 +7,99 @@ import AddTicketForm from "../forms/AddTicketForm";
 import AdmissionPageCard from "./AdmissionPageCard";
 import EventCapacity from "../forms/EventCapacity";
 
+/** Renders the Admission page component with given props
+@param {Object} props - Props for Admission page component
+@param {function} props.finalSubmission - Function to submit final data
+@param {function} props.Ticket - Function to calculate Ticket information
+@param {Array} props.finalData - Array of final data
+@param {number} props.finalCapacity - Final capacity number
+@param {Array} props.soldTicketData - Array of sold ticket data
+@returns {JSX.Element} Admission page component JSX element
+*/
 function AdmissionPage({finalSubmission, Ticket, finalData, finalCapacity, soldTicketData}) {
+
+  /** State to manage whether the form is open or not
+@type {[boolean, function]}
+*/
   const [formOpen, setFormOpen] = useState(false);
+  /** State to manage data of tickets
+@type {[Array, function]}
+*/
   const [data, setData] = useState(finalData ? finalData : []);
+  /** State to manage reverse data of tickets
+@type {[Array, function]}
+*/
   const [reverseData, setReverseData] = useState([]);
+  /** State to manage selected item of ticket
+@type {[Object, function]}
+*/
   const [selectedItem, setSelectedItem] = useState(null);
+  /** State to manage whether selected form is open or not
+@type {[boolean, function]}
+*/
   const [selectedFormOpen, setSelectedFormOpen] = useState(false);
+  /** State to manage whether the mouse is hovered or not
+@type {[boolean, function]}
+*/
   const [isHovered, setIsHovered] = useState(false);
+  /** State to manage whether the event form is open or not
+@type {[boolean, function]}
+*/
   const [eventForm, setEventForm] = useState(false);
+  /** State to manage whether the adder form is open or not
+@type {[boolean, function]}
+*/
   const [adderForm, setAdderForm] = useState(false); 
-  
- 
-
-
-
-
+  /** State to manage capacity of tickets
+@type {[number, function]}
+*/
   const [capacity, setCapacity] = useState(finalCapacity ? finalCapacity : 0); 
-  
+
+  /**Calls the Ticket function to calculate Ticket information on the data and capacity*/
   Ticket(data, capacity)
 
   // useEffect(() => {console.log(capacity)}, [capacity])
 
  useEffect(() => {
-
-  
   setReverseData(data.reverse())}, [data])
 
-
-
+  /** State to manage whether the dropdown is open or not
+@type {[boolean, function]}
+*/
   const [isOpen, setIsOpen] = useState(false);
 
+  /** Toggles the dropdown state.
+@function
+@name toggleDropdown
+@returns {void}
+*/
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
+  /** Closes the dropdown
+@param {Object} event - Event object
+*/
   const closeDropdown = (event) => {
       setIsOpen(false);
   };
 
 // useEffect(()=> {console.log(selectedItem)}, [selectedItem])
 
-
-  
+/** Handles the "Next" button click event to submit the final data with capacity.
+@function
+@name nextHandler
+@returns {void}
+*/
 function nextHandler(){
   const finalData={data, capacity}
   finalSubmission(finalData)
 }
 
+/** CSS for box shadow
+@type {string}
+*/
   const boxShadow = '0 2px 4px rgba(0, 0, 0, 0.2)';
-
 
 
   return (
