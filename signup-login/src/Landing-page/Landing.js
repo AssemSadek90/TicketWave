@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../NavBar/Navbar";
-import server from "../server";
-import DisplayEvents from "./DisplayEvents/Displayevents";
+import React, { useState, useEffect } from 'react';
+import Navbar from '../NavBar/Navbar';
+import server from '../server';
+import DisplayEvents from './DisplayEvents/Displayevents';
 import {
   getUsername,
   getEmail,
@@ -9,8 +9,8 @@ import {
   getLastName,
   getUserID,
   isValidSession,
-} from "../Credentials/Credentials";
-import "../App.css";
+} from '../Credentials/Credentials';
+import '../App.css';
 
 /**
  * Represents the Home component, which displays the main page of the application.
@@ -29,14 +29,14 @@ const Home = () => {
     // const accessToken = localStorage.getItem('accessToken');
     const requestOptions = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         // Authorization: `Bearer ${accessToken}`,
       },
     };
     server
       .get(`/events/list/`, requestOptions)
       .then((response) => {
-        const data = response.data;
+        const data = response.data.results;
         if (data) setEvents(data);
         console.log(data);
       })
@@ -53,7 +53,7 @@ const Home = () => {
         alt="Homepage header"
         srcSet="https://cdn.evbstatic.com/s3-build/fe/build/images/d3d4264123031b703a6942b9f48d2758-2_web_1919x543.jpg 1920w,https://cdn.evbstatic.com/s3-build/fe/build/images/c55f99382ac372e9b95ac3ba6f6c1821-2_4K_1920x544.jpg 1924w,"
         sizes="(max-width: 1920px) 1920px, 1924px"
-        style={{ backgroundColor: "#89A2BE", width: "100%", height: "auto" }}
+        style={{ backgroundColor: '#89A2BE', width: '100%', height: 'auto' }}
         loading="eager"
       ></img>
       <DisplayEvents id="event-container" eventsData={events} />
