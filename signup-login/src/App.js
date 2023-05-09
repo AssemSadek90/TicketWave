@@ -18,6 +18,7 @@ import NANavbar from './NavBar/NANavbar';
 import Search from './Search/Search';
 import ONavbar from './NavBar/OrganizationNav/ONavbar';
 import ProtectedRoutes from './Authorization/ProtectedRoutes';
+import Footer from './Footer/Footer';
 
 /**
  * Renders the main application component.
