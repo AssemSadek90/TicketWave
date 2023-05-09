@@ -76,20 +76,30 @@ const SecondNav = () => {
                           className="snipcss0-11-65-66"
                         >
                           <select
+                            id="dropdown-creator"
                             data-spec="filter-events-upcoming"
                             className="snipcss0-11-65-66 dropdown-creator"
                             onChange={handleOptionChange}
                           >
                             <option
+                              id="upcoming-events"
                               className="dropdown-creator"
                               value="upcoming"
                             >
                               Upcoming Events
                             </option>
-                            <option className="dropdown-creator" value="past">
+                            <option
+                              id="past-events"
+                              className="dropdown-creator"
+                              value="past"
+                            >
                               Past Events
                             </option>
-                            <option className="dropdown-creator" value="all">
+                            <option
+                              id="all-events"
+                              className="dropdown-creator"
+                              value="all"
+                            >
                               All Events
                             </option>
                           </select>
@@ -134,6 +144,7 @@ const SecondNav = () => {
       <div className="eds-show-up-md eds-g-cell eds-g-cell-2-12 snipcss0-3-15-74">
         <div className="create-event-creator snipcss0-4-74-75">
           <div
+            id="create-event-btn-creator"
             onClick={handleCreateEventClick}
             className=" eds-btn eds-btn--link eds-btn--fill snipcss0-5-75-76"
             style={{
