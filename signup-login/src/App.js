@@ -44,7 +44,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/creator" element={<CreatorEvent />}></Route>
-          {/* <Route
+          <Route
             path="/home"
             Component={() => {
               return (
@@ -53,7 +53,7 @@ function App() {
                 </React.Fragment>
               );
             }}
-          /> */}
+          />
 
           <Route
             path="/basic-info"
@@ -64,8 +64,10 @@ function App() {
               return (
                 <React.Fragment>
                   <Sidebar showSecond={showSecondSidebar} visible={visible} />
-                  <div style={{ paddingLeft: padding, paddingBottom: '1rem' }}>
-                    <CreateEventForm />
+                  <div style={{ paddingLeft: padding, paddingBottom: "1rem" }}>
+                    {" "}
+                    <ONavbar /> <CreateEventForm />
+
                   </div>
                 </React.Fragment>
               );
@@ -82,6 +84,8 @@ function App() {
                 <React.Fragment>
                   <Sidebar showSecond={showSecondSidebar} visible={visible} />
                   <div style={{ paddingLeft: padding }}>
+                    {" "}
+                    <ONavbar />{" "}
                     <div
                       style={{
                         paddingTop: '1rem',
