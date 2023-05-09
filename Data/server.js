@@ -82,8 +82,11 @@ const middlewares = jsonServer.defaults();
 server.use(jsonServer.bodyParser);
 server.use(middlewares);
 
+var event_ID = 0;
+
 server.post('/auth/signup', (req, res) => {
   const { username, password1, email } = req.body;
+  test = test + 1;
   const newUser = {
     id: Date.now(),
     username,
@@ -101,6 +104,7 @@ server.post('/auth/signup', (req, res) => {
     username: newUser.username,
     user: {
       pk: newUser.pk,
+      test: test,
     },
     // Include any additional user credentials you need
   };
@@ -284,6 +288,24 @@ server.get('/events/amount_of_tickets_sold/:event_id', (req, res) => {
   const ticketsSold = router.db.get('ticketsSold').get(event_id).value();
 
   res.json({ ticketsSold });
+});
+
+// Custom route handler for /events/create
+server.post('/events/create', (req, res) => {
+  const { event } = req.body;
+
+  // Generate an event ID
+  event_ID = event_ID + 1;
+  const eventId = event_ID;
+
+  // Add the event to the database
+  router.db
+    .get('events')
+    .push({ id: eventId, ...event })
+    .write();
+
+  // Return the event ID in the response
+  res.json({ id: eventId });
 });
 
 server.use(router);

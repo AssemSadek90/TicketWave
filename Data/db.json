@@ -20,6 +20,30 @@
       "pk": "1",
       "email": "ziad.m.ghanem02@gmail.com",
       "is_active": true
+    },
+    {
+      "id": 1683629042695,
+      "username": "AhmedGhanem",
+      "password1": "BNMbnm123",
+      "pk": "1",
+      "email": "ziad@ziad.com",
+      "is_active": true
+    },
+    {
+      "id": 1683629219279,
+      "username": "Ziadmido",
+      "password1": "fhsfaglfhgas",
+      "pk": "1",
+      "email": "ziad@ziad1.com",
+      "is_active": true
+    },
+    {
+      "id": 1683629269634,
+      "username": "BiboBsheer",
+      "password1": "hasgdjsafoiw",
+      "pk": "1",
+      "email": "ziad@ziad12.com",
+      "is_active": true
     }
   ],
   "eventsData": [
@@ -154,7 +178,6 @@
       }
     }
   ],
-
   "events": [
     {
       "id": 1,
