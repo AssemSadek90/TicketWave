@@ -4,6 +4,7 @@ import './EventsList.css';
 const EventsListItem = (props) => {
   const navigate = useNavigate();
   console.log(props.event.start);
+  //console.log(props.ticketsSold);
   // //const username = localStorage.getItem('userName');
   const start_date = new Date(props.event.start);
   const day = start_date.getDate();
@@ -15,6 +16,7 @@ const EventsListItem = (props) => {
 
   return (
     <div
+      id={`${props.id}`}
       onClick={handleEventClick}
       className="events-list-creator-item eds-g-group eds-list-item edit-list-item eds-align--space-between eds-l-pad-all-4 eds-l-mn-pad-hor-6 eds-l-md-pad-hor-6 eds-l-mw-pad-hor-6 eds-l-ln-pad-hor-6 eds-l-lg-pad-hor-6 eds-l-lw-pad-hor-6 snipcss-lLxHJ"
       data-spec="edit-list-item"
@@ -142,7 +144,7 @@ const EventsListItem = (props) => {
                           className="eds-align--sm-right eds-align--sn-right"
                           data-spec="event-list-item-sold"
                         >
-                          {props.soldTickets}/{props.capacity}
+                          {props.event.ticketsSold}/{props.event.capacity}
                         </p>
                         <div className="eds-show-up-mn">
                           <div>
@@ -174,7 +176,7 @@ const EventsListItem = (props) => {
                       data-spec="contents-grid-second-column"
                     >
                       <p data-spec="event-list-item-gross">
-                        ${props.soldTickets}
+                        ${props.event.ticketsSold}
                       </p>
                     </div>
                     <div className="eds-g-cell eds-g-cell-lg-4-12 eds-show-up-lg eds-l-pad-hor-0">

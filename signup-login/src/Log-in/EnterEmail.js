@@ -385,8 +385,10 @@ Handles email input change event
     server
       .post('/auth/signup/', user, requestOptions)
       .then((response) => {
+        console.log(response);
         const accessToken = response.data.access_token;
         const refreshToken = response.data.refresh_token;
+        console.log(accessToken);
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
         user.pk = response.data.user.pk;
@@ -577,7 +579,7 @@ Handles email input change event
           <img
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
-            style={{ height: '600px' }}
+            // style={{ height: '600px' }}
           ></img>
           {showTerms && (
             <div className="overlay-CP">
