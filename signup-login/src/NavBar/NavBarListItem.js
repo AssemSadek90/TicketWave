@@ -1,4 +1,5 @@
 import '../App.css';
+import styles from './Navbar.module.css';
 
 /**
  * A component for rendering a navigation bar list item.
@@ -11,11 +12,11 @@ import '../App.css';
  */
 export default function NavBarListItem(props) {
   return (
-    <li>
-      <span onClick={props.onClick}>
+    <li className={styles.navbar_li} id="navbar-li">
+      <a className={styles.navbar_a} href={props.path}>
         {props.children}
         <span>{props.title}</span>
-      </span>
+      </a>
     </li>
   );
 }

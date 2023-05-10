@@ -17,49 +17,36 @@ import { Navigate, useNavigate } from 'react-router-dom';
  * @return {JSX.Element} The rendered component.
  */
 export default function EventItem(props) {
-  const [eventId, seteventId] = useState(0);
+  const eventLink = '/event-details/' + props.event.id;
 
-  /**
-   * Updates local storage with the current `eventId` state and navigates
-   * to the event details page.
-   */
-  useEffect(() => {
-    localStorage.setItem('EventId', eventId);
-    navigate('/event-details');
-  }, [eventId]);
-  const navigate = useNavigate();
-
-  /**
-   * Updates the `eventId` state with the ID of the clicked event.
-   */
-  function handleClick() {
-    seteventId(props.event.id);
-  }
   return (
-    <div
-      onClick={() => handleClick()}
-      id="event-element"
-      className={styles.event_element}
-    >
-      <svg
-        id="event-poster"
-        className={styles.event_image}
-        width="100%"
-        height="50%"
-      >
-        <image href={props.event.path} width="100%" height="100%" />
-      </svg>
-      <div id="event-details" className={styles.event_details}>
-        <p id="event-detail-1" className={styles.event_detail_1}>
-          {props.event.start}
-        </p>
-        <p id="event-detail-2" className={styles.event_details_2}>
-          {props.event.id}
-        </p>
-        <p id="event-detail-3" className={styles.event_detail_3}>
-          {props.event.organizer}
-        </p>
-      </div>
+    <div id="event-element" className={styles.event_element}>
+      <a href={eventLink}>
+        <svg
+          id="event-poster"
+          className={styles.event_image}
+          width="100%"
+          height="50%"
+        >
+          <image href={props.event.path} width="100%" height="100%" />
+        </svg>
+        <div id="event-details" className={styles.event_details}>
+          <p id="event-detail-1" className={styles.event_detail_1}>
+            {props.event.name.slice(0, 24)}
+            {props.event.name[24] && '...'}
+          </p>
+          <p id="event-detail-2" className={styles.event_details_2}>
+            {props.event.id}
+          </p>
+          <p id="event-detail-3" className={styles.event_detail_3}>
+            {props.event.organizer}
+          </p>
+          <p id="event-detail-3" className={styles.event_detail_4}>
+            {props.event.description.slice(0, 24)}
+            {props.event.description[24] && '...'}
+          </p>
+        </div>
+      </a>
     </div>
   );
 }

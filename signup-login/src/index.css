@@ -17,3 +17,7 @@ code {
 * {
   box-sizing: border-box;
 }
+
+.no-underline:hover {
+  text-decoration: none;
+}

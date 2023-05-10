@@ -6,10 +6,17 @@ import { Link } from 'react-router-dom';
 //import axios from 'axios';
 import './Log-in-styling/Login.css';
 import server from '../server';
+import {
+  isValidSession,
+  getCredentials,
+  getUserID,
+} from '../Credentials/Credentials';
 //import GoogleIcon from './Google_G_Logo.png';
 //import FacebookIcon from '../EventDetails/Facebook.png';
 //import { ReactComponent as GoogleIcon } from '.../google-icon.svg';
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import GoogleLogin from './GoogleSignIn';
+import Footer from '../Footer/Footer';
 
 /**
  * A React component for creating an account.
@@ -205,7 +212,7 @@ Handles email input change event
       .get(`/users/email/${user.email}/`, requestOptions)
       .then((response) => {
         console.log(response);
-        setIsLoading(false);
+        // setIsLoading(false);
         if (response.data.username.length > 0) {
           setUserExists(true);
           //user.email = response.data.email;
@@ -224,9 +231,28 @@ Handles email input change event
               localStorage.setItem('accessToken', accessToken);
               localStorage.setItem('refreshToken', refreshToken);
               console.log(response.data);
-              navigate('/home');
+              isValidSession();
+              getUserID();
+              //navigate('/home');
             })
-            .catch((error) => console.log(error));
+            .then(() => {
+              getCredentials();
+            })
+            .then(() => {
+              const isValidSession = localStorage.getItem('isValidSession');
+              console.log(localStorage.getItem('userName'));
+              console.log(isValidSession);
+              if (isValidSession === 'true') {
+                setIsLoading(false);
+                navigate('/home');
+              } else {
+                setIsLoading(false);
+              }
+            })
+            .catch((error) => {
+              console.log('error', error);
+              setIsLoading(false);
+            });
         } else {
           setUserExists(false);
           setInvalidFields(true);
@@ -296,7 +322,10 @@ Handles email input change event
   @return {JSX.Element}
   */
   return (
-    <div className="container-fluid">
+    <div
+      className="container-fluid"
+      style={{ paddingRight: 0, paddingLeft: 0 }}
+    >
       <div className="row">
         <div className="col-md-6 split-container-primary">
           <div className="split-container-content">
@@ -369,9 +398,12 @@ Handles email input change event
                       Forgot Password?
                     </Link>
                   </p>
-                  <p>
-                    <Link to="/change-password">Change Password</Link>
-                  </p>
+                  <a
+                    style={{ textAlign: 'center' }}
+                    href="https://ticketwave.me/api/google/login/login"
+                  >
+                    Sign in with Google
+                  </a>
                 </div>
                 <div id="signInDiv">
                   {/* <GoogleLogin
@@ -391,9 +423,11 @@ Handles email input change event
           <img
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
+            // style={{ height: '700px' }}
           ></img>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

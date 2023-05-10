@@ -1,47 +1,171 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import "../Tickets.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import "./AddTicketForm.css";
-
-// your code here
+import server from '../../server';
 
 
+/** A form component for adding tickets
+@param {Function} onCancel - Function to handle canceling the form
+@param {Function} onSubmit - Function to handle submitting the form
+@param {Array} myData - An array of data for the tickets
+@returns {JSX.Element} - The AddTicketForm component
+*/
 function AddTicketForm({onCancel, onSubmit, myData}) {
 
-  // console.log(myData);
+// console.log(myData);
 
-
-  const [id, setId] = useState(myData ? myData.id : Math.floor(Math.random() * 10000000));
+/** State hook to manage the ID of the ticket.
+@type {[number, function]}
+*/
+const [id, setId] = useState(myData ? myData.id : Math.floor(Math.random() * 10000000));
+/** State hook to manage the name of the ticket.
+@type {[string, function]}
+*/
 const [name, setName] = useState(myData ? myData.name : "");
+/** State hook to manage the quantity of the ticket.
+@type {[string, function]}
+*/
 const [quantity, setQuantity] = useState(myData ? myData.quantity : '');
+/** State hook to manage the count of the ticket.
+@type {[number, function]}
+*/
 const [count, setCount] = useState(myData ? myData.count : 0);
+/** State hook to manage the price of the ticket.
+@type {[string, function]}
+*/
 const [price, setPrice] = useState(myData ? myData.price : '');
+/** State hook to manage the navigation button for the ticket.
+@type {[string, function]}
+*/
 const [navButton, setNavButton] = useState('Paid');
+
+
+
+/** State hook for the start date.
+@type {[Date, function]}
+@type {Date|null}
+@param {Date|null} [myData.startDate=null] The initial start date value.
+@return {[Date, function]} A tuple containing the current start date and a function to update it.
+*/
 const [startDate, setStartDate] = useState(myData ? myData.startDate : null);
+/** State hook for start time of an event
+@typedef {Object} StartTimeState
+@property {string} startTime - the start time of the event
+@property {function} setStartime - a function to update the start time of the event
+@type {[StartTimeState]}
+*/
 const [startTime, setStartTime] = useState(myData ? myData.startTime : null);
+/** Represents the end date of an event.
+@typedef {Date} EndDate
+@typedef {Date|null} EndDateState
+@type {EndDateState}
+*/
 const [endDate, setEndDate]  = useState(myData ? myData.endDate : null);
+/** State hook for end time of an event
+@typedef {Object} EndTimeState
+@property {string} endTime - the end time of the event
+@property {function} setEndime - a function to update the end time of the event
+@type {[EndTimeState]}
+*/
 const [endTime, setEndime] = useState(myData ? myData.endTime : null);
+
+
+/** This function initializes and sets the initial state for various data variables based on the provided myData object.
+@param {Object} myData - An object containing data for initializing various state variables.
+@param {string|null} myData.availability - A string representing the availability of a product.
+@param {boolean} myData.advancedSettings - A boolean value indicating whether advanced settings are enabled or not.
+@param {boolean|null} myData.showTicketSale - A boolean value indicating whether to show ticket sale information or not.
+@param {string|null} myData.description - A string representing the description of a product.
+@returns {void} This function doesn't return anything but initializes and sets the state for various data variables.
+/ function initializeDataState(myData) {/*
+
+/** The current availability of the product.
+@type {string|null}
+*/
 const [availability, setAvailability] = useState(myData ? myData.availability : null);
-
+/** A boolean value indicating whether advanced settings are enabled or not.
+@type {boolean}
+*/
 const [advancedSettings, setAdvancedSettings] = useState(myData ? myData.advancedSettings : false);
+/** A boolean value indicating whether to show ticket sale information or not.
+@type {boolean|null}
+*/
 const [showTicketSale, setShowTicketSale] = useState(myData ? myData.showTicketSale : null);
+/** A string representing the description of the product.
+@type {string|null}
+*/
 const [description, setDescription] = useState(myData ? myData.description : null);
+
+/**This function initializes and sets the initial state for various data variables based on the provided myData object.
+@param {Object} myData - An object containing data for initializing various state variables.
+@param {number|null} myData.descriptionCount - A number representing the count of the product description.
+@param {boolean|null} myData.Visibility - A boolean value indicating the visibility status of the product.
+@param {Date|null} myData.startShowingDate - A Date object representing the start showing date of the product.
+@param {Date|null} myData.startShowingTime - A Date object representing the start showing time of the product.
+@param {Date|null} myData.endShowingDate - A Date object representing the end showing date of the product.
+@returns {void} This function doesn't return anything but initializes and sets the state for various data variables.
+*/
+
+/** The count of the product description.
+@type {number|null}
+*/
 const [descriptionCount, setDescriptionCount] = useState(myData ? myData.descriptionCount : null);
+/** A boolean value indicating the visibility status of the product.
+@type {boolean|null}
+*/
 const [Visibility, setVisibility] = useState(myData ? myData.Visibility : null);
-
+/** A Date object representing the start showing date of the product.
+@type {Date|null}
+*/
 const [startShowingDate, setStartShowingDate] = useState(myData ? myData.startShowingDate : null);
+/** A Date object representing the start showing time of the product.
+@type {Date|null}
+*/
 const [startShowingTime, setStartShowingTime] = useState(myData ? myData.startShowingTime : null);
+/** A Date object representing the end showing date of the product.
+@type {Date|null}
+*/
 const [endShowingDate, setEndShowingDate] = useState(myData ? myData.endShowingDate : null);
+
+/**
+@param {Object} myData - An object containing data for initializing various state variables.
+@param {number|null} myData.endShowingTime - A number representing the end showing time of the product.
+@param {number|null} myData.minimumQuantity - A number representing the minimum quantity of the product.
+@param {number|null} myData.maximumQuantity - A number representing the maximum quantity of the product.
+@param {string|null} myData.qtyError - A string representing the error message related to quantity validation.
+@param {string|null} myData.salesChannel - A string representing the sales channel of the product.
+@param {boolean|null} myData.eTicket - A boolean value indicating whether the product is an eTicket or not.
+@param {boolean|null} myData.willCall - A boolean value indicating whether the product can be picked up or not.
+ */
+/** A number representing the end showing time of the product.
+@type {number|null}
+*/
 const [endShowingTime, setEndShowingTime] = useState(myData ? myData.endShowingTime : null);
-
+/** A number representing the minimum quantity of the product.
+@type {number|null}
+*/
 const [minimumQuantity, setMinimumQuantity] = useState(myData ? myData.minimumQuantity : null);
+/** A number representing the maximum quantity of the product.
+@type {number|null}
+*/
 const [maximumQuantity, setMaximumQuantity] = useState(myData ? myData.maximumQuantity : null);
+/** A string representing the error message related to quantity validation.
+@type {string|null}
+*/
 const [qtyError, setQtyError] = useState(null);
-
+/** A string representing the sales channel of the product.
+@type {string|null}
+*/
 const [salesChannel, setSalesChannel] = useState(myData ? myData.salesChannel : null);
-
+/** A boolean value indicating whether the product is an eTicket or not.
+@type {boolean|null}
+*/
 const [eTicket, setETicket] = useState(myData ? myData.eTicket : null);
+/** A boolean value indicating whether the product can be picked up or not.
+@type {boolean|null}
+*/
 const [willCall, setWillCall] = useState(myData ? myData.willCall : null);
 
 
@@ -73,13 +197,20 @@ const [willCall, setWillCall] = useState(myData ? myData.willCall : null);
   // const [eTicket, setETicket] = useState(null);
   // const [willCall, setWillCall] = useState(null);
 
+/** A boolean value indicating whether the form is closed or not.
+@type {boolean}
+*/
+const [formClosed, setFormClosed] = useState(false);
 
-  const [formClosed, setFormClosed] = useState(false);
+/**This function sets the availability variable to 'Date & Time' using useEffect.
+@returns {void} This function doesn't return anything but sets the availability variable to 'Date & Time' using useEffect.
+*/
+useEffect(() => {setAvailability('Date & Time')},[])
 
-
-  useEffect(() => {setAvailability('Date & Time')},[])
-
-
+/** This function updates the start and end dates and times based on the availability state variable using useEffect.
+@returns {void} This function doesn't return anything but updates the start and end dates and times based on the availability state variable using useEffect.
+/ function updateDatesAndTimes() { /*
+This useEffect updates the start and end dates and times based on the availability state variable after every re-render. */
 useEffect(() => {
   if (availability === 'Date & Time') {
     setStartDate(new Date());
@@ -96,7 +227,10 @@ useEffect(() => {
   
 }, [availability]);
 
-
+/**This function updates the state variables based on the advancedSettings state variable using useEffect.
+@returns {void} This function doesn't return anything but updates the state variables based on the advancedSettings state variable using useEffect.
+/function updateAdvancedSettings() { /*
+This useEffect updates the state variables based on the advancedSettings state variable after every re-render. */
 useEffect(() => {
   if (advancedSettings) {
     setShowTicketSale(false);
@@ -113,7 +247,9 @@ useEffect(() => {
   }
 }, [advancedSettings]);
 
-
+/**This function updates the start and end showing dates based on the Visibility state variable using useEffect.
+@returns {void} This function doesn't return anything but updates the start and end showing dates based on the Visibility state variable using useEffect.
+/function updateShowingDates() {*/
 useEffect(() => {
   if (Visibility === 'Custom Schedule') {
     setStartShowingDate(new Date());
@@ -122,23 +258,23 @@ useEffect(() => {
 }, [Visibility]);
 
 
-
-
-
-
+/** Function to handle form submission.
+@param {Object} event - The form submission event.
+@returns {void}
+*/
 function submitHandler(event){
   event.preventDefault();
 
   const data = {
     id: id,
     name: name,
-    quantity: quantity,
+    capacity: quantity,
     count: count,
     price: price,
-    startDate: startDate,
-    startTime: startTime,
-    endDate: endDate,
-    endTime: endTime,
+    SalesStart: startDate,
+    StartTime: startTime,
+    SalesEnd: endDate,
+    EndTime: endTime,
     availability: availability,
     advancedSettings: advancedSettings,
     showTicketSale: showTicketSale,
@@ -150,15 +286,15 @@ function submitHandler(event){
     endShowingDate: endShowingDate,
     endShowingTime: endShowingTime,
     minimumQuantity: minimumQuantity,
-    maximumQuantity: maximumQuantity,
+    TicketLimit: maximumQuantity,
     salesChannel: salesChannel,
     eTicket: eTicket,
-    willCall: willCall
+    willCall: willCall,
+    chosenQuantity: 0
   }
-
   onSubmit(data);
 
-
+  // Reset form values
   setName('');
   setQuantity('');
   setCount(0);
@@ -184,13 +320,28 @@ function submitHandler(event){
   setId(Math.floor(Math.random() * 10000000));
 
   onCancel(true);
-
-
-
-
+  console.log(data);
+  handleTicket(data);
 
 }
 
+const handleTicket = (data) => {
+
+  const accessToken = localStorage.getItem("accessToken")
+  const requestOptions = {
+    headers: {
+      'Content-Type': 'application/json',
+       Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  
+
+  server
+    // .post('/events/create/', data, requestOptions)
+    .post('/tickets/', JSON.stringify(data), requestOptions)
+    .then((response) => console.log(response.data))
+    .catch((error) => console.log(error));
+};
 
   return (
     <form style={{overflowY: 'auto', maxHeight: '100vh', width: '100%', overflowX: 'hidden', paddingRight: '1rem'}} onSubmit={submitHandler} >
@@ -216,6 +367,7 @@ function submitHandler(event){
 
 
               <button
+                id="add-ticket-form-paid"
                 type="button"
                 className={
                     navButton === "Paid"
@@ -230,6 +382,7 @@ function submitHandler(event){
               </button>
 
               <button
+                id="add-ticket-form-free"
                 type="button"
                 className={
                     navButton === "Free"
@@ -241,7 +394,7 @@ function submitHandler(event){
               </button>
 
               <button
-              
+                id="add-ticket-form-donation"
                 type="button"
                 className={
                     navButton === "Donation"
@@ -260,9 +413,9 @@ function submitHandler(event){
       <div className="inputContainer" style={{marginTop: '1rem'}}>
         <label className="inputLabel">Name</label>
         <input
+          id="add-ticket-form-name"
           style={{ fontSize: "0.85rem" }}
           type="text"
-          id="eventName"
           maxLength="50"
           name="eventName"
           value={name}
@@ -287,9 +440,9 @@ function submitHandler(event){
       <div className="inputContainer">
         <label className="inputLabel">Available Quantity</label>
         <input
+          id="add-ticket-form-quantity"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="quantity"
           name="quantity"
           value={quantity}
           onChange={(e) => {
@@ -315,9 +468,9 @@ function submitHandler(event){
         
         <label className="inputLabel">Price</label>
         <input
+          id="add-ticket-form-price"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="price"
           name="price"
           value={price}
           onChange={(e) => {
@@ -348,9 +501,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">When are tickets available?</label>
                     <select
-                      style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
+                      id="add-ticket-form-availability"
+                      style={{ maxHeight: "5rem", outline: 'none', border: 'none', fontSize: 'small' }}
                       onChange={(a) => setAvailability(a.target.value)}
-                      id="availability"
                       name="availability"
                       value={availability}
                     >
@@ -385,6 +538,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Sales start</label>
                     <DatePicker
+                      id="add-ticket-form-sales-start"
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                       
@@ -401,9 +555,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Start Time</label>
                     <select
+                      id="add-ticket-form-start-time"
                       style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
                       onChange={(date) => setStartTime(date.target.value)}
-                      id="startTime"
                       name="startTime"
                       value={startTime}
                     >
@@ -477,6 +631,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Sales end</label>
                     <DatePicker
+                      id="add-ticket-form-sales-end"
                       selected={endDate}
                       onChange={(date) => setEndDate(date)}
                     />
@@ -492,9 +647,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">End Time</label>
                     <select
+                      id="add-ticket-form-end-time"
                       onChange={(date) => setEndime(date.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={endTime}
                     >
@@ -578,7 +733,8 @@ function submitHandler(event){
 
                     
                     </div>
-                    <div style={{marginBottom: '8rem'}}>
+                    <div 
+                    style={{marginBottom: '8rem'}}>
 
 
                       
@@ -588,7 +744,7 @@ function submitHandler(event){
                     {
                         advancedSettings && 
                         
-                    <React.Fragment>
+                    <React.Fragment id="add-ticket-form-advanced-settings">
 
 
 <div
@@ -601,9 +757,9 @@ function submitHandler(event){
                   }}
                 >
                   <input
+                    id="add-ticket-form-show-ticket-sale"
                     onClick={() => {setShowTicketSale(!showTicketSale)}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -632,9 +788,9 @@ function submitHandler(event){
 <div className="inputContainer" style={{marginTop: '1rem'}}>
         <label className="inputLabel">Description</label>
         <textarea
+          id="add-ticket-form-description"
           style={{ fontSize: "0.85rem" }}
           type="text"
-          id="description"
           maxLength="2500"
           name="description"
           value={description}
@@ -669,9 +825,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Visibility</label>
                     <select
+                      id="add-ticket-form-Visibility"
                       onChange={(e) => setVisibility(e.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={Visibility}
                     >
@@ -687,7 +843,7 @@ function submitHandler(event){
                     {
                         Visibility === 'Custom Schedule' && 
 
-                    <React.Fragment>
+                    <React.Fragment id="add-ticket-form-custom-schedule">
                         <div
                   style={{
                     flexDirection: "row",
@@ -705,6 +861,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Start showing on</label>
                     <DatePicker
+                      id="add-ticket-form-custom-st-date"
                       selected={startShowingDate}
                       onChange={(date) => setStartShowingDate(date)}
                       
@@ -721,9 +878,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Start Time</label>
                     <select
+                      id="add-ticket-form-custom-st-time"
                       style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
                       onChange={(date) => setStartShowingTime(date.target.value)}
-                      id="startTime"
                       name="startTime"
                       value={startShowingTime}
                     >
@@ -797,6 +954,7 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Stop Showing on</label>
                     <DatePicker
+                      id="add-ticket-form-custom-stop-date"
                       selected={endShowingDate}
                       onChange={(date) => setEndShowingDate(date)}
                     />
@@ -812,9 +970,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">End Time</label>
                     <select
+                      id="add-ticket-form-custom-end-time"
                       onChange={(date) => setEndShowingTime(date.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={endShowingTime}
                     >
@@ -879,9 +1037,9 @@ function submitHandler(event){
                   <div className="inputContainer" style={{marginRight: '10%', width:'45%'}}>
         <label className="inputLabel">Minimum quantity</label>
         <input
+          id="add-ticket-form-minimum"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="quantity"
           name="quantity"
           value={minimumQuantity}
           onChange={(e) => {
@@ -894,9 +1052,9 @@ function submitHandler(event){
       <div className="inputContainer" style={{width:'45%'}}>
         <label className="inputLabel">Maximum quantity</label>
         <input
+          id="add-ticket-form-maximum"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="quantity"
           name="quantity"
           value={maximumQuantity}
           onChange={(e) => {
@@ -931,9 +1089,9 @@ function submitHandler(event){
                   >
                     <label className="inputLabel">Sales Channel</label>
                     <select
+                      id="add-ticket-form-channel"
                       onChange={(e) => setSalesChannel(e.target.value)}
                       style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
-                      id="endTime"
                       name="endTime"
                       value={salesChannel}
                     >
@@ -955,9 +1113,9 @@ function submitHandler(event){
                   }}
                 >
                   <input
+                    id="add-ticket-form-eticket"
                     onClick={() => {setETicket(!eTicket)}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -989,9 +1147,9 @@ function submitHandler(event){
                   }}
                 >
                   <input
+                    id="add-ticket-form-willcall"
                     onClick={() => {setWillCall(!willCall)}}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -1041,7 +1199,7 @@ function submitHandler(event){
     <div type="cancel" onClick={() => {
         setFormClosed(!formClosed)
         onCancel(formClosed);}} style={{height: '3rem', width: '45%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Cancel</div>
-    <button type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
+    <button id="add-ticket-form-submit" type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
     </div>
   
 </div>

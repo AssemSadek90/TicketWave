@@ -6,6 +6,12 @@ import { Link } from 'react-router-dom';
 import './Log-in-styling/Login.css';
 import Terms from './TermsConditions/Terms';
 import server from '../server';
+import {
+  getCredentials,
+  getUserID,
+  isValidSession,
+} from '../Credentials/Credentials';
+import Footer from '../Footer/Footer';
 
 /**
  * A React component for creating an account.
@@ -379,12 +385,19 @@ Handles email input change event
     server
       .post('/auth/signup/', user, requestOptions)
       .then((response) => {
+        console.log(response);
         const accessToken = response.data.access_token;
         const refreshToken = response.data.refresh_token;
+        console.log(accessToken);
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
         user.pk = response.data.user.pk;
         console.log(user.pk);
+        isValidSession();
+        getUserID();
+      })
+      .then(() => {
+        getCredentials();
       })
       .then(() => {
         server
@@ -392,8 +405,18 @@ Handles email input change event
           .then((response) => {
             console.log(response);
           })
-          .then(navigateHome())
+          // .then(navigateHome())
           .catch((error) => console.log(error));
+      })
+      .then(() => {
+        if (isValidSession === 'true') {
+          //setIsLoading(false);
+          navigate('/SignIn');
+        } else {
+          navigate('/SignIn');
+          alert('Please verify your email address before signing in.');
+          //setIsLoading(false);
+        }
       })
       .catch((error) => console.log(error));
   };
@@ -414,7 +437,10 @@ Handles email input change event
   @return {JSX.Element}
   */
   return (
-    <div className="container-fluid">
+    <div
+      className="container-fluid"
+      style={{ paddingRight: 0, paddingLeft: 0 }}
+    >
       <div className="row">
         <div className="col-md-6 split-container-primary">
           <div className="split-container-content">
@@ -553,6 +579,7 @@ Handles email input change event
           <img
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
+            // style={{ height: '600px' }}
           ></img>
           {showTerms && (
             <div className="overlay-CP">
@@ -566,6 +593,7 @@ Handles email input change event
           )}
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

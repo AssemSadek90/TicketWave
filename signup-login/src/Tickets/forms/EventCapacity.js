@@ -1,35 +1,42 @@
 import React from "react";
 import { useState } from "react";
 
-
+/** A component to display and handle the event capacity form
+@param {Object} props - The component's props
+@param {function} props.onCancel - A function to handle canceling the form
+@param {function} props.onSubmitCapacity - A function to handle submitting the form with the capacity data
+@returns {JSX.Element} - The event capacity form component
+*/
 function EventCapacity({onCancel, onSubmitCapacity}){
 
+/** The state of the capacity value entered in the form
+@type {number|string}
+*/
+const [capacity, setCapacity] = useState('');
+/** The state to track whether the form is closed or not
+@type {boolean}
+*/
+const [formClosed, setFormClosed] = useState(false);
 
-    const [capacity, setCapacity] = useState('');
-    const [formClosed, setFormClosed] = useState(false);
+/** A function to handle submitting the capacity form
+@param {Object} e - The event object
+*/
+function submitHandler(e){
+    e.preventDefault();
+    onSubmitCapacity(capacity);
+    onCancel(true);
 
-
-    function submitHandler(e){
-        e.preventDefault();
-        onSubmitCapacity(capacity);
-        onCancel(true);
-
-    }
-
-
+}
 
     return(
 
         <form style={{overflowY: 'auto', maxHeight: '100vh', width: '100%', overflowX: 'hidden', paddingRight: '1rem'}} onSubmit={submitHandler} >
-
-
 
 <div style={{display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #ccc'}}>
     <h2>
         Event Capacity
     </h2>
 </div>
-
 
 {/* ____________________________________________________________________________________________________________________ */}
 
@@ -42,9 +49,9 @@ function EventCapacity({onCancel, onSubmitCapacity}){
       <div className="inputContainer" style={{marginTop: '1rem'}}>
         <label className="inputLabel">Capacity</label>
         <input
+          id="event-capacity"
           style={{ fontSize: "0.85rem" }}
           type="number"
-          id="eventName"
           maxLength="50"
           name="eventName"
           value={capacity}
@@ -55,9 +62,6 @@ function EventCapacity({onCancel, onSubmitCapacity}){
           required
         />
       </div>
-
-
-
 
 
 <div className="mainButton"
@@ -80,17 +84,13 @@ function EventCapacity({onCancel, onSubmitCapacity}){
     <div type="cancel" onClick={() => {
         setFormClosed(!formClosed)
         onCancel(formClosed);}} style={{height: '3rem', width: '45%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Cancel</div>
-    <button type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
+    <button id="event-capacity-submit" type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
     </div>
   
 </div>
 
-     
-
-
     </form>
     )
-
 
 };
 

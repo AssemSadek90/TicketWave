@@ -2,9 +2,9 @@
     display: flex;
     align-items: center;
     height: 50px;
-    width:fit-content;
     background-color: #dbdbdb46;
     margin-top: 1rem;
+    width: fit-content;
   }
   
   .tabs {
@@ -19,6 +19,7 @@
     cursor: pointer;
     position: relative;
     color: #666;
+    width: max-content;
   }
   
   .tab:hover {
@@ -45,3 +46,9 @@
     background-color: #333;
   }
   
+  @media screen and (max-width: 850px){
+    .navbar{
+      width: 100%;
+      overflow-x: scroll;
+    }
+  }

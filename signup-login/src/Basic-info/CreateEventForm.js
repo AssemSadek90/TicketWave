@@ -29,6 +29,8 @@ const CreateEventForm = () => {
   */
   const titleRef = useRef("");
 
+  
+
   /**
 A reference to the event organizer input field.
 @type {React.MutableRefObject}
@@ -88,6 +90,8 @@ A reference to the language input field.
 @type {React.MutableRefObject}
 */
 const languageRef = useRef("");
+
+
 
   
 
@@ -239,7 +243,8 @@ const [startDate, setStartDate] = useState(new Date());
  * @type {[object, function]} Array that contains the current date object and a function to update it.
  */
 const [endDate, setEndDate] = useState(new Date());
-  // ________________________________________________________________________________________________________________________________________________
+
+
 
   // SUBMIT HANDLING_________________________________________________________________________________________________________________________________
 
@@ -250,9 +255,10 @@ const [endDate, setEndDate] = useState(new Date());
     event.preventDefault();
     const data = {
       Title: titleRef.current.value,
-      Organizer: organizerRef.current.value,
-      EventType: eventTypeRef.current.value,
-      EventCategory: eventCategory,
+      name:titleRef.current.value,
+      organizer: organizerRef.current.value,
+      type: eventTypeRef.current.value,
+      category: eventCategory,
       subCategory: subCategory,
       Tags: tags,
       Location: location,
@@ -262,9 +268,41 @@ const [endDate, setEndDate] = useState(new Date());
       EndTime: endTime,
       DisplayStartTime: displayStart,
       DisplayEndTime: displayEndRef.current.checked,
-      TimeZone: timeZoneRef.current.value,
-      Language: languageRef.current.value,
+      timezone: timeZoneRef.current.value,
+      language: languageRef.current.value,
     };
+    //   name: titleRef.current.value,
+    //   summary: -1,
+    //   description: -1,
+    //   url: -1,
+    //   online_event:-1,
+    //   hide_start_date:displayStart,
+    //   hide_end_date:displayEndRef.current.checked,
+    //   free:-1,
+    //   waitlist:-1,
+    //   status: -1,
+    //   view_counter:-1,
+    //   age_restriction:-1,
+    //   fully_booked:-1,
+    //   published:-1,
+    //   organizer:'organizerRef.current.value',
+    //   video_url:-1,
+    //   timezone:'timeZoneRef.current.value',
+    //   language:'languageRef.current.value',
+    //   listed:-1,
+    //   shareable:-1,
+    //   invite_only:-1,
+    //   show_remaining:-1,
+    //   capacity:-1,
+    //   capacity_is_custom:-1,
+    //   start: startDate + startTime,
+    //   end: endDate + endTime,
+    //   changed :-1,
+    //   created : -1,
+    //   owner:-1,
+    //   category:eventCategory,
+    //   venue:location,
+    // };
 
 
 
@@ -272,10 +310,11 @@ const [endDate, setEndDate] = useState(new Date());
 
     /**
    * Log form data to console
+   * @param {number} data.id - The id of the event
    * @param {string} data.Title - The title of the event
-   * @param {string} data.Organizer - The organizer of the event
-   * @param {string} data.EventType - The type of the event
-   * @param {string} data.EventCategory - The category of the event
+   * @param {string} data.organizer - The organizer of the event
+   * @param {string} data.type - The type of the event
+   * @param {string} data.category - The category of the event
    * @param {string} data.subCategory - The subcategory of the event (if applicable)
    * @param {array} data.Tags - The tags associated with the event
    * @param {string} data.Location - The location of the event
@@ -285,20 +324,20 @@ const [endDate, setEndDate] = useState(new Date());
    * @param {string} data.EndTime - The end time of the event
    * @param {boolean} data.DisplayStartTime - Whether to display the start time of the event
    * @param {boolean} data.DisplayEndTime - Whether to display the end time of the event
-   * @param {string} data.TimeZone - The timezone of the event
-   * @param {string} data.Language - The language of the event
+   * @param {string} data.timezone - The timezone of the event
+   * @param {string} data.language - The language of the event
    */
 
     console.log(
       "Title: " +
         data.Title +
         "\nOrganizer: " +
-        data.Organizer +
-        (data.EventType !== "Type" ? "\nEvent Type: " + data.EventType : "") +
-        (data.EventCategory !== "Category"
-          ? "\nEvent Category: " + data.EventCategory
+        data.organizer +
+        (data.type !== "Type" ? "\nEvent Type: " + data.type : "") +
+        (data.category !== "Category"
+          ? "\nEvent Category: " + data.category
           : "") +
-        (data.subCategory !== "Sub Category" && data.EventCategory !== 'Other'
+        (data.subCategory !== "Sub Category" && data.category !== 'Other'
           ? "\nSub Category: " + data.subCategory
           : "") +
         (data.Tags.length > 0 ? "\nTags: " + data.Tags : "") +
@@ -318,26 +357,33 @@ const [endDate, setEndDate] = useState(new Date());
         "\nDisplay End Time: " +
         data.DisplayEndTime +
         "\nTimeZone: " +
-        data.TimeZone +
+        data.timezone +
         "\nLanguage: " +
-        data.Language
+        data.language
     );
 
     console.log(data);
-    handleSignUp(data);
+    handleCreate(data);
+    
   }
 
   // SAVE TO DATABASE ________________________________________________________________________________________________________________________________
 
   
-  const handleSignUp = (data) => {
+  const handleCreate = (data) => {
+    const accessToken = localStorage.getItem("accessToken")
     const requestOptions = {
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+         Authorization: `Bearer ${accessToken}`,
+      },
     };
-
-    server
-      .post('/Events', data, requestOptions)
-      .then((response) => console.log(response.data))
+      
+    server.post('/events/create/', JSON.stringify(data), requestOptions)
+      .then((response) => {
+        console.log(response.data);
+        localStorage.setItem("Event_id", response.data.id);
+      })
       .catch((error) => console.log(error));
   };
 
@@ -479,11 +525,10 @@ const [endDate, setEndDate] = useState(new Date());
               Event Title *
             </label>
             <input
-              test-id="basic-info-title"
               ref={titleRef}
               style={{ fontSize: "0.85rem" }}
               type="text"
-              id="eventTitle"
+              id="basic-info-title"
               name="eventTitle"
               maxLength="75"
               value={value}
@@ -513,10 +558,9 @@ const [endDate, setEndDate] = useState(new Date());
           >
             <label className={classes.inputLabel}>Organizer</label>
             <input
-              test-id="basic-info-organizer"
+              id="basic-info-organizer"
               ref={organizerRef}
               type="text"
-              id="eventTitle"
               style={{ fontSize: "0.85rem" }}
               name="eventTitle"
               maxLength="75"
@@ -545,9 +589,8 @@ const [endDate, setEndDate] = useState(new Date());
             >
               <div className={classes["form-group"]}>
                 <select
-                  test-id="basic-info-type"
+                  id="basic-info-type"
                   ref={eventTypeRef}
-                  id="eventType"
                   name="eventType"
                   required
                 >
@@ -603,9 +646,8 @@ const [endDate, setEndDate] = useState(new Date());
                   onChange={(d) => {
                     setEventCategory(d.target.value);
                   }}
-                  id="eventCategory"
                   name="eventCategory"
-                  test-id="basic-info-eventcategory"
+                  id="basic-info-eventcategory"
                 >
                   <option value="Category">Category</option>
                   <option value="Auto, Boat and Air">Auto, Boat and Air</option>
@@ -651,9 +693,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory1"
+                    id="basic-info-subcategory1"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Country / Muncipal Government">Country / Muncipal Government</option>
@@ -682,9 +723,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory2"
+                    id="basic-info-subcategory2"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Medical">Medical</option>
@@ -710,9 +750,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory3"
+                    id="basic-info-subcategory3"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Adult">Adult</option>
@@ -742,9 +781,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory4"
+                    id="basic-info-subcategory4"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Dating">Dating</option>
@@ -768,9 +806,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory4"
+                    id="basic-info-subcategory4"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Acoustic">Acoustic</option>
@@ -818,9 +855,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory5"
+                    id="basic-info-subcategory5"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Ballet">Ballet</option>
@@ -856,9 +892,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory6"
+                    id="basic-info-subcategory6"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Agnosticism">Agnosticism</option>
@@ -895,9 +930,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory7"
+                    id="basic-info-subcategory7"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="After School Care">After School Care</option>
@@ -924,9 +958,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory8"
+                    id="basic-info-subcategory8"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="BioTech">BioTech</option>
@@ -955,9 +988,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory9"
+                    id="basic-info-subcategory9"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Channukah">Channukah</option>
@@ -988,9 +1020,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory10"
+                    id="basic-info-subcategory10"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Baseball">Baseball</option>
@@ -1020,9 +1051,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory11"
+                    id="basic-info-subcategory11"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Canoeing">Canoeing</option>
@@ -1049,9 +1079,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory12"
+                    id="basic-info-subcategory12"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Air">Air</option>
@@ -1074,9 +1103,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory13"
+                    id="basic-info-subcategory13"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Careers">Careers</option>
@@ -1112,9 +1140,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory14"
+                    id="basic-info-subcategory14"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Animal Welfare">Animal Welfare</option>
@@ -1141,9 +1168,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory15"
+                    id="basic-info-subcategory15"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="City/Town">City/Town</option>
@@ -1170,9 +1196,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory16"
+                    id="basic-info-subcategory16"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Alumni">Alumni</option>
@@ -1200,9 +1225,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory17"
+                    id="basic-info-subcategory17"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Accessories">Accessories</option>
@@ -1225,9 +1249,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory18"
+                    id="basic-info-subcategory18"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Adult">Adult</option>
@@ -1253,9 +1276,8 @@ const [endDate, setEndDate] = useState(new Date());
                     onChange={(d) => {
                       setSubCategory(d.target.value);
                     }}
-                    id="subCategory"
                     name="subCategory"
-                    test-id="basic-info-subcategory19"
+                    id="basic-info-subcategory19"
                   >
                     <option value="Sub Category">Sub Category</option>
                     <option value="Beer">Beer</option>
@@ -1307,10 +1329,9 @@ const [endDate, setEndDate] = useState(new Date());
                     Press Enter to add a tag.
                   </label>
                   <input
-                    test-id="basic-info-add-tag1"
+                    id="basic-info-add-tag1"
                     type="text"
                     style={{ fontSize: "0.85rem" }}
-                    id="eventTag"
                     name="eventTag"
                     maxLength="30"
                     placeholder="Add a tag"
@@ -1320,7 +1341,7 @@ const [endDate, setEndDate] = useState(new Date());
                   />
                 </div>
                 <button
-                  test-id="basic-info-add-tag2"
+                  id="basic-info-add-tag2"
                   type="tag"
                   onClick={handleAddTag}
                   style={{
@@ -1376,7 +1397,7 @@ const [endDate, setEndDate] = useState(new Date());
                     >
                       {tag}
                       <button
-                        test-id="basic-info-remove-tag"
+                        id="basic-info-remove-tag"
                         type="tag"
                         style={{
                           marginLeft: "5px",
@@ -1438,7 +1459,7 @@ const [endDate, setEndDate] = useState(new Date());
               }}
             >
               <button
-                test-id="basic-info-venue-button"
+                id="basic-info-venue-button"
                 type="button"
                 className={
                   myLocation === "Venue"
@@ -1507,9 +1528,8 @@ const [endDate, setEndDate] = useState(new Date());
                       }}
                     />
                     <input
-                      test-id="basic-info-location"
+                      id="basic-info-location"
                       type="text"
-                      id="venueLocation"
                       name="venueLocation"
                       maxLength="75"
                       required
@@ -1522,7 +1542,7 @@ const [endDate, setEndDate] = useState(new Date());
                   {suggestions.length > 0 && (
                     <div className={classes.selectContainer} ref={selectRef}>
                       <select
-                        test-id="basic-info-location-from-list"
+                        id="basic-info-location-from-list"
                         className={classes.select}
                         size={suggestions.length}
                       >
@@ -1577,7 +1597,7 @@ const [endDate, setEndDate] = useState(new Date());
               style={{ flexDirection: "row", display: "flex", width: "100%" }}
             >
               <button
-                test-id="basic-info-single-event"
+                id="basic-info-single-event"
                 type="button"
                 className={
                   date === "Single Event"
@@ -1592,7 +1612,7 @@ const [endDate, setEndDate] = useState(new Date());
               </button>
 
               <button
-                test-id="basic-info-recurring-event"
+                id="basic-info-recurring-event"
                 type="button"
                 className={
                   date === "Recurring Event"
@@ -1633,7 +1653,7 @@ const [endDate, setEndDate] = useState(new Date());
                   >
                     <label className={classes.inputLabel}>Event Starts</label>
                     <DatePicker
-                      test-id="basic-info-start-date"
+                      id="basic-info-start-date"
                       selected={startDate}
                       onChange={(date) => setStartDate(date)}
                     />
@@ -1649,10 +1669,9 @@ const [endDate, setEndDate] = useState(new Date());
                   >
                     <label className={classes.inputLabel}>Start Time</label>
                     <select
-                      test-id="basic-info-start-time"
+                      id="basic-info-start-time"
                       style={{ maxHeight: "5rem" }}
                       onChange={(date) => setStartTime(date.target.value)}
-                      id="startTime"
                       name="startTime"
                     >
                       <option value="12 AM">12:00 AM</option>
@@ -1725,7 +1744,7 @@ const [endDate, setEndDate] = useState(new Date());
                   >
                     <label className={classes.inputLabel}>Event Ends</label>
                     <DatePicker
-                      test-id="basic-info-end-date"
+                      id="basic-info-end-date"
                       selected={endDate}
                       onChange={(date) => setEndDate(date)}
                     />
@@ -1741,10 +1760,9 @@ const [endDate, setEndDate] = useState(new Date());
                   >
                     <label className={classes.inputLabel}>End Time</label>
                     <select
-                      test-id="basic-info-end-time"
+                      id="basic-info-end-time"
                       onChange={(date) => setEndime(date.target.value)}
                       style={{ maxHeight: "5rem" }}
-                      id="endTime"
                       name="endTime"
                     >
                       <option value="12 AM">12:00 AM</option>
@@ -1808,10 +1826,9 @@ const [endDate, setEndDate] = useState(new Date());
                   }}
                 >
                   <input
-                    test-id="basic-info-display-st-time"
+                    id="basic-info-display-st-time"
                     onChange={(date) => setDisplayStart(!displayStart)}
                     type="checkbox"
-                    id="displayStartTime"
                     name="displayStartTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -1845,10 +1862,9 @@ const [endDate, setEndDate] = useState(new Date());
                   }}
                 >
                   <input
-                    test-id="basic-info-display-end-time"
+                    id="basic-info-display-end-time"
                     ref={displayEndRef}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -1883,10 +1899,9 @@ const [endDate, setEndDate] = useState(new Date());
                   }}
                 >
                   <input
-                    test-id="basic-info-display-end-time"
+                    id="basic-info-display-end-time"
                     ref={displayEndRef}
                     type="checkbox"
-                    id="displayEndTime"
                     name="displayEndTime"
                     style={{ marginRight: "1rem", marginTop: 0 }}
                   />
@@ -1923,7 +1938,7 @@ const [endDate, setEndDate] = useState(new Date());
             >
               <div className={classes.inputContainer}>
                 <label className={classes.inputLabel}>Time Zone</label>
-                <select  test-id="basic-info-time-zone" ref={timeZoneRef} id="timeZone" name="timeZone">
+                <select  id="basic-info-time-zone" ref={timeZoneRef}  name="timeZone">
                   <option value="(GMT-11:00) Midway Island">
                     (GMT-11:00) Midway Island
                   </option>
@@ -2010,7 +2025,7 @@ const [endDate, setEndDate] = useState(new Date());
                 <label className={classes.inputLabel}>
                   Event Page Language
                 </label>
-                <select test-id="basic-info-language" ref={languageRef} id="Language" name="Language">
+                <select id="basic-info-language" ref={languageRef}  name="Language">
                   <option value="English US">English US</option>
                   <option value="Chinese">Chinese</option>
                   <option value="Spanish">Spanish</option>
@@ -2027,7 +2042,7 @@ const [endDate, setEndDate] = useState(new Date());
           </React.Fragment>
 
           <button
-            test-id="basic-info-submit"
+            id="basic-info-submit"
             className={classes.active}
             type="submit"
             style={{

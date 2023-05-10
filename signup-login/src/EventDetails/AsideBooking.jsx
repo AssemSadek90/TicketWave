@@ -1,24 +1,14 @@
-import { useState } from "react";
 import styles from "./AsideBooking.module.css";
 
-export default function AsideBooking({ openOverlay }) {
+export default function AsideBooking({
+  openOverlay,
+  alterCount,
+  count,
+  event,
+  isMobile,
+}) {
   const maxTicket = 10;
   const minTicket = 1;
-
-  const [count, setCount] = useState(1);
-
-  let ticketCounter = {
-    increment() {
-      if (count < maxTicket) {
-        setCount(count + 1);
-      }
-    },
-    decrement() {
-      if (count > minTicket) {
-        setCount(count - 1);
-      }
-    },
-  };
 
   return (
     <>
@@ -31,7 +21,9 @@ export default function AsideBooking({ openOverlay }) {
             <button
               className={styles.registration_buttons}
               id="decrement-button"
-              onClick={() => ticketCounter.decrement()}
+              onClick={() =>
+                count > minTicket ? alterCount(count - 1) : alterCount(count)
+              }
             >
               -
             </button>
@@ -39,7 +31,9 @@ export default function AsideBooking({ openOverlay }) {
             <button
               className={styles.registration_buttons}
               id="increment-button"
-              onClick={() => ticketCounter.increment()}
+              onClick={() =>
+                count < maxTicket ? alterCount(count + 1) : alterCount(count)
+              }
             >
               +
             </button>
@@ -47,7 +41,11 @@ export default function AsideBooking({ openOverlay }) {
         </div>
 
         <div>
-          <strong>Free</strong>
+          {event.free === true ? (
+            <strong>Free</strong>
+          ) : (
+            <strong>${event.price}</strong>
+          )}
         </div>
       </div>
 
@@ -57,7 +55,11 @@ export default function AsideBooking({ openOverlay }) {
           id="booking-button"
           onClick={() => openOverlay(true)}
         >
-          Reserve a spot
+          {event.free === true ? (
+            <small>Reserve a spot</small>
+          ) : (
+            <small>Checkout for ${event.price * count}</small>
+          )}
         </button>
       </div>
     </>

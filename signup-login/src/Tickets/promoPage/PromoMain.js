@@ -1,34 +1,54 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormContainer from "../components/FormContainer";
 import CreatePromoForm from "./CreatePromoForm";
 import UploadCsvForm from "./UploadCsvForm";
 import PromoPageCard from "./PromoPageCard";
 import Icon from '../files/Image.png'
 
-
+/** Renders the main component for managing promo codes, including the ability to create and upload promo codes
+@param {Object} Promo - A Promo object containing properties for each promo code
+@param {Array} finalData - An array of data containing promo code information
+@returns {JSX.Element} - Returns the main component as a JSX element
+*/
 function PromoMain({Promo, finalData}){
 
+  /**Scrolls to the top of the window on page load*/
+  useEffect(() => {window.scrollTo(0,0)}, [])
+
+    /** State to manage whether or not to show the create promo code form
+@type {[Boolean, Function]}
+*/
     const [createPromo, setCreatePromo] = useState(false);
+    /**State to manage whether or not to show the upload CSV form
+@type {[Boolean, Function]}
+*/
     const [uploadCsv, setUploadCsv] = useState(false);
+    /** State to manage the selected promo code
+@type {[Object, Function]}
+*/
     const [selectedItem, setSelectedItem] = useState(null);
+    /** State to manage all promo codes
+@type {[Array, Function]}
+*/
     const [promoCodes, setPromoCodes] = useState(finalData ? finalData : []);
+    /** State to manage the search query for filtering promo codes
+@type {[String, Function]}
+*/
     const [searchQuery, setSearchQuery] = useState("");
+    /** State to manage filtered promo codes based on the search query
+@type {[Array, Function]}
+*/
     const [filtered, setFiltered] = useState(promoCodes)
-
-
+    /** Filters promo codes based on the search query
+@type {Array}
+*/
     const filteredPromoCodes = promoCodes.filter(
       (item) =>
         item.codeName.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     // setFiltered(filteredPromoCodes);
-
-  // else setFiltered(promoCodes)
-
-    
-
-
+    // else setFiltered(promoCodes) 
     // console.log(promoCodes);
     // console.log(selectedItem);
     Promo(promoCodes);
@@ -41,19 +61,18 @@ function PromoMain({Promo, finalData}){
             promoCodes.length > 0 ?
           
 
-
 <React.Fragment>
 
-  <div style={{width: '100%', flexDirection: 'row', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', marginBottom: '1rem'}}>
+  <div style={{width: '100%',minWidth: '30rem', flexDirection: 'row', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', marginBottom: '1rem'}}>
 
 
 
   <div className="inputContainer" >
         <label className="inputLabel">Search</label>
         <input
+          id="promo-main-search"
           style={{ fontSize: "0.85rem" }}
           type="text"
-          id="eventName"
           maxLength="50"
           name="eventName"
           value={searchQuery}
@@ -85,6 +104,7 @@ function PromoMain({Promo, finalData}){
         }}
       >
         <button
+          id="promo-main-add-code"
           onClick={() => {setCreatePromo(true); setUploadCsv(false)}}
         >
           Add a code
@@ -148,7 +168,7 @@ function PromoMain({Promo, finalData}){
 :
 
 <React.Fragment>
-  <div style={{padding: '1rem'}}>
+  <div style={{padding: '1rem', minWidth: '30rem'}}>
 
   <p>To create promo codes that apply across multiple events, visit Marketing.</p>
   <div style={{display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center'}}>
@@ -169,7 +189,7 @@ You can create codes or upload a CSV to import ones you’ve already made.
 
 
 <div style={{width: '100%'}}>
-  <img src={Icon} alt="Image" />
+<img src={Icon} style={{marginTop: '2rem'}} alt="Image" />
     {/* <Icon /> */}
 </div>
 
@@ -190,6 +210,7 @@ You can create codes or upload a CSV to import ones you’ve already made.
         }}
       >
         <button
+        id="promo-main-add-promo-code"
            onClick={() => {setCreatePromo(true); setUploadCsv(false)}}
         >
           Create Promo Code
@@ -198,7 +219,7 @@ You can create codes or upload a CSV to import ones you’ve already made.
 
 
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '10rem', marginLeft: '2rem'}}>
-    <div  onClick={() => {setUploadCsv(true); setCreatePromo(false)}} style={{height: '3rem', width: '100%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Upload Csv</div>
+    <div id="promo-main-upload-csv" onClick={() => {setUploadCsv(true); setCreatePromo(false)}} style={{height: '3rem', width: '100%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Upload Csv</div>
     {/* <button type="submit" style={{height: '3rem', width: '45%'}} >Next</button> */}
     </div>
 

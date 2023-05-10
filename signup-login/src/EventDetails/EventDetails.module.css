@@ -25,11 +25,5 @@
   z-index: 1;
 }
 
-/* @media (max-width: 768px) {
-  .aside_booking_container {
-    position: static;
-    bottom: 0;
-    padding: 18px;
-    width: 100%;
-  }
-} */
+@media (max-width: 960px) {
+}
