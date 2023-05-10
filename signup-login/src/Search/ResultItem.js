@@ -43,11 +43,11 @@ export default function ResultItem(props) {
         </li>
         <li id="result-info" className={styles.result_data}>
           <p style={{ fontWeight: 'bold' }}>
-            {props.event.name.slice(0, 24)}
+            {props.event.name && props.event.name.slice(0, 24)}
             {props.event.name[24] && '...'}
           </p>
           <p>
-            {props.event.description.slice(0, 24)}
+            {props.event.description && props.event.description.slice(0, 24)}
             {props.event.description[24] && '...'}
           </p>
         </li>

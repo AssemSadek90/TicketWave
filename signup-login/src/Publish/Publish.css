@@ -118,21 +118,15 @@
   background-color: #f05537;
 }
 @media (max-width: 550px) {
-  .event-preview-card__image-container {
-    width: 100%;
-  }
-  .imgEvent {
-    width: 100%;
-  }
-  .page-heading {
-    text-align: center;
+
+ 
   }
 
   .event-preview-card {
     border: 1px solid #eeedf2;
     display: flex;
     margin-top: 24px;
-    flex-direction: column;
+    flex-direction: row;
     /* width: 50%; */
     margin: auto;
   }
@@ -141,7 +135,7 @@
     right: 24px;
     position: absolute;
   }
-}
+
 
 /* .event-preview-card__image-container{
     overflow: hidden;
@@ -397,3 +391,15 @@
 .eds-radio__label span {
   display: block;
 }
+@media (max-width:840px) {
+    .event-preview-card{    
+        flex-direction: column;
+}
+  .event-preview-card__image-container {
+    width: 100%;
+  }
+  .imgEvent {
+    width: 100%;
+  }
+  .page-heading {
+    text-align: center;}}
