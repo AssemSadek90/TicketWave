@@ -167,7 +167,7 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
           end_date: endDate,
           endTime: endTime,
           applyCodeTo: applyCodeTo,
-          discount: discount,
+          percent_off: discount,
           type: codeType,
           names: names,
           type: 'CreatePromo'
