@@ -840,16 +840,7 @@ table {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.eds-g-cell {
-  display: inline-block;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  overflow: hidden;
-  vertical-align: top;
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 400;
-}.eds-g-cell-sm-8-12 {
+.eds-g-cell-sm-8-12 {
   width: 66.6666666667%;
 }
 .eds-text-weight--heavy {
@@ -1462,4 +1453,5 @@ label.eds-label-primary {
 }
 @media (max-width:500px){.layout{
   width: 100%;
-}}
+}
+.eds-g-cell-4-12{width:fit-content;}}

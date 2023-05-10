@@ -180,36 +180,36 @@ function Share(Event_id) {
                     </span>
                   </span>
                 </LinkedinShareButton>
-              </div>
-              <WhatsappShareButton url={Event_id.EventURL}>
-                <span
-                  className="eds-icon-button eds-icon-button--neutral"
-                  data-spec="icon-button"
-                >
-                  <button
-                    className="eds-btn--button eds-btn--none eds-btn--icon-only"
-                    type="button"
+                <WhatsappShareButton url={Event_id.EventURL}>
+                  <span
+                    className="eds-icon-button eds-icon-button--neutral"
+                    data-spec="icon-button"
                   >
-                    <i
-                      className="eds-vector-image eds-icon--small eds-vector-image--block"
-                      title=""
-                      data-spec="icon"
-                      data-testid="icon"
+                    <button
+                      className="eds-btn--button eds-btn--none eds-btn--icon-only"
+                      type="button"
                     >
-                      <svg viewBox="0 0 24 24">
-                        <path
-                          fillRule="evenodd"
-                          clipRule="evenodd"
-                          d="M16.8 14c-.2-.1-1.5-.8-1.7-.9-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5 0-.2-.1-1-.4-2-1.3-.7-.7-1.2-1.5-1.3-1.8-.1-.3 0-.4.1-.5l.4-.4c.1-.1.2-.2.3-.4.1-.2.1-.3 0-.4-.1-.1-.6-1.3-.8-1.8-.1-.6-.4-.5-.5-.5h-.5c-.2 0-.4 0-.7.3-.2.2-.9.8-1 2 0 1.2.8 2.4.9 2.6.1.2 1.6 2.8 4.1 3.9 2.5 1.1 2.5.8 3 .7.5 0 1.5-.5 1.7-1.1.2-.6.3-1.1.2-1.2.1 0-.1-.1-.3-.2zm-4.6 5.9c-1.7 0-3.2-.5-4.5-1.3l-3.1 1 1-3c-1-1.3-1.6-3-1.6-4.8 0-4.5 3.7-8.1 8.2-8.1 4.5 0 8.2 3.6 8.2 8.1-.1 4.4-3.7 8.1-8.2 8.1zm0-17.9c-5.4 0-9.8 4.4-9.8 9.7 0 1.8.5 3.6 1.4 5L2 22l5.4-1.7c1.4.8 3 1.2 4.7 1.2 5.4 0 9.8-4.4 9.8-9.7C22 6.4 17.6 2 12.2 2z"
-                        ></path>
-                      </svg>
-                      <span className="eds-is-hidden-accessible">
-                        Share on WhatsApp
-                      </span>
-                    </i>
-                  </button>
-                </span>
-              </WhatsappShareButton>
+                      <i
+                        className="eds-vector-image eds-icon--small eds-vector-image--block"
+                        title=""
+                        data-spec="icon"
+                        data-testid="icon"
+                      >
+                        <svg viewBox="0 0 24 24">
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M16.8 14c-.2-.1-1.5-.8-1.7-.9-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.2.2-.3.2-.5 0-.2-.1-1-.4-2-1.3-.7-.7-1.2-1.5-1.3-1.8-.1-.3 0-.4.1-.5l.4-.4c.1-.1.2-.2.3-.4.1-.2.1-.3 0-.4-.1-.1-.6-1.3-.8-1.8-.1-.6-.4-.5-.5-.5h-.5c-.2 0-.4 0-.7.3-.2.2-.9.8-1 2 0 1.2.8 2.4.9 2.6.1.2 1.6 2.8 4.1 3.9 2.5 1.1 2.5.8 3 .7.5 0 1.5-.5 1.7-1.1.2-.6.3-1.1.2-1.2.1 0-.1-.1-.3-.2zm-4.6 5.9c-1.7 0-3.2-.5-4.5-1.3l-3.1 1 1-3c-1-1.3-1.6-3-1.6-4.8 0-4.5 3.7-8.1 8.2-8.1 4.5 0 8.2 3.6 8.2 8.1-.1 4.4-3.7 8.1-8.2 8.1zm0-17.9c-5.4 0-9.8 4.4-9.8 9.7 0 1.8.5 3.6 1.4 5L2 22l5.4-1.7c1.4.8 3 1.2 4.7 1.2 5.4 0 9.8-4.4 9.8-9.7C22 6.4 17.6 2 12.2 2z"
+                          ></path>
+                        </svg>
+                        <span className="eds-is-hidden-accessible">
+                          Share on WhatsApp
+                        </span>
+                      </i>
+                    </button>
+                  </span>
+                </WhatsappShareButton>
+              </div>
             </div>
           </div>
         </div>

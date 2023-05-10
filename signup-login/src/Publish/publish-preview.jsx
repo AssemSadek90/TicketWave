@@ -40,7 +40,7 @@ function Publish() {
         }
         // return server.get(`/events/price/${Event_id}`, requestOptions);
         // })
-        // .then((response) => {
+        // .then((response) => {///////
         //   const data = response.data.results;
         //   //console.log('data', data);
         //   if (data) {

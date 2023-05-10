@@ -65,7 +65,7 @@ function UrlEditor() {
             type="text"
             value={tempUrl}
             onChange={handleUrlChange}
-            id="input"
+            id="copyinput"
             className="copy-update-label eds-text-weight--heavy"
           />
 
@@ -73,6 +73,7 @@ function UrlEditor() {
             className="btnn-n"
             onClick={handleCancelClick}
             disabled={isLoading}
+            id="cancelbutton"
           >
             <u className="btnn-n">Cancel</u>
           </button>
@@ -80,6 +81,7 @@ function UrlEditor() {
             className="btnn-n"
             onClick={handleSaveClick}
             disabled={isLoading}
+            id="saveinput"
           >
             {isLoading ? (
               <ClipLoader color="#ffffff" loading={isLoading} size={15} />
@@ -95,6 +97,7 @@ function UrlEditor() {
             className="icon-button-combo--button"
             onClick={handleEditClick}
             disabled={isLoading}
+            id="Editinput"
           >
             <FaEdit className="eds-tooltip--hoc-wrapper" />
           </button>
@@ -104,6 +107,7 @@ function UrlEditor() {
             data-clipboard-action="copy"
             data-clipboard-target="#input"
             className="icon-button-combo--button eds-l-mar-left-3"
+            id="copyicon"
           >
             <FaCopy />
           </button>

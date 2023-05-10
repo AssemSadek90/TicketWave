@@ -1,12 +1,25 @@
 import React, { useState, useEffect } from "react";
 import server from "../server";
 import "./dashboard.css";
-//    const mockOrders = [
+/**
+ * @typedef {Object} Order
+ * @property {number} id - The order ID.
+ * @property {string} first_name - The first name of the customer.
+ * @property {string} cost - The cost of the order.
+ */
+//  const mockOrders = [
 //   { id: 1, first_name: 'John Doe',cost:"123"  },
 //   { id: 2, first_name: 'Jane Smith'  },
 //   { id: 3, first_name: 'Bob Johnson' },
 // ];
+/**
+ * Component to display a list of orders.
+ * @returns {JSX.Element} The Orders component.
+ */
 const Orders = () => {
+  /** @type {Order[]} */
+  //
+  // const Orders = () => {
   //const [orders, setOrders] = useState([]);
   const [orders, setOrders] = useState([]);
   //   const [isloaded, setisloaded] = useState(false);

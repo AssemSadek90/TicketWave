@@ -214,6 +214,12 @@ server.get("/events/retrieve/:id", (req, res) => {
       changed,
       age_restriction,
       capacity,
+      sales,
+      gross,
+      paid,
+      Free,
+      Tickets,
+      ticketsSold,
     } = foundEvent;
     res.json({
       start,
@@ -238,6 +244,12 @@ server.get("/events/retrieve/:id", (req, res) => {
       changed,
       age_restriction,
       capacity,
+      sales,
+      gross,
+      paid,
+      Free,
+      Tickets,
+      ticketsSold,
     });
   } else {
     // Return an error response if the event is not found
