@@ -40,7 +40,7 @@ export default function CategoriesNav() {
     // getLastName();
     // getEmail();
     const accessToken = localStorage.getItem('accessToken');
-    if (selectedTab == 1 || selectedTab == 5) {
+    if (selectedTab == 1) {
       const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
@@ -126,6 +126,25 @@ export default function CategoriesNav() {
         params: {
           start__gte: isoString,
           start__lte: isoStringEnd,
+        },
+      };
+      server
+        .get(`/events/list/`, requestOptions)
+        .then((response) => {
+          const data = response.data.results;
+          if (data) setEvents(data);
+          console.log(data);
+        })
+        .catch((error) => console.log(error));
+    }
+    if (selectedTab == 5) {
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          free: 'true',
         },
       };
       server

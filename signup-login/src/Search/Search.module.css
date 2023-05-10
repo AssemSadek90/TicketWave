@@ -37,7 +37,8 @@
 
 .item_container{
     width: 100%;
-    height: auto;
+    height: fit-content;
+
 }
 
 .item_container:hover{
@@ -46,9 +47,11 @@
 }
   
 .item_container ul{
+    height: 60px;
+    padding: 0 0.5rem;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     list-style: none;
 }
@@ -62,6 +65,14 @@
     flex-direction: column;
     gap: 1rem;
     margin-top: 2rem;
+}
+.results_container{
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.venue_container{
+    margin-top: 0.5rem;
 }
 
 @media screen and (max-width: 1030px){
