@@ -1,13 +1,45 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './EventsList.css';
+
+/**
+ * Component for rendering an individual event item.
+ * @component
+ * @param {Object} props - The props object containing the event data.
+ * @returns {JSX.Element} JSX representation of the component.
+ */
 const EventsListItem = (props) => {
+  /**
+   * Hook for navigation within the application.
+   */
   const navigate = useNavigate();
+
   console.log(props.event.start);
+  //console.log(props.ticketsSold);
   // //const username = localStorage.getItem('userName');
+
+  /**
+   * Start date of the event.
+   * @type {Date}
+   */
   const start_date = new Date(props.event.start);
+
+  /**
+   * Day of the month for the start date.
+   * @type {number}
+   */
   const day = start_date.getDate();
+
+  /**
+   * Month name for the start date.
+   * @type {string}
+   */
   const month = start_date.toLocaleString('default', { month: 'long' });
+
+  /**
+   * Handles the event click and navigates to the basic-info route.
+   * @function
+   */
   const handleEventClick = () => {
     localStorage.setItem('eventID', props.event.id);
     navigate('/basic-info');
@@ -15,6 +47,7 @@ const EventsListItem = (props) => {
 
   return (
     <div
+      id={`${props.id}`}
       onClick={handleEventClick}
       className="events-list-creator-item eds-g-group eds-list-item edit-list-item eds-align--space-between eds-l-pad-all-4 eds-l-mn-pad-hor-6 eds-l-md-pad-hor-6 eds-l-mw-pad-hor-6 eds-l-ln-pad-hor-6 eds-l-lg-pad-hor-6 eds-l-lw-pad-hor-6 snipcss-lLxHJ"
       data-spec="edit-list-item"
@@ -142,7 +175,7 @@ const EventsListItem = (props) => {
                           className="eds-align--sm-right eds-align--sn-right"
                           data-spec="event-list-item-sold"
                         >
-                          {props.soldTickets}/{props.capacity}
+                          {props.event.ticketsSold}/{props.event.capacity}
                         </p>
                         <div className="eds-show-up-mn">
                           <div>
@@ -174,7 +207,7 @@ const EventsListItem = (props) => {
                       data-spec="contents-grid-second-column"
                     >
                       <p data-spec="event-list-item-gross">
-                        ${props.soldTickets}
+                        ${props.event.ticketsSold}
                       </p>
                     </div>
                     <div className="eds-g-cell eds-g-cell-lg-4-12 eds-show-up-lg eds-l-pad-hor-0">

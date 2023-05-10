@@ -4,20 +4,39 @@ import { FaFacebookMessenger } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { GrMail } from "react-icons/gr";
-
-export default function SocialShare(props) {
+/**
+A component to share event details on social media platforms and email.
+@param {object} props - The props object.
+@param {object} props.event - An object containing event details, such as name and URL.
+@param {boolean} isMobile - A boolean value indicating whether the device is mobile or not.
+@returns {JSX.Element} A JSX element containing social media icons to share event details.
+*/
+export default function SocialShare(props, isMobile) {
+  /** 
+A function to handle sharing on Facebook.
+@function
+@returns {void}
+*/
   function handleFacebookShare() {
     const message = " ";
     let url = props.event.url;
     const shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${message}`;
     window.open(shareUrl, "Share on Facebook", "width=600,height=400");
   }
-
+  /**
+A function to handle sharing on Facebook Messenger.
+@function
+@returns {void}
+*/
   function handleMessengerShare() {
     const url = `https://www.facebook.com/dialog/send?app_id=217288657613432&display=popup&link=${props.event.url}&redirect_uri=YOUR_REDIRECT_URI`;
     window.open(url, "facebook-message-dialog", "width=800,height=600");
   }
-
+  /**
+A function to handle sharing on Twitter.
+@function
+@returns {void}
+*/
   function handleTwitterShare() {
     const text = `Check out "${props.event.name}"`;
     const url = props.event.url;
@@ -26,7 +45,11 @@ export default function SocialShare(props) {
     )}&text=${encodeURIComponent(text)}`;
     window.open(tweetUrl, "Tweet", "width=600,height=400");
   }
-
+  /**
+A function to handle sharing via email.
+@function
+@returns {string} A mailto link containing subject and body.
+*/
   function handleMailShare() {
     const subject = `You're invited to ${props.event.name}`;
     const body = props.event.url;

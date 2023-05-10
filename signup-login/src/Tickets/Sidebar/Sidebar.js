@@ -20,7 +20,7 @@ import NavPage from '../components/NavPage';
 */
 const icons = [
   {
-    name: 'home',
+    name: 'Home',
     icon: <FaHome />,
   },
   {

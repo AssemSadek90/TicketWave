@@ -16,6 +16,7 @@ import {
 //import { ReactComponent as GoogleIcon } from '.../google-icon.svg';
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import GoogleLogin from './GoogleSignIn';
+import Footer from '../Footer/Footer';
 
 /**
  * A React component for creating an account.
@@ -321,7 +322,10 @@ Handles email input change event
   @return {JSX.Element}
   */
   return (
-    <div className="container-fluid">
+    <div
+      className="container-fluid"
+      style={{ paddingRight: 0, paddingLeft: 0 }}
+    >
       <div className="row">
         <div className="col-md-6 split-container-primary">
           <div className="split-container-content">
@@ -394,12 +398,10 @@ Handles email input change event
                       Forgot Password?
                     </Link>
                   </p>
-                  <p>
-                    <Link to="/change-password">Change Password</Link>
-                  </p>
-                </div>
-                <div>
-                  <a href="https://ticketwave.me/api/google/login/login">
+                  <a
+                    style={{ textAlign: 'center' }}
+                    href="https://ticketwave.me/api/google/login/login"
+                  >
                     Sign in with Google
                   </a>
                 </div>
@@ -421,9 +423,11 @@ Handles email input change event
           <img
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
+            // style={{ height: '700px' }}
           ></img>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

@@ -1,17 +1,42 @@
 import { useState } from 'react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
+/**
+ * Component for the second navigation bar.
+ * @component
+ * @returns {JSX.Element} JSX representation of the component.
+ */
 const SecondNav = () => {
+  /**
+   * Hook for navigation within the application.
+   */
   const navigate = useNavigate();
+
+  /**
+   * Handles the click event for creating a new event and navigates to the basic-info route.
+   * @function
+   */
   const handleCreateEventClick = () => {
     localStorage.setItem('eventID', 0);
     navigate('/basic-info');
   };
+
+  /**
+   * State variable for the selected option.
+   * @type {string}
+   */
   const [selectedOption, setSelectedOption] = useState('');
 
+  /**
+   * Handles the change event for the option selection.
+   * @function
+   * @param {Object} event - The event object.
+   */
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
+
   return (
     <div className="eds-g-grid eds-align--center-vertical eds-l-mar-top-10 eds-l-mar-bot-10 filter-container snipcss0-2-14-15 snipcss-diTo1">
       <div className="eds-g-cell eds-g-cell-12-12 eds-g-cell-lw-md-4-12 eds-g-cell-sm-7-12 eds-g-cell-md-5-12 snipcss0-3-15-16">
@@ -76,20 +101,30 @@ const SecondNav = () => {
                           className="snipcss0-11-65-66"
                         >
                           <select
+                            id="dropdown-creator"
                             data-spec="filter-events-upcoming"
                             className="snipcss0-11-65-66 dropdown-creator"
                             onChange={handleOptionChange}
                           >
                             <option
+                              id="upcoming-events"
                               className="dropdown-creator"
                               value="upcoming"
                             >
                               Upcoming Events
                             </option>
-                            <option className="dropdown-creator" value="past">
+                            <option
+                              id="past-events"
+                              className="dropdown-creator"
+                              value="past"
+                            >
                               Past Events
                             </option>
-                            <option className="dropdown-creator" value="all">
+                            <option
+                              id="all-events"
+                              className="dropdown-creator"
+                              value="all"
+                            >
                               All Events
                             </option>
                           </select>
@@ -134,6 +169,7 @@ const SecondNav = () => {
       <div className="eds-show-up-md eds-g-cell eds-g-cell-2-12 snipcss0-3-15-74">
         <div className="create-event-creator snipcss0-4-74-75">
           <div
+            id="create-event-btn-creator"
             onClick={handleCreateEventClick}
             className=" eds-btn eds-btn--link eds-btn--fill snipcss0-5-75-76"
             style={{

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker';
+import server from '../../server'
 
 /** Renders a form for creating a promotional event
 @param {Object} onCancel - Function to cancel the form and return to previous screen
@@ -157,17 +158,17 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         const data = {
           id: id,
           codeName: codeName,
-          ticketLimit: ticketLimit,
+          quantity_available: ticketLimit,
           isTicketLimit: isTicketLimit,
           promoStarts: promoStarts,
           promoEnds: promoEnds,
-          startDate: startDate,
+          start_date: startDate,
           startTime: startTime,
-          endDate: endDate,
+          end_date: endDate,
           endTime: endTime,
           applyCodeTo: applyCodeTo,
-          discount: discount,
-          codeType: codeType,
+          percent_off: discount,
+          type: codeType,
           names: names,
           type: 'CreatePromo'
         }
@@ -188,6 +189,25 @@ function CreatePromoForm({onCancel, onSubmit, myData}){
         setDiscount(null)
         onCancel(true);
 
+        console.log(data);
+        handlePromo(data);
+
+    };
+
+    const handlePromo = (data) => {
+      const accessToken = localStorage.getItem("accessToken")
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${accessToken}`,
+        },
+      };
+        
+      server.post('/discounts', JSON.stringify(data), requestOptions)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
     };
 
     return(
