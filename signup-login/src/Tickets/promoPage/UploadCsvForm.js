@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import DatePicker from 'react-datepicker';
+import server from '../../server';
 
 /**
 
@@ -183,7 +184,26 @@ and setting the state values for code names and code name of the uploaded file.
 
         onCancel(true);
 
+        console.log(data);
+        handleCSV(data);
 
+
+    };
+
+    const handleCSV = (data) => {
+      const accessToken = localStorage.getItem("accessToken")
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${accessToken}`,
+        },
+      };
+        
+      server.post('/CSV', JSON.stringify(data), requestOptions)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
     };
 
 
@@ -200,7 +220,7 @@ and setting the state values for code names and code name of the uploaded file.
 
 <div style={{display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #ccc'}}>
     <h2>
-        Add Code
+        Upload CSV
     </h2>
 </div>
 

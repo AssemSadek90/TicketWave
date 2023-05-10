@@ -27,12 +27,20 @@ function NavPage() {
           Add-ons
         </CustomNavLink>
       </div>
+      <div style={{marginRight: '2rem'}}>
+            <CustomNavLink id="nav-page-holds" to={"/Tickets/holds"}>Holds</CustomNavLink>
+      </div>
 
-      <div>
+      <div style={{ marginRight: '2rem'}}>
         <CustomNavLink id="nav-page-settings" to={'/Tickets/event-settings'}>
           Settings
         </CustomNavLink>
       </div>
+      <div >
+        <CustomNavLink id="nav-page-promo-codes" to={"/Tickets/promo-codes"}>Promo codes</CustomNavLink>
+      </div>
+
+      
     </div>
   );
 }

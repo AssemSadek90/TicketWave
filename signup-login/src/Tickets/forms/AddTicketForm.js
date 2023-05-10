@@ -3,6 +3,8 @@ import { useState } from "react";
 import "../Tickets.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import server from '../../server';
+
 
 /** A form component for adding tickets
 @param {Function} onCancel - Function to handle canceling the form
@@ -266,13 +268,13 @@ function submitHandler(event){
   const data = {
     id: id,
     name: name,
-    quantity: quantity,
+    capacity: quantity,
     count: count,
     price: price,
-    startDate: startDate,
-    startTime: startTime,
-    endDate: endDate,
-    endTime: endTime,
+    SalesStart: startDate,
+    StartTime: startTime,
+    SalesEnd: endDate,
+    EndTime: endTime,
     availability: availability,
     advancedSettings: advancedSettings,
     showTicketSale: showTicketSale,
@@ -284,7 +286,7 @@ function submitHandler(event){
     endShowingDate: endShowingDate,
     endShowingTime: endShowingTime,
     minimumQuantity: minimumQuantity,
-    maximumQuantity: maximumQuantity,
+    TicketLimit: maximumQuantity,
     salesChannel: salesChannel,
     eTicket: eTicket,
     willCall: willCall,
@@ -318,8 +320,28 @@ function submitHandler(event){
   setId(Math.floor(Math.random() * 10000000));
 
   onCancel(true);
+  console.log(data);
+  handleTicket(data);
 
 }
+
+const handleTicket = (data) => {
+
+  const accessToken = localStorage.getItem("accessToken")
+  const requestOptions = {
+    headers: {
+      'Content-Type': 'application/json',
+       Authorization: `Bearer ${accessToken}`,
+    },
+  };
+  
+
+  server
+    // .post('/events/create/', data, requestOptions)
+    .post('/tickets/', JSON.stringify(data), requestOptions)
+    .then((response) => console.log(response.data))
+    .catch((error) => console.log(error));
+};
 
   return (
     <form style={{overflowY: 'auto', maxHeight: '100vh', width: '100%', overflowX: 'hidden', paddingRight: '1rem'}} onSubmit={submitHandler} >
