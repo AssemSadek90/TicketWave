@@ -381,7 +381,7 @@ const [endDate, setEndDate] = useState(new Date());
       
     server.post('/events/create/', JSON.stringify(data), requestOptions)
       .then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         localStorage.setItem("Event_id", response.data.id);
       })
       .catch((error) => console.log(error));
