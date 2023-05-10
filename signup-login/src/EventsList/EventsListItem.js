@@ -116,7 +116,7 @@ const EventsListItem = (props) => {
                         May 31, 2023 at 7:00 PM +04
                       </p>
                       <p data-spec="event-list-item-venue">
-                        {props.event.venue.name}
+                        {props.event.venue}
                       </p>
                       <p
                         className="eds-show-up-lg"
