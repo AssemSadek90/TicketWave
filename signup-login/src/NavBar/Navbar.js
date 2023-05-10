@@ -51,7 +51,7 @@ export default function Navbar() {
     navigate('/Search');
   }
   function handleManage() {
-    navigate('/creator');
+    navigate('/Events');
   }
   return (
     <nav className={styles.navigation_bar} id="navigation-bar">

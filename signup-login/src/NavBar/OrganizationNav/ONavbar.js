@@ -15,9 +15,10 @@ import { getFirstName, getLastName } from '../../Credentials/Credentials';
  *and Tabs components.
  */
 export default function ONavbar() {
-  const fname = localStorage.getItem('userFirstName');
+  const fname = localStorage.getItem('userName');
   const lname = localStorage.getItem('userLastName');
-  const name = fname + ' ' + lname;
+  //const name = fname + ' ' + lname;
+  const name = fname;
   const initials =
     fname.slice(0, 1).toUpperCase() + lname.slice(0, 1).toUpperCase();
   const initialsContainer = (
