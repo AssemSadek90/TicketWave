@@ -15,12 +15,10 @@ import { getFirstName, getLastName } from '../../Credentials/Credentials';
  *and Tabs components.
  */
 export default function ONavbar() {
-  const fname = 'karim';
-  // getFirstName();
-  const lname = 'elnady';
-  // getLastName();
- 
-  const name = fname + ' ' + lname;
+  const fname = localStorage.getItem('userName');
+  const lname = localStorage.getItem('userLastName');
+  //const name = fname + ' ' + lname;
+  const name = fname;
   const initials =
     fname.slice(0, 1).toUpperCase() + lname.slice(0, 1).toUpperCase();
   const initialsSvg = (
@@ -47,6 +45,9 @@ export default function ONavbar() {
       })
       .catch((error) => console.log(error));
   }
+  function handleSwitch() {
+    navigate('/home');
+  }
   return (
     <nav className={styles.navigation_bar} id="navigation-bar">
       <ul className={styles.navbar_ul} id="navbar-ul">
@@ -56,8 +57,12 @@ export default function ONavbar() {
           </a>
         </div>
         <div className={styles.navbar_li_2} id="navbar-li">
-          <Dropdown title={name} tag={initialsSvg}>
-            <Tabs title="Switch To Attending" path="#" />
+          <Dropdown title={name} tag={initialsContainer}>
+            <Tabs
+              title="Switch To Attending"
+              onClick={handleSwitch}
+              path="/home"
+            />
             <Tabs title="Log out" onClick={handleLogOut} id="log-out-tab" />
           </Dropdown>
         </div>

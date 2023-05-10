@@ -11,7 +11,6 @@ import styles from './Navbar.module.css';
  * @returns {JSX.Element} The JSX element representing the navigation bar list item.
  */
 export default function NavBarListItem(props) {
-  console.log(props.path);
   return (
     <li className={styles.navbar_li} id="navbar-li">
       <a className={styles.navbar_a} href={props.path}>
