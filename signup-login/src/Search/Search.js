@@ -22,22 +22,24 @@ export default function Search() {
     setSearchText(event.target.value);
   };
   useEffect(() => {
-    const requestOptions = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      params: {
-        search: searchText,
-      },
-    };
-    server
-      .get(`/events/list/`, requestOptions)
-      .then((response) => {
-        const data = response.data.results;
-        if (data) setEvents(data);
-      })
-      .catch((error) => console.log(error));
+    if (searchText != '') {
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        params: {
+          search: searchText,
+        },
+      };
+      server
+        .get(`/events/list/`, requestOptions)
+        .then((response) => {
+          const data = response.data.results;
+          if (data) setEvents(data);
+        })
+        .catch((error) => console.log(error));
+    }
   }, [searchText]);
 
   return (
