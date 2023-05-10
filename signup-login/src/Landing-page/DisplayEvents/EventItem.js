@@ -45,7 +45,8 @@ export default function EventItem(props) {
         </svg>
         <div id="event-details" className={styles.event_details}>
           <p id="event-detail-1" className={styles.event_detail_1}>
-            {props.event.name}
+            {props.event.name.slice(0, 24)}
+            {props.event.name[24] && '...'}
           </p>
           <p id="event-detail-2" className={styles.event_detail_2}>
             {realStart()}
@@ -54,8 +55,8 @@ export default function EventItem(props) {
             {props.event.organizer}
           </p>
           <p id="event-detail-3" className={styles.event_detail_4}>
-            {props.event.description.slice(0, 70)}
-            {props.event.description[71] && '...'}
+            {props.event.description.slice(0, 24)}
+            {props.event.description[24] && '...'}
           </p>
         </div>
       </a>

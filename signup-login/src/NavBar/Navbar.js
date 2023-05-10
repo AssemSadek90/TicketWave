@@ -50,6 +50,9 @@ export default function Navbar() {
   function handleSearch() {
     navigate('/Search');
   }
+  function handleManage() {
+    navigate('/creator');
+  }
   return (
     <nav className={styles.navigation_bar} id="navigation-bar">
       <ul className={styles.navbar_ul} id="navbar-ul">
@@ -69,15 +72,23 @@ export default function Navbar() {
             <path d="M18.8 6.2C18.1 5.4 17 5 16 5c-1 0-2 .4-2.8 1.2L12 7.4l-1.2-1.2C10 5.4 9 5 8 5c-1 0-2 .4-2.8 1.2-1.5 1.6-1.5 4.2 0 5.8l6.8 7 6.8-7c1.6-1.6 1.6-4.2 0-5.8zm-1.4 4.4L12 16.1l-5.4-5.5c-.8-.8-.8-2.2 0-3C7 7.2 7.5 7 8 7c.5 0 1 .2 1.4.6l2.6 2.7 2.7-2.7c.3-.4.8-.6 1.3-.6s1 .2 1.4.6c.8.8.8 2.2 0 3z"></path>
           </svg>
         </NavBarListItem>
-        <NavBarListItem title="Tickets" path="#">
+        <NavBarListItem title="Tickets" path="/Sold-Tickets">
           <svg className={styles.svg_icon} viewBox="0 0 20 20">
             <path d="M10 13v-2h4v2zm6 5V6h-.4C15 7.4 13.8 8.4 12 8.4S9 7.4 8.4 6H8v12h.4c.6-1.4 1.8-2.4 3.6-2.4s3 1 3.6 2.4zM14 4h4v16h-4s0-2.4-2-2.4-2 2.4-2 2.4H6V4h4s0 2.4 2 2.4S14 4 14 4z"></path>
           </svg>
         </NavBarListItem>
         <NavBarListItem>
           <Dropdown title={email} tag={dropdownSvg}>
-            <Tabs title="Browse events" path="#" id="browse-events-tab" />
-            <Tabs title="Manage my events" path="#" id="manage-events-tab" />
+            <Tabs
+              title="Browse events"
+              onClick={handleSearch}
+              id="browse-events-tab"
+            />
+            <Tabs
+              title="Manage my events"
+              onClick={handleManage}
+              id="manage-events-tab"
+            />
             <Tabs
               title="Change password"
               onClick={handleChangePassword}
