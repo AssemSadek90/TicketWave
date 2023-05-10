@@ -207,7 +207,7 @@ function Tickets({
       <Sidebar showSecond={showSecondSidebar} visible={visible} />
       <div style={{ paddingLeft: padding }}>
         <Routes>
-          {/* <Route
+          <Route
             path="/publish"
             Component={() => {
               setPadding('18rem');
@@ -222,7 +222,7 @@ function Tickets({
                 </React.Fragment>
               );
             }}
-          /> */}
+          />
 
           <Route
             path="/Events"

@@ -103,7 +103,7 @@ function App() {
             }
           />
           <Route path="/terms" element={<Terms />} />
-          <Route path="/publish" element={<PublishApp />} />
+          {/* <Route path="/publish" element={<PublishApp />} /> */}
           {/* <Route path="/basic-info" element={<CreateEventForm />} /> */}
 
           <Route path="/navbar" element={<Navbar />} />
