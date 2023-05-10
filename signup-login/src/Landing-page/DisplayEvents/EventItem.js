@@ -55,8 +55,8 @@ export default function EventItem(props) {
             {props.event.organizer}
           </p>
           <p id="event-detail-3" className={styles.event_detail_4}>
-            {props.event.description.slice(0, 100)}
-            {props.event.description[101] && '...'}
+            {props.event.description.slice(0, 24)}
+            {props.event.description[24] && '...'}
           </p>
         </div>
       </a>

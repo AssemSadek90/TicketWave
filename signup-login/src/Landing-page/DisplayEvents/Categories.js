@@ -5,10 +5,9 @@ import server from '../../server';
 import DisplayEvents from './Displayevents';
 
 /**
- * The CategoriesNav component displays a navigation bar with categories.
- * It receives no props.
+ * A component that displays a navigation bar with different tabs to display events based on their categories and dates.
  *
- * @returns {JSX.Element} JSX element representing the CategoriesNav component.
+ * @returns {JSX.Element} A React component that renders a navigation bar with tabs and displays events based on the selected tab.
  */
 export default function CategoriesNav() {
   const [events, setEvents] = useState([]);
@@ -31,7 +30,6 @@ export default function CategoriesNav() {
   const handleTabClick = (tab) => {
     setSelectedTab(tab.id);
     setSelectedTabLabel(tab.label);
-    console.log(selectedTab);
   };
 
   useEffect(() => {
@@ -41,12 +39,12 @@ export default function CategoriesNav() {
     // getFirstName();
     // getLastName();
     // getEmail();
-    // const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken');
     if (selectedTab == 1 || selectedTab == 5) {
       const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
       };
       server
@@ -64,7 +62,7 @@ export default function CategoriesNav() {
       const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         params: {
           start__gte: isoDate,
@@ -87,7 +85,7 @@ export default function CategoriesNav() {
       const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         params: {
           start__gte: date,
@@ -123,7 +121,7 @@ export default function CategoriesNav() {
       const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         params: {
           start__gte: isoString,
@@ -149,7 +147,7 @@ export default function CategoriesNav() {
       const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
-          // Authorization: `Bearer ${accessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         params: {
           category: selectedTabLabel,
