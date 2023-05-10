@@ -1,9 +1,9 @@
-import { FaEdit, FaCopy } from 'react-icons/fa';
-import './dashboard.css';
-import React, { useState } from 'react';
-import { ClipLoader } from 'react-spinners';
-import ClipboardJS from 'clipboard';
-new ClipboardJS('.button');
+import { FaEdit, FaCopy } from "react-icons/fa";
+import "./dashboard.css";
+import React, { useState } from "react";
+import { ClipLoader } from "react-spinners";
+import ClipboardJS from "clipboard";
+new ClipboardJS(".button");
 /**
  * React component for editing and copying a URL.
  * @function UrlEditor
@@ -19,7 +19,7 @@ function UrlEditor() {
    * State to hold the current URL.
    * @type {[string, function]} url - [initialValue, updaterFunction]
    */
-  const [url, setUrl] = useState('https://example.com');
+  const [url, setUrl] = useState("https://example.com");
   /**
    * State to hold the URL being edited.
    * @type {[string, function]} tempUrl - [initialValue, updaterFunction]
@@ -65,7 +65,7 @@ function UrlEditor() {
             type="text"
             value={tempUrl}
             onChange={handleUrlChange}
-            id="input"
+            id="copyinput"
             className="copy-update-label eds-text-weight--heavy"
           />
 
@@ -73,6 +73,7 @@ function UrlEditor() {
             className="btnn-n"
             onClick={handleCancelClick}
             disabled={isLoading}
+            id="cancelbutton"
           >
             <u className="btnn-n">Cancel</u>
           </button>
@@ -80,6 +81,7 @@ function UrlEditor() {
             className="btnn-n"
             onClick={handleSaveClick}
             disabled={isLoading}
+            id="saveinput"
           >
             {isLoading ? (
               <ClipLoader color="#ffffff" loading={isLoading} size={15} />
@@ -95,6 +97,7 @@ function UrlEditor() {
             className="icon-button-combo--button"
             onClick={handleEditClick}
             disabled={isLoading}
+            id="Editinput"
           >
             <FaEdit className="eds-tooltip--hoc-wrapper" />
           </button>
@@ -104,6 +107,7 @@ function UrlEditor() {
             data-clipboard-action="copy"
             data-clipboard-target="#input"
             className="icon-button-combo--button eds-l-mar-left-3"
+            id="copyicon"
           >
             <FaCopy />
           </button>

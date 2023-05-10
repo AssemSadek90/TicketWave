@@ -16,6 +16,8 @@ import CreatorEvent from '../EventsList/CreatorEvent';
 import Dashboard from '../Dashboard/dashboardinsights';
 import CreateEventForm from '../Basic-info/CreateEventForm';
 import ONavbar from '../NavBar/OrganizationNav/ONavbar';
+import Publish from '../Publish/publish-preview';
+import PublishApp from '../Publish/PublishApp';
 
 /** Represents a component for managing tickets and sold tickets.
 @constructor
@@ -205,6 +207,23 @@ function Tickets({
       <Sidebar showSecond={showSecondSidebar} visible={visible} />
       <div style={{ paddingLeft: padding }}>
         <Routes>
+          {/* <Route
+            path="/publish"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              setShowSecondSidebar(true);
+              return (
+                <React.Fragment>
+                  <ONavbar />
+                  <div style={{}}>
+                    <PublishApp />
+                  </div>
+                </React.Fragment>
+              );
+            }}
+          /> */}
+
           <Route
             path="/Events"
             Component={() => {
@@ -214,7 +233,7 @@ function Tickets({
               return (
                 <React.Fragment>
                   <ONavbar />
-                  <div style={{ }}>
+                  <div style={{}}>
                     <CreatorEvent />
                   </div>
                 </React.Fragment>
@@ -406,7 +425,6 @@ function Tickets({
                       paddingBottom: '1rem',
                     }}
                   >
-                    
                     <NavPage />
                     <AdmissionPage
                       soldTicketData={soldTicketData}
@@ -613,7 +631,6 @@ function Tickets({
               );
             }}
           />
-
         </Routes>
       </div>
     </React.Fragment>

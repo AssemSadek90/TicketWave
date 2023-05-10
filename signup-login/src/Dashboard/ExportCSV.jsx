@@ -1,17 +1,21 @@
 import React from "react";
 import { CSVLink } from "react-csv";
-import "./dashboard.css"
-function ExportCSV({ data }) {
-  const headers = [
-    { label: "Total Orders", key: "orders" },
-    { label: "Total Atendees", key: "Atendees" }
-  ];
+import "./dashboard.css";
+function ExportCSV(props) {
+  const { orders } = props;
 
-  const filename = "my_data.csv";
+  const data = orders.map((order) => {
+    return {
+      "Order no.": order.id,
+      Name: `${order.first_name} ${order.last_name}`,
+      Price: order.cost,
+      Date: order.created.substr(0, 10),
+    };
+  });
 
   return (
-    <CSVLink data={data} headers={headers} filename={filename}>
-        <div className="Export">Export to CSV</div>
+    <CSVLink data={data} filename={"orders.csv"} id="exportcsv">
+      Export to CSV
     </CSVLink>
   );
 }
