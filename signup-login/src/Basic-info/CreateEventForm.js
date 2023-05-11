@@ -11,6 +11,7 @@ import {
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import server from '../server';
+import { useNavigate } from 'react-router-dom';
 
 /**
 
@@ -173,6 +174,14 @@ A reference to the select element for the location suggestions.
 @type {Object}
 */
   const selectRef = useRef(null);
+
+ /**
+  A function provided by the react-router-dom package that allows for programmatic navigation.
+  @function
+  @name navigate
+  */
+  const navigate = useNavigate();
+
 
   /* A side effect that listens for clicks outside of the location select element and hides the suggestions list when detected.*/
   useEffect(() => {
@@ -373,6 +382,7 @@ A reference to the select element for the location suggestions.
       .then((response) => {
         // console.log(response.data);
         localStorage.setItem('Event_id', response.data.id);
+        navigate('/Tickets/admission');
       })
       .catch((error) => console.log(error));
   };
@@ -1464,6 +1474,7 @@ A reference to the select element for the location suggestions.
                 </button>
 
                 <button
+                id="onlineEventButton"
                   type="button"
                   className={
                     myLocation === 'Online Event'
@@ -1478,6 +1489,7 @@ A reference to the select element for the location suggestions.
                 </button>
 
                 <button
+                id="ToBeAnnoucedButton"
                   type="button"
                   className={
                     myLocation === 'To be announced'
