@@ -1474,6 +1474,7 @@ A reference to the select element for the location suggestions.
                 </button>
 
                 <button
+                id="onlineEventButton"
                   type="button"
                   className={
                     myLocation === 'Online Event'
@@ -1488,6 +1489,7 @@ A reference to the select element for the location suggestions.
                 </button>
 
                 <button
+                id="ToBeAnnoucedButton"
                   type="button"
                   className={
                     myLocation === 'To be announced'

@@ -716,6 +716,7 @@ const handleTicket = (data) => {
 
 
                     <div
+                    id="advanced-settings"
                     onClick={() => setAdvancedSettings(!advancedSettings)}
                     // className="inputContainer"
                     style={{
@@ -1198,7 +1199,7 @@ const handleTicket = (data) => {
   }}
 >
     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
-    <div type="cancel" onClick={() => {
+    <div id="cancelTicketButton" type="cancel" onClick={() => {
         setFormClosed(!formClosed)
         onCancel(formClosed);}} style={{height: '3rem', width: '45%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Cancel</div>
     <button id="add-ticket-form-submit" type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
