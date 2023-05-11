@@ -4,8 +4,6 @@ import "../Tickets.css";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import server from '../../server';
-import { useNavigate } from 'react-router-dom';
-
 
 /** A form component for adding tickets
 @param {Function} onCancel - Function to handle canceling the form
@@ -168,13 +166,6 @@ const [eTicket, setETicket] = useState(myData ? myData.eTicket : null);
 @type {boolean|null}
 */
 const [willCall, setWillCall] = useState(myData ? myData.willCall : null);
-
- /**
-  A function provided by the react-router-dom package that allows for programmatic navigation.
-  @function
-  @name navigate
-  */
-  const navigate = useNavigate();
 
 
 
@@ -349,7 +340,6 @@ const handleTicket = (data) => {
     .post('/tickets/', JSON.stringify(data), requestOptions)
     .then((response) => {
       console.log(response.data);
-      navigate('/publish');
     })
 
     .catch((error) => console.log(error));

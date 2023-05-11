@@ -321,7 +321,7 @@ while sending is true.
       );
     e.target.reset();
 
-    // navigate("/Navigation/Events/Add-Attendees")
+    navigate("/Add-Attendees")
     setSending(false);
   }
 
@@ -599,7 +599,7 @@ while sending is true.
       <input type="email" required={true} onChange={(e) => { setEmail(e.target.value) }} value={email} style={{ padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ccc', marginBottom: '1rem', minWidth: '200px' }} /> */}
 
             <div className="mainButton">
-              <button id="add-attendees-send" type="submit">
+              <button id="add-attendees-send" type="submit" >
                 Send
               </button>
             </div>
