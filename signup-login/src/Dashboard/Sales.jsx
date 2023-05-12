@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import './dashboard.css';
-import Orders from './Orders';
-import server from '../server';
+import React, { useState, useEffect } from "react";
+import "./dashboard.css";
+import Orders from "./Orders";
+import server from "../server";
 /**
  * Renders an upper dashboard with netsales data.
  * @returns {JSX.Element} The JSX element containing the upper dashboard.
@@ -15,21 +15,22 @@ function Sales() {
      * @returns {Promise<void>} A promise that resolves when the data is fetched and updated.
      */
     const fetchData = async () => {
-      const response = await fetch('http://localhost:3000/ticketData');
+      const response = await fetch("http://localhost:3000/ticketData");
       const data = await response.json();
       setTicketData(data);
+      console.log("data", ticketData);
     };
 
     fetchData();
   }, []);
-  localStorage.setItem('Event_id', 2);
+  localStorage.setItem("Event_id", 2);
   useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
-    const Event_id = localStorage.getItem('Event_id');
+    const accessToken = localStorage.getItem("accessToken");
+    const Event_id = localStorage.getItem("Event_id");
 
     const requestOptions = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
     };

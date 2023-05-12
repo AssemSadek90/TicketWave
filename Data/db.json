@@ -544,114 +544,27 @@
       }
     ],
     [
-      {
-        "EventDate": "2023-05-10T12:40:57.707Z",
-        "EventTime": ""
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T12:40:57.991Z",
-        "EventTime": ""
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T12:40:58.028Z",
-        "EventTime": "15:40"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T12:40:58.028Z",
-        "EventTime": "15:40"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:02:22.564Z",
-        "EventTime": ""
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:02:22.582Z",
-        "EventTime": "23:02"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:02:22.582Z",
-        "EventTime": "23:02"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:05:01.924Z",
-        "EventTime": ""
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:05:01.940Z",
-        "EventTime": "23:05"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:05:01.940Z",
-        "EventTime": "23:05"
-      },
-      {
-        "Password": ""
-      }
+
     ]
   ],
   "ticketData": [
     {
-      "Ticket_type": "General Admission",
-      "Price": "20",
+      "Name": "General Admission",
+      "price": "20",
       "Sold": "10",
-      "Tickets": "30"
+      "Amount": "30"
     },
     {
-      "Ticket_type": "VIP",
-      "Price": "50",
+      "Name": "VIP",
+      "price": "50",
       "Sold": "5",
-      "Tickets": "10"
+      "Amount": "10"
     },
     {
-      "Ticket_type": "Student",
-      "Price": "15",
+      "Name": "Student",
+      "price": "15",
       "Sold": "6",
-      "Tickets": "20"
+      "Amount": "20"
     }
   ],
   "events": [
