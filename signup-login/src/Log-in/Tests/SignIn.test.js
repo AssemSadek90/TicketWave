@@ -1,25 +1,25 @@
-// import React from 'react';
-// import { render, screen, fireEvent } from '@testing-library/react';
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 
-// import SignIn from '../SignIn.js';
-// const MockAdapter = require('axios-mock-adapter');
-// const axios = require('axios');
-// describe('SignIn component', () => {
-//   let mock;
+import SignIn from '../SignIn.js';
+const MockAdapter = require('axios-mock-adapter');
+const axios = require('axios');
+describe.skip('SignIn component', () => {
+  let mock;
 
-//   beforeAll(() => {
-//     mock = new MockAdapter(axios);
-//   });
+  beforeAll(() => {
+    mock = new MockAdapter(axios);
+  });
 
-//   afterEach(() => {
-//     mock.reset();
-//   });
+  afterEach(() => {
+    mock.reset();
+  });
 
-//   afterAll(() => {
-//     mock.restore();
-//   });
+  afterAll(() => {
+    mock.restore();
+  });
 
-//   it('renders without crashing', () => {
-//     render(<SignIn />);
-//   });
-// });
+  it('renders without crashing', () => {
+    render(<SignIn />);
+  });
+});
