@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: EventsList/SecondNav.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: EventsList/SecondNav.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
+/**
+ * Component for the second navigation bar.
+ * @component
+ * @returns {JSX.Element} JSX representation of the component.
+ */
+const SecondNav = () => {
+  /**
+   * Hook for navigation within the application.
+   */
+  const navigate = useNavigate();
+
+  /**
+   * Handles the click event for creating a new event and navigates to the basic-info route.
+   * @function
+   */
+  const handleCreateEventClick = () => {
+    localStorage.setItem('eventID', 0);
+    navigate('/basic-info');
+  };
+
+  /**
+   * State variable for the selected option.
+   * @type {string}
+   */
+  const [selectedOption, setSelectedOption] = useState('');
+
+  /**
+   * Handles the change event for the option selection.
+   * @function
+   * @param {Object} event - The event object.
+   */
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  return (
+    &lt;div className="eds-g-grid eds-align--center-vertical eds-l-mar-top-10 eds-l-mar-bot-10 filter-container snipcss0-2-14-15 snipcss-diTo1">
+      &lt;div className="eds-g-cell eds-g-cell-12-12 eds-g-cell-lw-md-4-12 eds-g-cell-sm-7-12 eds-g-cell-md-5-12 snipcss0-3-15-16">
+        &lt;div className="eds-g-grid snipcss0-4-16-17">
+          &lt;div className="eds-show-up-sm  eds-g-cell eds-g-cell-12-12 eds-g-cell-sm-5-12 eds-g-cell-md-5-12 eds-g-cell-lg-7-12 snipcss0-5-17-34">
+            &lt;div className="eds-g-grid view-mode snipcss0-6-34-35">
+              &lt;div className="eds-g-cell eds-g-cell-12-12 eds-g-cell-md-12-12 mode-selector-divider snipcss0-7-35-36">
+                &lt;div className="eds-show-up-lg snipcss0-8-36-37">
+                  &lt;span className="events-view-mode-selector eds-show-up-sm snipcss0-9-37-38">
+                    &lt;span className="eds-l-mar-right-2 events-view-mode-selector--active snipcss0-10-38-39">
+                      &lt;button
+                        aria-label="List"
+                        className="list-creator eds-btn eds-btn--button eds-btn--neutral with-text snipcss0-11-39-40"
+                        type="button"
+                      >
+                        &lt;svg viewBox="0 0 24 24" className="snipcss0-12-40-41">
+                          &lt;path
+                            id="unordered-list-chunky_svg__eds-icon--unordered-list-chunky_svg"
+                            d="M4 5h2v2H4V5zm0 6h2v2H4v-2zm0 6h2v2H4v-2zM8 5h12v2H8V5zm0 6h12v2H8v-2zm0 6h12v2H8v-2z"
+                          >&lt;/path>
+                        &lt;/svg>{' '}
+                        &lt;span className="snipcss0-12-40-42 ">List&lt;/span>
+                      &lt;/button>
+                    &lt;/span>
+                  &lt;/span>
+                &lt;/div>
+
+                &lt;div className="vertical-divider snipcss0-8-36-57">&lt;/div>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+      &lt;div className="eds-g-cell eds-g-cell-12-12 eds-l-sm-pad-left-4 dropdowns-container eds-g-cell-sm-5-12 eds-g-cell-md-5-12 snipcss0-3-15-58">
+        &lt;div className="event-filter-dropdown-menu__container snipcss0-4-58-59">
+          &lt;div tabIndex="-1" className="snipcss0-5-59-60">
+            &lt;div
+              data-spec="dropdown-menu"
+              role="menubar"
+              tabIndex="-1"
+              className="eds-dropdown-menu snipcss0-6-60-61"
+            >
+              &lt;div
+                className="eds-dropdown-menu__link ignore-react-onclickoutside snipcss0-7-61-62"
+                data-spec="dropdown-menu-link"
+                role="menuitem"
+                tabIndex="0"
+                aria-label="Menu dropdown link"
+              >
+                &lt;div
+                  className="eds-dropdown-menu__contents snipcss0-8-62-63"
+                  data-spec="dropdown-menu-contents className='dropdown-creator'"
+                >
+                  &lt;div className="event-filter-dropdown-menu__selected-content snipcss0-9-63-64">
+                    &lt;span className="eds-l-pad-left-2 snipcss0-10-64-65">
+                      &lt;span
+                        data-spec="filter-events-upcoming"
+                        className="snipcss0-11-65-66 className='dropdown-creator'"
+                      >
+                        &lt;div
+                          data-spec="filter-events-upcoming"
+                          className="snipcss0-11-65-66"
+                        >
+                          &lt;select
+                            id="dropdown-creator"
+                            data-spec="filter-events-upcoming"
+                            className="snipcss0-11-65-66 dropdown-creator"
+                            onChange={handleOptionChange}
+                          >
+                            &lt;option
+                              id="upcoming-events"
+                              className="dropdown-creator"
+                              value="upcoming"
+                            >
+                              Upcoming Events
+                            &lt;/option>
+                            &lt;option
+                              id="past-events"
+                              className="dropdown-creator"
+                              value="past"
+                            >
+                              Past Events
+                            &lt;/option>
+                            &lt;option
+                              id="all-events"
+                              className="dropdown-creator"
+                              value="all"
+                            >
+                              All Events
+                            &lt;/option>
+                          &lt;/select>
+                        &lt;/div>
+
+                        {/* Upcoming events */}
+                      &lt;/span>
+                      &lt;span className="eds-is-hidden-accessible snipcss0-11-65-67">
+                        selected
+                      &lt;/span>
+                    &lt;/span>
+                  &lt;/div>
+                &lt;/div>
+                &lt;span className="eds-dropdown-menu__icon snipcss0-8-62-71">
+                  &lt;i
+                    className="eds-vector-image eds-icon--small eds-vector-image--grey-400 eds-vector-image--block snipcss0-9-71-72"
+                    data-spec="icon"
+                    data-testid="icon"
+                    aria-hidden="true"
+                  >
+                    &lt;svg
+                      id="chevron-down-chunky_svg__eds-icon--chevron-down-chunky_svg"
+                      x="0"
+                      y="0"
+                      viewBox="0 0 24 24"
+                      className="snipcss0-10-72-73"
+                    >
+                      &lt;path
+                        id="chevron-down-chunky_svg__eds-icon--chevron-down-chunky_base"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
+                        d="M7 10.2l5 5 5-5-1.4-1.4-3.6 3.6-3.6-3.6z"
+                      >&lt;/path>
+                    &lt;/svg>
+                  &lt;/i>
+                &lt;/span>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+      &lt;div className="eds-show-up-md eds-g-cell eds-g-cell-2-12 snipcss0-3-15-74">
+        &lt;div className="create-event-creator snipcss0-4-74-75">
+          &lt;div
+            id="create-event-btn-creator"
+            onClick={handleCreateEventClick}
+            className=" eds-btn eds-btn--link eds-btn--fill snipcss0-5-75-76"
+            style={{
+              padding: '0',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Create Event
+          &lt;/div>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  );
+};
+export default SecondNav;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventDetails.html">EventDetails</a></li><li><a href="module-EventDetailsPage.html">EventDetailsPage</a></li></ul><h3>Classes</h3><ul><li><a href="Tickets.html">Tickets</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddAttendees">AddAttendees</a></li><li><a href="global.html#AddTicketForm">AddTicketForm</a></li><li><a href="global.html#AdmissionPage">AdmissionPage</a></li><li><a href="global.html#AdmissionPageCard">AdmissionPageCard</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Bar">Bar</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#CreatePromoForm">CreatePromoForm</a></li><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#CustomNavLink">CustomNavLink</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventCapacity">EventCapacity</a></li><li><a href="global.html#EventDescription">EventDescription</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#EventsListItem">EventsListItem</a></li><li><a href="global.html#EventsListNavBar">EventsListNavBar</a></li><li><a href="global.html#FormContainer">FormContainer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalOverlay">ModalOverlay</a></li><li><a href="global.html#NAHome">NAHome</a></li><li><a href="global.html#NavPage">NavPage</a></li><li><a href="global.html#Orders">Orders</a></li><li><a href="global.html#Popup">Popup</a></li><li><a href="global.html#PromoMain">PromoMain</a></li><li><a href="global.html#PromoPageCard">PromoPageCard</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#Row">Row</a></li><li><a href="global.html#Sales">Sales</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SecondCustomNavLink">SecondCustomNavLink</a></li><li><a href="global.html#SecondNav">SecondNav</a></li><li><a href="global.html#SecondSidebar">SecondSidebar</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SoldTickets">SoldTickets</a></li><li><a href="global.html#SoldTicketsMain">SoldTicketsMain</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UploadCsvForm">UploadCsvForm</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleMouseLeave">handleMouseLeave</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#isMobile">isMobile</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#nextHandler">nextHandler</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#setApplyCodeTo">setApplyCodeTo</a></li><li><a href="global.html#setCodeName">setCodeName</a></li><li><a href="global.html#setCodeType">setCodeType</a></li><li><a href="global.html#setDiscount">setDiscount</a></li><li><a href="global.html#setEndDate">setEndDate</a></li><li><a href="global.html#setEndTime">setEndTime</a></li><li><a href="global.html#setId">setId</a></li><li><a href="global.html#setIsTicketLimit">setIsTicketLimit</a></li><li><a href="global.html#setNames">setNames</a></li><li><a href="global.html#setPromoEnds">setPromoEnds</a></li><li><a href="global.html#setPromoStarts">setPromoStarts</a></li><li><a href="global.html#setReveal">setReveal</a></li><li><a href="global.html#setStartDate">setStartDate</a></li><li><a href="global.html#setStartTime">setStartTime</a></li><li><a href="global.html#setTicketLimit">setTicketLimit</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#submitHandler">submitHandler</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#useEffect">useEffect</a></li><li><a href="global.html#useEffectSoldTicketData">useEffectSoldTicketData</a></li><li><a href="global.html#useResizeListener">useResizeListener</a></li><li><a href="global.html#useTimer">useTimer</a></li><li><a href="global.html#user">user</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri May 12 2023 23:15:36 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

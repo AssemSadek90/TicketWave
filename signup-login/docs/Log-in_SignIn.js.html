@@ -34,10 +34,17 @@ import { Link } from 'react-router-dom';
 //import axios from 'axios';
 import './Log-in-styling/Login.css';
 import server from '../server';
+import {
+  isValidSession,
+  getCredentials,
+  getUserID,
+} from '../Credentials/Credentials';
 //import GoogleIcon from './Google_G_Logo.png';
 //import FacebookIcon from '../EventDetails/Facebook.png';
 //import { ReactComponent as GoogleIcon } from '.../google-icon.svg';
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import GoogleLogin from './GoogleSignIn';
+import Footer from '../Footer/Footer';
 
 /**
  * A React component for creating an account.
@@ -233,7 +240,7 @@ Handles email input change event
       .get(`/users/email/${user.email}/`, requestOptions)
       .then((response) => {
         console.log(response);
-        setIsLoading(false);
+        // setIsLoading(false);
         if (response.data.username.length > 0) {
           setUserExists(true);
           //user.email = response.data.email;
@@ -252,9 +259,28 @@ Handles email input change event
               localStorage.setItem('accessToken', accessToken);
               localStorage.setItem('refreshToken', refreshToken);
               console.log(response.data);
-              navigate('/home');
+              isValidSession();
+              getUserID();
+              //navigate('/home');
             })
-            .catch((error) => console.log(error));
+            .then(() => {
+              getCredentials();
+            })
+            .then(() => {
+              const isValidSession = localStorage.getItem('isValidSession');
+              console.log(localStorage.getItem('userName'));
+              console.log(isValidSession);
+              if (isValidSession === 'true') {
+                setIsLoading(false);
+                navigate('/home');
+              } else {
+                setIsLoading(false);
+              }
+            })
+            .catch((error) => {
+              console.log('error', error);
+              setIsLoading(false);
+            });
         } else {
           setUserExists(false);
           setInvalidFields(true);
@@ -292,7 +318,7 @@ Handles email input change event
           //console.log(forgotPasswordEmail);
           //send email
           server
-            .get(`auth/password/reset/${username}/${email}/`)
+            .get(`/auth/password/reset/${username}/${email}/`)
             .then((response) => {
               console.log(response);
             })
@@ -324,7 +350,10 @@ Handles email input change event
   @return {JSX.Element}
   */
   return (
-    &lt;div className="container-fluid">
+    &lt;div
+      className="container-fluid"
+      style={{ paddingRight: 0, paddingLeft: 0 }}
+    >
       &lt;div className="row">
         &lt;div className="col-md-6 split-container-primary">
           &lt;div className="split-container-content">
@@ -397,9 +426,12 @@ Handles email input change event
                       Forgot Password?
                     &lt;/Link>
                   &lt;/p>
-                  &lt;p>
-                    &lt;Link to="/change-password">Change Password&lt;/Link>
-                  &lt;/p>
+                  &lt;a
+                    style={{ textAlign: 'center' }}
+                    href="https://ticketwave.me/api/google/login/login"
+                  >
+                    Sign in with Google
+                  &lt;/a>
                 &lt;/div>
                 &lt;div id="signInDiv">
                   {/* &lt;GoogleLogin
@@ -419,9 +451,11 @@ Handles email input change event
           &lt;img
             src="https://cdn.evbstatic.com/s3-build/perm_001/530d34/django/images/login/lateral-image-2.jpg"
             alt="Kitchen working"
+            // style={{ height: '700px' }}
           >&lt;/img>
         &lt;/div>
       &lt;/div>
+      &lt;Footer />
     &lt;/div>
   );
 }
@@ -437,13 +471,13 @@ export default SignIn;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#App">App</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#user">user</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventDetails.html">EventDetails</a></li><li><a href="module-EventDetailsPage.html">EventDetailsPage</a></li></ul><h3>Classes</h3><ul><li><a href="Tickets.html">Tickets</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddAttendees">AddAttendees</a></li><li><a href="global.html#AddTicketForm">AddTicketForm</a></li><li><a href="global.html#AdmissionPage">AdmissionPage</a></li><li><a href="global.html#AdmissionPageCard">AdmissionPageCard</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Bar">Bar</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#CreatePromoForm">CreatePromoForm</a></li><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#CustomNavLink">CustomNavLink</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventCapacity">EventCapacity</a></li><li><a href="global.html#EventDescription">EventDescription</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#EventsListItem">EventsListItem</a></li><li><a href="global.html#EventsListNavBar">EventsListNavBar</a></li><li><a href="global.html#FormContainer">FormContainer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalOverlay">ModalOverlay</a></li><li><a href="global.html#NAHome">NAHome</a></li><li><a href="global.html#NavPage">NavPage</a></li><li><a href="global.html#Orders">Orders</a></li><li><a href="global.html#Popup">Popup</a></li><li><a href="global.html#PromoMain">PromoMain</a></li><li><a href="global.html#PromoPageCard">PromoPageCard</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#Row">Row</a></li><li><a href="global.html#Sales">Sales</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SecondCustomNavLink">SecondCustomNavLink</a></li><li><a href="global.html#SecondNav">SecondNav</a></li><li><a href="global.html#SecondSidebar">SecondSidebar</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SoldTickets">SoldTickets</a></li><li><a href="global.html#SoldTicketsMain">SoldTicketsMain</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UploadCsvForm">UploadCsvForm</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleMouseLeave">handleMouseLeave</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#isMobile">isMobile</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#nextHandler">nextHandler</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#setApplyCodeTo">setApplyCodeTo</a></li><li><a href="global.html#setCodeName">setCodeName</a></li><li><a href="global.html#setCodeType">setCodeType</a></li><li><a href="global.html#setDiscount">setDiscount</a></li><li><a href="global.html#setEndDate">setEndDate</a></li><li><a href="global.html#setEndTime">setEndTime</a></li><li><a href="global.html#setId">setId</a></li><li><a href="global.html#setIsTicketLimit">setIsTicketLimit</a></li><li><a href="global.html#setNames">setNames</a></li><li><a href="global.html#setPromoEnds">setPromoEnds</a></li><li><a href="global.html#setPromoStarts">setPromoStarts</a></li><li><a href="global.html#setReveal">setReveal</a></li><li><a href="global.html#setStartDate">setStartDate</a></li><li><a href="global.html#setStartTime">setStartTime</a></li><li><a href="global.html#setTicketLimit">setTicketLimit</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#submitHandler">submitHandler</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#useEffect">useEffect</a></li><li><a href="global.html#useEffectSoldTicketData">useEffectSoldTicketData</a></li><li><a href="global.html#useResizeListener">useResizeListener</a></li><li><a href="global.html#useTimer">useTimer</a></li><li><a href="global.html#user">user</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 19 2023 06:49:15 GMT+0200 (Eastern European Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri May 12 2023 23:15:36 GMT+0200 (Eastern European Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

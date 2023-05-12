@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Tickets/Sidebar/Sidebar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Tickets/Sidebar/Sidebar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
+import {
+  FaHome,
+  FaCalendarAlt,
+  FaShoppingCart,
+  FaBullhorn,
+  FaFileAlt,
+  FaMoneyBill,
+  FaCog,
+  FaThLarge,
+} from 'react-icons/fa';
+import SecondCustomNavLink from '../UI/SecondCustomNavLink';
+import { useLocation } from 'react-router-dom';
+import SecondSidebar from './SecondSidebar';
+import { useEffect } from 'react';
+import NavPage from '../components/NavPage';
+
+/** An array of objects that contains the name and icon of each menu item.
+@typedef {Array.&lt;{name: string, icon: React.ReactNode}>} IconArray
+*/
+const icons = [
+  {
+    name: 'Home',
+    icon: &lt;FaHome />,
+  },
+  {
+    name: 'Events',
+    icon: &lt;FaCalendarAlt />,
+  },
+  {
+    name: 'home-orders',
+    icon: &lt;FaShoppingCart />,
+  },
+  {
+    name: 'home-marketing',
+    icon: &lt;FaBullhorn />,
+  },
+  {
+    name: 'home-reports',
+    icon: &lt;FaFileAlt />,
+  },
+  {
+    name: 'home-finance',
+    icon: &lt;FaMoneyBill />,
+  },
+  {
+    name: 'home-settings',
+    icon: &lt;FaCog />,
+  },
+  {
+    name: 'home-app-Marketplace',
+    icon: &lt;FaThLarge />,
+  },
+];
+
+/** Sidebar component that displays a list of menu items with icons.
+@param {Object} props - The props object that contains the visible and showSecond boolean values.
+@param {boolean} props.visible - A boolean value that determines whether the sidebar is visible or not.
+@param {boolean} props.showSecond - A boolean value that determines whether the second sidebar is shown or not.
+@returns {JSX.Element} A JSX element that represents the Sidebar component.
+*/
+const Sidebar = ({ visible, showSecond }) => {
+  const [activeIcon, setActiveIcon] = useState(null);
+  const [isShown, setIsShown] = useState(true);
+  //   const [activedIcon, setActivedIcon] = useState(null);
+
+  /** The location object that represents the current URL path.
+@typedef {Object} LocationObject
+@property {string} pathname - The current URL path.
+*/
+  const location = useLocation();
+  const [currentUrl, setCurrentUrl] = useState(location.pathname);
+
+  /** Updates the current URL path state when the location pathname changes.
+@type {function} - A useEffect hook that updates the current URL path state when the location pathname changes.
+*/
+  useEffect(() => {
+    setCurrentUrl(location.pathname);
+  }, [location.pathname]);
+
+  /** A useEffect hook that sets the isShown state to true if the showSecond prop is true. */
+  useEffect(() => {
+    if (showSecond === true) {
+      setIsShown(true);
+    }
+    // if (currentUrl === '/Events') {
+    //   setIsShown(true);
+    // }
+    // else if (currentUrl.includes('/Events' || "dashboard")) {
+    //     setIsShown(true);
+    //   }
+    //   else setIsShown(false);
+    //   isShowing(isShown)
+  }, [showSecond]);
+
+  /** Handles the click event on a menu item icon and sets the active icon state.
+@param {string} name - The name of the menu item.
+*/
+  const handleIconClick = (name) => {
+    setActiveIcon(name);
+  };
+
+  /** Handles the mouse leave event on a menu item icon and sets the active icon state to null.*/
+  const handleIconLeave = () => {
+    setActiveIcon(null);
+  };
+
+  //   const handleClick = (name) => {
+  //     setActivedIcon(name);
+  //     console.log(name)
+  //   };
+  if (visible) {
+    return (
+      &lt;div className="sidebar" style={{ borderRight: '1px solid #ccc' }}>
+        {icons.map((item) => (
+          &lt;div
+            style={{ margin: '3px', position: 'relative' }}
+            key={item.name}
+            className="sidebar-item"
+            onMouseEnter={() => handleIconClick(item.name)}
+            onMouseLeave={handleIconLeave}
+            //   onClick={() => handleClick(item.name)}
+            //   onClick={handleIconClick(item.name)}
+          >
+            &lt;div
+              style={{
+                fontSize: '1.5rem',
+                color: '#333',
+                backgroundColor: activeIcon === item.name ? 'white' : '',
+                width: '80%',
+                height: '80%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                display: 'flex',
+                borderRadius: '6px',
+                overflow: 'hidden',
+              }}
+            >
+              &lt;SecondCustomNavLink
+                id="second-navbar"
+                exact={false}
+                to={`/${item.name}`}
+              >
+                {item.icon}
+              &lt;/SecondCustomNavLink>
+            &lt;/div>
+
+            {/* {currentUrl === '/Events' &amp;&amp; (
+    &lt;SecondSidebar  />
+)} */}
+
+            {isShown &amp;&amp; (
+              &lt;React.Fragment>
+                &lt;SecondSidebar showSecond={showSecond} />
+                {/* &lt;NavPage /> */}
+              &lt;/React.Fragment>
+            )}
+
+            {/* {currentUrl === '/Events' &amp;&amp; (
+            &lt;div style={{transform: 'translateX(200%)', fontSize: 'small', backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'}}>{item.name}&lt;/div>
+          )} */}
+          &lt;/div>
+        ))}
+      &lt;/div>
+    );
+  }
+};
+
+export default Sidebar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventDetails.html">EventDetails</a></li><li><a href="module-EventDetailsPage.html">EventDetailsPage</a></li></ul><h3>Classes</h3><ul><li><a href="Tickets.html">Tickets</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddAttendees">AddAttendees</a></li><li><a href="global.html#AddTicketForm">AddTicketForm</a></li><li><a href="global.html#AdmissionPage">AdmissionPage</a></li><li><a href="global.html#AdmissionPageCard">AdmissionPageCard</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Bar">Bar</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#CreatePromoForm">CreatePromoForm</a></li><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#CustomNavLink">CustomNavLink</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventCapacity">EventCapacity</a></li><li><a href="global.html#EventDescription">EventDescription</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#EventsListItem">EventsListItem</a></li><li><a href="global.html#EventsListNavBar">EventsListNavBar</a></li><li><a href="global.html#FormContainer">FormContainer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalOverlay">ModalOverlay</a></li><li><a href="global.html#NAHome">NAHome</a></li><li><a href="global.html#NavPage">NavPage</a></li><li><a href="global.html#Orders">Orders</a></li><li><a href="global.html#Popup">Popup</a></li><li><a href="global.html#PromoMain">PromoMain</a></li><li><a href="global.html#PromoPageCard">PromoPageCard</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#Row">Row</a></li><li><a href="global.html#Sales">Sales</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SecondCustomNavLink">SecondCustomNavLink</a></li><li><a href="global.html#SecondNav">SecondNav</a></li><li><a href="global.html#SecondSidebar">SecondSidebar</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SoldTickets">SoldTickets</a></li><li><a href="global.html#SoldTicketsMain">SoldTicketsMain</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UploadCsvForm">UploadCsvForm</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleMouseLeave">handleMouseLeave</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#isMobile">isMobile</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#nextHandler">nextHandler</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#setApplyCodeTo">setApplyCodeTo</a></li><li><a href="global.html#setCodeName">setCodeName</a></li><li><a href="global.html#setCodeType">setCodeType</a></li><li><a href="global.html#setDiscount">setDiscount</a></li><li><a href="global.html#setEndDate">setEndDate</a></li><li><a href="global.html#setEndTime">setEndTime</a></li><li><a href="global.html#setId">setId</a></li><li><a href="global.html#setIsTicketLimit">setIsTicketLimit</a></li><li><a href="global.html#setNames">setNames</a></li><li><a href="global.html#setPromoEnds">setPromoEnds</a></li><li><a href="global.html#setPromoStarts">setPromoStarts</a></li><li><a href="global.html#setReveal">setReveal</a></li><li><a href="global.html#setStartDate">setStartDate</a></li><li><a href="global.html#setStartTime">setStartTime</a></li><li><a href="global.html#setTicketLimit">setTicketLimit</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#submitHandler">submitHandler</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#useEffect">useEffect</a></li><li><a href="global.html#useEffectSoldTicketData">useEffectSoldTicketData</a></li><li><a href="global.html#useResizeListener">useResizeListener</a></li><li><a href="global.html#useTimer">useTimer</a></li><li><a href="global.html#user">user</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri May 12 2023 23:15:36 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
