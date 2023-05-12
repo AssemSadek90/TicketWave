@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Tickets/Tickets.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Tickets/Tickets.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NavPage from './components/NavPage';
+import AdmissionPage from './components/AdmissionPage';
+import PromoMain from './promoPage/PromoMain';
+import Sidebar from './Sidebar/Sidebar';
+import { useLocation } from 'react-router-dom';
+import './Tickets.css';
+import AddAttendees from './AddAttendees/AddAttendees';
+import SoldTickets from './SoldTickets/SoldTickets';
+import SoldTicketsMain from './SoldTickets/SoldTicketsMain';
+import EventDetails from '../EventDetails/EventDetails';
+import CreatorEvent from '../EventsList/CreatorEvent';
+
+// import Dashboard from "./Dashboard/Dashboard";
+import Dashboard from '../Dashboard/dashboardinsights';
+import CreateEventForm from '../Basic-info/CreateEventForm';
+import ONavbar from '../NavBar/OrganizationNav/ONavbar';
+import Publish from '../Publish/publish-preview';
+import PublishApp from '../Publish/PublishApp';
+
+/** Represents a component for managing tickets and sold tickets.
+@constructor
+@param {Object} props - The props object containing the ticket data.
+@param {Array} props.finalTicketData - An array of objects containing the final ticket data.
+@param {Array} props.finalSoldTicketData - An array of objects containing the final sold ticket data.
+@param {Array} props.finalTickets - An array of objects containing the final tickets.
+@param {Array} props.finalSoldTickets - An array of objects containing the final sold tickets.
+*/
+function Tickets({
+  finalTicketData,
+  finalSoldTicketData,
+  finalTickets,
+  finalSoldTickets,
+}) {
+  /** State hook for the promotional data.
+@type {[Array, function]}
+*/
+  const [promoData, setPromoData] = useState([]);
+  /** State hook for the ticket capacity.
+@type {[null, function]}
+*/
+  const [capacity, setCapacity] = useState(null);
+  /** State hook for the padding value.
+@type {[string, function]}
+*/
+  const [padding, setPadding] = useState('5rem');
+  /** State hook for the visibility of a component.
+@type {[boolean, function]}
+*/
+  const [visible, setVisible] = useState(true);
+  /** State hook for the second sidebar display.
+@type {[boolean, function]}
+*/
+  const [showSecondSidebar, setShowSecondSidebar] = useState(true);
+  /** State hook for the submission status.
+@type {[string, function]}
+*/
+  const [submitted, setSubmitted] = useState('Not Submitted');
+
+  // _________________________________________________ THESE TWO ARE FOR THE BACKEND CURRENTLY ______________________________________________________
+
+  /** State hook for the ticket data.
+@type {[Array, function]}
+*/
+  const [ticketData, setTicketData] = useState(finalTickets);
+  /** State hook for the sold ticket data.
+@type {[Array, function]}
+*/
+  const [soldTicketData, setSoldTicketData] = useState(finalSoldTickets);
+
+  // __________________________________________________________________________________________________________________________________________________
+
+  /** useEffect hook for updating the final ticket data.
+@function
+@param {function} finalTicketData - The function to update the final ticket data.
+@param {Array} ticketData - The current ticket data.
+@returns {undefined}
+*/
+  useEffect(() => {
+    finalTicketData(ticketData);
+  }, [ticketData]);
+
+  /** useEffect hook for updating the final sold ticket data.
+@function
+@param {function} finalSoldTicketData - The function to update the final sold ticket data.
+@param {Array} soldTicketData - The current sold ticket data.
+@returns {undefined}
+*/
+  useEffect(() => {
+    finalSoldTicketData(soldTicketData);
+  }, [soldTicketData]);
+
+  /** useEffect hook for updating the sold ticket data.
+@function
+@param {Array} ticketData - The current ticket data.
+@param {Array} soldTicketData - The current sold ticket data.
+@returns {undefined}
+*/
+  useEffect(() => {
+    setSoldTicketData((prevSoldTickets) =>
+      ticketData.map((obj) => {
+        const prevSoldTicket = prevSoldTickets.find(
+          (ticket) => ticket.id === obj.id
+        );
+        const prevSoldQuantity = prevSoldTicket
+          ? prevSoldTicket.soldTickets
+          : 0;
+        return {
+          ...obj,
+          soldTickets: obj.chosenQuantity + prevSoldQuantity,
+        };
+      })
+    );
+  }, [ticketData]);
+
+  /** Function to handle ticket data and capacity updates.
+@function
+@param {Array} e - The new ticket data.
+@param {number} a - The new capacity.
+@returns {undefined}
+*/
+  function TicketHandler(e, a) {
+    setTicketData(e);
+    setCapacity(a);
+    // console.log(e);
+  }
+
+  /** Function to handle promo data updates.
+@function
+@param {Array} b - The new promo data.
+@returns {undefined}
+*/
+  function promoHandler(b) {
+    setPromoData(b);
+    // console.log(b);
+  }
+
+  /** Function to add attendee data and update sold ticket data and ticket data.
+@function
+@param {Array} e - The new attendee data.
+@returns {undefined}
+*/
+  function addAttendeeData(e) {
+    setSoldTicketData((prevSoldTickets) =>
+      ticketData.map((obj) => {
+        const prevSoldTicket = prevSoldTickets.find(
+          (ticket) => ticket.id === obj.id
+        );
+        const prevSoldQuantity = prevSoldTicket
+          ? prevSoldTicket.soldTickets
+          : 0;
+        return {
+          ...obj,
+          soldTickets: obj.chosenQuantity + prevSoldQuantity,
+        };
+      })
+    );
+
+    setTicketData(e);
+    // console.log("ADDED")
+  }
+
+  /** Function to handle form submission and log ticket data, promo data, and capacity.
+@function
+@returns {undefined}
+*/
+  function submitHandler() {
+    console.log('Ticket Data', ticketData);
+    console.log('Promo Data', promoData);
+    console.log('Capacity', capacity);
+
+    const data = {
+      TicketData: ticketData,
+      PromoData: promoData,
+      Capacity: capacity,
+    };
+    // handleSignUp(data);
+  }
+
+  // const handleSignUp = (data) => {
+  //   const requestOptions = {
+  //     headers: { 'Content-Type': 'application/json' },
+  //   };
+
+  //   server
+  //     .post('/Events', data, requestOptions)
+  //     .then((response) => console.log(response.data))
+  //     .catch((error) => console.log(error));
+  // };
+
+  /** Effect hook to scroll to the top of the window on component mount.
+@function
+@returns {undefined}
+*/
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    // &lt;BrowserRouter>
+    /** Renders the main application layout with various routes and components.
+     * @component
+     * @return {JSX.Element}
+     */
+    &lt;React.Fragment>
+      &lt;Sidebar showSecond={showSecondSidebar} visible={visible} />
+      &lt;div style={{ paddingLeft: padding }}>
+        &lt;Routes>
+          &lt;Route
+            path="/publish"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              setShowSecondSidebar(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div style={{}}>
+                    &lt;PublishApp />
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Events"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              setShowSecondSidebar(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div style={{}}>
+                    &lt;CreatorEvent />
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/home-orders"
+            Component={() => {
+              setPadding('5rem');
+              setVisible(true);
+              setShowSecondSidebar(false);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/home-marketing"
+            Component={() => {
+              setPadding('5rem');
+              setVisible(true);
+              setShowSecondSidebar(false);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/home-reports"
+            Component={() => {
+              setPadding('5rem');
+              setVisible(true);
+              setShowSecondSidebar(false);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/home-finance"
+            Component={() => {
+              setPadding('5rem');
+              setVisible(true);
+              setShowSecondSidebar(false);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/home-settings"
+            Component={() => {
+              setPadding('5rem');
+              setVisible(true);
+              setShowSecondSidebar(false);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/home-app-Marketplace"
+            Component={() => {
+              setPadding('5rem');
+              setVisible(true);
+              setShowSecondSidebar(false);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          {/* ____________________________________________________ YOUR MENTIONED PAGES_______________________________________________________________ */}
+
+          &lt;Route
+            path="/dashboard"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              setShowSecondSidebar(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div style={{ paddingBottom: '1rem' }}>
+                    &lt;Dashboard
+                      soldTicketData={soldTicketData}
+                      ticketData={ticketData}
+                    />
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          {/* _________________________________________________________________________________________________________________________________________ */}
+
+          &lt;Route
+            path="/details"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              setShowSecondSidebar(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>Details Page&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Order-Options"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              setShowSecondSidebar(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>Order Options Page&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Payments-and-Tax"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              setShowSecondSidebar(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>Payments and Tax Page&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Marketing"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              setShowSecondSidebar(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div>Marketing Page&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Tickets/admission"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div
+                    style={{
+                      paddingTop: '1rem',
+                      paddingRight: '1rem',
+                      paddingBottom: '1rem',
+                    }}
+                  >
+                    &lt;NavPage />
+                    &lt;AdmissionPage
+                      soldTicketData={soldTicketData}
+                      finalCapacity={capacity}
+                      finalData={ticketData}
+                      Ticket={TicketHandler}
+                      finalSubmission={submitHandler}
+                    />
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/Tickets/add-ons"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div
+                    style={{
+                      paddingTop: '1rem',
+                      paddingRight: '1rem',
+                      paddingBottom: '1rem',
+                    }}
+                  >
+                    &lt;NavPage />
+                    &lt;div>&lt;/div>
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/Tickets/promo-codes"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div
+                    style={{
+                      paddingTop: '1rem',
+                      paddingRight: '1rem',
+                      paddingBottom: '1rem',
+                    }}
+                  >
+                    &lt;NavPage />
+                    &lt;PromoMain finalData={promoData} Promo={promoHandler} />
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/Tickets/holds"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div
+                    style={{
+                      paddingTop: '1rem',
+                      paddingRight: '1rem',
+                      paddingBottom: '1rem',
+                    }}
+                  >
+                    &lt;NavPage />
+                    &lt;div>&lt;/div>
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+          &lt;Route
+            path="/Tickets/event-settings"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div
+                    style={{
+                      paddingTop: '1rem',
+                      paddingRight: '1rem',
+                      paddingBottom: '1rem',
+                    }}
+                  >
+                    &lt;NavPage />
+                    &lt;div>&lt;/div>
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Add-Attendees"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div
+                    style={{
+                      paddingTop: '1rem',
+                      paddingRight: '1rem',
+                      paddingBottom: '1rem',
+                    }}
+                  >
+                    &lt;AddAttendees
+                      submitted={submitted}
+                      soldTickets={soldTicketData}
+                      finalData={ticketData}
+                      addAttendee={addAttendeeData}
+                    />
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Sold-Tickets"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div
+                    style={{
+                      paddingTop: '1rem',
+                      paddingRight: '1rem',
+                      paddingBottom: '1rem',
+                    }}
+                  >
+                    &lt;SoldTicketsMain data={soldTicketData} />
+                  &lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Orders"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div> Orders Page&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Attendee-Credits"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div> Attendee-Credits&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Attendee-List"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div> Attendee-List&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+
+          &lt;Route
+            path="/Check-in"
+            Component={() => {
+              setPadding('18rem');
+              setVisible(true);
+              return (
+                &lt;React.Fragment>
+                  &lt;ONavbar />
+                  &lt;div> Check in&lt;/div>
+                &lt;/React.Fragment>
+              );
+            }}
+          />
+        &lt;/Routes>
+      &lt;/div>
+    &lt;/React.Fragment>
+    // &lt;/BrowserRouter>
+  );
+}
+
+export default Tickets;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventDetails.html">EventDetails</a></li><li><a href="module-EventDetailsPage.html">EventDetailsPage</a></li></ul><h3>Classes</h3><ul><li><a href="Tickets.html">Tickets</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddAttendees">AddAttendees</a></li><li><a href="global.html#AddTicketForm">AddTicketForm</a></li><li><a href="global.html#AdmissionPage">AdmissionPage</a></li><li><a href="global.html#AdmissionPageCard">AdmissionPageCard</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Bar">Bar</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#CreatePromoForm">CreatePromoForm</a></li><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#CustomNavLink">CustomNavLink</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventCapacity">EventCapacity</a></li><li><a href="global.html#EventDescription">EventDescription</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#EventsListItem">EventsListItem</a></li><li><a href="global.html#EventsListNavBar">EventsListNavBar</a></li><li><a href="global.html#FormContainer">FormContainer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalOverlay">ModalOverlay</a></li><li><a href="global.html#NAHome">NAHome</a></li><li><a href="global.html#NavPage">NavPage</a></li><li><a href="global.html#Orders">Orders</a></li><li><a href="global.html#Popup">Popup</a></li><li><a href="global.html#PromoMain">PromoMain</a></li><li><a href="global.html#PromoPageCard">PromoPageCard</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#Row">Row</a></li><li><a href="global.html#Sales">Sales</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SecondCustomNavLink">SecondCustomNavLink</a></li><li><a href="global.html#SecondNav">SecondNav</a></li><li><a href="global.html#SecondSidebar">SecondSidebar</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SoldTickets">SoldTickets</a></li><li><a href="global.html#SoldTicketsMain">SoldTicketsMain</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UploadCsvForm">UploadCsvForm</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleMouseLeave">handleMouseLeave</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#isMobile">isMobile</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#nextHandler">nextHandler</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#setApplyCodeTo">setApplyCodeTo</a></li><li><a href="global.html#setCodeName">setCodeName</a></li><li><a href="global.html#setCodeType">setCodeType</a></li><li><a href="global.html#setDiscount">setDiscount</a></li><li><a href="global.html#setEndDate">setEndDate</a></li><li><a href="global.html#setEndTime">setEndTime</a></li><li><a href="global.html#setId">setId</a></li><li><a href="global.html#setIsTicketLimit">setIsTicketLimit</a></li><li><a href="global.html#setNames">setNames</a></li><li><a href="global.html#setPromoEnds">setPromoEnds</a></li><li><a href="global.html#setPromoStarts">setPromoStarts</a></li><li><a href="global.html#setReveal">setReveal</a></li><li><a href="global.html#setStartDate">setStartDate</a></li><li><a href="global.html#setStartTime">setStartTime</a></li><li><a href="global.html#setTicketLimit">setTicketLimit</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#submitHandler">submitHandler</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#useEffect">useEffect</a></li><li><a href="global.html#useEffectSoldTicketData">useEffectSoldTicketData</a></li><li><a href="global.html#useResizeListener">useResizeListener</a></li><li><a href="global.html#useTimer">useTimer</a></li><li><a href="global.html#user">user</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri May 12 2023 23:15:36 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

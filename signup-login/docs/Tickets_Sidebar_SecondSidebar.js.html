@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Tickets/Sidebar/SecondSidebar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Tickets/Sidebar/SecondSidebar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState } from 'react';
+import { FaBackward, FaBackspace, faBack } from 'react-icons/fa';
+import SecondCustomNavLink from '../UI/SecondCustomNavLink';
+import { useNavigate } from 'react-router-dom';
+import CustomNavLink from '../UI/CustomNavLink';
+import CustomLink from '../UI/CustomLink';
+
+/** An array of objects representing the icons in the second sidebar.
+@typedef {Object[]} IconObject
+@property {string} IconObject.name - The name of the icon.
+@property {string} IconObject.title - The title of the icon.
+*/
+const icons = [
+  {
+    name: '/basic-info',
+    title: 'Basic',
+  },
+  {
+    name: '/details',
+    title: 'Details',
+  },
+  {
+    name: '/Tickets/admission',
+    title: 'Tickets',
+  },
+  {
+    name: '/publish',
+    title: 'Publish',
+  },
+];
+
+/** Represents the second sidebar component.
+@param {Object} props - The props object.
+@param {boolean} props.showSecond - A boolean value indicating whether to show the second sidebar or not.
+@returns {JSX.Element} - The JSX element representing the second sidebar component.
+*/
+const SecondSidebar = ({ showSecond }) => {
+  /** Represents the state of the active icon.
+@typedef {Object} ActiveIconState
+@property {string|null} ActiveIconState.activeIcon - The name of the active icon.
+@property {Function} ActiveIconState.setActiveIcon - The function to set the state of the active icon.
+*/
+  const [activeIcon, setActiveIcon] = useState(null);
+  /** Represents the state of the options.
+@typedef {Object} OptionsState
+@property {boolean} OptionsState.options - The value indicating whether to show options or not.
+@property {Function} OptionsState.setOptions - The function to set the state of the options.
+*/
+  const [options, setOptions] = useState(false);
+  /** Represents the state of the payment.
+@typedef {Object} PaymentState
+@property {boolean} PaymentState.payment - The value indicating whether to show payment or not.
+@property {Function} PaymentState.setPayment - The function to set the state of the payment.
+*/
+  const [payment, setPayment] = useState(false);
+  /** Represents the state of the marketing.
+@typedef {Object} MarketingState
+@property {boolean} MarketingState.marketing - The value indicating whether to show marketing or not.
+@property {Function} MarketingState.setMarketing - The function to set the state of the marketing.
+*/
+  const [marketing, setMarketing] = useState(false);
+  /** Represents the state of the manage.
+@typedef {Object} ManageState
+@property {boolean} ManageState.manage - The value indicating whether to show manage or not.
+@property {Function} ManageState.setManage - The function to set the state of the manage.
+*/
+  const [manage, setManage] = useState(false);
+
+  /** Represents the navigate object from react-router-dom.
+@type {Object}
+@property {Function} history - The function to navigate to a new location.
+*/
+  const history = useNavigate();
+  //   const [activedIcon, setActivedIcon] = useState(null);
+
+  /** Sets the state of the active icon when an icon is clicked.
+@param {string} name - The name of the icon that was clicked.
+@returns {void}
+*/
+  const handleIconClick = (name) => {
+    setActiveIcon(name);
+  };
+
+  /** Sets the state of the active icon to null when the mouse leaves the icon.
+@returns {void}
+*/
+  const handleIconLeave = () => {
+    setActiveIcon(null);
+  };
+
+  /** Navigates to the home page.
+@returns {void}
+*/
+  function CloseHandler() {
+    history('/Events');
+  }
+
+  //   const handleClick = (name) => {
+  //     setActivedIcon(name);
+  //     console.log(name)
+  //   };
+
+  return (
+    &lt;div className="no-underline">
+      {showSecond &amp;&amp; (
+        &lt;div
+          className="sidebar"
+          style={{
+            zIndex: 99999,
+            marginLeft: '5rem',
+            minWidth: '12rem',
+            maxWidth: '20rem',
+            padding: '10px',
+            position: 'fixed',
+            overflowY: 'auto',
+            overflowX: 'hidden',
+            height: '100%',
+          }}
+        >
+          &lt;div
+            style={{
+              width: '100%',
+              backgroundColor: 'none',
+              margin: '1rem',
+              outline: 'none',
+              border: 'none',
+              color: 'blue',
+              fontSize: 'medium',
+              fontWeight: 'bold',
+              paddingBottom: '1rem',
+              borderBottom: '1px solid #ccc',
+              paddingLeft: '1rem',
+              alignItems: 'center',
+              display: 'flex',
+              flexDirection: 'row',
+            }}
+            onClick={CloseHandler}
+          >
+            &lt;div style={{ fontSize: 'large', marginRight: '1rem' }}>
+              &lt;FaBackward />
+            &lt;/div>
+            &lt;div>Back&lt;/div>
+          &lt;/div>
+          &lt;div style={{ borderBottom: '1px solid #ccc', width: '100%' }}>
+            {icons.map((item) => (
+              &lt;div
+                style={{ margin: '3px', position: 'relative', height: '3rem' }}
+                key={item.name}
+                className="sidebar-item"
+                onMouseEnter={() => handleIconClick(item.name)}
+                onMouseLeave={handleIconLeave}
+                //   onClick={() => handleClick(item.name)}
+                //   onClick={handleIconClick(item.name)}
+              >
+                &lt;div
+                  style={{
+                    fontSize: '1.5rem',
+                    color: '#333',
+                    backgroundColor: activeIcon === item.name ? 'white' : '',
+                    width: '80%',
+                    height: '80%',
+                    alignItems: 'center',
+                    display: 'flex',
+                    borderRadius: '6px',
+                    overflow: 'hidden',
+                  }}
+                >
+                  &lt;CustomLink exact={false} to={`${item.name}`}>
+                    &lt;div
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        width: '100%',
+                        padding: '10px',
+                      }}
+                    >
+                      &lt;div style={{ fontSize: 'medium', paddingRight: '10px' }}>
+                        ●{' '}
+                      &lt;/div>
+                      &lt;p style={{ fontSize: 'medium' }}>{item.title}&lt;/p>
+                    &lt;/div>
+                  &lt;/CustomLink>
+                &lt;/div>
+
+                {/* {activeIcon === item.name &amp;&amp; (
+            &lt;div style={{transform: 'translateX(200%)', fontSize: 'small', backgroundColor: 'white', boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)'}}>{item.name}&lt;/div>
+          )} */}
+              &lt;/div>
+            ))}
+          &lt;/div>
+
+          &lt;div
+            style={{
+              fontSize: '1.5rem',
+              color: 'rgb(116, 116, 116)',
+              width: '100%',
+              display: 'flex',
+              borderRadius: '6px',
+              marginTop: '1rem',
+            }}
+          >
+            &lt;div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+              }}
+            >
+              &lt;button
+                id="second-sidebar-dashboard"
+                style={{
+                  height: '2rem',
+                  fontSize: 'medium',
+                  border: 'none',
+                  cursor: 'pointer',
+                  height: '2rem',
+                  background: 'none',
+                  color: 'rgb(116, 116, 116)',
+                  textAlign: 'left',
+                }}
+                onClick={() => {
+                  setOptions(!options);
+                  history('/dashboard');
+                }}
+              >
+                Dashboard
+              &lt;/button>
+              &lt;button
+                id="second-sidebar-options"
+                style={{
+                  marginTop: '1rem',
+                  height: '2rem',
+                  fontSize: 'medium',
+                  border: 'none',
+                  cursor: 'pointer',
+                  height: '2rem',
+                  background: 'none',
+                  color: 'rgb(116, 116, 116)',
+                  textAlign: 'left',
+                }}
+                onClick={() => {
+                  setOptions(!options);
+                  history('/Order-Options');
+                }}
+              >
+                Order Options
+              &lt;/button>
+
+              &lt;button
+                id="second-sidebar-payment"
+                style={{
+                  marginTop: '1rem',
+                  fontSize: 'medium',
+                  border: 'none',
+                  cursor: 'pointer',
+                  height: '2rem',
+                  background: 'none',
+                  color: 'rgb(116, 116, 116)',
+                  textAlign: 'left',
+                }}
+                onClick={() => {
+                  setPayment(!payment);
+                  history('/Payments-and-Tax');
+                }}
+              >
+                Payments &amp; Tax
+              &lt;/button>
+
+              &lt;button
+                id="second-sidebar-marketing"
+                style={{
+                  marginTop: '1rem',
+                  fontSize: 'medium',
+                  border: 'none',
+                  cursor: 'pointer',
+                  height: '2rem',
+                  background: 'none',
+                  color: 'rgb(116, 116, 116)',
+                  textAlign: 'left',
+                }}
+                onClick={() => {
+                  setMarketing(!marketing);
+                  history('/Marketing');
+                }}
+              >
+                Marketing
+              &lt;/button>
+              &lt;button
+                id="second-sidebar-manage-attendees"
+                style={{
+                  marginTop: '1rem',
+                  fontSize: 'medium',
+                  border: 'none',
+                  cursor: 'pointer',
+                  height: '2rem',
+                  background: 'none',
+                  color: 'rgb(116, 116, 116)',
+                  textAlign: 'left',
+                }}
+                onClick={() => {
+                  setManage(!manage);
+                }}
+              >
+                Manage Attendees
+              &lt;/button>
+              {manage &amp;&amp; (
+                &lt;React.Fragment id="second-sidebar-extension">
+                  &lt;div
+                    style={{
+                      fontSize: 'medium',
+                      paddingLeft: '1rem',
+                      lineHeight: '2rem',
+                    }}
+                  >
+                    &lt;CustomLink to={`/Orders`}>Orders&lt;/CustomLink>
+                    &lt;br />
+                    &lt;CustomLink to={`/Attendee-Credits`}>
+                      Attendee Credits
+                    &lt;/CustomLink>
+                    &lt;br />
+                    &lt;CustomLink to={`/Add-Attendees`}>Add Attendees&lt;/CustomLink>
+                    &lt;br />
+                    &lt;CustomLink to={`/Attendee-List`}>Attendee List&lt;/CustomLink>
+                    &lt;br />
+                    &lt;CustomLink to={`/Check-in`}>Check-in&lt;/CustomLink>
+                    &lt;br />
+                    &lt;CustomLink to={`/Sold-Tickets`}>Sold Tickets&lt;/CustomLink>
+                  &lt;/div>
+                &lt;/React.Fragment>
+              )}
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      )}
+    &lt;/div>
+  );
+};
+
+export default SecondSidebar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventDetails.html">EventDetails</a></li><li><a href="module-EventDetailsPage.html">EventDetailsPage</a></li></ul><h3>Classes</h3><ul><li><a href="Tickets.html">Tickets</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddAttendees">AddAttendees</a></li><li><a href="global.html#AddTicketForm">AddTicketForm</a></li><li><a href="global.html#AdmissionPage">AdmissionPage</a></li><li><a href="global.html#AdmissionPageCard">AdmissionPageCard</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Bar">Bar</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#CreatePromoForm">CreatePromoForm</a></li><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#CustomNavLink">CustomNavLink</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventCapacity">EventCapacity</a></li><li><a href="global.html#EventDescription">EventDescription</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#EventsListItem">EventsListItem</a></li><li><a href="global.html#EventsListNavBar">EventsListNavBar</a></li><li><a href="global.html#FormContainer">FormContainer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalOverlay">ModalOverlay</a></li><li><a href="global.html#NAHome">NAHome</a></li><li><a href="global.html#NavPage">NavPage</a></li><li><a href="global.html#Orders">Orders</a></li><li><a href="global.html#Popup">Popup</a></li><li><a href="global.html#PromoMain">PromoMain</a></li><li><a href="global.html#PromoPageCard">PromoPageCard</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#Row">Row</a></li><li><a href="global.html#Sales">Sales</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SecondCustomNavLink">SecondCustomNavLink</a></li><li><a href="global.html#SecondNav">SecondNav</a></li><li><a href="global.html#SecondSidebar">SecondSidebar</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SoldTickets">SoldTickets</a></li><li><a href="global.html#SoldTicketsMain">SoldTicketsMain</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UploadCsvForm">UploadCsvForm</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleMouseLeave">handleMouseLeave</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#isMobile">isMobile</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#nextHandler">nextHandler</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#setApplyCodeTo">setApplyCodeTo</a></li><li><a href="global.html#setCodeName">setCodeName</a></li><li><a href="global.html#setCodeType">setCodeType</a></li><li><a href="global.html#setDiscount">setDiscount</a></li><li><a href="global.html#setEndDate">setEndDate</a></li><li><a href="global.html#setEndTime">setEndTime</a></li><li><a href="global.html#setId">setId</a></li><li><a href="global.html#setIsTicketLimit">setIsTicketLimit</a></li><li><a href="global.html#setNames">setNames</a></li><li><a href="global.html#setPromoEnds">setPromoEnds</a></li><li><a href="global.html#setPromoStarts">setPromoStarts</a></li><li><a href="global.html#setReveal">setReveal</a></li><li><a href="global.html#setStartDate">setStartDate</a></li><li><a href="global.html#setStartTime">setStartTime</a></li><li><a href="global.html#setTicketLimit">setTicketLimit</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#submitHandler">submitHandler</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#useEffect">useEffect</a></li><li><a href="global.html#useEffectSoldTicketData">useEffectSoldTicketData</a></li><li><a href="global.html#useResizeListener">useResizeListener</a></li><li><a href="global.html#useTimer">useTimer</a></li><li><a href="global.html#user">user</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri May 12 2023 23:15:36 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
