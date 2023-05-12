@@ -58,6 +58,7 @@ function App() {
                     <div
                       style={{ paddingLeft: padding, paddingBottom: '1rem' }}
                     >
+                      <ONavbar/>
                       <CreateEventForm />
                     </div>
                   </ProtectedRoutes>
