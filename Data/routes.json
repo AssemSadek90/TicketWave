@@ -2,5 +2,6 @@
   "/events/retrieve/:id": "/events/:id",
   "/orders/create/": "/orders",
   "/discount/:id": "/discounts/:id",
-  "/venues/retrieve/:id": "/venues/:id"
+  "/venues/retrieve/:id": "/venues/:id",
+  "/orders/list/:event": "/Orders/:event"
 }
