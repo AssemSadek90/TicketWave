@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import server from "../server";
-import "./dashboard.css";
+import React, { useState, useEffect } from 'react';
+import server from '../server';
+import './dashboard.css';
 /**
  * @typedef {Object} Order
  * @property {number} id - The order ID.
@@ -24,22 +24,22 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   //   const [isloaded, setisloaded] = useState(false);
   //const [data, setdata] = useState();
-  localStorage.setItem("Event_id", 2);
+  localStorage.setItem('Event_id', 2);
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const Event_id = localStorage.getItem("Event_id");
+    const accessToken = localStorage.getItem('accessToken');
+    const Event_id = localStorage.getItem('Event_id');
 
     const requestOptions = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
     };
     server
-      .get(`/orders/list/?event=${Event_id}`, requestOptions)
+      .get(`/orders/?event=${Event_id}`, requestOptions)
       .then((response) => {
         const data = response.data.results;
-        //console.log('data', data);
+        console.log('data', data);
         if (data) {
           setOrders(data);
           console.log(data);
@@ -191,7 +191,7 @@ const Orders = () => {
       </div>
     );
   }
-  console.log("Orders: ", orders);
+  console.log('Orders: ', orders);
   return (
     <div
       className="dashboard-attendees-section eds-l-pad-right-4"
@@ -287,7 +287,7 @@ const Orders = () => {
                         {order.cost}
                       </td>
                       <td className="eds-data-table-list-item__column">
-                        {order.created.substr(0, 10)}
+                        {order.created}
                       </td>
                     </tr>
                   ))}

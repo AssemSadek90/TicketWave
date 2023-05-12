@@ -736,9 +736,7 @@
       "type": "Rally",
       "category": "Music",
       "subCategory": "Blues & Jazz",
-      "Tags": [
-        "tag"
-      ],
+      "Tags": ["tag"],
       "Location": "",
       "StartDate": "2023-05-10T19:26:29.950Z",
       "StartTime": "12 AM",
@@ -815,6 +813,75 @@
       "id": 5
     }
   ],
+
+  "orders": {
+    "results": [
+      {
+        "first_name": "Assem",
+        "last_name": "Sadek",
+        "email": "abdelhamid.ssen@gmail.com",
+        "promo_code": "",
+        "status": null,
+        "cost": 200,
+        "event": 3,
+        "attendee": 0,
+        "ticket": null,
+        "id": 1
+      },
+      {
+        "first_name": "Assem",
+        "last_name": "Sadek",
+        "email": "abdelhamid.ssen@gmail.com",
+        "promo_code": "",
+        "status": null,
+        "cost": 0,
+        "event": 1,
+        "attendee": 0,
+        "ticket": null,
+        "id": 2
+      },
+      {
+        "first_name": "Ziad",
+        "last_name": "Ghanem",
+        "email": "ziad.m.ghanem02@gmail.com",
+        "promo_code": "",
+        "status": null,
+        "cost": 0,
+        "event": 1,
+        "user": 4,
+        "attendee": 0,
+        "ticket": null,
+        "id": 3
+      },
+      {
+        "first_name": "Ziad",
+        "last_name": "Ghanem",
+        "email": "ziad.m.ghanem02@gmail.com",
+        "promo_code": "",
+        "status": null,
+        "cost": 0,
+        "event": 1,
+        "user": 4,
+        "attendee": 0,
+        "ticket": null,
+        "id": 4
+      },
+      {
+        "first_name": "Ziad",
+        "last_name": "Ghanem",
+        "email": "ziad.m.ghanem02@gmail.com",
+        "promo_code": "SEP",
+        "status": null,
+        "cost": 45,
+        "event": 2,
+        "user": 4,
+        "attendee": 0,
+        "ticket": null,
+        "id": 5
+      }
+    ]
+  },
+
   "discounts": [
     {
       "id": 1,
