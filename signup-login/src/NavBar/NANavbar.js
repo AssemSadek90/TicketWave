@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 /**
- * Renders the Navbar component, which contains the site title, search bar, and navigation links.
+ * Renders the NANavbar component, which contains the site title, search bar, and navigation links.
  *
- * @returns {JSX.Element} The Navbar component.
+ * @returns {JSX.Element} The NA component.
  */
-export default function Navbar() {
+export default function NANavbar() {
   const navigate = useNavigate();
   function handleSearch() {
     navigate('/Search');
@@ -27,13 +27,13 @@ export default function Navbar() {
         <SearchButton onClick={handleSearch} label="Search events" />
       </ul>
       <ul id="navbar-ul">
-        <NavBarListItem title="Create Event" path="/basic-info">
+        <NavBarListItem title="Create Event" path="/signup">
           <svg className={styles.svg_icon} viewBox="0 0 20 20">
             <path d="M13 11V4h-2v7H4v2h7v7h2v-7h7v-2z"></path>
           </svg>
         </NavBarListItem>
         <NavBarListItem title="LOG IN" path="/signin" />
-        <NavBarListItem title="SIGN UP" path="/" />
+        <NavBarListItem title="SIGN UP" path="/signup" />
       </ul>
     </nav>
   );

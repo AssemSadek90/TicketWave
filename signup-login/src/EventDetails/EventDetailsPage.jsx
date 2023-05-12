@@ -7,6 +7,8 @@ import EventDetails from "./EventDetails";
 import { useParams } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import server from "../server";
+import { isValidSession } from "../Credentials/Credentials";
+import NANavbar from "../NavBar/NANavbar";
 /**
 Event details page component
 @function
@@ -45,7 +47,7 @@ Fetches the event data from the server
   console.log(event);
   return (
     <div>
-      <Navbar />
+      {isValidSession()?<Navbar />:<NANavbar />}
       {event && <EventDetails event={event} />}
       <Footer />
     </div>
