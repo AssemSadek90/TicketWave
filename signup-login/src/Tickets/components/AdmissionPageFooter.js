@@ -1,10 +1,15 @@
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 
-/** Renders the footer component for the Admission Page
-@param {Function} onClick - A function to be called when the button is clicked
-@returns {JSX.Element} - The Admission Page footer component
-*/
+/**
+  A function provided by the react-router-dom package that allows for programmatic navigation.
+  @function
+  @name navigate
+  */
 function AdmissionPageFooter({onClick}) {
+
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="mainButton"
@@ -23,7 +28,7 @@ function AdmissionPageFooter({onClick}) {
           height: '6rem'
         }}
       >
-        <button id="admission-page-footer-next" onClick={onClick} >Next</button>
+        <button id="admission-page-footer-next" onClick={() => navigate('/publish')}>Next</button>
       </div>
     </div>
   );

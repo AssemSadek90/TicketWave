@@ -19,6 +19,7 @@ import Search from './Search/Search';
 import ONavbar from './NavBar/OrganizationNav/ONavbar';
 import ProtectedRoutes from './Authorization/ProtectedRoutes';
 import Footer from './Footer/Footer';
+import NAHome from './Landing-page/NALanding';
 
 /**
  * Renders the main application component.
@@ -58,6 +59,7 @@ function App() {
                     <div
                       style={{ paddingLeft: padding, paddingBottom: '1rem' }}
                     >
+                      <ONavbar />
                       <CreateEventForm />
                     </div>
                   </ProtectedRoutes>
@@ -107,7 +109,8 @@ function App() {
           {/* <Route path="/basic-info" element={<CreateEventForm />} /> */}
 
           <Route path="/navbar" element={<Navbar />} />
-          <Route path="/" element={<CreateAccount />} />
+          <Route path="/" element={<NAHome />} />
+          <Route path="/signup" element={<CreateAccount />} />
           <Route path="/signin" element={<SignIn />} />
 
           <Route

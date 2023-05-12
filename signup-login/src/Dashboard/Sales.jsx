@@ -18,6 +18,7 @@ function Sales() {
       const response = await fetch("http://localhost:3000/ticketData");
       const data = await response.json();
       setTicketData(data);
+      console.log("data", ticketData);
     };
 
     fetchData();
@@ -118,8 +119,11 @@ function Sales() {
                     </tr>
                   </thead>
                   <tbody className="eds-table-list">
-                    {ticketData.map((prop) => (
-                      <tr className="eds-data-table-list-item" key={prop.Name}>
+                    {ticketData.map((prop, index) => (
+                      <tr
+                        className="eds-data-table-list-item"
+                        key={`${prop.Name}-${index}`}
+                      >
                         <td
                           className="eds-data-table-list-item__column"
                           data-spec="data-table-list-item-column"

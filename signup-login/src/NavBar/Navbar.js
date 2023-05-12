@@ -40,7 +40,8 @@ export default function Navbar() {
         console.log(response);
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
-        navigate('/');
+        localStorage.removeItem('isValidSession');
+        navigate('/signin');
       })
       .catch((error) => console.log(error));
   }

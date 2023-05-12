@@ -33,28 +33,46 @@ export default function EventItem(props) {
   };
 
   return (
-    <div id="event-element" className={styles.event_element}>
+    <div
+      id={`event-element-${props.event.id}`}
+      className={styles.event_element}
+    >
       <a href={eventLink}>
         <svg
-          id="event-poster"
+          id={`event-poster-${props.event.id}`}
           className={styles.event_image}
-          width="100%"
-          height="50%"
+          width='100%'
+          height='50%'
         >
-          <image href={props.event.url} width="100%" height="100%" />
+          <image href={props.event.url} width='100%' height='100%' />
         </svg>
-        <div id="event-details" className={styles.event_details}>
-          <p id="event-detail-1" className={styles.event_detail_1}>
+        <div
+          id={`event-details-${props.event.id}`}
+          className={styles.event_details}
+        >
+          <p
+            id={`event-detail-1-${props.event.id}`}
+            className={styles.event_detail_1}
+          >
             {props.event.name && props.event.name.slice(0, 24)}
             {props.event.name[24] && '...'}
           </p>
-          <p id="event-detail-2" className={styles.event_detail_2}>
+          <p
+            id={`event-detail-2-${props.event.id}`}
+            className={styles.event_detail_2}
+          >
             {realStart()}
           </p>
-          <p id="event-detail-3" className={styles.event_detail_3}>
+          <p
+            id={`event-detail-3-${props.event.id}`}
+            className={styles.event_detail_3}
+          >
             {props.event.organizer}
           </p>
-          <p id="event-detail-3" className={styles.event_detail_4}>
+          <p
+            id={`event-detail-3-${props.event.id}`}
+            className={styles.event_detail_4}
+          >
             {props.event.description && props.event.description.slice(0, 24)}
             {props.event.description[24] && '...'}
           </p>

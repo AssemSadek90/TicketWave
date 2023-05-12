@@ -20,7 +20,9 @@ export default function ONavbar() {
   //const name = fname + ' ' + lname;
   const name = fname;
   const initials =
-    fname.slice(0, 1).toUpperCase() + lname.slice(0, 1).toUpperCase();
+    (fname && fname.slice(0, 1).toUpperCase()) +
+    (lname && lname.slice(0, 1).toUpperCase());
+  console.log(fname);
   const initialsContainer = (
     <div className={styles.initials_container} id="initials-container">
       <span>{initials}</span>

@@ -7,7 +7,7 @@ import './EventsList.css';
 import server from '../server';
 
 const CreatorEvent = () => {
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   /**
    * User ID of the creator.
    * @type {string}
@@ -47,11 +47,11 @@ const CreatorEvent = () => {
         `/events/private/retrieve/${eventId}/`,
         requestOptions
       );
-      console.log('cap', response.data.capacity);
+      //console.log('cap', response.data.capacity);
       const data = response.data;
-      const capacity = data.capacity; // Assuming the capacity is returned in the response
+      const capacity = data.capacity;
       cap.push(capacity);
-      console.log('cap', cap);
+      //console.log('cap', cap);
       return capacity;
     } catch (error) {
       // Handle error if the request fails
@@ -90,13 +90,12 @@ const CreatorEvent = () => {
         `/events/amount_of_tickets_sold/${eventId}/`,
         requestOptions
       );
-      const ticketsSold = response.data; // Assuming the response contains the number of tickets sold
-      console.log('ticketsSold', ticketsSold);
+      const ticketsSold = response.data;
+      //console.log('ticketsSold', ticketsSold);
       tickets.push(ticketsSold);
-      console.log('tickets', tickets);
+      //console.log('tickets', tickets);
       return ticketsSold;
     } catch (error) {
-      // Handle error if the request fails
       console.error(
         `Failed to retrieve tickets sold for event ID ${eventId}`,
         error
@@ -119,17 +118,6 @@ const CreatorEvent = () => {
     return ticketsSoldData;
   }
 
-  function processTicketsSold(ticketsSoldArray) {
-    // Perform your desired mapping operation on the ticketsSoldArray
-    const processedData = ticketsSoldArray.map((ticketSold) => {
-      // Process each ticketSold item and return the desired value
-      return ticketSold.toUpperCase(); // Example: Convert each item to uppercase
-    });
-
-    // Return the processed data
-    return processedData;
-  }
-
   async function fetchTotalSales(eventId) {
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -145,9 +133,9 @@ const CreatorEvent = () => {
         requestOptions
       );
       const totalSales = response.data; // Assuming the response contains the total sales
-      console.log('totalSales', totalSales);
+      //console.log('totalSales', totalSales);
       gross.push(totalSales);
-      console.log('gross', gross);
+      //console.log('gross', gross);
       return totalSales;
     } catch (error) {
       console.error(
@@ -172,9 +160,6 @@ const CreatorEvent = () => {
     return totalSalesData;
   }
 
-  // Usage in your code:
-  // Assuming you have the ticketsSold array available
-
   /**
    * Fetches the list of events and the number of tickets sold for each event.
    * @function
@@ -184,58 +169,67 @@ const CreatorEvent = () => {
    * @param {Array} [] - An empty dependency array, meaning the effect runs only once after the initial render.
    * @returns {void}
    */
+  var fetchedEvents = [];
 
   useEffect(() => {
-    const fetchData = async () => {
-      console.log('fetching data');
-      console.log('fetching data');
-      const accessToken = localStorage.getItem('accessToken');
-      const userID = localStorage.getItem('userID');
-      const requestOptions = {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-      };
-
-      // Fetch events
-      const eventsResponse = await server.get(
-        `/events/list/?owner=${userID}`,
-        requestOptions
-      );
-      //const eventsData = eventsResponse.data.results;
-      // if (eventsData) {
-      setEvents(eventsResponse.data.results);
-
-      // Fetch capacities for each event
-      const capacities = await fetchCapacities(events);
-      setCapacities(capacities);
-
-      // Fetch tickets sold for each event
-      const ticketsSoldData = await fetchTicketsSoldForEvents(events);
-      setTicketsSold(ticketsSoldData);
-
-      // Fetch total sales for each event
-      const totalSalesData = await fetchTotalSalesForEvents(events);
-      setTotalSales(totalSalesData);
-      store();
-      setNewEventsData(events);
-      console.log('newEventsData', newEventsData);
-      console.log('eventyes', events);
-      console.log('newEventsData', newEventsData);
-      const updatedData = events.map((event) => ({
-        Event: event.name,
-        Date: new Date(event.start),
-        Status: event.status,
-        'Tickets Sold': event.ticketsSold,
-        'Tickets Available': event.capacity - event.ticketsSold,
-      }));
-      setEventsData(updatedData);
+    setIsLoading(true);
+    console.log('fetching data');
+    const accessToken = localStorage.getItem('accessToken');
+    const userID = localStorage.getItem('userID');
+    const requestOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
     };
+    server
+      .get(`/events/list/?owner=${userID}`, requestOptions)
+      .then((response) => {
+        fetchedEvents = response.data.results;
+        setEvents(response.data.results);
+        //console.log('fetchevents', fetchedEvents);
 
-    fetchData();
-    //store();
-    console.log('events', events);
+        return fetchCapacities(fetchedEvents);
+      })
+      .then((capacities) => {
+        setCapacities(capacities);
+        return fetchTicketsSoldForEvents(fetchedEvents);
+      })
+      .then((ticketsSoldData) => {
+        setTicketsSold(ticketsSoldData);
+        return fetchTotalSalesForEvents(fetchedEvents);
+      })
+      .then((totalSalesData) => {
+        setTotalSales(totalSalesData);
+      })
+      .then(() => {
+        store();
+      })
+      .then(() => {
+        setNewEventsData(fetchedEvents);
+        // console.log('newEventsData', newEventsData);
+        // console.log('eventyes', fetchedEvents);
+        // console.log('newEventsData', newEventsData);
+      })
+      .then(() => {
+        const updatedData = fetchedEvents.map((event) => ({
+          Event: event.name,
+          Date: new Date(event.start),
+          Status: event.status,
+          'Tickets Sold': event.ticketsSold,
+          'Tickets Available': event.capacity - event.ticketsSold,
+        }));
+        setEventsData(updatedData);
+      })
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        setIsLoading(false);
+      });
+
+    //console.log('events', events);
   }, []);
 
   /**
@@ -243,25 +237,31 @@ const CreatorEvent = () => {
    * @type {Array}
    */
   function store() {
-    for (let i = 0; i < events.length; i++) {
-      gross[i] = gross[i]['total sales'];
+    for (let i = 0; i < fetchedEvents.length; i++) {
+      if (server === 'https://ticketwave.me/api') {
+        gross[i] = gross[i]['total sales'];
+        fetchedEvents[i].totalSales = gross[i];
+      }
       tickets[i] = tickets[i]['tickets sold'];
-      events[i].capacity = cap[i];
-      events[i].ticketsSold = tickets[i];
-      events[i].totalSales = gross[i];
+      fetchedEvents[i].capacity = cap[i];
+      fetchedEvents[i].ticketsSold = tickets[i];
     }
+    //console.log('events3', events);
   }
 
   return (
     <>
-      <div className="creator-events-view">
-        <p className="eds-text-hm__title snipcss0-0-0-1 snipcss-vBV7a">
-          Events
-        </p>
-        <SecondNav />
-        <EventsListNavBar />
-        <DisplayEvents eventsData={newEventsData} />
-      </div>
+      {isLoading && <h1>Loading...</h1>}
+      {!isLoading && (
+        <div className="creator-events-view">
+          <p className="eds-text-hm__title snipcss0-0-0-1 snipcss-vBV7a">
+            Events
+          </p>
+          <SecondNav />
+          <EventsListNavBar />
+          <DisplayEvents eventsData={newEventsData} />
+        </div>
+      )}
       <footer
         className="creator-events-view eds-align--space-between eds-align--center eds-l-mar-top-10 snipcss-oBft8"
         data-spec="events-screen-list-footer-links"

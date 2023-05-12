@@ -48,7 +48,10 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
       body: JSON.stringify(formData),
     };
     fetch(`${process.env.REACT_APP_SERVER_NAME}/orders/create/`, requestOptions)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) response.json();
+        closeOverlay();
+      })
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
@@ -126,6 +129,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                         className="form-control"
                         placeholder="First name"
                         aria-label="First name"
+                        id="form-first-name-free"
                         required
                       ></input>
                     </div>
@@ -138,18 +142,22 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                         className="form-control"
                         placeholder="Last name"
                         aria-label="Last name"
+                        id="form-last-name-free"
                         required
                       ></input>
                     </div>
                     <div className="col-12">
-                      <label for="inputAddress" className="form-label"></label>
+                      <label
+                        for="input-address-free"
+                        className="form-label"
+                      ></label>
                       <input
                         type="text"
                         name="email"
                         onChange={handleChange}
                         value={formData.email}
                         className="form-control"
-                        id="inputAddress"
+                        id="input-address-free"
                         placeholder="Email address"
                         required
                       ></input>
@@ -201,6 +209,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                       onChange={handleChange}
                       value={formData.promo_code}
                       className="form-control"
+                      id="form-promo-code-paid"
                       placeholder="Promo Code"
                       aria-label="Promo Code"
                     />
@@ -227,6 +236,7 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                         value={formData.first_name}
                         className="form-control"
                         placeholder="First name"
+                        id="form-first-name-paid"
                         aria-label="First name"
                         required
                       ></input>
@@ -240,18 +250,22 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
                         className="form-control"
                         placeholder="Last name"
                         aria-label="Last name"
+                        id="form-last-name-paid"
                         required
                       ></input>
                     </div>
                     <div className="col-12">
-                      <label for="inputAddress" className="form-label"></label>
+                      <label
+                        for="input-address-paid"
+                        className="form-label"
+                      ></label>
                       <input
                         type="text"
                         name="email"
                         className="form-control"
                         onChange={handleChange}
                         value={formData.email}
-                        id="inputAddress"
+                        id="input-address-paid"
                         placeholder="Email address"
                         required
                       ></input>

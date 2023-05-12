@@ -30,18 +30,18 @@ export default function ResultItem(props) {
   };
   return (
     <div
-      id="item-ul-container"
+      id={`item-ul-container-${props.event.id}`}
       className={styles.item_container}
       onClick={handleClick}
     >
-      <ul id="item-ul">
-        <li id="result-date" className={styles.result_date}>
+      <ul id={`item-ul-${props.event.id}`}>
+        <li id={`result-date-${props.event.id}`} className={styles.result_date}>
           <p style={{ color: 'chocolate' }}>{realStart()}</p>
         </li>
-        <li id="result-item" className={styles.result_item}>
+        <li id={`result-item-${props.event.id}`} className={styles.result_item}>
           {props.event.children}
         </li>
-        <li id="result-info" className={styles.result_data}>
+        <li id={`result-info-${props.event.id}`} className={styles.result_data}>
           <p style={{ fontWeight: 'bold' }}>
             {props.event.name && props.event.name.slice(0, 24)}
             {props.event.name[24] && '...'}
