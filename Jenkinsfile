@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     stages {
-//         stage('Clean workspace') {
-//             steps {
-//                 sh '''
-//                 sudo rm -rf /var/lib/jenkins/workspace/TicketWave-Frontend-Pipeline/*
-//                 '''
-//             }
-//         }
+        stage('Clean workspace') {
+            steps {
+                sh '''
+                sudo rm -rf /var/lib/jenkins/workspace/TicketWave-Frontend-Pipeline/*
+                '''
+            }
+        }
         stage('Fetch') {
             steps {
                 git branch: 'main',
