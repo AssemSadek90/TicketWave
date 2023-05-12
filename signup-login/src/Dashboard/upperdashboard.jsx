@@ -2,14 +2,14 @@
  * Renders an upper dashboard with netsales data.
  * @returns {JSX.Element} The JSX element containing the upper dashboard.
  */
-import React, { useState, useEffect } from "react";
-import "./dashboard.css";
-import Netsales from "./Netsales";
-import server from "../server";
+import React, { useState, useEffect } from 'react';
+import './dashboard.css';
+import Netsales from './Netsales';
+import server from '../server';
 
 function upperdashboard() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [event_id, setevent_id] = useState("");
+  const [event_id, setevent_id] = useState('');
   // fetch("http://localhost:3000/events")
   //   .then((response) => response.json())
   //   .then((data) => {
@@ -17,21 +17,21 @@ function upperdashboard() {
   //     setEvent_id(data[0]);
   //   })
   //   .catch((error) => console.error(error));
-  localStorage.setItem("Event_id", 2);
+  localStorage.setItem('Event_id', 2);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const Event_id = localStorage.getItem("Event_id");
+    const accessToken = localStorage.getItem('accessToken');
+    const Event_id = localStorage.getItem('Event_id');
 
     const requestOptions = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
     };
 
     server
-      .get(`/events/retrieve/${Event_id}`, requestOptions)
+      .get(`/events/private/retrieve/${Event_id}`, requestOptions)
       .then((response) => {
         const data = response.data;
         //console.log('data', data);
