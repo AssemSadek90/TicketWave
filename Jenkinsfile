@@ -49,9 +49,9 @@ pipeline {
         stage('Docker compose') {
             steps {
                 sh '''
-                pwd
                 cd /home/omar
-                pwd
+		docker-compose down
+		sudo docker-compose up -d
                 '''
             }
         }
