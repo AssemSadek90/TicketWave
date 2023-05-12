@@ -70,7 +70,7 @@ export default function EventInfo(props, isMobile) {
           </p>
 
           <div className="mt-4">
-            <YoutubeEmbed id="youtube-video" embedId={props.event.video_url} />
+            <YoutubeEmbed embedId={props.event.video_url} />
           </div>
         </div>
       </div>
