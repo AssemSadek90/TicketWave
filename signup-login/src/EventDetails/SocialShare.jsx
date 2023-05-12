@@ -82,7 +82,6 @@ A function to handle sharing via email.
         </span>
         <span className={styles.share_icons}>
           <FaLinkedinIn
-            onClick="https://www.linkedin.com/"
             id="share-linkedin-icon"
             className="text-secondary fs-5"
           />
