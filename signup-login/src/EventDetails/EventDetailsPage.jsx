@@ -1,14 +1,14 @@
 /**
 @module EventDetailsPage
 */
-import React, { useEffect, useState } from "react";
-import Navbar from "../NavBar/Navbar";
-import EventDetails from "./EventDetails";
-import { useParams } from "react-router-dom";
-import Footer from "../Footer/Footer";
-import server from "../server";
-import { isValidSession } from "../Credentials/Credentials";
-import NANavbar from "../NavBar/NANavbar";
+import React, { useEffect, useState } from 'react';
+import Navbar from '../NavBar/Navbar';
+import EventDetails from './EventDetails';
+import { useParams } from 'react-router-dom';
+import Footer from '../Footer/Footer';
+import server from '../server';
+import { isValidSession } from '../Credentials/Credentials';
+import NANavbar from '../NavBar/NANavbar';
 /**
 Event details page component
 @function
@@ -17,10 +17,10 @@ Event details page component
 function EventDetailsPage() {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
-  const accessToken = localStorage.getItem("accessToken");
+  const accessToken = localStorage.getItem('accessToken');
   const headers = {
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${accessToken}`,
+    'Content-Type': 'application/json',
+    //Authorization: `Bearer ${accessToken}`,
   };
   /**
 Fetches the event data from the server
@@ -45,9 +45,10 @@ Fetches the event data from the server
     fetchEvent(eventId);
   }, [eventId]);
   console.log(event);
+  const valid = localStorage.getItem('isValidSession');
   return (
     <div>
-      {isValidSession()?<Navbar />:<NANavbar />}
+      {!valid ? <Navbar /> : <NANavbar />}
       {event && <EventDetails event={event} />}
       <Footer />
     </div>

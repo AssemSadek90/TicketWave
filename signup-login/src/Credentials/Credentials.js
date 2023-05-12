@@ -6,6 +6,9 @@ export const isValidSession = () => {
   if (accessToken) {
     localStorage.setItem('isValidSession', true);
     return true;
+  } else if (!accessToken) {
+    localStorage.setItem('isValidSession', false);
+    return false;
   } else {
     localStorage.setItem('isValidSession', false);
     return false;

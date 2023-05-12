@@ -3,6 +3,7 @@ import styles from './CategoriesNav.module.css';
 import { useEffect, useState } from 'react';
 import server from '../../server';
 import DisplayEvents from './Displayevents';
+import { isValidSession } from '../../Credentials/Credentials';
 
 /**
  * A component that displays a navigation bar with different tabs to display events based on their categories and dates.
@@ -39,12 +40,13 @@ export default function CategoriesNav() {
     // getFirstName();
     // getLastName();
     // getEmail();
+    isValidSession();
     const accessToken = localStorage.getItem('accessToken');
     if (selectedTab == 1) {
       const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
+          //Authorization: `Bearer ${accessToken}`,
         },
       };
       server
