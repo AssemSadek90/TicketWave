@@ -6,10 +6,108 @@ import React, { useState, useEffect } from 'react';
 import './dashboard.css';
 import Netsales from './Netsales';
 import server from '../server';
+import REACT_APP_SERVER_NAME from '../server';
 
 function upperdashboard() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [event_id, setevent_id] = useState('');
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [newEvent, setNewEvent] = useState('');
+  var eventDashboard = {};
+  var gross = {};
+  var cap = {};
+  var tickets_Sold = {};
+  async function fetchTotalSales(event_id) {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const Event_id = localStorage.getItem('Event_id');
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await server.get(
+        `/events/total_sales/${Event_id}/`,
+        requestOptions
+      );
+      const totalSales = response.data; // Assuming the response contains the total sales
+      gross = totalSales;
+      eventDashboard.gross = gross['total sales'];
+      //console.log('totalSales', totalSales);
+      //gross.push(totalSales);
+      //console.log('gross', gross);
+      return totalSales;
+    } catch (error) {
+      console.error(`Failed to retrieve total sales for event ID`, error);
+      return null;
+    }
+  }
+
+  async function fetchCapacity(event_id) {
+    const id = localStorage.getItem('Event_id');
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      console.log('fetching');
+      const response = await server.get(
+        `/events/private/retrieve/${id}/`,
+        requestOptions
+      );
+      console.log('response', response);
+      //console.log('cap', response.data.capacity);
+      const data = response.data;
+      const capacity = data.capacity;
+      console.log('cap', cap);
+      eventDashboard.capacity = capacity;
+      //console.log('cap', cap);
+      return capacity;
+    } catch (error) {
+      console.error(`Failed to retrieve capacity for event ID `, error);
+      return null;
+    }
+  }
+
+  async function fetchTicketsSold(event_id) {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const Event_id = localStorage.getItem('Event_id');
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+
+      const response = await server.get(
+        `/events/amount_of_tickets_sold/${Event_id}/`,
+        requestOptions
+      );
+      const tickets_Sold = response.data;
+      //console.log('ticketsSold', ticketsSold);
+      //tickets.push(ticketsSold);
+      //console.log('tickets', tickets);
+      eventDashboard.ticketsSold = tickets_Sold['tickets sold'];
+      console.log('ticketsSold', tickets_Sold);
+      console.log('ticketsSoldev', eventDashboard.ticketsSold);
+      if (eventDashboard.ticketsSold === undefined) {
+        eventDashboard.ticketsSold = tickets_Sold['ticketsSold'];
+        console.log('ticketsSoldreal', tickets_Sold);
+      }
+      console.log('eventdata', eventDashboard);
+      return tickets_Sold;
+    } catch (error) {
+      console.error(`Failed to retrieve tickets sold for event ID`, error);
+      return null;
+    }
+  }
+
   // fetch("http://localhost:3000/events")
   //   .then((response) => response.json())
   //   .then((data) => {
@@ -31,25 +129,40 @@ function upperdashboard() {
     };
 
     server
-      .get(`/events/private/retrieve/${Event_id}`, requestOptions)
+      .get(`/events/retrieve/${Event_id}`, requestOptions)
       .then((response) => {
         const data = response.data;
         //console.log('data', data);
         if (data) {
           setevent_id(data);
-          console.log(data);
+          eventDashboard = data;
+          console.log('eventdata', eventDashboard);
           //console.log('orders', orders);
         }
-        // return server.get(`/events/price/${Event_id}`, requestOptions);
-        // })
-        // .then((response) => {
-        //   const data = response.data.results;
-        //   //console.log('data', data);
-        //   if (data) {
-        //     setevent_id(data);
-        //     console.log(data);
-        //     //console.log('orders', orders);
-        //   }
+      })
+      .then(() => {
+        console.log('fetchTotalSales');
+        // if (REACT_APP_SERVER_NAME === 'https://ticketwave.me/api') {
+        console.log('yeahh');
+        return fetchTotalSales(eventDashboard);
+        //}
+      })
+      .then(() => {
+        console.log('fetchCapacity');
+        //if (REACT_APP_SERVER_NAME === 'https://ticketwave.me/api') {
+        console.log('yeahh');
+        return fetchCapacity(eventDashboard);
+        //}
+      })
+      .then(() => {
+        console.log('fetchTicketsSold');
+        //if (REACT_APP_SERVER_NAME === 'https://ticketwave.me/api') {
+        console.log('yeahh');
+        return fetchTicketsSold(eventDashboard);
+        //}
+      })
+      .then(() => {
+        setNewEvent(eventDashboard);
       })
       .catch((error) => console.log(error));
     //console.log('orders', orders);
@@ -141,12 +254,12 @@ function upperdashboard() {
     <div className="eds-data-table__wrapper">
       <div className="cards-carousel eds-g-cell eds-g-cell-12-12">
         <Netsales
-          Nsales={event_id.sales}
-          Sold={event_id.ticketsSold}
-          Paid={event_id.paid}
-          Tickets={event_id.Tickets}
-          Gross={event_id.gross}
-          Free={event_id.Free}
+          Nsales={newEvent.gross}
+          Sold={newEvent.ticketsSold}
+          Paid={newEvent.paid}
+          Tickets={newEvent.capacity}
+          Gross={newEvent.gross}
+          Free={newEvent.free}
         />
       </div>
       <div className="eds-g-cell eds-g-cell-12-12 eds-g-cell-sm-4-12"></div>

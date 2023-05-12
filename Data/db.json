@@ -758,7 +758,11 @@
       "category": "1",
       "sub_category": "2",
       "venue": 1,
-      "capacity": 50
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
     },
     {
       "id": 2,
@@ -791,7 +795,11 @@
       "category": "1",
       "sub_category": "4",
       "venue": 2,
-      "capacity": 50
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
     },
     {
       "id": 3,
@@ -824,7 +832,11 @@
       "category": "2",
       "sub_category": "1",
       "venue": 3,
-      "capacity": 50
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
     },
     {
       "id": 4,
@@ -857,7 +869,11 @@
       "category": "5",
       "sub_category": "1",
       "venue": 4,
-      "capacity": 50
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
     },
     {
       "id": 5,
@@ -890,7 +906,11 @@
       "category": "3",
       "sub_category": "2",
       "venue": 5,
-      "capacity": 50
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
     }
   ],
 
