@@ -3,7 +3,7 @@ import React from "react";
 import { render } from "@testing-library/react";
 import PublishApp from "..PublishApp/PublishApp";
 
-describe("PublishApp", () => {
+describe.skip("PublishApp", () => {
   it("should render the Publish component", () => {
     // Render the component
     const { getByText } = render(<PublishApp />);

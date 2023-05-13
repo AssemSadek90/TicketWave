@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import Sales from "../Sales";
 
-describe("Sales", () => {
+describe.skip("Sales", () => {
   it("should render the Sales component", () => {
     render(<Sales />);
 

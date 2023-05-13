@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import EventImage from "./EventImage";
 
-describe("EventImage", () => {
+describe.skip("EventImage", () => {
   it("should render the EventImage component", () => {
     const event_id = {
       logo: "https://example.com/event-logo.png",

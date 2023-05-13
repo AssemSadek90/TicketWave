@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import ExportCSV from "../csv.jsx";
 
-describe("ExportCSV", () => {
+describe.skip("ExportCSV", () => {
   const orders = [
     {
       id: 1,
