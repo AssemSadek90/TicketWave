@@ -2,30 +2,40 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import UrlEditor from "../copyandedit.jsx";
-describe.skip("UrlEditor", () => {
+/**
+ * Renders the UrlEditor component and tests its initial rendering.
+ */
+describe("UrlEditor", () => {
+  /**
+   * Tests that the initial URL and edit button are rendered correctly.
+   */
   it("renders the initial URL and edit button", () => {
     render(<UrlEditor />);
 
-    // Check if the initial URL is rendered
+    // Asserts that the initial URL is displayed
     expect(screen.getByText("https://example.com")).toBeInTheDocument();
 
-    // Check if the edit button is rendered
+    // Asserts that the "Edit" button is displayed
     expect(screen.getByText("Edit")).toBeInTheDocument();
   });
 });
+
+/**
+ * Tests the functionality of editing the URL.
+ */
 it("allows editing the URL", () => {
   render(<UrlEditor />);
 
-  // Click the edit button
+  // Simulates a click on the "Edit" button
   fireEvent.click(screen.getByText("Edit"));
 
-  // Enter a new URL in the input field
+  // Finds the input field and changes its value to the new URL
   const inputField = screen.getByRole("textbox");
   fireEvent.change(inputField, { target: { value: "https://newurl.com" } });
 
-  // Click the save button
+  // Simulates a click on the "Save" button
   fireEvent.click(screen.getByText("Save"));
 
-  // Check if the new URL is displayed
+  // Asserts that the new URL is displayed
   expect(screen.getByText("https://newurl.com")).toBeInTheDocument();
 });

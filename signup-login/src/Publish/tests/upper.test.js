@@ -2,7 +2,13 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import Upper from "../upper part";
 
+/**
+ * Tests the Upper component.
+ */
 describe.skip("Upper", () => {
+  /**
+   * Tests that the Upper component is rendered correctly.
+   */
   it("should render the Upper component", () => {
     const event_id = {
       Name: "Test Event",

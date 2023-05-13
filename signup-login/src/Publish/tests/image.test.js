@@ -2,7 +2,13 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import EventImage from "./EventImage";
 
+/**
+ * Tests the EventImage component.
+ */
 describe.skip("EventImage", () => {
+  /**
+   * Tests that the EventImage component is rendered correctly when a logo is provided.
+   */
   it("should render the EventImage component", () => {
     const event_id = {
       logo: "https://example.com/event-logo.png",
@@ -18,6 +24,9 @@ describe.skip("EventImage", () => {
     expect(screen.queryByAltText("Event Logo")).toBeTruthy();
   });
 
+  /**
+   * Tests that a placeholder image is rendered when no logo is provided.
+   */
   it("should render a placeholder image if no logo is provided", () => {
     const event_id = {
       logo: "",

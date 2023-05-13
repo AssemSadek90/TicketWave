@@ -1,8 +1,10 @@
-// Publish.test.js
 import React from "react";
 import { render, waitFor } from "@testing-library/react";
 import Publish from "../publish-preview";
 
+/**
+ * Tests the Publish component.
+ */
 describe.skip("Publish", () => {
   beforeEach(() => {
     // Mock localStorage methods used in the component
@@ -16,6 +18,9 @@ describe.skip("Publish", () => {
     window.localStorage.setItem.mockRestore();
   });
 
+  /**
+   * Tests that the header and event preview are rendered correctly.
+   */
   it("should render the header and event preview correctly", async () => {
     // Mock the necessary data for the component
     const event = {
