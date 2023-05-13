@@ -25,13 +25,13 @@
 // });
 
 import { render } from '@testing-library/react';
-import SignIn from '../SignIn.js';
+import CreateAccount from '../EnterEmail.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-test('renders sign in without crashing', async () => {
+test('renders sign up without crashing', () => {
   render(
     <BrowserRouter>
       <Routes>
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<CreateAccount />} />
       </Routes>
     </BrowserRouter>
   );
