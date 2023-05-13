@@ -88,7 +88,6 @@ var event_ID = 0;
 
 server.post('/auth/signup', (req, res) => {
   const { username, password1, email } = req.body;
-  test = test + 1;
   const newUser = {
     id: Date.now(),
     username,
@@ -106,7 +105,6 @@ server.post('/auth/signup', (req, res) => {
     username: newUser.username,
     user: {
       pk: newUser.pk,
-      test: test,
     },
     // Include any additional user credentials you need
   };
