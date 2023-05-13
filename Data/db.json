@@ -542,116 +542,26 @@
       {
         "Password": ""
       }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T12:40:57.707Z",
-        "EventTime": ""
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T12:40:57.991Z",
-        "EventTime": ""
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T12:40:58.028Z",
-        "EventTime": "15:40"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T12:40:58.028Z",
-        "EventTime": "15:40"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:02:22.564Z",
-        "EventTime": ""
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:02:22.582Z",
-        "EventTime": "23:02"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:02:22.582Z",
-        "EventTime": "23:02"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:05:01.924Z",
-        "EventTime": ""
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:05:01.940Z",
-        "EventTime": "23:05"
-      },
-      {
-        "Password": ""
-      }
-    ],
-    [
-      {
-        "EventDate": "2023-05-10T20:05:01.940Z",
-        "EventTime": "23:05"
-      },
-      {
-        "Password": ""
-      }
     ]
   ],
   "ticketData": [
     {
-      "Ticket_type": "General Admission",
-      "Price": "20",
+      "Name": "General Admission",
+      "price": "20",
       "Sold": "10",
-      "Tickets": "30"
+      "Amount": "30"
     },
     {
-      "Ticket_type": "VIP",
-      "Price": "50",
+      "Name": "VIP",
+      "price": "50",
       "Sold": "5",
-      "Tickets": "10"
+      "Amount": "10"
     },
     {
-      "Ticket_type": "Student",
-      "Price": "15",
+      "Name": "Student",
+      "price": "15",
       "Sold": "6",
-      "Tickets": "20"
+      "Amount": "20"
     }
   ],
   "events": [
@@ -814,25 +724,193 @@
       "category": "3",
       "sub_category": "2",
       "venue": 5
-    },
+    }
+  ],
+  "Events": [
     {
       "id": 1,
-      "Title": "party3",
-      "name": "party3",
-      "organizer": "kjdks",
-      "type": "Rally",
-      "category": "Music",
-      "subCategory": "Blues & Jazz",
-      "Tags": ["tag"],
-      "Location": "",
-      "StartDate": "2023-05-10T19:26:29.950Z",
-      "StartTime": "12 AM",
-      "EndDate": "2023-08-16T19:26:29.000Z",
-      "EndTime": "12 AM",
-      "DisplayStartTime": false,
-      "DisplayEndTime": false,
-      "timezone": "(GMT-11:00) Midway Island",
-      "language": "English US"
+      "name": "Middle East Vape Show 2023",
+      "summary": "The most anticipated Vape Show in the Middle East, it's time to bring your Vape Business and Products to the next level.",
+      "description": "Will be held 3 days from 6 to 8 July 2023, after the success of the 1st event in Bahrain this year with a new atmosphere it will be held in Cairo, Egypt. We choose Egypt International Exhibition Center as the best venue in Cairo for MEVS 2023.",
+      "url": "https://www.eventbrite.com/e/middle-east-vape-show-2023-tickets-512820940237?utm-campaign=social&utm-content=attendeeshare&utm-medium=discovery&utm-term=listing&utm-source=cp&aff=escb",
+      "type": "string",
+      "start": "2023-07-06T10:00:00",
+      "end": "2023-07-08T22:00:00",
+      "created": "2023-05-08T16:48:50.048Z",
+      "changed": "2023-05-08T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": false,
+      "published": true,
+      "organizer": "Sawa",
+      "video_url": "R63RiKdiB2o",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F438303329%2F1343904084043%2F1%2Foriginal.20230203-023453?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=69cab150771ec45eb6ed627fbf66039d",
+      "owner": 1,
+      "category": "1",
+      "sub_category": "2",
+      "venue": 1,
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
+    },
+    {
+      "id": 2,
+      "name": "The Design Show Egypt",
+      "summary": "The Design Show Egypt is taking place from 1-3 June 2023 at Cairo International Convention Center, Cairo, Egypt.",
+      "description": "The Design Show - TDS is the largest and most significant Architecture, Interior, and Product Design show in the MENA region. The exhibition is covering all design aspects regarding Architecture designs, Interior & Exterior designs, Product designs, Landscape designs, Furnishing & fit-out solutions.",
+      "url": "https://www.eventbrite.com/e/the-design-show-egypt-tickets-372686233557?aff=ebdssbcitybrowse",
+      "type": "string",
+      "start": "2023-06-01T11:00:00",
+      "end": "2023-06-03T21:00:00",
+      "created": "2023-05-08T16:48:50.048Z",
+      "changed": "2023-05-08T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": false,
+      "price": 15,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": false,
+      "published": true,
+      "organizer": "ICEC",
+      "video_url": "xv2_F4FwFiM",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F312475989%2F726391040543%2F1%2Foriginal.20220703-131002?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C2160%2C1080&s=257b8ab40d4e7ae0ba99ebaac8df2a00",
+      "owner": 4,
+      "category": "1",
+      "sub_category": "4",
+      "venue": 2,
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
+    },
+    {
+      "id": 3,
+      "name": "Power and (Dis)Connect: The Middle East and Northern Africa (MENA)",
+      "summary": "Power and (Dis)Connect: The Middle East and North Africa (MENA) Between Modernization, Democratization, and Self- Preservation",
+      "description": "The Political Science department hosts an annual conference with the aim of bridging the academic and non-academic worlds of theory and practice. This is the fourth annual conference. The objective of the conference is to present a forum for research development, discussion, and networking for AUC faculty and graduate and undergraduate students on the one hand and faculty and researchers from Egyptian, Arab, and International universities and institutes from the Global South, on the other.",
+      "url": "https://www.eventbrite.com/e/power-and-disconnect-the-middle-east-and-northern-africa-mena-tickets-538508973837?aff=ebdssbcitybrowse&keep_tld=1",
+      "type": "string",
+      "start": "2023-05-12T09:00:00",
+      "end": "2023-05-13T20:00:00",
+      "created": "2023-05-12T16:48:50.048Z",
+      "changed": "2023-05-13T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": false,
+      "price": 50,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": false,
+      "published": true,
+      "organizer": "AUC",
+      "video_url": "mqUPkk9cWT0",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F488551959%2F147231206264%2F1%2Foriginal.20230409-135212?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C14%2C1686%2C843&s=93832d09b0cabc4795413df87969b7ed",
+      "owner": 4,
+      "category": "2",
+      "sub_category": "1",
+      "venue": 3,
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
+    },
+    {
+      "id": 4,
+      "name": "Certified Crypto Associate | Cairo",
+      "summary": "The workshop presents you with an opportunity to understand the basic concepts of cryptocurrency application of blockchain technology, and what makes it so special in today’s technologically advanced world.",
+      "description": "We aim to empower you with concrete knowledge and understanding of various dynamics of cryptocurrency trading and enable you to get started and grow your cryptocurrency portfolio. We aim to empower you with concrete knowledge and understanding of various dynamics of cryptocurrency trading and enable you to get started and grow your cryptocurrency portfolio.",
+      "url": "https://www.eventbrite.com/e/certified-crypto-associate-cairo-tickets-491108427527?aff=ebdssbcitybrowse&keep_tld=1",
+      "type": "string",
+      "start": "2023-05-23T04:00:00",
+      "end": "2023-05-25T15:00:00",
+      "created": "2023-05-08T16:48:50.048Z",
+      "changed": "2023-05-08T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": false,
+      "published": true,
+      "organizer": "Blockchain Smart Solutions",
+      "video_url": "xOmDm477NPQ",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F280894799%2F951323845083%2F1%2Foriginal.20220509-015632?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C0%2C1200%2C600&s=8bb7ffbf47853e81bfbb70a8d94193a7",
+      "owner": 5,
+      "category": "5",
+      "sub_category": "1",
+      "venue": 4,
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
+    },
+    {
+      "id": 5,
+      "name": "Cairo Leadership: Overcome Anxiety with Discipline and Termination!",
+      "summary": "You should attend if you are a manager or a business owner, managing a team of employees, or managing a team of managers.",
+      "description": "Do you feel uneasy, when it comes to disciplining and terminating bad employees? Your head says: This bad employee should be terminated, but you just can't bring yourself to start the disciplinary action?\nProblems like this will not solve themselves! The more you try to avoid confronting this kind of problems, the more this kind of problems grow and they grow exponentially! The more you try to run away from this kind of problems, the more they chase you!!!\nShort term pain but long term pleasure, or, short term pleasure but long term pain, which one do you want?",
+      "url": "https://www.eventbrite.com/e/cairo-leadership-overcome-anxiety-with-discipline-and-termination-tickets-449335744307?aff=ebdssbcitybrowse",
+      "type": "string",
+      "start": "2023-05-09T14:00:00",
+      "end": "2023-05-10T18:00:00",
+      "created": "2023-05-08T16:48:50.048Z",
+      "changed": "2023-05-08T16:48:50.048Z",
+      "status": "draft",
+      "online_event": false,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "free": true,
+      "price": 0,
+      "waitlist": true,
+      "view_counter": 0,
+      "age_restriction": true,
+      "fully_booked": true,
+      "published": true,
+      "organizer": "Coach Michael Lin",
+      "video_url": "BVJkf8IuRjE",
+      "timezone": "6GMT",
+      "language": "English",
+      "logo": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F379023309%2F449795840092%2F1%2Foriginal.20201111-182043?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=958%2C0%2C2558%2C1279&s=ccb3c01560e87269f5bc979000569ffd",
+      "owner": 8,
+      "category": "3",
+      "sub_category": "2",
+      "venue": 5,
+      "capacity": 50,
+      "gross": "20",
+      "ticketsSold": "10",
+      "Paid": "5",
+      "Free": "3"
     }
   ],
   "orders": [
@@ -900,8 +978,7 @@
       "id": 5
     }
   ],
-
-  "orders": {
+  "Orders": {
     "results": [
       {
         "first_name": "Assem",
@@ -968,7 +1045,6 @@
       }
     ]
   },
-
   "discounts": [
     {
       "id": 1,

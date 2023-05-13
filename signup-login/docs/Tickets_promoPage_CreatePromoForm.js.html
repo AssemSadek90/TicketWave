@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Tickets/promoPage/CreatePromoForm.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Tickets/promoPage/CreatePromoForm.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { useState, useEffect } from "react";
+import DatePicker from 'react-datepicker';
+import server from '../../server'
+
+/** Renders a form for creating a promotional event
+@param {Object} onCancel - Function to cancel the form and return to previous screen
+@param {Object} onSubmit - Function to submit the form and create a new promotional event
+@param {Object} myData - Object containing existing promotional event data to pre-fill the form
+*/
+function CreatePromoForm({onCancel, onSubmit, myData}){
+
+  /** Function that updates the state for the 'id' variable
+@function setId
+@param {number} newId - A new value for the 'id' state variable
+@returns {void}
+*/
+  const [id, setId] = useState(myData ? myData.id : Math.floor(Math.random() * 10000000));
+  /** Function that updates the state for the 'codeName' variable
+@function setCodeName
+@param {string} newCodeName - A new value for the 'codeName' state variable
+@returns {void}
+*/
+  const [codeName, setCodeName] = useState(myData ? myData.codeName : '')
+  /** Function that updates the state for the 'names' variable
+@function setNames
+@param {string} newNames - A new value for the 'names' state variable
+@returns {void}
+*/
+  const [names, setNames] = useState(myData ? myData.names : '')
+  /** Function that updates the state for the 'ticketLimit' variable
+@function setTicketLimit
+@param {string} newTicketLimit - A new value for the 'ticketLimit' state variable
+@returns {void}
+*/
+  const [ticketLimit, setTicketLimit] = useState(myData ? myData.ticketLimit : 'Unlimited')
+  /** Function that updates the state for the 'isTicketLimit' variable
+@function setIsTicketLimit
+@param {number} newIsTicketLimit - A new value for the 'isTicketLimit' state variable
+@returns {void}
+*/
+  const [isTicketLimit, setIsTicketLimit] = useState(myData ? myData.isTicketLimit : 0)
+  /** Function that updates the state for the 'reveal' variable
+@function setReveal
+@param {boolean} newReveal - A new value for the 'reveal' state variable
+@returns {void}
+*/
+  const [reveal, setReveal] = useState(myData ? myData.reveal : false);
+
+  /** Function that updates the state for the 'promoStarts' variable
+@function setPromoStarts
+@param {string} newPromoStarts - A new value for the 'promoStarts' state variable
+@returns {void}
+*/
+  const [promoStarts, setPromoStarts] = useState(myData ? myData.promoStarts : "Now");
+  /** Function that updates the state for the 'promoEnds' variable
+@function setPromoEnds
+@param {string} newPromoEnds - A new value for the 'promoEnds' state variable
+@returns {void}
+*/
+  const [promoEnds, setPromoEnds] = useState(myData ? myData.promoEnds : "When ticket sale ends");
+  /** Function that updates the state for the 'startDate' variable
+@function setStartDate
+@param {Date} newStartDate - A new value for the 'startDate' state variable
+@returns {void}
+*/
+  const [startDate, setStartDate] = useState(myData ? myData.startDate : null);
+  /** Function that updates the state for the 'startTime' variable
+@function setStartTime
+@param {string} newStartTime - A new value for the 'startTime' state variable
+@returns {void}
+*/
+  const [startTime, setStartTime] = useState(myData ? myData.startTime : null);
+  /** Function that updates the state for the 'endDate' variable
+@function setEndDate
+@param {Date} newEndDate - A new value for the 'endDate' state variable
+@returns {void}
+*/
+  const [endDate, setEndDate] = useState(myData ? myData.endDate : null);
+  /** Function that updates the state for the 'endTime' variable
+@function setEndTime
+@param {string} newEndTime - A new value for the 'endTime' state variable
+@returns {void}
+*/
+  const [endTime, setEndTime] = useState(myData ? myData.endTime : null);
+  /** Function that updates the state for the 'codeType' variable
+@function setCodeType
+@param {string} newCodeType
+@returns {void}
+*/
+  const [codeType, setCodeType] = useState("");
+  /** Function that updates the state for the 'discount' variable
+@function setDiscount
+@param {boolean} newDiscount - A new value for the 'discount' state variable
+@returns {void}
+*/
+  const [discount, setDiscount] = useState(myData ? myData.discount : false);
+  /** Function that updates the state for the 'applyCodeTo' variable
+@function setApplyCodeTo
+@param {string} newApplyCodeTo - A new value for the 'applyCodeTo' state variable
+@returns {void}
+*/
+  const [applyCodeTo, setApplyCodeTo] = useState(myData ? myData.applyCodeTo : "All Visible Tickets");
+
+/** Function that sets the start date and time to the current date and time if the 'promoStarts' state variable is set to 'Scheduled Time'
+@function useEffect
+@param {function} effect - A function to be executed after rendering
+@param {Array} dependencies - An array of dependencies for the effect
+@returns {void}
+*/
+    useEffect(() => {
+        if (promoStarts === 'Scheduled Time') {
+            setStartDate(new Date());
+            setStartTime('12 AM');
+        }
+      }, [promoStarts]);
+
+/** Function that sets the end date and time to the current date and time if the 'promoEnds' state variable is set to 'Scheduled Time'
+@function useEffect
+@param {function} effect - A function to be executed after rendering
+@param {Array} dependencies - An array of dependencies for the effect
+@returns {void}
+*/
+      useEffect(() => {
+        if (promoEnds === 'Scheduled Time') {
+            setEndDate(new Date());
+            setEndTime('12 AM');
+        }
+      }, [promoEnds]);
+
+/** Function that sets the 'codeType' state variable depending on the values of 'reveal' and 'discount' state variables
+@function useEffect
+@param {function} effect - A function to be executed after rendering
+@param {Array} dependencies - An array of dependencies for the effect
+@returns {void}
+*/
+      useEffect(() => {
+        if (reveal &amp;&amp; discount){
+          setCodeType("Reveals hidden tickets , Applies discount")
+        }
+        else if (reveal){
+          setCodeType("Reveals hidden tickets")
+        }
+        else if (discount){
+          setCodeType("Applies discount")
+        }
+
+      }, [reveal, discount])
+
+/** Function that handles the submission of form data
+@function submitHandler
+@param {Object} event - The event object that triggered the form submission
+@returns {void}
+*/
+    function submitHandler(event){
+        event.preventDefault();
+
+        const data = {
+          id: id,
+          codeName: codeName,
+          quantity_available: ticketLimit,
+          isTicketLimit: isTicketLimit,
+          promoStarts: promoStarts,
+          promoEnds: promoEnds,
+          start_date: startDate,
+          startTime: startTime,
+          end_date: endDate,
+          endTime: endTime,
+          applyCodeTo: applyCodeTo,
+          percent_off: discount,
+          type: codeType,
+          names: names,
+          type: 'CreatePromo'
+        }
+
+        onSubmit(data);
+
+        setCodeName('');
+        setTicketLimit('');
+        setIsTicketLimit(0);
+        setReveal(null)
+        setPromoStarts(null)
+        setPromoEnds(null)
+        setStartDate(null)
+        setStartTime(null)
+        setEndDate(null)
+        setEndTime(null)
+        setApplyCodeTo(null)
+        setDiscount(null)
+        onCancel(true);
+
+        console.log(data);
+        handlePromo(data);
+
+    };
+
+    const handlePromo = (data) => {
+      const accessToken = localStorage.getItem("accessToken")
+      const requestOptions = {
+        headers: {
+          'Content-Type': 'application/json',
+           Authorization: `Bearer ${accessToken}`,
+        },
+      };
+        
+      server.post('/discounts', JSON.stringify(data), requestOptions)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
+    };
+
+    return(
+        // &lt;div>
+        //     Create Promo Form
+        //     &lt;button onClick={() => {onCancel(true)}}>Cancel&lt;/button>
+        // &lt;/div>
+        &lt;form style={{overflowY: 'auto', maxHeight: '100vh', width: '100%', overflowX: 'hidden', paddingRight: '1rem'}} onSubmit={submitHandler} >
+            &lt;div style={{height: 'max-content', marginBottom: '7rem'}}>      
+
+
+&lt;div style={{display: 'flex', flexDirection: 'row', width: '100%', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #ccc'}}>
+    &lt;h2>
+        Add Code
+    &lt;/h2>
+&lt;/div>
+
+{/* ____________________________________________________________________________________________________________________ */}
+
+
+      &lt;div className="inputContainer" style={{marginTop: '1rem'}}>
+        &lt;label className="inputLabel">Code Name&lt;/label>
+        &lt;input
+          id="promo-code-name"
+          style={{ fontSize: "0.85rem" }}
+          type="text"
+          name="eventName"
+          value={codeName}
+    onChange={(e) => {
+        setCodeName(e.target.value);
+    //   setCount(e.target.value.length);
+    }}
+          required
+        />
+      &lt;/div>
+
+      {/* _______________________________________________________________________________________________________________________________ */}
+
+&lt;div style={{display: 'flex', flexDirection: 'row'}}>
+      &lt;div
+                    className="inputContainer"
+                    style={{
+                      marginRight: "10%",
+                      marginBottom: "1rem",
+                      width: "45%",
+                      marginTop: '1rem'
+                    }}
+                  >
+                    &lt;label className="inputLabel">Ticket Limit&lt;/label>
+                    &lt;select
+                      id="promo-code-limit"
+                      style={{ maxHeight: "5rem", outline: 'none', border: 'none' }}
+                      onChange={(a) => setTicketLimit(a.target.value)}
+                      name="availability"
+                      value={ticketLimit}
+                    >
+                      &lt;option value="Unlimited">Unlimited&lt;/option>
+                      &lt;option value="Limited to">Limited to&lt;/option>
+                    &lt;/select>
+                  &lt;/div>
+
+                        {
+                            ticketLimit === 'Limited to' &amp;&amp; 
+
+                            &lt;div className="inputContainer" style={{marginTop: '1rem', width: '45%', height: '100%'}}>
+        &lt;label className="inputLabel">Amount&lt;/label>
+
+        &lt;div  style={{display: 'flex', flexDirection: 'row', top: 0, bottom: 0, padding: '0px', margin: '0px'}} >
+
+        &lt;input
+          id="promo-code-amount"
+          style={{ fontSize: "0.85rem", width: '60%' }}
+          type="number"
+          value={isTicketLimit}
+    onChange={(e) => {
+        setIsTicketLimit(e.target.value);
+    //   setCount(e.target.value.length);
+    }}
+          required
+        />
+        &lt;span style={{color: "#ccc", fontSize: '0.7rem'}}>Tickets&lt;/span>
+        
+        &lt;/div>
+        
+      &lt;/div>
+            }
+                  &lt;/div>
+
+                  &lt;p style={{fontSize: 'small'}}>Total number of tickets that can be purchased with this code&lt;/p>
+
+                  &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  &lt;input
+                    id="promo-code-reveal"
+                    onClick={() => {setReveal(!reveal)}}
+                    type="checkbox"
+                    name="displayEndTime"
+                    style={{ marginRight: "1rem", marginTop: 0 }}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal", fontSize: 'small' }}
+                      htmlFor="displayEndTime"
+                    >
+                      Reveal hidden tickets during checkout
+                    &lt;/label>
+                  &lt;/div>
+                &lt;/div>
+
+                    &lt;p>Discount amount (optional)&lt;/p>
+                &lt;div className="inputContainer" style={{marginTop: '1rem', alignItems: 'center', display: 'flex', flexDirection: 'row'}}>
+                &lt;span style={{color: "#ccc", fontSize: '0.7rem', paddingLeft: '1rem', paddingRight: '1rem'}}>$&lt;/span>
+        {/* &lt;label className="inputLabel">Code Name&lt;/label> */}
+        &lt;input
+          id="promo-code-discount"
+          style={{ fontSize: "0.85rem", width: '100%' }}
+          type="number"
+          name="eventName"
+          value={discount}
+    onChange={(e) => {
+        setDiscount(e.target.value);
+    //   setCount(e.target.value.length);
+    }}
+        />
+      &lt;/div>
+
+                &lt;div>
+                    &lt;p style={{fontWeight: 'bold'}}>Promo code starts&lt;/p>
+                &lt;/div>
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  &lt;input
+                    id="promo-code-starts"
+                    onClick={() => {setPromoStarts('Now')}}
+                    type="checkbox"
+                    name="displayEndTime"
+                    style={{
+                        display: "inline-block",
+                        position: "relative",
+                        verticalAlign: "middle",
+                        marginRight: "1rem",
+                        marginTop: 0,
+                        appearance: "none",
+                        width: "1rem",
+                        height: "1rem",
+                        borderRadius: "50%",
+                        border: "1px solid black",
+                        backgroundColor: promoStarts === 'Now' ? "blue" : "transparent",
+                        transition: "background-color 0.2s ease",
+                        cursor: "pointer"
+                      }}
+                      defaultChecked={promoStarts === 'Now'}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal", fontSize: 'small' }}
+                      htmlFor="displayEndTime"
+                    >
+                      Now
+                    &lt;/label>
+                  &lt;/div>
+                &lt;/div>
+                
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  &lt;input
+                    id="promo-code-scheduled-start"
+                    onClick={() => {setPromoStarts('Scheduled Time')}}
+                    type="checkbox"
+                    name="displayEndTime"
+                    style={{
+                        display: "inline-block",
+                        position: "relative",
+                        verticalAlign: "middle",
+                        marginRight: "1rem",
+                        marginTop: 0,
+                        appearance: "none",
+                        width: "1rem",
+                        height: "1rem",
+                        borderRadius: "50%",
+                        border: "1px solid black",
+                        backgroundColor: promoStarts === 'Scheduled Time' ? "blue" : "transparent",
+                        transition: "background-color 0.2s ease",
+                        cursor: "pointer"
+                      }}
+                      defaultChecked={promoStarts === 'Scheduled Time'}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal", fontSize: 'small' }}
+                      htmlFor="displayEndTime"
+                    >
+                      Scheduled Time
+                    &lt;/label>
+                  &lt;/div>
+                &lt;/div>
+
+                {
+                    promoStarts === 'Scheduled Time' &amp;&amp; 
+
+                    &lt;div>
+                        &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  &lt;div
+                    className="inputContainer"
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label className="inputLabel">Start Date&lt;/label>
+                    &lt;DatePicker
+                      id="promo-code-start-date"
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
+                    />
+                  &lt;/div>
+
+                  &lt;div
+                    className="inputContainer"
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label className="inputLabel">Start Time&lt;/label>
+                    &lt;select
+                      id="promo-code-start-time"
+                      onChange={(date) => setStartTime(date.target.value)}
+                      style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
+                      name="endTime"
+                      value={startTime}
+                    >
+                      &lt;option value="12 AM">12:00 AM&lt;/option>
+                      &lt;option value="12:30 AM">12:30 AM&lt;/option>
+                      &lt;option value="1 AM">1:00 AM&lt;/option>
+                      &lt;option value="1:30 AM">1:30 AM&lt;/option>
+                      &lt;option value="2 AM">2:00 AM&lt;/option>
+                      &lt;option value="2:30 AM">2:30 AM&lt;/option>
+                      &lt;option value="3 AM">3:00 AM&lt;/option>
+                      &lt;option value="3:30 AM">3:30 AM&lt;/option>
+                      &lt;option value="4 AM">4:00 AM&lt;/option>
+                      &lt;option value="4:30 AM">4:30 AM&lt;/option>
+                      &lt;option value="5 AM">5:00 AM&lt;/option>
+                      &lt;option value="5:30 AM">5:30 AM&lt;/option>
+                      &lt;option value="6 AM">6:00 AM&lt;/option>
+                      &lt;option value="6:30 AM">6:30 AM&lt;/option>
+                      &lt;option value="7 AM">7:00 AM&lt;/option>
+                      &lt;option value="7:30 AM">7:30 AM&lt;/option>
+                      &lt;option value="8 AM">8:00 AM&lt;/option>
+                      &lt;option value="8:30 AM">8:30 AM&lt;/option>
+                      &lt;option value="9 AM">9:00 AM&lt;/option>
+                      &lt;option value="9:30 AM">9:30 AM&lt;/option>
+                      &lt;option value="10 AM">10:00 AM&lt;/option>
+                      &lt;option value="10:30 AM">10:30 AM&lt;/option>
+                      &lt;option value="11 AM">11:00 AM&lt;/option>
+                      &lt;option value="11:30 AM">11:30 AM&lt;/option>
+                      &lt;option value="12 PM">12:00 PM&lt;/option>
+                      &lt;option value="12:30 PM">12:30 PM&lt;/option>
+                      &lt;option value="1 PM">1:00 PM&lt;/option>
+                      &lt;option value="1:30 PM">1:30 PM&lt;/option>
+                      &lt;option value="2 PM">2:00 PM&lt;/option>
+                      &lt;option value="2:30 PM">2:30 PM&lt;/option>
+                      &lt;option value="3 PM">3:00 PM&lt;/option>
+                      &lt;option value="3:30 PM">3:30 PM&lt;/option>
+                      &lt;option value="4 PM">4:00 PM&lt;/option>
+                      &lt;option value="4:30 PM">4:30 PM&lt;/option>
+                      &lt;option value="5 PM">5:00 PM&lt;/option>
+                      &lt;option value="5:30 PM">5:30 PM&lt;/option>
+                      &lt;option value="6 PM">6:00 PM&lt;/option>
+                      &lt;option value="6:30 PM">6:30 PM&lt;/option>
+                      &lt;option value="7 PM">7:00 PM&lt;/option>
+                      &lt;option value="7:30 PM">7:30 PM&lt;/option>
+                      &lt;option value="8 PM">8:00 AM&lt;/option>
+                      &lt;option value="8:30 PM">8:30 PM&lt;/option>
+                      &lt;option value="9 PM">9:00 PM&lt;/option>
+                      &lt;option value="9:30 PM">9:30 PM&lt;/option>
+                      &lt;option value="10 PM">10:00 PM&lt;/option>
+                      &lt;option value="10:30 PM">10:30 PM&lt;/option>
+                      &lt;option value="11 PM">11:00 PM&lt;/option>
+                      &lt;option value="11:30 PM">11:30 PM&lt;/option>
+                    &lt;/select>
+                  &lt;/div>
+                &lt;/div>
+                    &lt;/div>
+                }
+
+
+
+&lt;div>
+                    &lt;p style={{fontWeight: 'bold'}}>Promo code ends&lt;/p>
+                &lt;/div>
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  &lt;input
+                    id="promo-code-ends"
+                    onClick={() => {setPromoEnds('When ticket sale ends')}}
+                    type="checkbox"
+                    name="displayEndTime"
+                    style={{
+                        display: "inline-block",
+                        position: "relative",
+                        verticalAlign: "middle",
+                        marginRight: "1rem",
+                        marginTop: 0,
+                        appearance: "none",
+                        width: "1rem",
+                        height: "1rem",
+                        borderRadius: "50%",
+                        border: "1px solid black",
+                        backgroundColor: promoEnds === 'When ticket sale ends' ? "blue" : "transparent",
+                        transition: "background-color 0.2s ease",
+                        cursor: "pointer"
+                      }}
+                      defaultChecked={promoEnds === 'When ticket sale ends'}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal", fontSize: 'small' }}
+                      htmlFor="displayEndTime"
+                    >
+                      When ticket sale ends
+                    &lt;/label>
+                  &lt;/div>
+                &lt;/div>
+                
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  &lt;input
+                    id="promo-code-scheduled-end"
+                    onClick={() => {setPromoEnds('Scheduled Time')}}
+                    type="checkbox"
+                    name="displayEndTime"
+                    style={{
+                        display: "inline-block",
+                        position: "relative",
+                        verticalAlign: "middle",
+                        marginRight: "1rem",
+                        marginTop: 0,
+                        appearance: "none",
+                        width: "1rem",
+                        height: "1rem",
+                        borderRadius: "50%",
+                        border: "1px solid black",
+                        backgroundColor: promoEnds === 'Scheduled Time' ? "blue" : "transparent",
+                        transition: "background-color 0.2s ease",
+                        cursor: "pointer"
+                      }}
+                      defaultChecked={promoEnds === 'Scheduled Time'}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal", fontSize: 'small' }}
+                      htmlFor="displayEndTime"
+                    >
+                      Scheduled Time
+                    &lt;/label>
+                  &lt;/div>
+                &lt;/div>
+
+                
+
+                {
+                    promoEnds === 'Scheduled Time' &amp;&amp; 
+
+                    &lt;div>
+                        &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                  }}
+                >
+                  &lt;div
+                    className="inputContainer"
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label className="inputLabel">Start Date&lt;/label>
+                    &lt;DatePicker
+                      id="promo-code-end-date"
+                      selected={endDate}
+                      onChange={(date) => setEndDate(date)}
+                    />
+                  &lt;/div>
+
+                  &lt;div
+                    className="inputContainer"
+                    style={{
+                      marginRight: "1rem",
+                      marginBottom: "1rem",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label className="inputLabel">Start Time&lt;/label>
+                    &lt;select
+                      id="promo-code-end-time"
+                      onChange={(date) => setEndTime(date.target.value)}
+                      style={{ maxHeight: "5rem" , outline: 'none', border: 'none' }}
+                      name="endTime"
+                      value={endTime}
+                    >
+                      &lt;option value="12 AM">12:00 AM&lt;/option>
+                      &lt;option value="12:30 AM">12:30 AM&lt;/option>
+                      &lt;option value="1 AM">1:00 AM&lt;/option>
+                      &lt;option value="1:30 AM">1:30 AM&lt;/option>
+                      &lt;option value="2 AM">2:00 AM&lt;/option>
+                      &lt;option value="2:30 AM">2:30 AM&lt;/option>
+                      &lt;option value="3 AM">3:00 AM&lt;/option>
+                      &lt;option value="3:30 AM">3:30 AM&lt;/option>
+                      &lt;option value="4 AM">4:00 AM&lt;/option>
+                      &lt;option value="4:30 AM">4:30 AM&lt;/option>
+                      &lt;option value="5 AM">5:00 AM&lt;/option>
+                      &lt;option value="5:30 AM">5:30 AM&lt;/option>
+                      &lt;option value="6 AM">6:00 AM&lt;/option>
+                      &lt;option value="6:30 AM">6:30 AM&lt;/option>
+                      &lt;option value="7 AM">7:00 AM&lt;/option>
+                      &lt;option value="7:30 AM">7:30 AM&lt;/option>
+                      &lt;option value="8 AM">8:00 AM&lt;/option>
+                      &lt;option value="8:30 AM">8:30 AM&lt;/option>
+                      &lt;option value="9 AM">9:00 AM&lt;/option>
+                      &lt;option value="9:30 AM">9:30 AM&lt;/option>
+                      &lt;option value="10 AM">10:00 AM&lt;/option>
+                      &lt;option value="10:30 AM">10:30 AM&lt;/option>
+                      &lt;option value="11 AM">11:00 AM&lt;/option>
+                      &lt;option value="11:30 AM">11:30 AM&lt;/option>
+                      &lt;option value="12 PM">12:00 PM&lt;/option>
+                      &lt;option value="12:30 PM">12:30 PM&lt;/option>
+                      &lt;option value="1 PM">1:00 PM&lt;/option>
+                      &lt;option value="1:30 PM">1:30 PM&lt;/option>
+                      &lt;option value="2 PM">2:00 PM&lt;/option>
+                      &lt;option value="2:30 PM">2:30 PM&lt;/option>
+                      &lt;option value="3 PM">3:00 PM&lt;/option>
+                      &lt;option value="3:30 PM">3:30 PM&lt;/option>
+                      &lt;option value="4 PM">4:00 PM&lt;/option>
+                      &lt;option value="4:30 PM">4:30 PM&lt;/option>
+                      &lt;option value="5 PM">5:00 PM&lt;/option>
+                      &lt;option value="5:30 PM">5:30 PM&lt;/option>
+                      &lt;option value="6 PM">6:00 PM&lt;/option>
+                      &lt;option value="6:30 PM">6:30 PM&lt;/option>
+                      &lt;option value="7 PM">7:00 PM&lt;/option>
+                      &lt;option value="7:30 PM">7:30 PM&lt;/option>
+                      &lt;option value="8 PM">8:00 AM&lt;/option>
+                      &lt;option value="8:30 PM">8:30 PM&lt;/option>
+                      &lt;option value="9 PM">9:00 PM&lt;/option>
+                      &lt;option value="9:30 PM">9:30 PM&lt;/option>
+                      &lt;option value="10 PM">10:00 PM&lt;/option>
+                      &lt;option value="10:30 PM">10:30 PM&lt;/option>
+                      &lt;option value="11 PM">11:00 PM&lt;/option>
+                      &lt;option value="11:30 PM">11:30 PM&lt;/option>
+                    &lt;/select>
+                  &lt;/div>
+                &lt;/div>
+                    &lt;/div>
+                }
+
+
+                &lt;div style={{width: '100%', borderBottom: '1px solid #ccc'}}>&lt;/div>
+
+
+                {/* ____________________________________________________________________________________________________________________ */}
+
+                
+&lt;div>
+                    &lt;p style={{fontWeight: 'bold'}}>Apply code to:&lt;/p>
+                &lt;/div>
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  &lt;input
+                    id="promo-code-all-tickets"
+                    onClick={() => {setApplyCodeTo('All Visible Tickets')}}
+                    type="checkbox"
+                    name="displayEndTime"
+                    style={{
+                        display: "inline-block",
+                        position: "relative",
+                        verticalAlign: "middle",
+                        marginRight: "1rem",
+                        marginTop: 0,
+                        appearance: "none",
+                        width: "1rem",
+                        height: "1rem",
+                        borderRadius: "50%",
+                        border: "1px solid black",
+                        backgroundColor: applyCodeTo === 'All Visible Tickets' ? "blue" : "transparent",
+                        transition: "background-color 0.2s ease",
+                        cursor: "pointer"
+                      }}
+                      defaultChecked={applyCodeTo === 'All Visible Tickets'}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal", fontSize: 'small' }}
+                      htmlFor="displayEndTime"
+                    >
+                      All Visible Tickets
+                    &lt;/label>
+                  &lt;/div>
+                &lt;/div>
+                
+                &lt;div
+                  style={{
+                    flexDirection: "row",
+                    display: "flex",
+                    width: "100%",
+                    marginBottom: "1rem",
+                    marginTop: "2rem",
+                  }}
+                >
+                  &lt;input
+                    id="promo-code-certain-tickets"
+                    onClick={() => {setApplyCodeTo('Only Certain Visible Tickets')}}
+                    type="checkbox"
+                    name="displayEndTime"
+                    style={{
+                        display: "inline-block",
+                        position: "relative",
+                        verticalAlign: "middle",
+                        marginRight: "1rem",
+                        marginTop: 0,
+                        appearance: "none",
+                        width: "1rem",
+                        height: "1rem",
+                        borderRadius: "50%",
+                        border: "1px solid black",
+                        backgroundColor: applyCodeTo === 'Only Certain Visible Tickets' ? "blue" : "transparent",
+                        transition: "background-color 0.2s ease",
+                        cursor: "pointer"
+                      }}
+                      defaultChecked={applyCodeTo === 'Only Certain Visible Tickets'}
+                  />
+                  &lt;div
+                    style={{
+                      flexDirection: "column",
+                      display: "flex",
+                      width: "100%",
+                    }}
+                  >
+                    &lt;label
+                      style={{ color: "rgb(60, 60, 60)", fontWeight: "normal", fontSize: 'small' }}
+                      htmlFor="displayEndTime"
+                    >
+                      Only Certain Visible Tickets
+                    &lt;/label>
+                  &lt;/div>
+                &lt;/div>
+
+
+
+                  {/* ____________________________________________________________________________________________________________________ */}
+
+                  &lt;/div>
+
+
+&lt;div className="mainButton"
+  style={{
+    borderTop: "1px solid #ccc",
+    padding: "1rem",
+    flexDirection: "row",
+    display: "flex",
+    justifyContent: "flex-end",
+    marginTop: "2rem",
+    backgroundColor: "#fff",
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: '5rem'
+  }}
+>
+    &lt;div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+    &lt;div type="cancel" onClick={() => {
+        onCancel(true);}} style={{height: '3rem', width: '45%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Cancel&lt;/div>
+    &lt;button id="promo-code-next" type="submit" style={{height: '3rem', width: '45%'}} >Next&lt;/button>
+    &lt;/div>
+  
+&lt;/div>
+
+     
+
+
+    &lt;/form>
+
+    )
+
+};
+
+export default CreatePromoForm;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventDetails.html">EventDetails</a></li><li><a href="module-EventDetailsPage.html">EventDetailsPage</a></li></ul><h3>Classes</h3><ul><li><a href="Tickets.html">Tickets</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddAttendees">AddAttendees</a></li><li><a href="global.html#AddTicketForm">AddTicketForm</a></li><li><a href="global.html#AdmissionPage">AdmissionPage</a></li><li><a href="global.html#AdmissionPageCard">AdmissionPageCard</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Bar">Bar</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#CreatePromoForm">CreatePromoForm</a></li><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#CustomNavLink">CustomNavLink</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventCapacity">EventCapacity</a></li><li><a href="global.html#EventDescription">EventDescription</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#EventsListItem">EventsListItem</a></li><li><a href="global.html#EventsListNavBar">EventsListNavBar</a></li><li><a href="global.html#FormContainer">FormContainer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalOverlay">ModalOverlay</a></li><li><a href="global.html#NAHome">NAHome</a></li><li><a href="global.html#NavPage">NavPage</a></li><li><a href="global.html#Orders">Orders</a></li><li><a href="global.html#Popup">Popup</a></li><li><a href="global.html#PromoMain">PromoMain</a></li><li><a href="global.html#PromoPageCard">PromoPageCard</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#Row">Row</a></li><li><a href="global.html#Sales">Sales</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SecondCustomNavLink">SecondCustomNavLink</a></li><li><a href="global.html#SecondNav">SecondNav</a></li><li><a href="global.html#SecondSidebar">SecondSidebar</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SoldTickets">SoldTickets</a></li><li><a href="global.html#SoldTicketsMain">SoldTicketsMain</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UploadCsvForm">UploadCsvForm</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleMouseLeave">handleMouseLeave</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#isMobile">isMobile</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#nextHandler">nextHandler</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#setApplyCodeTo">setApplyCodeTo</a></li><li><a href="global.html#setCodeName">setCodeName</a></li><li><a href="global.html#setCodeType">setCodeType</a></li><li><a href="global.html#setDiscount">setDiscount</a></li><li><a href="global.html#setEndDate">setEndDate</a></li><li><a href="global.html#setEndTime">setEndTime</a></li><li><a href="global.html#setId">setId</a></li><li><a href="global.html#setIsTicketLimit">setIsTicketLimit</a></li><li><a href="global.html#setNames">setNames</a></li><li><a href="global.html#setPromoEnds">setPromoEnds</a></li><li><a href="global.html#setPromoStarts">setPromoStarts</a></li><li><a href="global.html#setReveal">setReveal</a></li><li><a href="global.html#setStartDate">setStartDate</a></li><li><a href="global.html#setStartTime">setStartTime</a></li><li><a href="global.html#setTicketLimit">setTicketLimit</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#submitHandler">submitHandler</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#useEffect">useEffect</a></li><li><a href="global.html#useEffectSoldTicketData">useEffectSoldTicketData</a></li><li><a href="global.html#useResizeListener">useResizeListener</a></li><li><a href="global.html#useTimer">useTimer</a></li><li><a href="global.html#user">user</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri May 12 2023 23:15:36 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

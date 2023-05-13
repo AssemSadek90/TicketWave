@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Tickets/AddAttendees/AddAttendees.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Tickets/AddAttendees/AddAttendees.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect } from 'react';
+import { useState } from 'react';
+import AdmissionPageCard from '../components/AdmissionPageCard';
+import Row from './Row';
+import '../Tickets.css';
+import { useNavigate } from 'react-router-dom';
+import emailjs from 'emailjs-com';
+
+/**
+A component for adding attendees to an event
+@param {object} props - The props object
+@param {array} props.finalData - The array of attendees to be displayed
+@param {function} props.addAttendee - The function to add an attendee to the event
+@param {number} props.soldTickets - The number of tickets already sold for the event
+@returns {JSX.Element} - The AddAttendees component
+/function AddAttendees({finalData, addAttendee, soldTickets}) { /*
+The react-router-dom hook to navigate between pages
+@type {function}
+*/
+function AddAttendees({ finalData, addAttendee, soldTickets }) {
+  /**
+The state variable to store the attendees that are not yet added to the event
+@type {array} 
+*/
+  const navigate = useNavigate();
+  /** The state variable to store the attendees that are not yet added to the event
+@type {array}
+*/
+  const [pendingData, setPendingData] = useState([]);
+  /** The state variable to store the total cost of all selected attendees
+@type {string}
+*/
+  const [totalCost, setTotalCost] = useState('');
+  /** The state variable to store the initial quantity of attendees
+@type {number}
+*/
+  const [initialQuantity, setInitialQuantity] = useState(0);
+  /** The state variable to store the number of attendees currently selected
+@type {number}
+*/
+  const [selected, setSelected] = useState(0);
+  /** The state variable to store the search query for filtering attendees
+@type {string}
+*/
+  const [searchQuery, setSearchQuery] = useState('');
+  /** The state variable to store whether data is currently being sent
+@type {boolean}
+*/
+  const [sending, setSending] = useState(false);
+  /** The state variable to store the current time in seconds
+@type {number}
+*/
+  const [timer, setTimer] = useState(0);
+  /** The number of minutes in the current timer value
+@type {number}
+*/
+  const minutes = Math.floor(timer / 60);
+  /** The number of seconds remaining in the current timer value
+@type {number}
+*/
+  const seconds = timer % 60;
+  /** The formatted time string for display purposes
+@type {string}
+*/
+  const timeString = `${minutes.toString().padStart(2, '0')}:${seconds
+    .toString()
+    .padStart(2, '0')}`;
+
+  /** Starts a timer for 12 minutes and sets the 'sending' state to true
+@function
+@returns {void}
+*/
+  const startTimer = () => {
+    setTimer(780); // 720 seconds = 12 minutes
+    setSending(true);
+  };
+
+  /** A hook that sets up a countdown timer that decrements every second
+while sending is true.
+@function useTimer
+@param {boolean} sending - A boolean that determines whether the timer should start or stop.
+@param {number} timer - A number that represents the current timer value in seconds.
+@returns {void}
+*/
+  useEffect(() => {
+    let intervalId;
+    if (sending) {
+      intervalId = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    }
+    return () => clearInterval(intervalId);
+  }, [sending]);
+
+  /** Executes the effect to check if the timer has reached 0 and stops sending data
+@function
+@param {number} timer - The timer in seconds
+@param {boolean} sending - The boolean that indicates whether data is being sent
+@param {timerCallback} setSending - Callback function to stop sending data
+@param {number} setTimer - Callback function to set the timer
+*/
+  useEffect(() => {
+    if (timer === 0) {
+      setSending(false);
+      setTimer(0);
+    }
+  }, [timer]);
+
+  /** Filters the final data based on the search query and sets the filtered data state
+@function
+@param {object[]} finalData - The array of data to be filtered
+@param {string} searchQuery - The search query to filter the data with
+@returns {object[]} The filtered data
+*/
+  const filtered = finalData.filter((item) =>
+    item.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // useEffect(() => {
+  //   const filteredData = data.filter(item => item.chosenQuantity > 0);
+  //   const updatedData = filteredData.map(item => ({
+  //     ...item,
+  //     soldTickets: item.chosenQuantity
+  //   }));
+  //   setSoldTickets(updatedData)
+  //   finalSoldTickets(updatedData)
+  //   // console.log(updatedData);
+  // }, [data]);
+
+  /** Sets the pending data state with the provided data
+@function
+@param {object[]} e - The array of data to set the pending data state with
+@returns {void}
+*/
+  function finalDataHandler(e) {
+    setPendingData(e);
+  }
+  /**Resets initial quantity, starts the timer, and navigates to the "Send-Email" page
+@return {void}
+*/
+  function nextHandler() {
+    // addAttendee(pendingData);
+    // console.log(pendingData)
+    setInitialQuantity(0);
+    // setSending(true)
+    startTimer();
+    // navigate('/Navigation/Events/Send-Email');
+  }
+  /** A hook that sets the total cost and selected count based on final data.
+@param {Array} finalData - An array of objects containing the final data.
+@param {number} totalCost - The total cost of all selected items.
+@param {number} selected - The number of selected items.
+*/
+  useEffect(() => {
+    setTotalCost(finalData.reduce((acc, cur) => acc + cur.totalCost, 0));
+    setSelected(finalData.reduce((acc, cur) => acc + cur.chosenQuantity, 0));
+    // console.log(totalCost)
+  }, [pendingData]);
+  // useEffect(() => {
+  // console.log(selected)
+  // }, [selected])
+
+  /** State hook for storing a name.
+@type {[string, function]}
+*/
+  const [name, setName] = useState('');
+  /**
+@typedef {string} LastName
+*/
+  const [lastName, setLastName] = useState('');
+
+  /** State hook to store the email input value.
+@typedef {string} Email
+@typedef {function(string): void} SetEmail
+@type {[Email, SetEmail]} EmailState
+*/
+  const [email, setEmail] = useState('');
+  /** Represents a hook that defines the filtered data state and its setter.
+@function
+@returns {FilteredDataState} An array containing the filtered data state and its setter.
+*/
+  const [filteredData, setFilteredData] = useState([]);
+
+  // const [totalCost, setTotalCost] = useState('');
+
+  // useEffect(() => {
+  //     setTotalCost(data.reduce((acc, cur) => acc + cur.totalCost, 0));
+  //   // console.log(totalCost)
+  //   }, [data])
+
+  /** useEffect hook to filter the data and update the state
+@function
+@param {Array} pendingData - The array of data to filter
+@returns {void} - Nothing
+*/
+  useEffect(() => {
+    const filtered = pendingData.filter((item) => item.chosenQuantity > 0);
+    setFilteredData(filtered);
+    // console.log(filtered);
+  }, [pendingData]);
+
+  /** Sends an email to attendees with the invitation details
+@function
+@param {Object} e - The event object
+@returns {void} - Nothing
+*/
+  function sendEmail(e) {
+    e.preventDefault();
+    addAttendee(pendingData);
+    // console.log(name);
+    // console.log(email);
+    // console.log("Data to email is = ", filteredData)
+
+    // Construct the message to be sent via email
+    const message = `
+  &lt;html>
+    &lt;head>
+      &lt;style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+          margin-top: 20px;
+          color: #000
+        }
+        th, td {
+          text-align: left;
+          padding: 8px;
+        }
+        th {
+          background-color: #646464;
+          color: white;
+        }
+        tr:nth-child(even) {
+          background-color: #cacaca;
+        }
+        h2 {
+          font-size: medium;
+          color: #000
+        }
+      &lt;/style>
+    &lt;/head>
+    &lt;body>
+      &lt;h2>Your TicketWave Invitations&lt;/h2>
+      &lt;table>
+        &lt;tr>
+          &lt;th>Event Name&lt;/th>
+          &lt;th>Quantity&lt;/th>
+          &lt;th>Link&lt;/th>
+        &lt;/tr>
+        ${filteredData
+          .map((item) => {
+            return `&lt;tr>
+            &lt;td>${item.name}&lt;/td>
+            &lt;td>${item.chosenQuantity}&lt;/td>
+
+            &lt;td>&lt;a 
+            
+            
+
+
+
+
+
+
+
+
+
+            href="https://react-ea708.web.app/${item.id}"
+            
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            style="display: inline-block; padding: 6px 12px; background-color: #646464; color: #fff; text-align: center; text-decoration: none; border: none; border-radius: 3px;">Click here to view&lt;/a>&lt;/td>
+          &lt;/tr>
+          `;
+          })
+          .join('')}
+        &lt;tr>
+          &lt;th>&lt;/th>
+          &lt;th>Total:&lt;/th>
+          &lt;th>$${totalCost}&lt;/th>
+        &lt;/tr>
+      &lt;/table>
+    &lt;/body>
+  &lt;/html>
+`;
+
+    // Send email via emailjs service
+
+    emailjs
+      .send(
+        'service_raj17x9',
+        'template_pk6pl9g',
+        {
+          from_email: 'ticketwave_01@outlook.com',
+          message: message,
+          to_name: name,
+          to_email: email,
+          subject: 'You are Invited!',
+        },
+        'v1ACOVA6Mru8hH5xJ'
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    e.target.reset();
+
+    navigate("/Add-Attendees")
+    setSending(false);
+  }
+
+  return (
+    &lt;div>
+      {!sending ? (
+        &lt;div
+          style={{
+            overflowY: 'auto',
+            marginBottom: '7rem',
+            height: 'max-content',
+            color: '#303030',
+            paddingBottom: '3rem',
+            minWidth: '30rem',
+          }}
+        >
+          &lt;div
+            style={{ paddingBottom: '1.5rem', borderBottom: '1px solid #ccc' }}
+          >
+            &lt;span style={{ fontSize: '2rem', fontWeight: '501' }}>
+              {' '}
+              Add Attendees
+            &lt;/span>{' '}
+            &lt;br />
+            &lt;span style={{ fontSize: 'medium' }}>
+              {' '}
+              Manually add attendees info for complimentary tickets or offline
+              payments
+            &lt;/span>
+          &lt;/div>
+
+          &lt;div style={{}}>
+            &lt;div
+              style={{
+                marginTop: '1rem',
+                marginBottom: '1.5rem',
+                width: '100%',
+              }}
+            >
+              Order Type
+              &lt;div
+                className="inputContainer"
+                style={{
+                  marginRight: '1rem',
+                  marginBottom: '1rem',
+                  width: '40%',
+                  marginTop: '1rem',
+                  alignItems: 'center',
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
+                &lt;select
+                  id="add-attendees-order-type"
+                  style={{
+                    maxHeight: '5rem',
+                    outline: 'none',
+                    border: 'none',
+                    fontSize: 'small',
+                  }}
+                  // onChange={(a) => setAvailability(a.target.value)}
+                >
+                  &lt;option value="Paid with check">Paid with check&lt;/option>
+                  &lt;option value="Others">Others&lt;/option>
+                &lt;/select>
+              &lt;/div>
+              *Eventbrite does not charge any fees for manual orders.
+            &lt;/div>
+
+            &lt;div>
+              &lt;div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  width: '100%',
+                }}
+              >
+                &lt;div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    borderBottom: '1px solid black',
+                  }}
+                >
+                  &lt;div style={{ flex: 2, fontWeight: 'bold' }}>Ticket Type&lt;/div>
+                  &lt;div style={{ flex: 1, fontWeight: 'bold' }}>Sold&lt;/div>
+                  &lt;div style={{ flex: 1, fontWeight: 'bold' }}>Price&lt;/div>
+                  &lt;div style={{ flex: 1, fontWeight: 'bold' }}>Quantity&lt;/div>
+                  &lt;div style={{ flex: 1, fontWeight: 'bold' }}>Face value&lt;/div>
+                &lt;/div>
+                {filtered.map((item, index) => (
+                  &lt;Row
+                    item={item}
+                    key={index}
+                    data={finalData}
+                    myFinalData={finalDataHandler}
+                    backgroundColor={
+                      index % 2 === 0 ? 'rgb(230, 230, 230)' : 'white'
+                    }
+                    myChosenQuantity={item.chosenQuantity}
+                    soldTickets={soldTickets}
+                    initialQuantity={initialQuantity}
+                  />
+                ))}
+              &lt;/div>
+
+              &lt;div
+                style={{
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  marginTop: '1rem',
+                }}
+              >
+                &lt;div
+                  style={{
+                    flexDirection: 'column',
+                    display: 'flex',
+                    alignItems: 'flex-end',
+                  }}
+                >
+                  &lt;div
+                    style={{
+                      marginTop: '1rem',
+                      marginBottom: '1rem',
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                    }}
+                  >
+                    Total Cost:
+                    &lt;div
+                      style={{
+                        backgroundColor: 'rgb(230, 230, 230)',
+                        border: '1px solid #ccc',
+                        minWidth: '200px',
+                        minHeight: '50px',
+                        flexDirection: 'row',
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginLeft: '0.5rem',
+                        padding: '0.5rem',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      &lt;p>$&lt;/p>
+                      {totalCost}
+                    &lt;/div>
+                  &lt;/div>
+
+                  &lt;div className="mainButton">
+                    {selected > 0 ? (
+                      &lt;button
+                        id="add-attendees-next-button"
+                        onClick={nextHandler}
+                      >
+                        Next
+                      &lt;/button>
+                    ) : (
+                      &lt;button disabled>Next&lt;/button>
+                    )}
+                  &lt;/div>
+                &lt;/div>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      ) : (
+        &lt;div
+          style={{
+            border: '1px solid #ccc',
+            height: '100%',
+            width: '100%',
+            minWidth: '30rem',
+          }}
+        >
+          &lt;div
+            style={{
+              paddingBottom: '1.5rem',
+              borderBottom: '1px solid #ccc',
+              marginBottom: '1.5rem',
+              textAlign: 'center',
+              paddingTop: '1.5rem',
+            }}
+          >
+            &lt;span style={{ fontSize: '1.5rem', fontWeight: '501' }}>
+              {' '}
+              Checkout
+            &lt;/span>{' '}
+            &lt;br />
+            &lt;br />
+            &lt;span style={{ fontSize: 'medium' }}> Time Left: {timeString}&lt;/span>
+          &lt;/div>
+
+          &lt;form
+            onSubmit={sendEmail}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              padding: '1.5rem',
+            }}
+          >
+            &lt;h2 style={{ textAlign: 'left' }}>Contact Information&lt;/h2>
+
+            &lt;div
+              style={{
+                flexDirection: 'row',
+                display: 'flex',
+                width: '100%',
+                marginTop: '1rem',
+                marginBottom: '1rem',
+              }}
+            >
+              &lt;div
+                style={{ width: '48%', marginRight: '4%' }}
+                className="inputContainer"
+              >
+                &lt;label className="inputLabel">First Name&lt;/label>
+                &lt;input
+                  id="add-attendees-first-name"
+                  style={{ fontSize: '0.85rem' }}
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                  required
+                />
+              &lt;/div>
+
+              &lt;div style={{ width: '48%' }} className="inputContainer">
+                &lt;label className="inputLabel">Last Name&lt;/label>
+                &lt;input
+                  id="add-attendees-last-name"
+                  style={{ fontSize: '0.85rem' }}
+                  value={lastName}
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                  }}
+                  required
+                />
+              &lt;/div>
+            &lt;/div>
+
+            {/* &lt;label style={{ marginBottom: '1rem' }}>Enter Name&lt;/label>
+      &lt;input type="text" required={true} onChange={(e) => { setName(e.target.value) }} value={name} style={{ padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ccc', marginBottom: '1rem', minWidth: '200px' }} /> */}
+
+            &lt;div
+              style={{ width: '100%', marginBottom: '1rem' }}
+              className="inputContainer"
+            >
+              &lt;label className="inputLabel">Email Address&lt;/label>
+              &lt;input
+                id="add-attendees-email"
+                style={{ fontSize: '0.85rem' }}
+                value={email}
+                type="email"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                required
+              />
+            &lt;/div>
+
+            &lt;p>
+              As a reminder, The creator is responsible for the compilance with
+              privacy and marketing regulation when using this feature to upload
+              email addresses for marketing communications &lt;br />
+              &lt;br />
+              Powered by &lt;b>Ticketwave&lt;/b>
+              &lt;br />
+              &lt;br />
+            &lt;/p>
+
+            {/* &lt;label style={{ marginBottom: '1rem' }}>Enter Email&lt;/label>
+      &lt;input type="email" required={true} onChange={(e) => { setEmail(e.target.value) }} value={email} style={{ padding: '0.5rem', borderRadius: '0.25rem', border: '1px solid #ccc', marginBottom: '1rem', minWidth: '200px' }} /> */}
+
+            &lt;div className="mainButton">
+              &lt;button id="add-attendees-send" type="submit" >
+                Send
+              &lt;/button>
+            &lt;/div>
+          &lt;/form>
+        &lt;/div>
+      )}
+    &lt;/div>
+  );
+}
+
+export default AddAttendees;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventDetails.html">EventDetails</a></li><li><a href="module-EventDetailsPage.html">EventDetailsPage</a></li></ul><h3>Classes</h3><ul><li><a href="Tickets.html">Tickets</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddAttendees">AddAttendees</a></li><li><a href="global.html#AddTicketForm">AddTicketForm</a></li><li><a href="global.html#AdmissionPage">AdmissionPage</a></li><li><a href="global.html#AdmissionPageCard">AdmissionPageCard</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Bar">Bar</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#CreatePromoForm">CreatePromoForm</a></li><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#CustomNavLink">CustomNavLink</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventCapacity">EventCapacity</a></li><li><a href="global.html#EventDescription">EventDescription</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#EventsListItem">EventsListItem</a></li><li><a href="global.html#EventsListNavBar">EventsListNavBar</a></li><li><a href="global.html#FormContainer">FormContainer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalOverlay">ModalOverlay</a></li><li><a href="global.html#NAHome">NAHome</a></li><li><a href="global.html#NavPage">NavPage</a></li><li><a href="global.html#Orders">Orders</a></li><li><a href="global.html#Popup">Popup</a></li><li><a href="global.html#PromoMain">PromoMain</a></li><li><a href="global.html#PromoPageCard">PromoPageCard</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#Row">Row</a></li><li><a href="global.html#Sales">Sales</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SecondCustomNavLink">SecondCustomNavLink</a></li><li><a href="global.html#SecondNav">SecondNav</a></li><li><a href="global.html#SecondSidebar">SecondSidebar</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SoldTickets">SoldTickets</a></li><li><a href="global.html#SoldTicketsMain">SoldTicketsMain</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UploadCsvForm">UploadCsvForm</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleMouseLeave">handleMouseLeave</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#isMobile">isMobile</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#nextHandler">nextHandler</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#setApplyCodeTo">setApplyCodeTo</a></li><li><a href="global.html#setCodeName">setCodeName</a></li><li><a href="global.html#setCodeType">setCodeType</a></li><li><a href="global.html#setDiscount">setDiscount</a></li><li><a href="global.html#setEndDate">setEndDate</a></li><li><a href="global.html#setEndTime">setEndTime</a></li><li><a href="global.html#setId">setId</a></li><li><a href="global.html#setIsTicketLimit">setIsTicketLimit</a></li><li><a href="global.html#setNames">setNames</a></li><li><a href="global.html#setPromoEnds">setPromoEnds</a></li><li><a href="global.html#setPromoStarts">setPromoStarts</a></li><li><a href="global.html#setReveal">setReveal</a></li><li><a href="global.html#setStartDate">setStartDate</a></li><li><a href="global.html#setStartTime">setStartTime</a></li><li><a href="global.html#setTicketLimit">setTicketLimit</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#submitHandler">submitHandler</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#useEffect">useEffect</a></li><li><a href="global.html#useEffectSoldTicketData">useEffectSoldTicketData</a></li><li><a href="global.html#useResizeListener">useResizeListener</a></li><li><a href="global.html#useTimer">useTimer</a></li><li><a href="global.html#user">user</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri May 12 2023 23:15:36 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

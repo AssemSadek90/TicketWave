@@ -18,6 +18,7 @@ function Sales() {
       const response = await fetch('http://localhost:3000/ticketData');
       const data = await response.json();
       setTicketData(data);
+      console.log("data", ticketData);
     };
 
     fetchData();

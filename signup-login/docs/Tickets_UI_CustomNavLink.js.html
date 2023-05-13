@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Tickets/UI/CustomNavLink.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Tickets/UI/CustomNavLink.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react';
+import { NavLink } from 'react-router-dom';
+import './CustomNavLink.css';
+import { useState, useEffect } from 'react';
+
+/** A functional component for rendering a custom nav link.
+@param {string} to - The URL to which the link should navigate.
+@param {React.ReactNode} children - The children to be rendered within the link.
+@returns {JSX.Element} - The JSX element of the component.
+*/
+  const CustomNavLink = ({ to, children }) => {
+
+    /** A hook to detect if the screen width is less than or equal to 768 pixels and set it to a state variable.
+@returns {boolean} - A boolean value indicating if the screen width is less than or equal to 768 pixels.
+*/
+  const [isMobile, setIsMobile] = useState(false);
+
+  /** Sets the state of isMobile based on the current screen width. Listens to the window resize event to update the state.
+@function
+@name useResizeListener
+@param {boolean} isMobile - The state variable that represents whether the screen width is less than or equal to 768 pixels.
+@param {function} setIsMobile - The function that updates the isMobile state variable.
+@returns {void}
+*/
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth &lt;= 768); // Set to true if screen width is less than or equal to 768 pixels
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  
+  return(
+    &lt;NavLink exact={true} to={to} style={isMobile ? {padding: '2vw'}:{}} className="no-underline">
+  {children}
+&lt;/NavLink>
+);
+  };
+
+export default CustomNavLink;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-EventDetails.html">EventDetails</a></li><li><a href="module-EventDetailsPage.html">EventDetailsPage</a></li></ul><h3>Classes</h3><ul><li><a href="Tickets.html">Tickets</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddAttendees">AddAttendees</a></li><li><a href="global.html#AddTicketForm">AddTicketForm</a></li><li><a href="global.html#AdmissionPage">AdmissionPage</a></li><li><a href="global.html#AdmissionPageCard">AdmissionPageCard</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Backdrop">Backdrop</a></li><li><a href="global.html#Bar">Bar</a></li><li><a href="global.html#Card">Card</a></li><li><a href="global.html#ChangePassword">ChangePassword</a></li><li><a href="global.html#CreateAccount">CreateAccount</a></li><li><a href="global.html#CreateEventForm">CreateEventForm</a></li><li><a href="global.html#CreatePromoForm">CreatePromoForm</a></li><li><a href="global.html#CustomLink">CustomLink</a></li><li><a href="global.html#CustomNavLink">CustomNavLink</a></li><li><a href="global.html#Dashboard">Dashboard</a></li><li><a href="global.html#Dropdown">Dropdown</a></li><li><a href="global.html#EventCapacity">EventCapacity</a></li><li><a href="global.html#EventDescription">EventDescription</a></li><li><a href="global.html#EventImage">EventImage</a></li><li><a href="global.html#Event_id">Event_id</a></li><li><a href="global.html#EventsListItem">EventsListItem</a></li><li><a href="global.html#EventsListNavBar">EventsListNavBar</a></li><li><a href="global.html#FormContainer">FormContainer</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#Location">Location</a></li><li><a href="global.html#Modal">Modal</a></li><li><a href="global.html#ModalOverlay">ModalOverlay</a></li><li><a href="global.html#NAHome">NAHome</a></li><li><a href="global.html#NavPage">NavPage</a></li><li><a href="global.html#Orders">Orders</a></li><li><a href="global.html#Popup">Popup</a></li><li><a href="global.html#PromoMain">PromoMain</a></li><li><a href="global.html#PromoPageCard">PromoPageCard</a></li><li><a href="global.html#Publish">Publish</a></li><li><a href="global.html#PublishApp">PublishApp</a></li><li><a href="global.html#Row">Row</a></li><li><a href="global.html#Sales">Sales</a></li><li><a href="global.html#SearchButton">SearchButton</a></li><li><a href="global.html#SecondCustomNavLink">SecondCustomNavLink</a></li><li><a href="global.html#SecondNav">SecondNav</a></li><li><a href="global.html#SecondSidebar">SecondSidebar</a></li><li><a href="global.html#Sidebar">Sidebar</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#SoldTickets">SoldTickets</a></li><li><a href="global.html#SoldTicketsMain">SoldTicketsMain</a></li><li><a href="global.html#Terms">Terms</a></li><li><a href="global.html#UploadCsvForm">UploadCsvForm</a></li><li><a href="global.html#UrlEditor">UrlEditor</a></li><li><a href="global.html#dashboard">dashboard</a></li><li><a href="global.html#fetchEventData">fetchEventData</a></li><li><a href="global.html#getLocation">getLocation</a></li><li><a href="global.html#handleEditClick">handleEditClick</a></li><li><a href="global.html#handleError">handleError</a></li><li><a href="global.html#handleMouseLeave">handleMouseLeave</a></li><li><a href="global.html#handleMouseOver">handleMouseOver</a></li><li><a href="global.html#handleSignUp">handleSignUp</a></li><li><a href="global.html#isMobile">isMobile</a></li><li><a href="global.html#navigate">navigate</a></li><li><a href="global.html#navigateHome">navigateHome</a></li><li><a href="global.html#nextHandler">nextHandler</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#serverName">serverName</a></li><li><a href="global.html#setApplyCodeTo">setApplyCodeTo</a></li><li><a href="global.html#setCodeName">setCodeName</a></li><li><a href="global.html#setCodeType">setCodeType</a></li><li><a href="global.html#setDiscount">setDiscount</a></li><li><a href="global.html#setEndDate">setEndDate</a></li><li><a href="global.html#setEndTime">setEndTime</a></li><li><a href="global.html#setId">setId</a></li><li><a href="global.html#setIsTicketLimit">setIsTicketLimit</a></li><li><a href="global.html#setNames">setNames</a></li><li><a href="global.html#setPromoEnds">setPromoEnds</a></li><li><a href="global.html#setPromoStarts">setPromoStarts</a></li><li><a href="global.html#setReveal">setReveal</a></li><li><a href="global.html#setStartDate">setStartDate</a></li><li><a href="global.html#setStartTime">setStartTime</a></li><li><a href="global.html#setTicketLimit">setTicketLimit</a></li><li><a href="global.html#signOut">signOut</a></li><li><a href="global.html#submitHandler">submitHandler</a></li><li><a href="global.html#toggleDropdown">toggleDropdown</a></li><li><a href="global.html#useEffect">useEffect</a></li><li><a href="global.html#useEffectSoldTicketData">useEffectSoldTicketData</a></li><li><a href="global.html#useResizeListener">useResizeListener</a></li><li><a href="global.html#useTimer">useTimer</a></li><li><a href="global.html#user">user</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri May 12 2023 23:15:36 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

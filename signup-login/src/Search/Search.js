@@ -26,7 +26,7 @@ export default function Search() {
       const requestOptions = {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
+          //Authorization: `Bearer ${accessToken}`,
         },
         params: {
           search: searchText,

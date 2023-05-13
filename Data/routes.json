@@ -1,5 +1,6 @@
 {
   "/events/retrieve/:id": "/events/:id",
+  "/events/private/retrieve/:id": "/Events/:id",
   "/orders/create/": "/orders",
   "/discount/:id": "/discounts/:id",
   "/venues/retrieve/:id": "/venues/:id",

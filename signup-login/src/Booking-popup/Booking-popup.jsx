@@ -48,7 +48,10 @@ const Popup = ({ event, closeOverlay, count, isMobile }) => {
       body: JSON.stringify(formData),
     };
     fetch(`${process.env.REACT_APP_SERVER_NAME}/orders/create/`, requestOptions)
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) response.json();
+        closeOverlay();
+      })
       .then((data) => console.log(data))
       .catch((error) => console.log(error));
   };
