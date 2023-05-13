@@ -1,7 +1,6 @@
 module.exports = {
-  // ...
   transform: {
-    '^.+\\.jsx?$': 'babel-jest',
+    "\\.js$": "<rootDir>/node_modules/babel-jest",
   },
   moduleFileExtensions: ['js', 'jsx', 'json'],
 };

@@ -13,8 +13,17 @@ import ExportCSV from "./ExportCSV";
 //   },
 //   { id: 3, first_name: "Bob", last_name: "Johnson", cost: "50", created: "3/5" }
 // ];
-
+/**
+ * CSVExport component for exporting attendee summary report as CSV.
+ *
+ * @component
+ * @example
+ * return (
+ *   <CSVExport />
+ * )
+ */
 function CSVExport() {
+  // State hooks
   // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   //   const handleDropdownToggle = () => {
@@ -27,7 +36,7 @@ function CSVExport() {
     setIsDropdownOpen(!isDropdownOpen);
   };
   const [orders, setOrders] = useState([]);
-
+  // Effect hook
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     const requestOptions = {
