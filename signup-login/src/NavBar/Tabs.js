@@ -12,7 +12,11 @@ import styles from './Navbar.module.css';
 
 export default function Tabs(props) {
   return (
-    <li className={styles.tabs} id="dropdown-list-item" onClick={props.onClick}>
+    <li
+      className={styles.tabs}
+      id={`dropdown-list-item-${props.title}`}
+      onClick={props.onClick}
+    >
       {props.title}
     </li>
   );
