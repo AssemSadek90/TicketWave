@@ -34,6 +34,12 @@ const CreatorEvent = () => {
   const cap = [];
   const tickets = [];
 
+  /**
+   * Fetches the capacity for a specific event.
+   * @param {string} eventId - The ID of the event.
+   * @returns {number|null} The capacity of the event, or null if the request fails.
+   */
+
   async function fetchCapacity(eventId) {
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -63,6 +69,12 @@ const CreatorEvent = () => {
     }
   }
 
+  /**
+   * Fetches the capacities for multiple events.
+   * @param {Array} events - An array of event objects.
+   * @returns {Array} An array of capacities for the events.
+   */
+
   async function fetchCapacities(events) {
     const capacities = [];
 
@@ -75,6 +87,12 @@ const CreatorEvent = () => {
 
     return capacities;
   }
+
+  /**
+   * Fetches the number of tickets sold for a specific event.
+   * @param {string} eventId - The ID of the event.
+   * @returns {number|null} The number of tickets sold, or null if the request fails.
+   */
 
   async function fetchTicketsSold(eventId) {
     try {
@@ -104,6 +122,12 @@ const CreatorEvent = () => {
     }
   }
 
+  /**
+   * Fetches the number of tickets sold for multiple events.
+   * @param {Array} events - An array of event objects.
+   * @returns {Array} An array of the number of tickets sold for the events.
+   */
+
   async function fetchTicketsSoldForEvents(events) {
     const ticketsSoldData = [];
 
@@ -117,6 +141,12 @@ const CreatorEvent = () => {
 
     return ticketsSoldData;
   }
+
+  /**
+   * Fetches the total sales for a specific event.
+   * @param {string} eventId - The ID of the event.
+   * @returns {number|null} The total sales of the event, or null if the request fails.
+   */
 
   async function fetchTotalSales(eventId) {
     try {
@@ -145,6 +175,12 @@ const CreatorEvent = () => {
       return null;
     }
   }
+
+  /**
+   * Fetches the total sales for multiple events.
+   * @param {Array} events - An array of event objects.
+   * @returns {Array} An array of the total sales for the events.
+   */
 
   async function fetchTotalSalesForEvents(events) {
     const totalSalesData = [];

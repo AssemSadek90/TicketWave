@@ -1,16 +1,15 @@
 import { render } from '@testing-library/react';
-import SignIn from '../SignIn.js';
+import CreatorEvent from '../CreatorEvent';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 /**
- * Renders the SignIn component without crashing.
+ * Renders the CreatorEvent component without crashing.
  * @returns {void}
  */
-test('renders sign in without crashing', async () => {
+test('renders creators events without crashing', async () => {
   render(
     <BrowserRouter>
       <Routes>
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/Events" element={<CreatorEvent />} />
       </Routes>
     </BrowserRouter>
   );

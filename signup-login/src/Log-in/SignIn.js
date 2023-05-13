@@ -17,6 +17,7 @@ import {
 //import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import GoogleLogin from './GoogleSignIn';
 import Footer from '../Footer/Footer';
+//import useHistory from 'react-router-dom';
 
 /**
  * A React component for creating an account.
@@ -67,7 +68,7 @@ function SignIn() {
   @name navigate
   */
   const navigate = useNavigate();
-
+  //let history = useHistory();
   const user = {};
   /**
    * The email input's value.
@@ -359,6 +360,7 @@ Handles email input change event
                 </div>
                 <div>
                   <button
+                    data-testid="submit-form-sign-in"
                     id="submit-form-sign-in"
                     className="eds-btn eds-btn--submit eds-btn--fill eds-btn--block"
                     type="submit"

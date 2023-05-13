@@ -186,8 +186,8 @@ export default function CategoriesNav() {
   }, [selectedTab]);
   return (
     <div>
-      <nav id="categories-navbar" className={styles.navbar}>
-        <ul id="categoriesnav-list" className={styles.tabs}>
+      <nav id='categories-navbar' className={styles.navbar}>
+        <ul id='categoriesnav-list' className={styles.tabs}>
           {tabs.map((tab) => (
             <li
               id={`categoriesnav-list-item-${tab.id}`}
@@ -198,7 +198,7 @@ export default function CategoriesNav() {
               <div className={selectedTab === tab.id ? 'active' : ''}>
                 {tab.label}
                 <div
-                  id="categoriesnav-underline"
+                  id='categoriesnav-underline'
                   className={styles.underline}
                 ></div>
               </div>
@@ -206,7 +206,7 @@ export default function CategoriesNav() {
           ))}
         </ul>
       </nav>
-      <DisplayEvents id="event-container" eventsData={events} />
+      <DisplayEvents id='event-container' eventsData={events} />
     </div>
   );
 }
