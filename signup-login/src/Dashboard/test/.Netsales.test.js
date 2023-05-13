@@ -1,15 +1,15 @@
-import React from "react";
-import { render, screen } from "@testing-library/react";
-import Netsales from "./Netsales";
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import Netsales from '../Netsales';
 
 /**
  * Tests the Netsales component.
  */
-describe.skip("Netsales", () => {
+describe.skip('Netsales', () => {
   /**
    * Tests that the component is rendered correctly.
    */
-  it("should render the component correctly", () => {
+  xit('should render the component correctly', () => {
     // Sample event ID data
     const eventId = {
       Nsales: 100,
@@ -23,28 +23,28 @@ describe.skip("Netsales", () => {
     render(<Netsales eventId={eventId} />);
 
     // Asserts that the "Net Sales" card title is rendered correctly
-    expect(screen.getByTestId("amount-card-title")).toHaveTextContent(
-      "Net Sales"
+    expect(screen.getByTestId('amount-card-title')).toHaveTextContent(
+      'Net Sales'
     );
 
     // Asserts that the net sales value is rendered correctly
-    expect(screen.getByTestId("amount-card-value")).toHaveTextContent("£100");
+    expect(screen.getByTestId('amount-card-value')).toHaveTextContent('£100');
 
     // Asserts that the tooltip content is rendered correctly
-    expect(screen.getByTestId("amount-card-tooltip")).toHaveTextContent(
-      "Royalties included, if any"
+    expect(screen.getByTestId('amount-card-tooltip')).toHaveTextContent(
+      'Royalties included, if any'
     );
 
     // Asserts that the gross sales value is rendered correctly
-    expect(screen.getByTestId("amount-card-value")).toHaveTextContent("£200");
+    expect(screen.getByTestId('amount-card-value')).toHaveTextContent('£200');
 
     // Asserts that the number of tickets sold is rendered correctly
-    expect(screen.getByTestId("tickets-sold")).toHaveTextContent("50/100");
+    expect(screen.getByTestId('tickets-sold')).toHaveTextContent('50/100');
 
     // Asserts that the number of paid tickets is rendered correctly
-    expect(screen.getByTestId("paid")).toHaveTextContent("40");
+    expect(screen.getByTestId('paid')).toHaveTextContent('40');
 
     // Asserts that the number of free tickets is rendered correctly
-    expect(screen.getByTestId("free")).toHaveTextContent("10");
+    expect(screen.getByTestId('free')).toHaveTextContent('10');
   });
 });
