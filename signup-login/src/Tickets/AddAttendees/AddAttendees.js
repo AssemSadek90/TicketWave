@@ -481,7 +481,7 @@ while sending is true.
                         Next
                       </button>
                     ) : (
-                      <button disabled>Next</button>
+                      <button id="attendees-next" disabled>Next</button>
                     )}
                   </div>
                 </div>
