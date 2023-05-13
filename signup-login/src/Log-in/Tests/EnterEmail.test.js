@@ -27,6 +27,10 @@
 import { render } from '@testing-library/react';
 import CreateAccount from '../EnterEmail.js';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+/**
+ * Renders the CreateAccount component without crashing.
+ * @returns {void}
+ */
 test('renders sign up without crashing', () => {
   render(
     <BrowserRouter>

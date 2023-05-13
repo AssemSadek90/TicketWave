@@ -21,6 +21,9 @@ jest.mock('../../../../Data/server', () => ({
 }));
 
 describe('isValidSession', () => {
+  /**
+   * Test case: should return true if accessToken is present in localStorage.
+   */
   it('should return true if accessToken is present in localStorage', () => {
     const accessToken =
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY4NDE3NjE1MCwiaWF0IjoxNjgzNTcxMzUwLCJqdGkiOiJhMzQzZWQ4NTljZjA0NDQ3YWFmNThjMzVlYTc5MThhMCIsInVzZXJfaWQiOjR9.jA9kH5ucCJR7YmPKYeROGh7tD7J2FrSuYPYfo6lDFxE'; // Replace with your access token value
@@ -31,6 +34,9 @@ describe('isValidSession', () => {
   });
 
   it('should return false if accessToken is not present in localStorage', () => {
+    /**
+     * Test case: should return false if accessToken is not present in localStorage.
+     */
     localStorage.removeItem('accessToken');
     const result = isValidSession();
     expect(result).toBe(false);
