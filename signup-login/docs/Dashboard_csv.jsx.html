@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Tickets/components/NavPage.js</title>
+    <title>JSDoc: Source: Dashboard/csv.jsx</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Tickets/components/NavPage.js</h1>
+    <h1 class="page-title">Source: Dashboard/csv.jsx</h1>
 
     
 
@@ -26,54 +26,87 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import React from 'react';
-import CustomNavLink from '../UI/CustomNavLink';
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import server from "../server";
+import "./dashboard.css";
+import ExportCSV from "./ExportCSV";
+// const mockOrders = [
+//   { id: 1, first_name: "John", last_name: "Doe", cost: "123", created: "30/5" },
+//   {
+//     id: 2,
+//     first_name: "Jane",
+//     last_name: "Smith",
+//     cost: "123",
+//     created: "30/5"
+//   },
+//   { id: 3, first_name: "Bob", last_name: "Johnson", cost: "50", created: "3/5" }
+// ];
+/**
+ * CSVExport component for exporting attendee summary report as CSV.
+ *
+ * @component
+ * @example
+ * return (
+ *   &lt;CSVExport />
+ * )
+ */
+function CSVExport() {
+  // State hooks
+  // const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-/** Renders the navigation page component.
-@return {JSX.Element} Navigation page component.
-*/
-function NavPage() {
+  //   const handleDropdownToggle = () => {
+  //     setIsDropdownOpen(!isDropdownOpen);
+  //   }
+  // const [orders, setOrders] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+  const [orders, setOrders] = useState([]);
+  // Effect hook
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    const requestOptions = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    };
+    server
+      .get(`/orders/list`, requestOptions)
+      .then((response) => {
+        const data = response.data.results;
+        //console.log('data', data);
+        if (data) {
+          setOrders(data);
+          console.log(data);
+          //console.log('orders', orders);
+        }
+      })
+      .catch((error) => console.log(error));
+    //console.log('orders', orders);
+  }, []);
+
   return (
-    &lt;div
-      style={{
-        flexDirection: 'row',
-        display: 'flex',
-        borderBottom: '1px solid #ccc',
-        paddingBottom: '2vh',
-        maxWidth: '30rem',
-        minWidth: '30rem',
-      }}
-    >
-      &lt;div style={{ marginRight: '2rem' }}>
-        &lt;CustomNavLink id="nav-page-admission" exact to={'/Tickets/admission'}>
-          Admission
-        &lt;/CustomNavLink>
-      &lt;/div>
-
-      &lt;div style={{ marginRight: '2rem' }}>
-        &lt;CustomNavLink id="nav-page-add-ons" to={'/Tickets/add-ons'}>
-          Add-ons
-        &lt;/CustomNavLink>
-      &lt;/div>
-      &lt;div style={{marginRight: '2rem'}}>
-            &lt;CustomNavLink id="nav-page-holds" to={"/Tickets/holds"}>Holds&lt;/CustomNavLink>
-      &lt;/div>
-
-      &lt;div style={{ marginRight: '2rem'}}>
-        &lt;CustomNavLink id="nav-page-settings" to={'/Tickets/event-settings'}>
-          Settings
-        &lt;/CustomNavLink>
-      &lt;/div>
-      &lt;div >
-        &lt;CustomNavLink id="nav-page-promo-codes" to={"/Tickets/promo-codes"}>Promo codes&lt;/CustomNavLink>
-      &lt;/div>
-
-      
+    &lt;div className="row">
+      &lt;span
+        className="eds-text-bm eds-text-weight--heavy atendeereport "
+        onClick={handleDropdownToggle}
+        id="Attendee summary"
+      >
+        Attendee summary report{" "}
+      &lt;/span>
+      {isDropdownOpen &amp;&amp; (
+        &lt;div>
+          &lt;ExportCSV orders={orders} />
+        &lt;/div>
+      )}
     &lt;/div>
   );
 }
 
-export default NavPage;
+export default CSVExport;
 </code></pre>
         </article>
     </section>
