@@ -18,12 +18,12 @@ function Sales() {
       const response = await fetch('http://localhost:3000/ticketData');
       const data = await response.json();
       setTicketData(data);
-      console.log("data", ticketData);
+      console.log('data', ticketData);
     };
 
     fetchData();
   }, []);
-  localStorage.setItem('Event_id', 2);
+  //localStorage.setItem('Event_id', 2);
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     const Event_id = localStorage.getItem('Event_id');

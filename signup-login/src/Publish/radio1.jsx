@@ -1,21 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
-import "./Publish.css";
-import server from "../server";
-import EventDetails from "../EventDetails/EventDetailsPage";
+import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import moment from 'moment';
+import './Publish.css';
+import server from '../server';
+import EventDetails from '../EventDetails/EventDetailsPage';
 
 function RadioApp() {
-  const [radioValue, setRadioValue] = useState("option1");
-  const [selectedOption, setSelectedOption] = useState("Publish-Now");
+  const [radioValue, setRadioValue] = useState('option1');
+  const [selectedOption, setSelectedOption] = useState('Publish-Now');
   const [dropdownVisible, setDropdownVisible] = useState(false);
-  const [selectedDropdownOption, setSelectedDropdownOption] = useState(" ");
+  const [selectedDropdownOption, setSelectedDropdownOption] = useState(' ');
   const [textInputVisible, setTextInputVisible] = useState(false);
-  const [textInputValue, setTextInputValue] = useState("");
+  const [textInputValue, setTextInputValue] = useState('');
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedTime, setSelectedTime] = useState('');
   const [EnableDate, SetEnableDate] = useState(true);
   const optionRef = useRef(null);
   const id = 1;
@@ -28,7 +28,7 @@ function RadioApp() {
 
   useEffect(() => {
     setSelectedDate(new Date());
-    setSelectedTime(moment().format("HH:mm"));
+    setSelectedTime(moment().format('HH:mm'));
   }, []);
   //  useEffect(() => {
   //   const interval = setInterval(() => {
@@ -85,8 +85,8 @@ function RadioApp() {
   function handleRadioButtonChange(event) {
     const selectedOptionValue = event.target.value;
     setSelectedOption(selectedOptionValue);
-    setDropdownVisible(selectedOptionValue === "option2");
-    if (selectedOptionValue === "Scheduled") {
+    setDropdownVisible(selectedOptionValue === 'option2');
+    if (selectedOptionValue === 'Scheduled') {
       SetEnableDate(false);
     } else {
       SetEnableDate(true);
@@ -96,7 +96,7 @@ function RadioApp() {
   // Scheduled -> false
   // keep-private & Publish-Now  -> true
   const enableDate = () => {
-    if (selectedOption === "keep-private" || selectedOption === "Publish-Now") {
+    if (selectedOption === 'keep-private' || selectedOption === 'Publish-Now') {
       SetEnableDate(true);
     } else {
       SetEnableDate(false);
@@ -109,7 +109,7 @@ function RadioApp() {
   function handleDropdownChange(event) {
     const selectvalueDrop = event.target.value;
     setSelectedDropdownOption(selectvalueDrop);
-    setTextInputVisible(selectvalueDrop === "option2");
+    setTextInputVisible(selectvalueDrop === 'option2');
   }
 
   function handlepasswordInputChange(event) {
@@ -123,7 +123,7 @@ function RadioApp() {
     eventdata.password = textInputValue;
     SubmitTheData(eventdata);
   }
-  localStorage.setItem("Event_id", 2);
+  //localStorage.setItem("Event_id", 2);
 
   const SubmitTheData = (eventdata) => {
     // event.preventDefault();
@@ -131,20 +131,20 @@ function RadioApp() {
     // data.StartTime=selectedTime;
     // data.password=textInputValue;}
     const requestOptions = {
-      headers: { "Content-Type": "application/json" },
+      headers: { 'Content-Type': 'application/json' },
     };
 
     server
-      .post("/Time", eventdata, requestOptions)
+      .post('/Time', eventdata, requestOptions)
       .then((response) => console.log(response.data))
       .catch((error) => console.log(error));
   };
 
-  fetch("http://localhost:3000/Time", {
-    method: "POST",
+  fetch('http://localhost:3000/Time', {
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer <your access token>",
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer <your access token>',
     },
     body: JSON.stringify([
       {
@@ -156,7 +156,7 @@ function RadioApp() {
   })
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       return response.json();
     })
@@ -164,9 +164,9 @@ function RadioApp() {
       // handle the response data
     })
     .catch((error) => {
-      console.error("There was a problem with the push request:", error);
+      console.error('There was a problem with the push request:', error);
     });
-  const Event_id = localStorage.getItem("Event_id");
+  const Event_id = localStorage.getItem('Event_id');
 
   return (
     <div>
@@ -212,7 +212,7 @@ function RadioApp() {
           </span>
         </div>
       </div>
-      {radioValue === "option1" && (
+      {radioValue === 'option1' && (
         <div>
           {/* show additional options */}
           <h2>When should we publish your event? </h2>
@@ -244,7 +244,7 @@ function RadioApp() {
           </label>
         </div>
       )}
-      {radioValue === "option2" && (
+      {radioValue === 'option2' && (
         <div className="Audience">
           {/* show different additional options */}
           <h2 className="Header2">
@@ -326,21 +326,21 @@ function RadioApp() {
 
         <div
           style={{
-            flexDirection: "row",
-            display: "flex",
-            width: "100%",
+            flexDirection: 'row',
+            display: 'flex',
+            width: '100%',
           }}
         >
           <div
             className="eds-field-styled__label-wrapper snipcss0-11-78-79 snipcss0-9-23-24"
             style={{
-              marginRight: "1rem",
-              marginBottom: "1rem",
+              marginRight: '1rem',
+              marginBottom: '1rem',
             }}
           >
             <label className="eds-field-styled__label eds-label-primary snipcss0-12-79-80 snipcss0-10-24-25">
               <span className="eds-label__content snipcss0-13-80-81 snipcss0-11-25-26">
-                {" "}
+                {' '}
                 Start date
               </span>
             </label>
@@ -356,8 +356,8 @@ function RadioApp() {
           {/* <input type="time" value={selectedTime} disabled={EnableDate} onChange={handleTimeChange} /> */}
           <div
             style={{
-              marginRight: "1rem",
-              marginBottom: "1rem",
+              marginRight: '1rem',
+              marginBottom: '1rem',
             }}
           >
             <label className="eds-field-styled__label eds-label-primary snipcss0-12-79-80 snipcss0-10-24-25">
@@ -366,7 +366,7 @@ function RadioApp() {
               </span>
             </label>
             <select
-              style={{ maxHeight: "5rem" }}
+              style={{ maxHeight: '5rem' }}
               onChange={handleTimeChange}
               id="startTime"
               name="startTime"

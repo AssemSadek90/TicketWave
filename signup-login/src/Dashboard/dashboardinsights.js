@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./dashboard.css";
-import Upperdashboard from "./upperdashboard";
-import Share from "./Share";
-import Sales from "./Sales";
-import server from "../server";
+import React, { useState, useEffect } from 'react';
+import './dashboard.css';
+import Upperdashboard from './upperdashboard';
+import Share from './Share';
+import Sales from './Sales';
+import server from '../server';
 
 /**
  * Renders a dashboard UI that displays various insights and data related to an event.
@@ -12,21 +12,21 @@ import server from "../server";
  */
 function Dashboard() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [Event_id, setEvent_id] = useState("");
+  const [Event_id, setEvent_id] = useState('');
   /**
    * Fetches event data from the server and updates the state with the data.
    * @function
    * @returns {void}
    */
-  localStorage.setItem("Event_id", 2);
+  //localStorage.setItem("Event_id", 2);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const Event_id = localStorage.getItem("Event_id");
+    const accessToken = localStorage.getItem('accessToken');
+    const Event_id = localStorage.getItem('Event_id');
 
     const requestOptions = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
     };

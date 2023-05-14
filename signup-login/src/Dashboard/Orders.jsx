@@ -24,7 +24,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   //   const [isloaded, setisloaded] = useState(false);
   //const [data, setdata] = useState();
-  localStorage.setItem('Event_id', 2);
+  //localStorage.setItem('Event_id', 2);
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
     const Event_id = localStorage.getItem('Event_id');

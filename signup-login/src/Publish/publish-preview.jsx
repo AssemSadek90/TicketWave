@@ -1,27 +1,27 @@
-import React, { useState, useEffect } from "react";
-import Header from "./Header";
-import "./ticket-icon.jpg";
-import RadioApp from "./radio1";
-import EventImage from "./image";
-import Upper from "./upper part";
-import server from "../server";
-import "./Publish.css";
+import React, { useState, useEffect } from 'react';
+import Header from './Header';
+import './ticket-icon.jpg';
+import RadioApp from './radio1';
+import EventImage from './image';
+import Upper from './upper part';
+import server from '../server';
+import './Publish.css';
 
 function Publish() {
   // const event_id= localStorage.getItem('event_id');
 
-  const [event_id, setevent_id] = useState("");
+  const [event_id, setevent_id] = useState('');
   // const dateObject = new Date(event_id.created);
   const [dateObject, setdateObject] = useState(new Date());
   // fetch the data from the API OR BackEnd
-  localStorage.setItem("Event_id", 2);
+  //localStorage.setItem("Event_id", 2);
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const Event_id = localStorage.getItem("Event_id");
+    const accessToken = localStorage.getItem('accessToken');
+    const Event_id = localStorage.getItem('Event_id');
 
     const requestOptions = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
     };
@@ -154,10 +154,10 @@ function Publish() {
           price={event_id.price}
           Name={event_id.name}
           capacity={event_id.capacity}
-          created={dateObject.toLocaleDateString("en-US", {
-            weekday: "short",
-            month: "short",
-            day: "2-digit",
+          created={dateObject.toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: '2-digit',
           })}
           status={event_id.status}
         />

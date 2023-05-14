@@ -2,28 +2,28 @@
  * Renders an upper dashboard with netsales data.
  * @returns {JSX.Element} The JSX element containing the upper dashboard.
  */
-import React, { useState, useEffect } from "react";
-import "./dashboard.css";
-import Netsales from "./Netsales";
-import server from "../server";
-import REACT_APP_SERVER_NAME from "../server";
+import React, { useState, useEffect } from 'react';
+import './dashboard.css';
+import Netsales from './Netsales';
+import server from '../server';
+import REACT_APP_SERVER_NAME from '../server';
 
 function Upperdashboard() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [event_id, setevent_id] = useState("");
+  const [event_id, setevent_id] = useState('');
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [newEvent, setNewEvent] = useState("");
+  const [newEvent, setNewEvent] = useState('');
   var eventDashboard = {};
   var gross = {};
   var cap = {};
   var tickets_Sold = {};
   async function fetchTotalSales(event_id) {
     try {
-      const accessToken = localStorage.getItem("accessToken");
-      const Event_id = localStorage.getItem("Event_id");
+      const accessToken = localStorage.getItem('accessToken');
+      const Event_id = localStorage.getItem('Event_id');
       const requestOptions = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
       };
@@ -34,7 +34,7 @@ function Upperdashboard() {
       );
       const totalSales = response.data; // Assuming the response contains the total sales
       gross = totalSales;
-      eventDashboard.gross = gross["total sales"];
+      eventDashboard.gross = gross['total sales'];
       //console.log('totalSales', totalSales);
       //gross.push(totalSales);
       //console.log('gross', gross);
@@ -46,25 +46,25 @@ function Upperdashboard() {
   }
 
   async function fetchCapacity(event_id) {
-    const id = localStorage.getItem("Event_id");
+    const id = localStorage.getItem('Event_id');
     try {
-      const accessToken = localStorage.getItem("accessToken");
+      const accessToken = localStorage.getItem('accessToken');
       const requestOptions = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
       };
-      console.log("fetching");
+      console.log('fetching');
       const response = await server.get(
         `/events/private/retrieve/${id}/`,
         requestOptions
       );
-      console.log("response", response);
+      console.log('response', response);
       //console.log('cap', response.data.capacity);
       const data = response.data;
       const capacity = data.capacity;
-      console.log("cap", cap);
+      console.log('cap', cap);
       eventDashboard.capacity = capacity;
       //console.log('cap', cap);
       return capacity;
@@ -76,11 +76,11 @@ function Upperdashboard() {
 
   async function fetchTicketsSold(event_id) {
     try {
-      const accessToken = localStorage.getItem("accessToken");
-      const Event_id = localStorage.getItem("Event_id");
+      const accessToken = localStorage.getItem('accessToken');
+      const Event_id = localStorage.getItem('Event_id');
       const requestOptions = {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
           Authorization: `Bearer ${accessToken}`,
         },
       };
@@ -93,14 +93,14 @@ function Upperdashboard() {
       //console.log('ticketsSold', ticketsSold);
       //tickets.push(ticketsSold);
       //console.log('tickets', tickets);
-      eventDashboard.ticketsSold = tickets_Sold["tickets sold"];
-      console.log("ticketsSold", tickets_Sold);
-      console.log("ticketsSoldev", eventDashboard.ticketsSold);
+      eventDashboard.ticketsSold = tickets_Sold['tickets sold'];
+      console.log('ticketsSold', tickets_Sold);
+      console.log('ticketsSoldev', eventDashboard.ticketsSold);
       if (eventDashboard.ticketsSold === undefined) {
-        eventDashboard.ticketsSold = tickets_Sold["ticketsSold"];
-        console.log("ticketsSoldreal", tickets_Sold);
+        eventDashboard.ticketsSold = tickets_Sold['ticketsSold'];
+        console.log('ticketsSoldreal', tickets_Sold);
       }
-      console.log("eventdata", eventDashboard);
+      console.log('eventdata', eventDashboard);
       return tickets_Sold;
     } catch (error) {
       console.error(`Failed to retrieve tickets sold for event ID`, error);
@@ -115,15 +115,15 @@ function Upperdashboard() {
   //     setEvent_id(data[0]);
   //   })
   //   .catch((error) => console.error(error));
-  localStorage.setItem("Event_id", 2);
+  //localStorage.setItem("Event_id", 2);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const Event_id = localStorage.getItem("Event_id");
+    const accessToken = localStorage.getItem('accessToken');
+    const Event_id = localStorage.getItem('Event_id');
 
     const requestOptions = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
     };
@@ -136,28 +136,28 @@ function Upperdashboard() {
         if (data) {
           setevent_id(data);
           eventDashboard = data;
-          console.log("eventdata", eventDashboard);
+          console.log('eventdata', eventDashboard);
           //console.log('orders', orders);
         }
       })
       .then(() => {
-        console.log("fetchTotalSales");
+        console.log('fetchTotalSales');
         // if (REACT_APP_SERVER_NAME === 'https://ticketwave.me/api') {
-        console.log("yeahh");
+        console.log('yeahh');
         return fetchTotalSales(eventDashboard);
         //}
       })
       .then(() => {
-        console.log("fetchCapacity");
+        console.log('fetchCapacity');
         //if (REACT_APP_SERVER_NAME === 'https://ticketwave.me/api') {
-        console.log("yeahh");
+        console.log('yeahh');
         return fetchCapacity(eventDashboard);
         //}
       })
       .then(() => {
-        console.log("fetchTicketsSold");
+        console.log('fetchTicketsSold');
         //if (REACT_APP_SERVER_NAME === 'https://ticketwave.me/api') {
-        console.log("yeahh");
+        console.log('yeahh');
         return fetchTicketsSold(eventDashboard);
         //}
       })
