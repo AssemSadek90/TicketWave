@@ -446,7 +446,7 @@ Handles email input change event
           <div className="split-container-content">
             <div className="header-create-element">
               <div className="company-name">Ticketwave</div>
-              <div className="create-account-hl">Create an account</div>
+              <div className="create-account-hl">AAAAAAAA Create an account</div>
             </div>
             <form id="sign-up-form" onSubmit={submitForm}>
               <div className="additional-info" id="create-account">
