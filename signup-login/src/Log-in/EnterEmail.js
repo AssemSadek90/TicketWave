@@ -386,8 +386,8 @@ Handles email input change event
       .post('/auth/signup/', user, requestOptions)
       .then((response) => {
         console.log(response);
-        const accessToken = response.data.access_token;
-        const refreshToken = response.data.refresh_token;
+        const accessToken = response.data.access;
+        const refreshToken = response.data.refresh;
         console.log(accessToken);
         localStorage.setItem('accessToken', accessToken);
         localStorage.setItem('refreshToken', refreshToken);
