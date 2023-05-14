@@ -922,7 +922,7 @@ Spaces, apostrophes, and special characters (except: -_ , @ . ) are not allowed.
   }}
 >
     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
-    <div type="cancel" onClick={() => {
+    <div id="csv-cancel" type="cancel" onClick={() => {
         onCancel(true);}} style={{height: '3rem', width: '45%', backgroundColor: 'white', border: '2px solid #ccc', color: '#555555', borderRadius: '5px', textAlign: 'center', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', cursor: 'pointer'}}>Cancel</div>
     <button id="upload-csv-submit" type="submit" style={{height: '3rem', width: '45%'}} >Next</button>
     </div>

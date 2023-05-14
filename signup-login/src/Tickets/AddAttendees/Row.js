@@ -98,6 +98,7 @@ import React, { useState, useEffect } from "react";
     <div style={{ flex: 1 }}>$ {item.price}</div>
     <div style={{ flex: 1 }}>
       <input
+      id="row-quantity"
         style={{ width: "50%", fontSize: "0.85rem", padding: '0.5rem' }}
         type="number"
         min="0"
