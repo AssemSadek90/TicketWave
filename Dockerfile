@@ -5,7 +5,7 @@
 # COPY ./signup-login .
 # CMD ["npm", "run", "start"]
 
-FROM node:16-alpine
+FROM node:16-alpine as builder
  
 USER node
  
@@ -16,4 +16,9 @@ COPY --chown=node:node ./signup-login/package.json ./
 RUN npm install
 COPY --chown=node:node ./signup-login ./
  
-CMD ["npm", "start"]
+RUN npm run build
+
+FROM nginx
+EXPOSE 3000
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder /home/node/app/frontend/build /usr/share/nginx/html
